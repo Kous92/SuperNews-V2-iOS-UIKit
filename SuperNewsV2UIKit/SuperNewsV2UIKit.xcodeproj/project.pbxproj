@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4B64685029E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
 		4B64685129E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
+		4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685429E6ED1F00F35682 /* Kingfisher */; };
+		4B64685829E6ED7200F35682 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685729E6ED7200F35682 /* Alamofire */; };
+		4B64685B29E6EDF700F35682 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685A29E6EDF700F35682 /* SnapKit */; };
 		4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */; };
 		4BA595C129E6D6BF006B9460 /* MediaSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */; };
 		4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */; };
@@ -62,6 +65,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B64685B29E6EDF700F35682 /* SnapKit in Frameworks */,
+				4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */,
+				4B64685829E6ED7200F35682 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +185,11 @@
 			dependencies = (
 			);
 			name = SuperNewsV2UIKit;
+			packageProductDependencies = (
+				4B64685429E6ED1F00F35682 /* Kingfisher */,
+				4B64685729E6ED7200F35682 /* Alamofire */,
+				4B64685A29E6EDF700F35682 /* SnapKit */,
+			);
 			productName = SuperNewsV2UIKit;
 			productReference = 4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */;
 			productType = "com.apple.product-type.application";
@@ -211,6 +222,11 @@
 				Base,
 			);
 			mainGroup = 4BD88CA529E6BAAD000369DE;
+			packageReferences = (
+				4B64685329E6ED1F00F35682 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4B64685629E6ED7200F35682 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 4BD88CAF29E6BAAD000369DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -296,7 +312,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -315,7 +331,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -527,6 +543,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4B64685329E6ED1F00F35682 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		4B64685629E6ED7200F35682 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4B64685429E6ED1F00F35682 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B64685329E6ED1F00F35682 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		4B64685729E6ED7200F35682 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B64685629E6ED7200F35682 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		4B64685A29E6EDF700F35682 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4BD88CA629E6BAAD000369DE /* Project object */;
 }
