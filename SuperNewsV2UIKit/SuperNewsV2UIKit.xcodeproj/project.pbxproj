@@ -7,25 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */; };
+		4BA595C129E6D6BF006B9460 /* MediaSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */; };
+		4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */; };
+		4BA595C529E6DA2E006B9460 /* MediaSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */; };
 		4BD88CB229E6BAAD000369DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CB129E6BAAD000369DE /* AppDelegate.swift */; };
 		4BD88CB429E6BAAD000369DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CB329E6BAAD000369DE /* SceneDelegate.swift */; };
 		4BD88CB629E6BAAD000369DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CB529E6BAAD000369DE /* ViewController.swift */; };
 		4BD88CBB29E6BAAF000369DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD88CBA29E6BAAF000369DE /* Assets.xcassets */; };
 		4BD88CBE29E6BAAF000369DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BD88CBC29E6BAAF000369DE /* LaunchScreen.storyboard */; };
-		4BD88CC929E6BAAF000369DE /* SuperNewsV2UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CC829E6BAAF000369DE /* SuperNewsV2UIKitTests.swift */; };
-		4BD88CD329E6BAAF000369DE /* SuperNewsV2UIKitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CD229E6BAAF000369DE /* SuperNewsV2UIKitUITests.swift */; };
-		4BD88CD529E6BAAF000369DE /* SuperNewsV2UIKitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CD429E6BAAF000369DE /* SuperNewsV2UIKitUITestsLaunchTests.swift */; };
+		4BD88CE329E6CDED000369DE /* MediaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CE229E6CDED000369DE /* MediaSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4BD88CC529E6BAAF000369DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4BD88CA629E6BAAD000369DE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4BD88CAD29E6BAAD000369DE;
-			remoteInfo = SuperNewsV2UIKit;
-		};
-		4BD88CCF29E6BAAF000369DE /* PBXContainerItemProxy */ = {
+		4BA595B829E6D506006B9460 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4BD88CA629E6BAAD000369DE /* Project object */;
 			proxyType = 1;
@@ -35,6 +30,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4BA595B429E6D506006B9460 /* SuperNewsV2UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperNewsV2UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitTests.swift; sourceTree = "<group>"; };
+		4BA595BE29E6D658006B9460 /* SuperNewsV2UIKit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = SuperNewsV2UIKit.xctestplan; sourceTree = SOURCE_ROOT; };
+		4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MediaSourcesMockData.json; sourceTree = "<group>"; };
+		4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsModelTests.swift; sourceTree = "<group>"; };
 		4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperNewsV2UIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD88CB129E6BAAD000369DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BD88CB329E6BAAD000369DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,29 +42,18 @@
 		4BD88CBA29E6BAAF000369DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4BD88CBD29E6BAAF000369DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4BD88CBF29E6BAAF000369DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4BD88CC429E6BAAF000369DE /* SuperNewsV2UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperNewsV2UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BD88CC829E6BAAF000369DE /* SuperNewsV2UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitTests.swift; sourceTree = "<group>"; };
-		4BD88CCE29E6BAAF000369DE /* SuperNewsV2UIKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperNewsV2UIKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BD88CD229E6BAAF000369DE /* SuperNewsV2UIKitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitUITests.swift; sourceTree = "<group>"; };
-		4BD88CD429E6BAAF000369DE /* SuperNewsV2UIKitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4BD88CE229E6CDED000369DE /* MediaSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4BA595B129E6D506006B9460 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4BD88CAB29E6BAAD000369DE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4BD88CC129E6BAAF000369DE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4BD88CCB29E6BAAF000369DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,12 +63,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BA595B529E6D506006B9460 /* SuperNewsV2UIKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				4BA595BF29E6D69D006B9460 /* JSON Data */,
+				4BA595C229E6D6D5006B9460 /* Model tests */,
+				4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */,
+				4BA595BE29E6D658006B9460 /* SuperNewsV2UIKit.xctestplan */,
+			);
+			path = SuperNewsV2UIKitTests;
+			sourceTree = "<group>";
+		};
+		4BA595BF29E6D69D006B9460 /* JSON Data */ = {
+			isa = PBXGroup;
+			children = (
+				4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */,
+			);
+			path = "JSON Data";
+			sourceTree = "<group>";
+		};
+		4BA595C229E6D6D5006B9460 /* Model tests */ = {
+			isa = PBXGroup;
+			children = (
+				4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */,
+			);
+			path = "Model tests";
+			sourceTree = "<group>";
+		};
 		4BD88CA529E6BAAD000369DE = {
 			isa = PBXGroup;
 			children = (
 				4BD88CB029E6BAAD000369DE /* SuperNewsV2UIKit */,
-				4BD88CC729E6BAAF000369DE /* SuperNewsV2UIKitTests */,
-				4BD88CD129E6BAAF000369DE /* SuperNewsV2UIKitUITests */,
+				4BA595B529E6D506006B9460 /* SuperNewsV2UIKitTests */,
 				4BD88CAF29E6BAAD000369DE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */,
-				4BD88CC429E6BAAF000369DE /* SuperNewsV2UIKitTests.xctest */,
-				4BD88CCE29E6BAAF000369DE /* SuperNewsV2UIKitUITests.xctest */,
+				4BA595B429E6D506006B9460 /* SuperNewsV2UIKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,6 +111,7 @@
 		4BD88CB029E6BAAD000369DE /* SuperNewsV2UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				4BD88CE129E6CDDF000369DE /* Model */,
 				4BD88CB129E6BAAD000369DE /* AppDelegate.swift */,
 				4BD88CB329E6BAAD000369DE /* SceneDelegate.swift */,
 				4BD88CB529E6BAAD000369DE /* ViewController.swift */,
@@ -107,26 +122,35 @@
 			path = SuperNewsV2UIKit;
 			sourceTree = "<group>";
 		};
-		4BD88CC729E6BAAF000369DE /* SuperNewsV2UIKitTests */ = {
+		4BD88CE129E6CDDF000369DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4BD88CC829E6BAAF000369DE /* SuperNewsV2UIKitTests.swift */,
+				4BD88CE229E6CDED000369DE /* MediaSource.swift */,
 			);
-			path = SuperNewsV2UIKitTests;
-			sourceTree = "<group>";
-		};
-		4BD88CD129E6BAAF000369DE /* SuperNewsV2UIKitUITests */ = {
-			isa = PBXGroup;
-			children = (
-				4BD88CD229E6BAAF000369DE /* SuperNewsV2UIKitUITests.swift */,
-				4BD88CD429E6BAAF000369DE /* SuperNewsV2UIKitUITestsLaunchTests.swift */,
-			);
-			path = SuperNewsV2UIKitUITests;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4BA595B329E6D506006B9460 /* SuperNewsV2UIKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BA595BA29E6D506006B9460 /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKitTests" */;
+			buildPhases = (
+				4BA595B029E6D506006B9460 /* Sources */,
+				4BA595B129E6D506006B9460 /* Frameworks */,
+				4BA595B229E6D506006B9460 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4BA595B929E6D506006B9460 /* PBXTargetDependency */,
+			);
+			name = SuperNewsV2UIKitTests;
+			productName = SuperNewsV2UIKitTests;
+			productReference = 4BA595B429E6D506006B9460 /* SuperNewsV2UIKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4BD88CAD29E6BAAD000369DE /* SuperNewsV2UIKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4BD88CD829E6BAAF000369DE /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKit" */;
@@ -144,42 +168,6 @@
 			productReference = 4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4BD88CC329E6BAAF000369DE /* SuperNewsV2UIKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4BD88CDB29E6BAAF000369DE /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKitTests" */;
-			buildPhases = (
-				4BD88CC029E6BAAF000369DE /* Sources */,
-				4BD88CC129E6BAAF000369DE /* Frameworks */,
-				4BD88CC229E6BAAF000369DE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4BD88CC629E6BAAF000369DE /* PBXTargetDependency */,
-			);
-			name = SuperNewsV2UIKitTests;
-			productName = SuperNewsV2UIKitTests;
-			productReference = 4BD88CC429E6BAAF000369DE /* SuperNewsV2UIKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		4BD88CCD29E6BAAF000369DE /* SuperNewsV2UIKitUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4BD88CDE29E6BAAF000369DE /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKitUITests" */;
-			buildPhases = (
-				4BD88CCA29E6BAAF000369DE /* Sources */,
-				4BD88CCB29E6BAAF000369DE /* Frameworks */,
-				4BD88CCC29E6BAAF000369DE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4BD88CD029E6BAAF000369DE /* PBXTargetDependency */,
-			);
-			name = SuperNewsV2UIKitUITests;
-			productName = SuperNewsV2UIKitUITests;
-			productReference = 4BD88CCE29E6BAAF000369DE /* SuperNewsV2UIKitUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -190,16 +178,12 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					4BA595B329E6D506006B9460 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 4BD88CAD29E6BAAD000369DE;
+					};
 					4BD88CAD29E6BAAD000369DE = {
 						CreatedOnToolsVersion = 14.3;
-					};
-					4BD88CC329E6BAAF000369DE = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 4BD88CAD29E6BAAD000369DE;
-					};
-					4BD88CCD29E6BAAF000369DE = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 4BD88CAD29E6BAAD000369DE;
 					};
 				};
 			};
@@ -217,78 +201,60 @@
 			projectRoot = "";
 			targets = (
 				4BD88CAD29E6BAAD000369DE /* SuperNewsV2UIKit */,
-				4BD88CC329E6BAAF000369DE /* SuperNewsV2UIKitTests */,
-				4BD88CCD29E6BAAF000369DE /* SuperNewsV2UIKitUITests */,
+				4BA595B329E6D506006B9460 /* SuperNewsV2UIKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4BA595B229E6D506006B9460 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BA595C129E6D6BF006B9460 /* MediaSourcesMockData.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4BD88CAC29E6BAAD000369DE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BA595C529E6DA2E006B9460 /* MediaSourcesMockData.json in Resources */,
 				4BD88CBE29E6BAAF000369DE /* LaunchScreen.storyboard in Resources */,
 				4BD88CBB29E6BAAF000369DE /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4BD88CC229E6BAAF000369DE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4BD88CCC29E6BAAF000369DE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4BA595B029E6D506006B9460 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */,
+				4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4BD88CAA29E6BAAD000369DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4BD88CB629E6BAAD000369DE /* ViewController.swift in Sources */,
+				4BD88CE329E6CDED000369DE /* MediaSource.swift in Sources */,
 				4BD88CB229E6BAAD000369DE /* AppDelegate.swift in Sources */,
 				4BD88CB429E6BAAD000369DE /* SceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4BD88CC029E6BAAF000369DE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4BD88CC929E6BAAF000369DE /* SuperNewsV2UIKitTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4BD88CCA29E6BAAF000369DE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4BD88CD529E6BAAF000369DE /* SuperNewsV2UIKitUITestsLaunchTests.swift in Sources */,
-				4BD88CD329E6BAAF000369DE /* SuperNewsV2UIKitUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4BD88CC629E6BAAF000369DE /* PBXTargetDependency */ = {
+		4BA595B929E6D506006B9460 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4BD88CAD29E6BAAD000369DE /* SuperNewsV2UIKit */;
-			targetProxy = 4BD88CC529E6BAAF000369DE /* PBXContainerItemProxy */;
-		};
-		4BD88CD029E6BAAF000369DE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4BD88CAD29E6BAAD000369DE /* SuperNewsV2UIKit */;
-			targetProxy = 4BD88CCF29E6BAAF000369DE /* PBXContainerItemProxy */;
+			targetProxy = 4BA595B829E6D506006B9460 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -304,6 +270,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4BA595BB29E6D506006B9460 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LX6HN92HPR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperNewsV2UIKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SuperNewsV2UIKit";
+			};
+			name = Debug;
+		};
+		4BA595BC29E6D506006B9460 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LX6HN92HPR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperNewsV2UIKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SuperNewsV2UIKit";
+			};
+			name = Release;
+		};
 		4BD88CD629E6BAAF000369DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -354,7 +358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -408,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -474,85 +478,18 @@
 			};
 			name = Release;
 		};
-		4BD88CDC29E6BAAF000369DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperNewsV2UIKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SuperNewsV2UIKit";
-			};
-			name = Debug;
-		};
-		4BD88CDD29E6BAAF000369DE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperNewsV2UIKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SuperNewsV2UIKit";
-			};
-			name = Release;
-		};
-		4BD88CDF29E6BAAF000369DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SuperNewsV2UIKit;
-			};
-			name = Debug;
-		};
-		4BD88CE029E6BAAF000369DE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKitUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SuperNewsV2UIKit;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4BA595BA29E6D506006B9460 /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BA595BB29E6D506006B9460 /* Debug */,
+				4BA595BC29E6D506006B9460 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4BD88CA929E6BAAD000369DE /* Build configuration list for PBXProject "SuperNewsV2UIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -567,24 +504,6 @@
 			buildConfigurations = (
 				4BD88CD929E6BAAF000369DE /* Debug */,
 				4BD88CDA29E6BAAF000369DE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4BD88CDB29E6BAAF000369DE /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4BD88CDC29E6BAAF000369DE /* Debug */,
-				4BD88CDD29E6BAAF000369DE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4BD88CDE29E6BAAF000369DE /* Build configuration list for PBXNativeTarget "SuperNewsV2UIKitUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4BD88CDF29E6BAAF000369DE /* Debug */,
-				4BD88CE029E6BAAF000369DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

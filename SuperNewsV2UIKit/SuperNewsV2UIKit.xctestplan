@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "5284A318-F992-4A79-97FC-F1546AB09560",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SuperNewsV2UIKit.xcodeproj",
+        "identifier" : "4BA595B329E6D506006B9460",
+        "name" : "SuperNewsV2UIKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
