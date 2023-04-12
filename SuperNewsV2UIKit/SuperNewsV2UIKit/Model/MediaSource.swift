@@ -10,6 +10,8 @@ import Foundation
 struct MediaSourceOutput: Decodable {
     let status: String
     let sources: [MediaSource]
+    let code: String?
+    let message: String?
 }
 
 struct MediaSource: Decodable {
