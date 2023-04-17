@@ -11,17 +11,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    // It's important to keep here a strong reference for navigation flow management.
+    var coordinator: AppCoordinator?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        // Le NavigationController principal à être utilisé dans l'app
+        let navigationController = UINavigationController()
+        
+        // C'est d'ici qu'on démarre l'application et donc ici qu'on démarre avec le coordinator.
+        print("Initializing Coordinator")
+        coordinator = AppCoordinator(with: UITabBarController())
+        
+        print("Opening first view")
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
         // Si on définit le point d'entrée de manière programmatique, la fenêtre doit avoir une vue racine définie, ici le NavigationController où des vues y seront poussées.
-        window?.rootViewController = ViewController()
+        window?.rootViewController = coordinator?.start()
         window?.makeKeyAndVisible()
     }
 
