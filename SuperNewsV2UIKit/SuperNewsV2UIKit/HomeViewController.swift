@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .darkGray
-        dataAPI = SuperNewsNetworkAPIService()
+        // dataAPI = SuperNewsNetworkAPIService()
         
         /*
         Task {
@@ -66,3 +66,24 @@ final class HomeViewController: UIViewController {
         print("Recherche de PSG en français:\n\(result3)\n")
     }
 }
+
+// Ready to live preview and make views much faster
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct HomeViewControllerPreview: PreviewProvider {
+    static var previews: some View {
+
+        // Dark mode
+        UIViewControllerPreview {
+            let vc = HomeViewController()
+            return vc
+        }
+        .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+        .preferredColorScheme(.dark)
+        .previewDisplayName("iPhone 14 Pro")
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+#endif
