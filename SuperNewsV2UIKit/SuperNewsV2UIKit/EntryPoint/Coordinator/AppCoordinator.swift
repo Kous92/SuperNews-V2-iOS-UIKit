@@ -19,8 +19,6 @@ final class AppCoordinator: Coordinator {
         self.rootViewController = rootViewController
     }
     
-    
-    
     func start() -> UIViewController {
         let homeViewController = homeCoordinator.start()
         homeCoordinator.parentCoordinator = self
