@@ -39,6 +39,8 @@
 		4B73F61829ECAA2C00CD412C /* FrenchTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61329ECA94500CD412C /* FrenchTopHeadlinesMockData.json */; };
 		4B73F61C29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */; };
 		4B73F61D29ECAC3B00CD412C /* SourcesTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */; };
+		4B9E901229ED929C006E541F /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E901129ED929C006E541F /* UIViewControllerPreview.swift */; };
+		4B9E901429ED92A4006E541F /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E901329ED92A4006E541F /* UIViewPreview.swift */; };
 		4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */; };
 		4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */; };
 		4BA595C729E6DF08006B9460 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595C629E6DF08006B9460 /* Article.swift */; };
@@ -84,6 +86,8 @@
 		4B73F61329ECA94500CD412C /* FrenchTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FrenchTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4B73F61529ECAA2500CD412C /* SportsTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SportsTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SourcesTopHeadlinesMockData.json; sourceTree = "<group>"; };
+		4B9E901129ED929C006E541F /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
+		4B9E901329ED92A4006E541F /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4BA595B429E6D506006B9460 /* SuperNewsV2UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperNewsV2UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitTests.swift; sourceTree = "<group>"; };
 		4BA595BE29E6D658006B9460 /* SuperNewsV2UIKit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SuperNewsV2UIKit.xctestplan; sourceTree = SOURCE_ROOT; };
@@ -148,6 +152,7 @@
 		4B08603029ED881600AA32C0 /* ViewExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				4B9E901029ED9286006E541F /* LivePreviews */,
 				4B08603129ED884600AA32C0 /* GradientTabBarController.swift */,
 			);
 			path = ViewExtensions;
@@ -200,6 +205,15 @@
 				4B08601B29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json */,
 			);
 			path = Everything;
+			sourceTree = "<group>";
+		};
+		4B9E901029ED9286006E541F /* LivePreviews */ = {
+			isa = PBXGroup;
+			children = (
+				4B9E901129ED929C006E541F /* UIViewControllerPreview.swift */,
+				4B9E901329ED92A4006E541F /* UIViewPreview.swift */,
+			);
+			path = LivePreviews;
 			sourceTree = "<group>";
 		};
 		4BA595B529E6D506006B9460 /* SuperNewsV2UIKitTests */ = {
@@ -433,9 +447,11 @@
 				4BD88CB629E6BAAD000369DE /* HomeViewController.swift in Sources */,
 				4B64685F29E6F0F500F35682 /* SuperNewsDataAPIService.swift in Sources */,
 				4BD88CE329E6CDED000369DE /* MediaSource.swift in Sources */,
+				4B9E901229ED929C006E541F /* UIViewControllerPreview.swift in Sources */,
 				4B08602F29ED836600AA32C0 /* SearchCoordinator.swift in Sources */,
 				4B08602B29ED7FE900AA32C0 /* SearchViewController.swift in Sources */,
 				4B08602729ED7C1C00AA32C0 /* Coordinator.swift in Sources */,
+				4B9E901429ED92A4006E541F /* UIViewPreview.swift in Sources */,
 				4B08602D29ED805900AA32C0 /* HomeCoordinator.swift in Sources */,
 				4BD88CB229E6BAAD000369DE /* AppDelegate.swift in Sources */,
 				4B64686129E6F15600F35682 /* SuperNewsAPIError.swift in Sources */,

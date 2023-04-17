@@ -25,3 +25,24 @@ final class SearchViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
+
+// Ready to live preview and make views much faster
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct SearchViewControllerPreview: PreviewProvider {
+    static var previews: some View {
+
+        // Dark mode
+        UIViewControllerPreview {
+            let vc = SearchViewController()
+            return vc
+        }
+        .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+        .preferredColorScheme(.dark)
+        .previewDisplayName("iPhone 14 Pro")
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+#endif
