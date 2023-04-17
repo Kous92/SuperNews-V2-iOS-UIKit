@@ -12,7 +12,7 @@ final class SuperNewsModelTests: XCTestCase {
     
     private func getFilePath(name: String) -> URL? {
         guard let path = Bundle.main.path(forResource: name, ofType: "json") else {
-            XCTFail("The required file \(name) is not available, cannot test decoding data.")
+            XCTFail("The required file \(name).json is not available, cannot test decoding data.")
             return nil
         }
         
@@ -28,7 +28,7 @@ final class SuperNewsModelTests: XCTestCase {
     }
     
     private func getMediaSourceData() -> [MediaSource] {
-        guard let fileURL = getFilePath(name: "MediaSourcesMockData") else {
+        guard let fileURL = getFilePath(name: "AllSourcesMockData") else {
             return []
         }
         

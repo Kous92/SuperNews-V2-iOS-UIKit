@@ -1,0 +1,266 @@
+{
+    "status": "ok",
+    "totalResults": 34,
+    "articles": [
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "DNA - Dernières Nouvelles d'Alsace",
+            "title": "Faits divers. Incendie dans un immeuble à Strasbourg : un quinquagénaire décédé, une octogénaire en ... - DNA - Dernières Nouvelles d'Alsace",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMilQFodHRwczovL3d3dy5kbmEuZnIvZmFpdHMtZGl2ZXJzLWp1c3RpY2UvMjAyMy8wNC8xNS9pbmNlbmRpZS1kYW5zLXVuLWltbWV1YmxlLWEtc3RyYXNib3VyZy11bi1xdWlucXVhZ2VuYWlyZS1kZWNlZGUtdW5lLW9jdG9nZW5haXJlLWVuLXVyZ2VuY2UtYWJzb2x1ZdIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T19:59:54Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "L'Équipe",
+            "title": "Holger Rune fait plier Jannik Sinner et se qualifie pour la finale de Monte-Carlo - L'Équipe",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMiggFodHRwczovL3d3dy5sZXF1aXBlLmZyL1Rlbm5pcy9BY3R1YWxpdGVzL0hvbGdlci1ydW5lLWZhaXQtcGxpZXItamFubmlrLXNpbm5lci1ldC1zZS1xdWFsaWZpZS1wb3VyLWxhLWZpbmFsZS1kZS1tb250ZS1jYXJsby8xMzkxNjY00gEA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T19:58:46Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "CNEWS",
+            "title": "Réforme des retraites : la présence de deux ministres au concert de Jay-Z à la fondation Vuitton suscite la polémique (vidéo) - CNEWS",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMicWh0dHBzOi8vd3d3LmNuZXdzLmZyL2ZyYW5jZS8yMDIzLTA0LTE1L3JlZm9ybWUtZGVzLXJldHJhaXRlcy1sYS1wcmVzZW5jZS1kZS1kZXV4LW1pbmlzdHJlcy1hdS1jb25jZXJ0LWRlLWpheS16LWxh0gF1aHR0cHM6Ly93d3cuY25ld3MuZnIvZnJhbmNlLzIwMjMtMDQtMTUvcmVmb3JtZS1kZXMtcmV0cmFpdGVzLWxhLXByZXNlbmNlLWRlLWRldXgtbWluaXN0cmVzLWF1LWNvbmNlcnQtZGUtamF5LXotbGE_YW1w?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T19:44:01Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Le Monde",
+            "title": "Retraites, en direct : Emmanuel Macron fait preuve de « mépris » et de « déconnexion », juge Laurent Berger - Le Monde",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMipAFodHRwczovL3d3dy5sZW1vbmRlLmZyL3BvbGl0aXF1ZS9saXZlLzIwMjMvMDQvMTUvcmV0cmFpdGVzLWVuLWRpcmVjdC1lbW1hbnVlbC1tYWNyb24tZmFpdC1wcmV1dmUtZGUtbWVwcmlzLWV0LWRlLWRlY29ubmV4aW9uLWp1Z2UtbGF1cmVudC1iZXJnZXJfNjE2OTYzNl84MjM0NDguaHRtbNIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T19:17:12Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "RMC Sport",
+            "title": "EN DIRECT - PSG-Lens: match crucial dans la course au titre, en pleine tornade Galtier - RMC Sport",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMioQFodHRwczovL3JtY3Nwb3J0LmJmbXR2LmNvbS9mb290YmFsbC9saWd1ZS0xL2VuLWRpcmVjdC1saWd1ZS0xLXN1aXZlei1sLWVub3JtZS1jaG9jLXBvdXItbGUtdGl0cmUtcHNnLWxlbnMtZW4tbGl2ZS1zdXItZm9uZC1kLWFmZmFpcmUtZ2FsdGllcl9MUy0yMDIzMDQxNTAwMzguaHRtbNIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T18:32:59Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "franceinfo",
+            "title": "DIRECT. Réforme des retraites : le texte est arrivé \"au terme de son cheminement démocratique\", insiste Eli... - franceinfo",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMipAFodHRwczovL3d3dy5mcmFuY2V0dmluZm8uZnIvZWNvbm9taWUvcmV0cmFpdGUvcmVmb3JtZS1kZXMtcmV0cmFpdGVzL2RpcmVjdC1yZWZvcm1lLWRlcy1yZXRyYWl0ZXMtbGEtbG9pLWEtZXRlLXByb211bGd1ZWUtY2V0dGUtbnVpdC1wYXItZW1tYW51ZWwtbWFjcm9uXzU3NzIzNTYuaHRtbNIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T18:19:13Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "France Bleu",
+            "title": "Réforme des retraites : de nombreux affrontements pendant la manifestation non déclarée à Rennes - France Bleu",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMifWh0dHBzOi8vd3d3LmZyYW5jZWJsZXUuZnIvaW5mb3Mvc29jaWV0ZS9yZWZvcm1lLWRlcy1yZXRyYWl0ZXMtc3VpdmV6LWVuLWRpcmVjdC1sYS1tYW5pZmVzdGF0aW9uLW5vbi1kZWNsYXJlZS1hLXJlbm5lcy00NzQ4MDg20gEA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T17:52:37Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "LaDepeche.fr",
+            "title": "La célèbre marque d'ustensiles de cuisine Tupperware au bord de la faillite - LaDepeche.fr",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMie2h0dHBzOi8vd3d3LmxhZGVwZWNoZS5mci8yMDIzLzA0LzE1L2xhLWNlbGVicmUtbWFycXVlLWR1c3RlbnNpbGVzLWRlLWN1aXNpbmUtdHVwcGVyd2FyZS1hdS1ib3JkLWRlLWxhLWZhaWxsaXRlLTExMTM2Mjg2LnBocNIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T17:13:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Le Figaro",
+            "title": "TV : grève des techniciens de Canal+, la diffusion des matchs de Ligue 1 et Top 14 impactée - Le Figaro",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMihAFodHRwczovL3d3dy5sZWZpZ2Fyby5mci9zcG9ydHMvcnVnYnkvdG9wLTE0L3RvcC0xNC1ncmV2ZS1kZXMtdGVjaG5pY2llbnMtZGUtY2FuYWwtbGEtZGlmZnVzaW9uLWRlLXRvdXMtbGVzLW1hdGNoZXMtaW1wYWN0ZWUtMjAyMzA0MTXSAYQBaHR0cHM6Ly9hbXAubGVmaWdhcm8uZnIvc3BvcnRzL3J1Z2J5L3RvcC0xNC90b3AtMTQtZ3JldmUtZGVzLXRlY2huaWNpZW5zLWRlLWNhbmFsLWxhLWRpZmZ1c2lvbi1kZS10b3VzLWxlcy1tYXRjaGVzLWltcGFjdGVlLTIwMjMwNDE1?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T16:25:25Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Le Figaro",
+            "title": "Taïwan est vulnérable face à une attaque aérienne chinoise, selon des documents américains - Le Figaro",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMiiAFodHRwczovL3d3dy5sZWZpZ2Fyby5mci9pbnRlcm5hdGlvbmFsL3RhaXdhbi1lc3QtdnVsbmVyYWJsZS1mYWNlLWEtdW5lLWF0dGFxdWUtYWVyaWVubmUtY2hpbm9pc2Utc2Vsb24tZGVzLWRvY3VtZW50cy1hbWVyaWNhaW5zLTIwMjMwNDE10gGIAWh0dHBzOi8vYW1wLmxlZmlnYXJvLmZyL2ludGVybmF0aW9uYWwvdGFpd2FuLWVzdC12dWxuZXJhYmxlLWZhY2UtYS11bmUtYXR0YXF1ZS1hZXJpZW5uZS1jaGlub2lzZS1zZWxvbi1kZXMtZG9jdW1lbnRzLWFtZXJpY2FpbnMtMjAyMzA0MTU?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T16:22:21Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Le Figaro",
+            "title": "La Pologne interdit les importations de céréales d'Ukraine pour protéger ses agriculteurs - Le Figaro",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMihgFodHRwczovL3d3dy5sZWZpZ2Fyby5mci9jb25qb25jdHVyZS9sYS1wb2xvZ25lLWludGVyZGl0LWxlcy1pbXBvcnRhdGlvbnMtZGUtY2VyZWFsZXMtZC11a3JhaW5lLXBvdXItcHJvdGVnZXItc2VzLWFncmljdWx0ZXVycy0yMDIzMDQxNdIBhgFodHRwczovL2FtcC5sZWZpZ2Fyby5mci9jb25qb25jdHVyZS9sYS1wb2xvZ25lLWludGVyZGl0LWxlcy1pbXBvcnRhdGlvbnMtZGUtY2VyZWFsZXMtZC11a3JhaW5lLXBvdXItcHJvdGVnZXItc2VzLWFncmljdWx0ZXVycy0yMDIzMDQxNQ?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T16:17:51Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Midi Libre",
+            "title": "[VIDEO] \"Tout est avantageux\" : prix bas, produits malins, TikTok... comment Action est devenue l'enseigne préférée des Français - Midi Libre",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMinwFodHRwczovL3d3dy5taWRpbGlicmUuZnIvMjAyMy8wNC8xNS90b3V0LWVzdC1hdmFudGFnZXV4LXByaXgtYmFzLXByb2R1aXRzLW1hbGlucy10aWt0b2stY29tbWVudC1hY3Rpb24tZXN0LWRldmVudWUtbGVuc2VpZ25lLXByZWZlcmVlLWRlcy1mcmFuY2Fpcy0xMTEyNjA5OC5waHDSAQA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T16:01:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Eurosport FR",
+            "title": "Nice - Didier Digard sur l'affaire Christophe Galtier : \"A aucun moment il n'était question de prendre parti\" - Eurosport FR",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMirwFodHRwczovL3d3dy5ldXJvc3BvcnQuZnIvZm9vdGJhbGwvbGlndWUtMS8yMDIyLTIwMjMvbmljZS1kaWRpZXItZGlnYXJkLXN1ci1sLWFmZmFpcmUtY2hyaXN0b3BoZS1nYWx0aWVyLWEtYXVjdW4tbW9tZW50LWlsLW4tZXRhaXQtcXVlc3Rpb24tZGUtcHJlbmRyZS1wYV9zdG85NTYyNzI2L3N0b3J5LnNodG1s0gGzAWh0dHBzOi8vd3d3LmV1cm9zcG9ydC5mci9mb290YmFsbC9saWd1ZS0xLzIwMjItMjAyMy9uaWNlLWRpZGllci1kaWdhcmQtc3VyLWwtYWZmYWlyZS1jaHJpc3RvcGhlLWdhbHRpZXItYS1hdWN1bi1tb21lbnQtaWwtbi1ldGFpdC1xdWVzdGlvbi1kZS1wcmVuZHJlLXBhX3N0bzk1NjI3MjYvc3RvcnktYW1wLnNodG1s?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:52:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Closer France",
+            "title": "\"Une bouteille à 3h du mat\" : l'anecdote très arrosée de Dany Boon sur Kad Merad et son penchant pour le vin - Closer France",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMikAFodHRwczovL3d3dy5jbG9zZXJtYWcuZnIvcGVvcGxlL3VuZS1ib3V0ZWlsbGUtYS0zaC1kdS1tYXQtbC1hbmVjZG90ZS10cmVzLWFycm9zZWUtZGUtZGFueS1ib29uLXN1ci1rYWQtbWVyYWQtZXQtc29uLXBlbmNoYW50LXBvdXItbGUtdmluLTE3MTA2MzPSAQA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:51:56Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "La Nouvelle République des Pyrénées",
+            "title": "Hautes-Pyrénées : il déterre une Fiat 500 en pleine montagne pour la restaurer - La Nouvelle République des Pyrénées",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMifmh0dHBzOi8vd3d3Lm5ycHlyZW5lZXMuZnIvMjAyMy8wNC8xNS9oYXV0ZXMtcHlyZW5lZXMtaWwtZGV0ZXJyZS11bmUtZmlhdC01MDAtZW4tcGxlaW5lLW1vbnRhZ25lLXBvdXItbGEtcmVzdGF1cmVyLTExMTM2MDAyLnBocNIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:48:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "CNEWS",
+            "title": "Etats-Unis : Elon Musk crée une entreprise d'intelligence artificielle - CNEWS",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMieWh0dHBzOi8vd3d3LmNuZXdzLmZyL3ZpZS1udW1lcmlxdWUvMjAyMy0wNC0xNS9ldGF0cy11bmlzLWVsb24tbXVzay1jcmVlLXVuZS1lbnRyZXByaXNlLWRpbnRlbGxpZ2VuY2UtYXJ0aWZpY2llbGxlLTEzNDQ2MzfSAX1odHRwczovL3d3dy5jbmV3cy5mci92aWUtbnVtZXJpcXVlLzIwMjMtMDQtMTUvZXRhdHMtdW5pcy1lbG9uLW11c2stY3JlZS11bmUtZW50cmVwcmlzZS1kaW50ZWxsaWdlbmNlLWFydGlmaWNpZWxsZS0xMzQ0NjM3P2FtcA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:47:39Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "franceinfo",
+            "title": "Notre-Dame de Paris : \"Quelle émotion !\", se réjouit la ministre de la Culture, après la pose du socle de la f - franceinfo",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMirgFodHRwczovL3d3dy5mcmFuY2V0dmluZm8uZnIvY3VsdHVyZS9wYXRyaW1vaW5lL25vdHJlLWRhbWUtZGUtcGFyaXMtcXVlbGxlLWVtb3Rpb24tc2UtcmVqb3VpdC1sYS1taW5pc3RyZS1kZS1sYS1jdWx0dXJlLWFwcmVzLWxhLXBvc2UtZHUtc29jbGUtZGUtbGEtZnV0dXJlLWZsZWNoZV81NzcyODk2Lmh0bWzSAQA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:45:15Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "20 Minutes",
+            "title": "Loi « Rist » : Manifestation à Vittel contre la fermeture des urgences et l’encadrement de l’intérim médical - 20 Minutes",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMihQFodHRwczovL3d3dy4yMG1pbnV0ZXMuZnIvc29jaWV0ZS80MDMyNzc5LTIwMjMwNDE1LWxvaS1yaXN0LW1hbmlmZXN0YXRpb24tdml0dGVsLWNvbnRyZS1mZXJtZXR1cmUtdXJnZW5jZXMtZW5jYWRyZW1lbnQtaW50ZXJpbS1tZWRpY2Fs0gEkaHR0cHM6Ly9tLjIwbWludXRlcy5mci9hbXAvYS80MDMyNzc5?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:17:19Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "Le Monde",
+            "title": "Mathilde Touvier, une nutritionniste au service de la santé des Français - Le Monde",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMijwFodHRwczovL3d3dy5sZW1vbmRlLmZyL3NjaWVuY2VzL2FydGljbGUvMjAyMy8wNC8xNS9tYXRoaWxkZS10b3V2aWVyLXVuZS1udXRyaXRpb25uaXN0ZS1hdS1zZXJ2aWNlLWRlLWxhLXNhbnRlLWRlcy1mcmFuY2Fpc182MTY5NjgxXzE2NTA2ODQuaHRtbNIBAA?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T15:00:05Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "google-news",
+                "name": "Google News"
+            },
+            "author": "BFMTV",
+            "title": "Volodymyr Zelensky affirme avoir discuté avec Emmanuel Macron de sa visite en Chine - BFMTV",
+            "description": null,
+            "url": "https://news.google.com/rss/articles/CBMimwFodHRwczovL3d3dy5iZm10di5jb20vaW50ZXJuYXRpb25hbC9ldXJvcGUvdWtyYWluZS92b2xvZHlteXItemVsZW5za3ktYWZmaXJtZS1hdm9pci1kaXNjdXRlLWF2ZWMtZW1tYW51ZWwtbWFjcm9uLWRlLXNhLXZpc2l0ZS1lbi1jaGluZV9BRC0yMDIzMDQxNTAyNjYuaHRtbNIBnwFodHRwczovL3d3dy5iZm10di5jb20vYW1wL2ludGVybmF0aW9uYWwvZXVyb3BlL3VrcmFpbmUvdm9sb2R5bXlyLXplbGVuc2t5LWFmZmlybWUtYXZvaXItZGlzY3V0ZS1hdmVjLWVtbWFudWVsLW1hY3Jvbi1kZS1zYS12aXNpdGUtZW4tY2hpbmVfQUQtMjAyMzA0MTUwMjY2Lmh0bWw?oc=5",
+            "urlToImage": null,
+            "publishedAt": "2023-04-15T14:25:00Z",
+            "content": null
+        }
+    ]
+}

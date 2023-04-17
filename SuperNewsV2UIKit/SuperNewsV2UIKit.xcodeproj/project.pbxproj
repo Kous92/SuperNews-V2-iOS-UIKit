@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B08601C29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B08601B29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json */; };
+		4B08601D29ED465F00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B08601B29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json */; };
+		4B08601F29ED49AC00AA32C0 /* SuperNewsNetworkAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08601E29ED49AC00AA32C0 /* SuperNewsNetworkAPIService.swift */; };
 		4B64685029E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
 		4B64685129E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
 		4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685429E6ED1F00F35682 /* Kingfisher */; };
@@ -14,11 +17,26 @@
 		4B64685B29E6EDF700F35682 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685A29E6EDF700F35682 /* SnapKit */; };
 		4B64685F29E6F0F500F35682 /* SuperNewsDataAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64685E29E6F0F500F35682 /* SuperNewsDataAPIService.swift */; };
 		4B64686129E6F15600F35682 /* SuperNewsAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64686029E6F15600F35682 /* SuperNewsAPIError.swift */; };
+		4B73F60229EC713F00CD412C /* AllSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F60129EC713F00CD412C /* AllSourcesMockData.json */; };
+		4B73F60629EC71A900CD412C /* TechnologySourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F60529EC71A900CD412C /* TechnologySourcesMockData.json */; };
+		4B73F60829EC71DC00CD412C /* FranceSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F60729EC71DC00CD412C /* FranceSourcesMockData.json */; };
+		4B73F60C29EC731100CD412C /* AllSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F60129EC713F00CD412C /* AllSourcesMockData.json */; };
+		4B73F60D29EC731400CD412C /* FranceSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F60729EC71DC00CD412C /* FranceSourcesMockData.json */; };
+		4B73F60E29EC731600CD412C /* TechnologySourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F60529EC71A900CD412C /* TechnologySourcesMockData.json */; };
+		4B73F61129ECA59900CD412C /* EnglishSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61029ECA59900CD412C /* EnglishSourcesMockData.json */; };
+		4B73F61229ECA8DF00CD412C /* EnglishSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61029ECA59900CD412C /* EnglishSourcesMockData.json */; };
+		4B73F61429ECA94500CD412C /* FrenchTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61329ECA94500CD412C /* FrenchTopHeadlinesMockData.json */; };
+		4B73F61629ECAA2500CD412C /* SportsTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61529ECAA2500CD412C /* SportsTopHeadlinesMockData.json */; };
+		4B73F61729ECAA2900CD412C /* SportsTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61529ECAA2500CD412C /* SportsTopHeadlinesMockData.json */; };
+		4B73F61829ECAA2C00CD412C /* FrenchTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61329ECA94500CD412C /* FrenchTopHeadlinesMockData.json */; };
+		4B73F61C29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */; };
+		4B73F61D29ECAC3B00CD412C /* SourcesTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */; };
 		4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */; };
-		4BA595C129E6D6BF006B9460 /* MediaSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */; };
 		4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */; };
-		4BA595C529E6DA2E006B9460 /* MediaSourcesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */; };
 		4BA595C729E6DF08006B9460 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595C629E6DF08006B9460 /* Article.swift */; };
+		4BC3D0F129EB18FA00EAD942 /* SuperNewsDataAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3D0F029EB18FA00EAD942 /* SuperNewsDataAPITests.swift */; };
+		4BC3D0F429EB19DD00EAD942 /* SuperNewsMockDataAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3D0F329EB19DD00EAD942 /* SuperNewsMockDataAPIService.swift */; };
+		4BC3D0F629EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3D0F529EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift */; };
 		4BD88CB229E6BAAD000369DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CB129E6BAAD000369DE /* AppDelegate.swift */; };
 		4BD88CB429E6BAAD000369DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CB329E6BAAD000369DE /* SceneDelegate.swift */; };
 		4BD88CB629E6BAAD000369DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD88CB529E6BAAD000369DE /* ViewController.swift */; };
@@ -38,15 +56,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B08601B29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EverythingiPhoneFrenchNewsMockData.json; sourceTree = "<group>"; };
+		4B08601E29ED49AC00AA32C0 /* SuperNewsNetworkAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsNetworkAPIService.swift; sourceTree = "<group>"; };
 		4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EverythingArticleOutputMockData.json; sourceTree = "<group>"; };
 		4B64685E29E6F0F500F35682 /* SuperNewsDataAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsDataAPIService.swift; sourceTree = "<group>"; };
 		4B64686029E6F15600F35682 /* SuperNewsAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsAPIError.swift; sourceTree = "<group>"; };
+		4B73F60129EC713F00CD412C /* AllSourcesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AllSourcesMockData.json; sourceTree = "<group>"; };
+		4B73F60529EC71A900CD412C /* TechnologySourcesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TechnologySourcesMockData.json; sourceTree = "<group>"; };
+		4B73F60729EC71DC00CD412C /* FranceSourcesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FranceSourcesMockData.json; sourceTree = "<group>"; };
+		4B73F61029ECA59900CD412C /* EnglishSourcesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EnglishSourcesMockData.json; sourceTree = "<group>"; };
+		4B73F61329ECA94500CD412C /* FrenchTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FrenchTopHeadlinesMockData.json; sourceTree = "<group>"; };
+		4B73F61529ECAA2500CD412C /* SportsTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SportsTopHeadlinesMockData.json; sourceTree = "<group>"; };
+		4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SourcesTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4BA595B429E6D506006B9460 /* SuperNewsV2UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperNewsV2UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitTests.swift; sourceTree = "<group>"; };
 		4BA595BE29E6D658006B9460 /* SuperNewsV2UIKit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SuperNewsV2UIKit.xctestplan; sourceTree = SOURCE_ROOT; };
-		4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MediaSourcesMockData.json; sourceTree = "<group>"; };
 		4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsModelTests.swift; sourceTree = "<group>"; };
 		4BA595C629E6DF08006B9460 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		4BC3D0F029EB18FA00EAD942 /* SuperNewsDataAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsDataAPITests.swift; sourceTree = "<group>"; };
+		4BC3D0F329EB19DD00EAD942 /* SuperNewsMockDataAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsMockDataAPIService.swift; sourceTree = "<group>"; };
+		4BC3D0F529EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsDataAPIServiceTestCaller.swift; sourceTree = "<group>"; };
 		4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperNewsV2UIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD88CB129E6BAAD000369DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BD88CB329E6BAAD000369DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,16 +119,48 @@
 			children = (
 				4B64685E29E6F0F500F35682 /* SuperNewsDataAPIService.swift */,
 				4B64686029E6F15600F35682 /* SuperNewsAPIError.swift */,
+				4B08601E29ED49AC00AA32C0 /* SuperNewsNetworkAPIService.swift */,
 			);
 			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		4B73F60929EC721B00CD412C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4B73F60129EC713F00CD412C /* AllSourcesMockData.json */,
+				4B73F60529EC71A900CD412C /* TechnologySourcesMockData.json */,
+				4B73F60729EC71DC00CD412C /* FranceSourcesMockData.json */,
+				4B73F61029ECA59900CD412C /* EnglishSourcesMockData.json */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		4B73F60A29EC722100CD412C /* TopHeadlines */ = {
+			isa = PBXGroup;
+			children = (
+				4B73F61329ECA94500CD412C /* FrenchTopHeadlinesMockData.json */,
+				4B73F61529ECAA2500CD412C /* SportsTopHeadlinesMockData.json */,
+				4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */,
+			);
+			path = TopHeadlines;
+			sourceTree = "<group>";
+		};
+		4B73F60B29EC722900CD412C /* Everything */ = {
+			isa = PBXGroup;
+			children = (
+				4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */,
+				4B08601B29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json */,
+			);
+			path = Everything;
 			sourceTree = "<group>";
 		};
 		4BA595B529E6D506006B9460 /* SuperNewsV2UIKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				4BC3D0F229EB199600EAD942 /* DataTests */,
 				4B64685229E6E56300F35682 /* Extensions */,
 				4BA595BF29E6D69D006B9460 /* JSON Data */,
-				4BA595C229E6D6D5006B9460 /* Model tests */,
+				4BA595C229E6D6D5006B9460 /* ModelTests */,
 				4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */,
 				4BA595BE29E6D658006B9460 /* SuperNewsV2UIKit.xctestplan */,
 			);
@@ -109,18 +170,29 @@
 		4BA595BF29E6D69D006B9460 /* JSON Data */ = {
 			isa = PBXGroup;
 			children = (
-				4BA595C029E6D6BF006B9460 /* MediaSourcesMockData.json */,
-				4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */,
+				4B73F60B29EC722900CD412C /* Everything */,
+				4B73F60A29EC722100CD412C /* TopHeadlines */,
+				4B73F60929EC721B00CD412C /* Sources */,
 			);
 			path = "JSON Data";
 			sourceTree = "<group>";
 		};
-		4BA595C229E6D6D5006B9460 /* Model tests */ = {
+		4BA595C229E6D6D5006B9460 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
 				4BA595C329E6D6F8006B9460 /* SuperNewsModelTests.swift */,
 			);
-			path = "Model tests";
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
+		4BC3D0F229EB199600EAD942 /* DataTests */ = {
+			isa = PBXGroup;
+			children = (
+				4BC3D0F029EB18FA00EAD942 /* SuperNewsDataAPITests.swift */,
+				4BC3D0F329EB19DD00EAD942 /* SuperNewsMockDataAPIService.swift */,
+				4BC3D0F529EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift */,
+			);
+			path = DataTests;
 			sourceTree = "<group>";
 		};
 		4BD88CA529E6BAAD000369DE = {
@@ -256,8 +328,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B73F61C29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json in Resources */,
+				4B73F61129ECA59900CD412C /* EnglishSourcesMockData.json in Resources */,
+				4B73F60829EC71DC00CD412C /* FranceSourcesMockData.json in Resources */,
 				4B64685129E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */,
-				4BA595C129E6D6BF006B9460 /* MediaSourcesMockData.json in Resources */,
+				4B73F60629EC71A900CD412C /* TechnologySourcesMockData.json in Resources */,
+				4B73F61629ECAA2500CD412C /* SportsTopHeadlinesMockData.json in Resources */,
+				4B73F60229EC713F00CD412C /* AllSourcesMockData.json in Resources */,
+				4B08601C29ED465B00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json in Resources */,
+				4B73F61429ECA94500CD412C /* FrenchTopHeadlinesMockData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,10 +344,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BA595C529E6DA2E006B9460 /* MediaSourcesMockData.json in Resources */,
+				4B73F60D29EC731400CD412C /* FranceSourcesMockData.json in Resources */,
+				4B73F60C29EC731100CD412C /* AllSourcesMockData.json in Resources */,
+				4B08601D29ED465F00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json in Resources */,
+				4B73F61D29ECAC3B00CD412C /* SourcesTopHeadlinesMockData.json in Resources */,
+				4B73F61229ECA8DF00CD412C /* EnglishSourcesMockData.json in Resources */,
 				4BD88CBE29E6BAAF000369DE /* LaunchScreen.storyboard in Resources */,
 				4B64685029E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */,
+				4B73F60E29EC731600CD412C /* TechnologySourcesMockData.json in Resources */,
+				4B73F61729ECAA2900CD412C /* SportsTopHeadlinesMockData.json in Resources */,
 				4BD88CBB29E6BAAF000369DE /* Assets.xcassets in Resources */,
+				4B73F61829ECAA2C00CD412C /* FrenchTopHeadlinesMockData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +365,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC3D0F129EB18FA00EAD942 /* SuperNewsDataAPITests.swift in Sources */,
+				4BC3D0F629EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift in Sources */,
+				4BC3D0F429EB19DD00EAD942 /* SuperNewsMockDataAPIService.swift in Sources */,
 				4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */,
 				4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */,
 			);
@@ -288,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B08601F29ED49AC00AA32C0 /* SuperNewsNetworkAPIService.swift in Sources */,
 				4BD88CB629E6BAAD000369DE /* ViewController.swift in Sources */,
 				4B64685F29E6F0F500F35682 /* SuperNewsDataAPIService.swift in Sources */,
 				4BD88CE329E6CDED000369DE /* MediaSource.swift in Sources */,

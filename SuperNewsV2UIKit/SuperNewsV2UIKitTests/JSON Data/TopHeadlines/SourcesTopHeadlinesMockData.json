@@ -1,0 +1,136 @@
+{
+    "status": "ok",
+    "totalResults": 10,
+    "articles": [
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Jonathan Danty touché aux côtes",
+            "description": "Le centre du Stade Rochelais Jonathan Danty est sorti en grimaçant, touché aux côtes, face à l'Aviron Bayonnais samedi soir. Il passera des examens ce lundi.",
+            "url": "https://www.lequipe.fr/Rugby/Actualites/Jonathan-danty-touche-aux-cotes/1391691",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/jonathan-danty-ici-lors-du-quart-de-finale-de-coupe-des-champions-contre-les-saracens-a-mounic-l-equ/1500000001773994/325:173,1685:1079-640-427-75/39a2f.jpg",
+            "publishedAt": "2023-04-15T22:05:50+00:00",
+            "content": "Le trois-quarts centre des Bleus et du Stade Rochelais, Jonathan Danty, est sorti en grimaçant ce samedi soir face à Bayonne (26-6), lors de la 22e journée de Top 14. Peu avant l'heure de jeu, plaqué… [+515 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Fabio Quartararo, 19e du sprint du GP des Amériques : « Tenter un dépassement est impossible »",
+            "description": "Le pilote Yamaha, qui a chuté lors du sprint à Austin, se désolait des difficultés éprouvées pour se battre face à ses adversaires.",
+            "url": "https://www.lequipe.fr/Moto/Actualites/Fabio-quartararo-19e-du-sprint-du-gp-des-ameriques-tenter-un-depassement-est-impossible/1391690",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/fabio-quartararo-a-chute-et-fini-19e-du-sprint-d-austin-photopsp-lukasz-swiderek/1500000001773993/137:56,1861:1205-640-427-75/07222.jpg",
+            "publishedAt": "2023-04-15T22:01:23+00:00",
+            "content": "Fabio Quartararo (Yamaha, 19e du sprint du GP des Amériques) : « On ne peut pas rouler avec les pilotes de devant, c'est incroyable d'avoir autant de difficultés avec eux. Même tenter un dépassement … [+1308 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Le flash sports du 16 avril",
+            "description": "Retrouvez toute l'actualité sportive dans votre flash quotidien.",
+            "url": "https://www.lequipe.fr/Tous-sports/Actualites/Le-flash-sports-du-16-avril/1391687",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/le-flash-sports-l-equipe/1500000001773989/0:0,1997:1331-640-427-75/37828.jpg",
+            "publishedAt": "2023-04-15T21:57:46+00:00",
+            "content": "Ligue 1 : Paris domine Lens et se donne de l'air dans la course au titre... Ligue 2 : Le Havre se rapproche un peu plus de la Ligue 1... Tennis : Les Françaises se qualifient pour la phase finale de … [+95 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Christophe Galtier : « Toute ma vie je me suis enrichi avec la diversité »",
+            "description": "Au terme de la victoire probante du PSG face à Lens (3-1) samedi soir en Ligue 1, Christophe Galtier a loué au micro de Canal+ la prestation de ses joueurs et remercié les différentes personnes qui l'ont soutenu ces derniers jours.",
+            "url": "https://www.lequipe.fr/Football/Actualites/Christophe-galtier-toute-ma-vie-je-me-suis-enrichi-avec-la-diversite/1391684",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/christophe-galtier-a-apprecie-la-prestation-de-ses-hommes-samedi-soir-f-faugere-l-equipe/1500000001773985/0:0,1996:1331-640-427-75/abd13.jpg",
+            "publishedAt": "2023-04-15T21:36:56+00:00",
+            "content": "Christophe Galtier, au micro de Canal +, après la victoire du PSG face à Lens samedi soir (3-1) lors de la 31e journée de Ligue 1 : « C'était important (cette victoire). C'était un plaisir de l'empor… [+1173 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "La perf de Nantes contre Le Cannet, champion en titre",
+            "description": "Menées deux manches à une, les Nantaises ont finalement gagné le quart de finale aller au tie-break, ce samedi soir, contre Le Cannet, champion de France (25-13, 25-27, 18-25, 25-22, 15-10).",
+            "url": "https://www.lequipe.fr/Volley-ball/Actualites/La-perf-de-nantes-contre-le-cannet-champion-en-titre/1391682",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/taylor-mimms-la-pointue-americaine-de-nantes-mvp-de-la-rencontre-lnv/1500000001773959/0:0,1599:1066-640-427-75/d79f7.jpg",
+            "publishedAt": "2023-04-15T21:32:09+00:00",
+            "content": "Il a fallu un ultime challenge vidéo avant la délivrance pour les Neptunes de Nantes, victorieuses du Cannet, ce samedi soir dans leur salle, au tie-break (3-2 : 25-13, 25-27, 18-25, 25-22, 15-10). L… [+2503 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "En difficulté en Serie A, l'Inter Milan tombe à domicile face à Monza",
+            "description": "L'Inter Milan a été surpris par Monza (0-1), quelques jours après avoir battu le Benfica Lisbonne en C1 (2-0). Ils manquent l'occasion de retrouver le podium de Serie A et enchaînent une troisième défaite à domicile.",
+            "url": "https://www.lequipe.fr/Football/Actualites/En-difficulte-en-serie-a-l-inter-milan-tombe-a-domicile-face-a-monza/1391681",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/l-inter-tombe-encore-sur-ses-terres-face-a-monza-p-bona-ipp/1500000001773953/0:0,1351:1351-640-640-75/270b1.jpg",
+            "publishedAt": "2023-04-15T21:19:14+00:00",
+            "content": "Mal en point en Championnat (un point sur les 4 derniers matches), Simone Inzaghi ne pouvait pas s'offrir le luxe de préserver ses joueurs avant le quart de finale retour face au Benfica (le 19 avril… [+2171 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Débuts parfaits pour Philadelphie qui remporte le Game 1 contre Brooklyn",
+            "description": "Philadelphie a remporté une large victoire face à Brooklyn (121-101) pour son entrée dans les play-offs, samedi. La star des 76ers, Joel Embiid a inscrit 26 points.",
+            "url": "https://www.lequipe.fr/Basket/Actualites/Debuts-parfaits-pour-philadelphie-qui-remporte-le-game-1-contre-brooklyn/1391680",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/joel-embiid-a-mene-philadelphie-vers-une-premiere-victoire-en-play-offs-b-streicher-usa-today-sports/1500000001773951/408:0,1739:1331-640-640-75/565e6.jpg",
+            "publishedAt": "2023-04-15T21:18:33+00:00",
+            "content": "Joel Embiid et Philadelphie ont parfaitement lancé leur série au premier tour des play-offs face à Brooklyn, samedi, en signant une nette victoire (121-101). Devant son public, les 76ers n'ont jamais… [+860 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Le Real Madrid s'impose face à Cadix",
+            "description": "Malgré une dizaine de situations dangereuses, le Real Madrid a peiné avant de trouver la faille contre Cadix, 14e de Liga (2-0).",
+            "url": "https://www.lequipe.fr/Football/Actualites/Le-real-madrid-s-impose-face-a-cadix/1391679",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/malgre-plusieurs-opportunites-karim-benzema-est-reste-muet-lors-de-la-victoire-du-real-madrid-contre/1500000001773950/0:0,1329:1329-640-640-75/ccce5.jpg",
+            "publishedAt": "2023-04-15T21:15:44+00:00",
+            "content": "Une heure, douze minutes et une bonne douzaine d'actions franches, c'est le temps et l'énergie qui auront été nécessaires au Real Madrid pour faire plier Cadix, pourtant 14e de Liga (2-0). Jusqu'à ce… [+936 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "Romain Grosjean s'élancera troisième à Long Beach, derrière Kirkwood et Ericsson, Pagenaud 14e",
+            "description": "Sur le tracé en ville de Long Beach, Romain Grosjean a pris la troisième place de la qualification. En bonne place avant la course. Son coéquipier chez Andretti Kyle Kirkwood a pris la pole devant Marcus Ericsson (Chip Ganassi). Simon Pagenaud (Meyer Shank) s…",
+            "url": "https://www.lequipe.fr/Sport-auto/Actualites/Romain-grosjean-s-elancera-troisieme-a-long-beach-derriere-kirkwood-et-ericsson-pagenaud-14e/1391678",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/sous-les-palmiers-californiens-romain-grosjean-partira-en-deuxeme-ligne-j-skibinski-indycar/1500000001773946/0:0,1995:1330-640-427-75/a2fa8.jpg",
+            "publishedAt": "2023-04-15T21:07:39+00:00",
+            "content": "D'abord par son coéquipier chez Andretti, Kyle Kirkwoord (qui signe la première pole de sa carrière) puis par Marcus Ericsson (Chip Ganassi), deuxième. Leader au championnat, Pato O'Ward (McLaren) pa… [+716 chars]"
+        },
+        {
+            "source": {
+                "id": "lequipe",
+                "name": "L'equipe"
+            },
+            "author": "L'EQUIPE",
+            "title": "La Rochelle assure le minimum face à Bayonne en Top 14",
+            "description": "Victoire (26-6), deux essais à zéro, du Stade Rochelais sur l'Aviron Bayonnais, samedi soir à Marcel-Deflandre lors de la 22e journée de Championnat.",
+            "url": "https://www.lequipe.fr/Rugby/Actualites/La-rochelle-assure-le-minimum-face-a-bayonne-en-top-14/1391677",
+            "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/le-demi-de-melee-rochelais-thomas-berjon-a-inscrit-le-premier-des-deux-essais-rochelais-samedi-soir-/1500000001773956/0:0,1997:1331-640-427-75/8392d.jpg",
+            "publishedAt": "2023-04-15T21:02:31+00:00",
+            "content": "Les deux équipes eurent ceci de commun qu'elles péchèrent dans les zones de marque par manque de finition. Ainsi, sur leurs rares temps forts, Rochelais et Bayonnais ne parvinrent pas à marquer si ce… [+381 chars]"
+        }
+    ]
+}
