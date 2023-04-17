@@ -45,3 +45,6 @@ DerivedData/
 ## User settings
 *.pbxuser
 xcuserdata/
+
+## Secrets
+apiKey.plist
