@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 12/04/2023.
@@ -7,9 +7,18 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     private var dataAPI: SuperNewsDataAPIService?
+    weak var coordinator: HomeViewControllerDelegate?
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,10 +26,12 @@ final class ViewController: UIViewController {
         view.backgroundColor = .darkGray
         dataAPI = SuperNewsNetworkAPIService()
         
+        /*
         Task {
             await testFetchSources()
             await testFetchArticles()
         }
+         */
     }
     
     func testFetchSources() async {
@@ -55,4 +66,3 @@ final class ViewController: UIViewController {
         print("Recherche de PSG en français:\n\(result3)\n")
     }
 }
-
