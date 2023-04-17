@@ -28,7 +28,7 @@ final class AppCoordinator: Coordinator {
         
         let searchViewController = searchCoordinator.start()
         searchCoordinator.parentCoordinator = self
-        searchViewController.tabBarItem = UITabBarItem(title: "Recherche'", image: UIImage(systemName: "magnifyingglass"), tag: 1)
+        searchViewController.tabBarItem = UITabBarItem(title: "Recherche", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
         (rootViewController as? UITabBarController)?.viewControllers = [homeViewController, searchViewController]
                 

@@ -20,12 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        // Le NavigationController principal à être utilisé dans l'app
-        let navigationController = UINavigationController()
+        let tabBar = GradientTabBarController()
         
         // C'est d'ici qu'on démarre l'application et donc ici qu'on démarre avec le coordinator.
         print("Initializing Coordinator")
-        coordinator = AppCoordinator(with: UITabBarController())
+        coordinator = AppCoordinator(with: tabBar)
         
         print("Opening first view")
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
@@ -63,7 +62,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-
