@@ -25,7 +25,7 @@ final class HomeCoordinator: ParentCoordinator, HomeViewControllerDelegate {
         self.navigationController = navigationController
     }
     
-    // À titre d'exemple pour vérifier que lorsqu'on retourne sur l'écran d'accueil qu'il n'y a pas de memory leak.
+    // À titre d'exemple pour vérifier que lorsqu'on retourne sur l'écran d'accueil qu'il n'y a pas de memory leak
     deinit {
         print("[HomeCoordinator] Coordinator destroyed.")
     }
