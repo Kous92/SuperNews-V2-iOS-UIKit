@@ -35,7 +35,7 @@ struct ArticleSource: Decodable {
 }
 
 extension Article {
-    /// Returns a fake object with all available fields, not nil case.
+    /// Returns a fake object with all available fields, not nil case. For unit tests and SwiftUI previews
     static func getFakeArticle() -> Article {
         return Article(
             source: ArticleSource(id: "mac-rumors", name: "MacRumors"),

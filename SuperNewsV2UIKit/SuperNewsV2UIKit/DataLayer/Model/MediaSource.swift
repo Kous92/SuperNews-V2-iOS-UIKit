@@ -25,6 +25,7 @@ struct MediaSource: Decodable {
 }
 
 extension MediaSource {
+    /// Returns a fake object with all available fields, not nil case. For unit tests and SwiftUI previews.
     static func getFakeObject() -> MediaSource {
         return MediaSource(id: "le-monde", name: "Le Monde", description: "Les articles du journal et toute l'actualité; en continu : International, France, Société, Économie, Culture, Environnement, Blogs ...", url: "http://www.lemonde.fr", category: "general", language: "fr", country: "fr")
     }

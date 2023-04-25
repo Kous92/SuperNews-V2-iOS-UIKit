@@ -32,7 +32,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     init() {
         self.apiKey = getApiKey() ?? ""
-        print(apiKey)
+        print("Initialisation avec la clé: \(apiKey)")
     }
     
     func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError> {
