@@ -28,7 +28,7 @@ final class SuperNewsCoordinatorTests: XCTestCase {
     }
     
     func testHomeCoordinator() {
-        let homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
+        let homeCoordinator = HomeCoordinator(navigationController: UINavigationController(), builder: HomeModuleBuilder())
         let homeViewController = homeCoordinator.start()
         XCTAssertTrue(homeViewController is HomeViewController)
     }

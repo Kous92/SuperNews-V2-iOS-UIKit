@@ -11,7 +11,6 @@ final class NewsTableViewCell: UITableViewCell {
     private lazy var cellView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
-        view.backgroundColor = .clear
         return view
     }()
     
@@ -31,10 +30,7 @@ final class NewsTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.textColor = .white
-        label.layer.shadowOpacity = 1
-        label.layer.shadowRadius = 3
-        label.layer.shadowOffset = .zero
-        label.layer.shadowColor = CGColor(red: 0, green: 0, blue: 255, alpha: 1)
+        label.setShadowLabel(color: UIColor.black.cgColor, opacity: 1, radius: 3)
         return label
     }()
     
@@ -45,10 +41,7 @@ final class NewsTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .white
-        label.layer.shadowOpacity = 1
-        label.layer.shadowRadius = 3
-        label.layer.shadowOffset = .zero
-        label.layer.shadowColor = CGColor(red: 0, green: 0, blue: 255, alpha: 1)
+        label.setShadowLabel(color: UIColor.black.cgColor, opacity: 1, radius: 3)
         return label
     }()
     
@@ -89,12 +82,14 @@ final class NewsTableViewCell: UITableViewCell {
         }
     }
     
+    /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
     func configure(with viewModel: NewsCellViewModel) {
         titleLabel.text = viewModel.title
         sourceLabel.text = viewModel.source
         articleImageView.loadImage(with: viewModel.imageURL)
     }
     
+    // For live preview
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * (9 / 16))
     }
@@ -104,11 +99,6 @@ final class NewsTableViewCell: UITableViewCell {
         
         // Reset Thumbnail Image View
         articleImageView.cancelDownloadTask()
-    }
-    
-    // No background on cell selection
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        contentView.backgroundColor = .clear
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Mock data service for unit tests and live preview mode
 final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
     private let forceFetchFailure: Bool
     
