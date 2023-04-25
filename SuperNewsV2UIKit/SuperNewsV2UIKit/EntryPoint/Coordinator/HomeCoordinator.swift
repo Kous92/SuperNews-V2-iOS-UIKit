@@ -19,10 +19,12 @@ final class HomeCoordinator: ParentCoordinator, HomeViewControllerDelegate {
     
     private(set) var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
+    var builder: ModuleBuilder
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, builder: ModuleBuilder) {
         print("[HomeCoordinator] Initialising")
         self.navigationController = navigationController
+        self.builder = builder
     }
     
     // À titre d'exemple pour vérifier que lorsqu'on retourne sur l'écran d'accueil qu'il n'y a pas de memory leak
@@ -32,8 +34,8 @@ final class HomeCoordinator: ParentCoordinator, HomeViewControllerDelegate {
     
     func start() -> UIViewController {        
         print("[HomeCoordinator] Instantiating HomeViewController.")
-        let homeViewController = HomeViewController()
-        homeViewController.coordinator = self
+        let homeViewController = builder.buildModule(testMode: false)
+        // homeViewController.coordinator = self
         
         // On n'oublie pas de faire l'injection de dépendance du ViewModel
         

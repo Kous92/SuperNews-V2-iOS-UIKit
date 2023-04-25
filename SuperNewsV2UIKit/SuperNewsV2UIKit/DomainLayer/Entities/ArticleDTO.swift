@@ -40,3 +40,9 @@ struct ArticleDTO {
         self.publishedAt = article.publishedAt ?? "Date inconnue"
     }
 }
+
+extension ArticleDTO {
+    static func getFakeObjectFromArticle() -> ArticleDTO {
+        return ArticleDTO(with: Article.getFakeArticle())
+    }
+}

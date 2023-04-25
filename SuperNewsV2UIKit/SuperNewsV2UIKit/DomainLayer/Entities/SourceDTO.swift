@@ -37,3 +37,10 @@ struct SourceDTO {
         self.country = mediaSource.country
     }
 }
+
+extension SourceDTO {
+    /// Returns a fake object with all available fields, not nil case. For unit tests and SwiftUI previews.
+    static func getFakeObjectFromSource() -> SourceDTO {
+        return SourceDTO(with: MediaSource.getFakeObject())
+    }
+}
