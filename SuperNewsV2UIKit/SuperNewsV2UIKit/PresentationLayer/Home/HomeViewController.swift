@@ -15,9 +15,6 @@ final class HomeViewController: UIViewController {
     weak var coordinator: HomeViewControllerDelegate?
     
     // MVVM with Reactive Programming
-    // let service = SuperNewsMockDataAPIService(forceFetchFailure: false)
-    // let repository = SuperNewsDataRepository(apiService: SuperNewsMockDataAPIService(forceFetchFailure: false))
-    // let useCase = TopHeadlinesUseCase(repository: repository)
     var viewModel: HomeViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
@@ -31,6 +28,7 @@ final class HomeViewController: UIViewController {
         tableView.estimatedRowHeight = UIScreen.main.bounds.width * (9 / 16)
         tableView.separatorStyle = .none
         tableView.isHidden = true
+        tableView.backgroundColor = .clear
         
         return tableView
     }()
@@ -57,6 +55,7 @@ final class HomeViewController: UIViewController {
         label.layer.shadowRadius = 3
         label.layer.shadowOffset = .zero
         label.layer.shadowColor = CGColor(red: 0, green: 0, blue: 255, alpha: 1)
+        label.isHidden = true
         return label
     }()
     
@@ -73,7 +72,6 @@ final class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor(named: "SuperNewsDarkBlue")
         buildViewHierarchy()
-        tableView.backgroundColor = .clear
         setConstraints()
         setBindings()
         viewModel?.fetchTopHeadlines()
@@ -113,6 +111,7 @@ final class HomeViewController: UIViewController {
                 }
             }.store(in: &subscriptions)
         
+        // Update binding
         viewModel?.updateResultPublisher
             .receive(on: RunLoop.main)
             .sink { completion in
@@ -147,7 +146,6 @@ extension HomeViewController {
     }
     
     private func updateTableView() {
-        noResultLabel.isHidden = true
         tableView.isHidden = false
         tableView.reloadData()
     }
@@ -155,7 +153,6 @@ extension HomeViewController {
     private func setLoadingSpinner(isLoading: Bool) {
         if isLoading {
             loadingSpinner.startAnimating()
-            // loadingSpinner.isHidden = false
         } else {
             loadingSpinner.stopAnimating()
         }
@@ -175,6 +172,10 @@ extension HomeViewController: UITableViewDataSource {
         if let articleViewModel = viewModel?.viewModels[indexPath.row] {
             cell.configure(with: articleViewModel)
         }
+        
+        cell.backgroundColor = .clear
+        cell.backgroundView = UIView()
+        cell.selectedBackgroundView = UIView()
         
         return cell
     }
