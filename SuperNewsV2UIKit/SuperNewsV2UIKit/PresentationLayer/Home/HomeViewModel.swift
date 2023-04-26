@@ -33,16 +33,27 @@ final class HomeViewModel {
         Task {
             isLoading.send(true)
             let result = await useCase.execute(source: "lequipe")
-            
-            switch result {
-                case .success(let viewModels):
-                    print("[HomeViewModel] Données récupérées: \(viewModels.count) articles")
-                    self.viewModels = viewModels
-                    self.updateResult.send(viewModels.count > 0)
-                case .failure(let error):
-                    print("ERREUR: " + error.rawValue)
-                    self.updateResult.send(completion: .failure(error))
-            }
+            await handleResult(with: result)
+        }
+    }
+    
+    func fetchTopHeadlines(with category: String) {
+        Task {
+            isLoading.send(true)
+            let result = await useCase.execute(countryCode: "us", category: category)
+            await handleResult(with: result)
+        }
+    }
+    
+    private func handleResult(with result: Result<[NewsCellViewModel], SuperNewsAPIError>) async {
+        switch result {
+            case .success(let viewModels):
+                print("[HomeViewModel] Données récupérées: \(viewModels.count) articles")
+                self.viewModels = viewModels
+                self.updateResult.send(viewModels.count > 0)
+            case .failure(let error):
+                print("ERREUR: " + error.rawValue)
+                self.updateResult.send(completion: .failure(error))
         }
     }
 }

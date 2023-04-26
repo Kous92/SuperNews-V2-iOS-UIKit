@@ -15,7 +15,6 @@ final class NewsTableViewCell: UITableViewCell {
     
     private lazy var cellView: UIView = {
         let view = UIView()
-        view.clipsToBounds = true
         return view
     }()
     
@@ -84,8 +83,8 @@ final class NewsTableViewCell: UITableViewCell {
     /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
     func configure(with viewModel: NewsCellViewModel) {
         articleImageView.loadImage(with: viewModel.imageURL)
-        sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: 14, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
-        titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: 17, weight: .semibold), textColor: .white, shadowColor: .blue, radius: 3)
+        sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: 14, weight: .medium), textColor: .white, shadowColor: .black, radius: 3)
+        titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: 17, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
     }
     
     // For live preview

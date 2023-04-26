@@ -15,8 +15,25 @@ final class HomeViewController: UIViewController {
     weak var coordinator: HomeViewControllerDelegate?
     
     // MVVM with Reactive Programming
+    private let categoryViewModels = CategoryCellViewModel.getCategories()
     var viewModel: HomeViewModel?
     private var subscriptions = Set<AnyCancellable>()
+    
+    private lazy var categoryCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        
+        return collectionView
+    }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -39,6 +56,7 @@ final class HomeViewController: UIViewController {
         spinner.style = .medium
         spinner.transform = CGAffineTransform(scaleX: 2, y: 2)
         spinner.hidesWhenStopped = true
+        
         return spinner
     }()
     
@@ -56,6 +74,7 @@ final class HomeViewController: UIViewController {
         label.layer.shadowOffset = .zero
         label.layer.shadowColor = CGColor(red: 0, green: 0, blue: 255, alpha: 1)
         label.isHidden = true
+        
         return label
     }()
     
@@ -85,6 +104,7 @@ final class HomeViewController: UIViewController {
     private func buildViewHierarchy() {
         view.addSubview(loadingSpinner)
         view.addSubview(noResultLabel)
+        view.addSubview(categoryCollectionView)
         view.addSubview(tableView)
     }
     
@@ -99,9 +119,15 @@ final class HomeViewController: UIViewController {
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(categoryCollectionView.snp.bottom)
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
+        }
+        
+        categoryCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(50)
         }
     }
     
@@ -151,8 +177,9 @@ extension HomeViewController {
     }
     
     private func updateTableView() {
-        tableView.isHidden = false
         tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        tableView.isHidden = false
     }
     
     private func setLoadingSpinner(isLoading: Bool) {
@@ -188,6 +215,28 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return categoryViewModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.configure(with: categoryViewModels[indexPath.item].title)
+        
+        return cell
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel?.fetchTopHeadlines(with: categoryViewModels[indexPath.item].categoryId)
+    }
 }
 
 // Ready to live preview and make views much faster

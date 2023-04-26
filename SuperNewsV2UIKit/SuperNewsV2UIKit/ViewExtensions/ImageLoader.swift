@@ -13,9 +13,10 @@ extension UIImageView {
     // Asynchronous image download.
     func loadImage(with url: String) {
         self.image = nil
-        let defaultImage = UIImage(systemName: "SuperNewsNotAvailableImage")
+        let defaultImage = UIImage(named: "SuperNewsNotAvailableImage")
         
         guard !url.isEmpty, let imageURL = URL(string: url) else {
+            print("Default image")
             self.image = defaultImage
             return
         }
