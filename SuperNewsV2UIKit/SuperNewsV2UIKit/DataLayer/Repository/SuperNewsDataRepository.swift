@@ -74,7 +74,6 @@ final class SuperNewsDataRepository: SuperNewsRepository {
     private func handleArticleResult(with result: Result<[Article], SuperNewsAPIError>) -> Result<[ArticleDTO], SuperNewsAPIError> {
         switch result {
             case .success(let articles):
-                print("Articles before conversion:\n\(articles)")
                 return .success(articlesToDTO(with: articles))
             case .failure(let error):
                 return .failure(error)

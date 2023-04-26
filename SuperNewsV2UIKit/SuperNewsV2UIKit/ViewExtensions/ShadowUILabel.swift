@@ -8,10 +8,17 @@
 import UIKit
 
 extension UILabel {
-    func setShadowLabel(color: CGColor? = nil, opacity: Float = 0, radius: CGFloat = 0, offset: CGSize = CGSize(width: 0, height: 0)) {
-        self.layer.shadowColor = color
-        self.layer.shadowOpacity = opacity
-        self.layer.shadowRadius = radius
-        self.layer.shadowOffset = offset
+    func setShadowLabel(string: String, font: UIFont, textColor: UIColor? = nil, shadowColor: UIColor? = nil, radius: CGFloat = 0) {        
+        let shadow = NSShadow()
+        shadow.shadowColor = shadowColor ?? UIColor.black
+        shadow.shadowBlurRadius = radius
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: textColor ?? UIColor.white,
+            .shadow: shadow
+        ]
+        
+        self.attributedText = NSMutableAttributedString(string: string, attributes: attributes)
     }
 }
