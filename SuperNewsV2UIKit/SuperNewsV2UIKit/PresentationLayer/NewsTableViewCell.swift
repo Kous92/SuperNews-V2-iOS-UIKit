@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 final class NewsTableViewCell: UITableViewCell {
+    
+    private var title: String = ""
+    private var source: String = ""
+    
     private lazy var cellView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -28,9 +33,6 @@ final class NewsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .white
-        label.setShadowLabel(color: UIColor.black.cgColor, opacity: 1, radius: 3)
         return label
     }()
     
@@ -39,9 +41,6 @@ final class NewsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.textColor = .white
-        label.setShadowLabel(color: UIColor.black.cgColor, opacity: 1, radius: 3)
         return label
     }()
     
@@ -56,7 +55,7 @@ final class NewsTableViewCell: UITableViewCell {
     }
     
     private func buildViewHierarchy() {
-        contentView.addSubview(cellView)
+        addSubview(cellView)
         cellView.addSubview(articleImageView)
         articleImageView.addSubview(titleLabel)
         articleImageView.addSubview(sourceLabel)
@@ -84,9 +83,9 @@ final class NewsTableViewCell: UITableViewCell {
     
     /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
     func configure(with viewModel: NewsCellViewModel) {
-        titleLabel.text = viewModel.title
-        sourceLabel.text = viewModel.source
         articleImageView.loadImage(with: viewModel.imageURL)
+        sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: 14, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: 17, weight: .semibold), textColor: .white, shadowColor: .blue, radius: 3)
     }
     
     // For live preview

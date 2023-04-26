@@ -19,7 +19,7 @@ final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
         
         switch result {
             case .success(let articles):
-                print("DTOs:\n\(articles)")
+                // print("DTOs:\n\(articles)")
                 return .success(parseViewModels(with: articles))
             case .failure(let error):
                 return .failure(error)
@@ -31,7 +31,7 @@ final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
         
         switch result {
             case .success(let articles):
-                print("DTOs:\n\(articles)")
+                // print("DTOs:\n\(articles)")
                 return .success(parseViewModels(with: articles))
             case .failure(let error):
                 return .failure(error)
@@ -41,7 +41,6 @@ final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
     private func parseViewModels(with articles: [ArticleDTO]) -> [NewsCellViewModel] {
         var viewModels = [NewsCellViewModel]()
         articles.forEach { viewModels.append(NewsCellViewModel(imageURL: $0.imageUrl, title: $0.title, source: $0.sourceName)) }
-        // print(viewModels)
         
         return viewModels
     }

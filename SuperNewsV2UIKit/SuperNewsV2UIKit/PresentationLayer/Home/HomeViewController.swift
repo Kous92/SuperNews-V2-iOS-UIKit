@@ -77,6 +77,11 @@ final class HomeViewController: UIViewController {
         viewModel?.fetchTopHeadlines()
     }
     
+    override func viewDidLayoutSubviews() {
+        tableView.layer.shadowPath = UIBezierPath(rect: tableView.bounds).cgPath
+        
+    }
+    
     private func buildViewHierarchy() {
         view.addSubview(loadingSpinner)
         view.addSubview(noResultLabel)
