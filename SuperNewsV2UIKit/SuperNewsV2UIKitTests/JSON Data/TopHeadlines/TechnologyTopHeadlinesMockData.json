@@ -1,0 +1,266 @@
+{
+    "status": "ok",
+    "totalResults": 70,
+    "articles": [
+        {
+            "source": {
+                "id": "the-verge",
+                "name": "The Verge"
+            },
+            "author": "Jon Porter",
+            "title": "Samsung's Galaxy Z Fold 5 could be far thinner while folded - The Verge",
+            "description": "Physical dimensions of Samsung’s upcoming foldable, the Galaxy Z Fold 5, have leaked, suggesting it’ll be thinner and lighter than its predecessor.",
+            "url": "https://www.theverge.com/2023/4/26/23698748/samsung-galaxy-z-fold-5-weight-dimensions-leak",
+            "urlToImage": "https://cdn.vox-cdn.com/thumbor/JAYLendy9H6aAxAEsV6ugYLvKT4=/0x0:3000x2000/1200x628/filters:focal(1500x1000:1501x1001)/cdn.vox-cdn.com/uploads/chorus_asset/file/23949711/DSC03413_resized.jpg",
+            "publishedAt": "2023-04-26T08:28:33Z",
+            "content": "Samsungs Galaxy Z Fold 5 could be far thinner while folded\r\nSamsungs Galaxy Z Fold 5 could be far thinner while folded\r\n / A reliable tipster has leaked the dimensions of the upcoming foldable, which… [+2156 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Cointelegraph"
+            },
+            "author": "Tom Mitchelhill",
+            "title": "The danger with Google’s new cloud backup for 2FA authenticator - Cointelegraph",
+            "description": "Google has released an update to its 2FA authenticator app that stores a “one-time code” cloud storage, possibly making it easier for hackers to gain access to their authenticator-linked apps.",
+            "url": "https://cointelegraph.com/news/the-danger-with-google-s-new-cloud-backup-for-2fa-authenticator",
+            "urlToImage": "https://images.cointelegraph.com/cdn-cgi/image/format=auto,onerror=redirect,quality=90,width=1200/https://s3.cointelegraph.com/uploads/2023-04/706d59a7-133d-4fbf-a2c4-b67804fd07f6.jpg",
+            "publishedAt": "2023-04-26T05:00:52Z",
+            "content": "Google released an update for its popular authenticator app that stores a one-time code in cloud storage, allowing users who have lost the device with their authenticator on it to retain access to th… [+3465 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Slashdot.org"
+            },
+            "author": null,
+            "title": "Meet the People Who Use 'Notion' To Plan Their Whole Lives - Slashdot",
+            "description": "An anonymous reader quotes a report from MIT Technology Review: Joshua Bergen is a very productive person. His secret is the workspace app Notion. Bergen, a product manager living in Vancouver, uses it to plan trips abroad in meticulous detail, with notes and…",
+            "url": "https://tech.slashdot.org/story/23/04/25/2116216/meet-the-people-who-use-notion-to-plan-their-whole-lives",
+            "urlToImage": "https://a.fsdn.com/sd/topics/business_64.png",
+            "publishedAt": "2023-04-26T03:30:00Z",
+            "content": "This reminded me that Evernote was a thing. I found out about Evernote when they put their logo on top of a building in Redwood City, and I got curious. I googled it, and went on with my life.\r\nI gue… [+1282 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Push Square"
+            },
+            "author": "Khayl Adam",
+            "title": "Horizon Forbidden West: Burning Shores' Seyka Shares the Story Behind Her Alter-Ego's High Ponytail - Push Square",
+            "description": "Art imitates life",
+            "url": "https://www.pushsquare.com/news/2023/04/horizon-forbidden-west-burning-shores-seyka-shares-the-story-behind-her-alter-egos-high-ponytail",
+            "urlToImage": "https://images.pushsquare.com/1647e91efe4bb/1280x720.jpg",
+            "publishedAt": "2023-04-26T03:00:00Z",
+            "content": "Horizon Forbidden West: Burning Shores expansion has been a joy for players to explore for themselves, and as is so often the case, a completely surreal experience for the real humans involved to see… [+1091 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Gematsu"
+            },
+            "author": "Sal Romano",
+            "title": "Magical Drop VI - Forever Limited physical editions announced for Switch - Gematsu",
+            "description": "Publisher Forever Entertainment, and developers Highball Games and Storm Trident have opened pre-orders for physical editions of Magical Drop VI for Switch at Forever Limted. It is available in…",
+            "url": "https://www.gematsu.com/2023/04/magical-drop-vi-forever-limited-physical-editions-announced-for-switch",
+            "urlToImage": "https://www.gematsu.com/wp-content/uploads/2023/04/Magical-Drop-VI_2023_04-25-23_010.jpg",
+            "publishedAt": "2023-04-26T02:08:59Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nintendo Life"
+            },
+            "author": "Liam Doolan",
+            "title": "Miyamoto Thinks Mario Movie's Critical Reception Contributed To The \"Buzz\" - Nintendo Life",
+            "description": "It's now expected to surpass $1 billion at the box office",
+            "url": "https://www.nintendolife.com/news/2023/04/miyamoto-thinks-mario-movies-critical-reception-contributed-to-the-buzz",
+            "urlToImage": "https://images.nintendolife.com/d81936da65e03/1280x720.jpg",
+            "publishedAt": "2023-04-26T02:05:00Z",
+            "content": "The good news here is that at least it shows that Nintendo are actively looking at the critic reviews and not ignoring them.\r\nRT user review scores mean relatively nothing overall in the grand scheme… [+809 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "Honkai: Star Rail Combat Gameplay - GameSpot",
+            "description": null,
+            "url": "https://www.youtube.com/watch?v=sEheUxvfGDM",
+            "urlToImage": null,
+            "publishedAt": "2023-04-26T02:00:15Z",
+            "content": "Your browser isnt supported anymore. Update it to get the best YouTube experience and our latest features. Learn more\r\nRemind me later"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "BBC News"
+            },
+            "author": "https://www.facebook.com/bbcnews",
+            "title": "iSpace: Japanese Moon lander likely to have crashed - BBC",
+            "description": "Communication was lost with Japan's Hakuto-R lunar moments before it was due to touch down.",
+            "url": "https://www.bbc.com/news/world-asia-65389730",
+            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/181F0/production/_129500889_mediaitem129500888.jpg",
+            "publishedAt": "2023-04-26T01:51:20Z",
+            "content": "A Japanese company hoping to carry out a rare private Moon landing says it is likely its lunar lander crashed on the surface. \r\nCommunication was lost with Hakuto-R moments before it was due to touch… [+2730 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nintendo Life"
+            },
+            "author": "Liam Doolan",
+            "title": "Xenoblade Chronicles 3 Version 2.0.0 Is Now Available, Here Are The Full Patch Notes - Nintendo Life",
+            "description": "The final wave of the Expansion Pass has arrived",
+            "url": "https://www.nintendolife.com/news/2023/04/xenoblade-chronicles-3-version-2-0-0-is-now-available-here-are-the-full-patch-notes",
+            "urlToImage": "https://images.nintendolife.com/f05be4cb57f00/1280x720.jpg",
+            "publishedAt": "2023-04-26T01:05:00Z",
+            "content": "Subscribe to Nintendo Life on YouTube\r\nNintendo surprised Xenoblade Chronicles 3 fans last week when it announced the \"final DLC\" for the Expansion Pass would be arriving this week on April 25th. In … [+1594 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "Here's What's Leaving PlayStation Plus in May - Beyond Clip - IGN",
+            "description": null,
+            "url": "https://www.youtube.com/watch?v=B5QV-A8DJRA",
+            "urlToImage": null,
+            "publishedAt": "2023-04-26T01:00:07Z",
+            "content": "Your browser isnt supported anymore. Update it to get the best YouTube experience and our latest features. Learn more\r\nRemind me later"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "MacRumors"
+            },
+            "author": "Joe Rossignol",
+            "title": "Beats Studio Buds+ Launching in May With New Transparent Design Option, Improved Noise Cancellation, and More - MacRumors",
+            "description": "Apple's rumored Beats Studio Buds+ appear to have been listed on Amazon today, providing a closer look at new features and changes before they...",
+            "url": "https://www.macrumors.com/2023/04/25/beats-studio-buds-plus-amazon-listing/",
+            "urlToImage": "https://images.macrumors.com/t/uGHu-K3gkLNSGDn7Cm9r9GcB6UA=/1600x/article-new/2023/04/Beats-Studio-Buds-Plus-Transparent.jpeg",
+            "publishedAt": "2023-04-26T00:46:13Z",
+            "content": "Apple's rumored Beats Studio Buds+ appear to have been listed on Amazon today, providing a closer look at new features and changes before they are officially announced. The earbuds are listed with a … [+1592 chars]"
+        },
+        {
+            "source": {
+                "id": "the-verge",
+                "name": "The Verge"
+            },
+            "author": "Jay Peters",
+            "title": "Leak: TikTok is launching generative AI avatars and here's what they look like - The Verge",
+            "description": "TikTok is working on a feature that will create AI-generated profile pictures, as found by social media consultant Matt Navarra. Think avatars you’ve seen made by Lensa, but from TikTok.",
+            "url": "https://www.theverge.com/2023/4/25/23698394/tiktok-ai-profile-picture-avatar-lensa",
+            "urlToImage": "https://cdn.vox-cdn.com/thumbor/cOjgJjQBJzdqQLWnMiExfbIk6PE=/0x0:1768x1186/1200x628/filters:focal(1221x628:1222x629)/cdn.vox-cdn.com/uploads/chorus_asset/file/24611115/tiktok_ai_avatars_matt_navarra.jpg",
+            "publishedAt": "2023-04-26T00:02:00Z",
+            "content": "Leak: TikTok is launching generative AI avatars and heres what they look like\r\nLeak: TikTok is launching generative AI avatars and heres what they look like\r\n / Think Lensa-made avatars, but made usi… [+1133 chars]"
+        },
+        {
+            "source": {
+                "id": "fox-news",
+                "name": "Fox News"
+            },
+            "author": "Alexander Hall",
+            "title": "Nintendo changes name of Mario Bros. character that was deemed offensive: 'Incredibly unfortunate name' - Fox News",
+            "description": "Nintendo declared that it will rename a character that appears in classic games as well as the new film as fans noted how the name translated to a racial slur in Western countries.",
+            "url": "https://www.foxnews.com/media/nintendo-changes-name-of-mario-bros-character-deemed-offensive-incredibly-unfortunate-name",
+            "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2023/04/mario-screencap-3.png",
+            "publishedAt": "2023-04-25T23:27:00Z",
+            "content": "Japanese video game company Nintendo announced that a character originally called \"Blackie\" has been renamed to \"Spike.\" \r\n\"The Super Mario Bros. Movie,\" based on the internationally famous Mario Bro… [+2998 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "GameSpot"
+            },
+            "author": "Grace Benfell",
+            "title": "AMD Announces New Processors For Powering Handheld PC Gaming - GameSpot",
+            "description": "AMD is partnering with Asus to create a Steam Deck competitor called the ROG ally.",
+            "url": "https://www.gamespot.com/articles/amd-announces-new-processors-for-powering-handheld-pc-gaming/1100-6513574/",
+            "urlToImage": "https://www.gamespot.com/a/uploads/screen_kubrick/1690/16904437/4129986-z1series.jpg",
+            "publishedAt": "2023-04-25T23:25:47Z",
+            "content": "AMD has announced new Ryzen Z1 processors, explicitly meant to power portable PC devices. The Z1 series includes two processors: the Z1 and the Z1 Extreme. AMD is partnering with Asus to bring the fi… [+1184 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "Dead Island 2 Sells More Than 1 Million Units in Three Days - IGN Daily Fix - IGN",
+            "description": "On today's Daily Fix:Deep Silver and Dambuster Studios announced that Dead Island 2 has sold over 1 million copies within the first three days of release. Ha...",
+            "url": "https://www.youtube.com/watch?v=rZuwHnQs-VI",
+            "urlToImage": "https://i.ytimg.com/vi/rZuwHnQs-VI/maxresdefault.jpg",
+            "publishedAt": "2023-04-25T23:23:35Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "fox-news",
+                "name": "Fox News"
+            },
+            "author": "Gary Gastelu",
+            "title": "Bruce Springsteen's 1969 Chevrolet Chevelle convertible is ready to rock the auction block - Fox News",
+            "description": "A 1969 Chevrolet Chevelle SS convertible once-owned by Bruce Springsteen will be put up for auction at the Mecum Auction's event in Indianapolis this May.",
+            "url": "https://www.foxnews.com/auto/bruce-springsteens-chevrolet-chevelle-convertible-auction",
+            "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2023/04/bruce-with-car.jpg",
+            "publishedAt": "2023-04-25T23:16:00Z",
+            "content": "When Bruce Springsteen sang \"I got a sixty-nine Chevy with a three-ninety-six, fuelie heads and a Hurst on the floor\" in his 1978 song \"Racing in the Street\" he didn't actually have a car like that.\r… [+1710 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "McLaren Global Premiere - McLaren Automotive",
+            "description": "At McLaren, we never stand still. We believe in going beyond. It’s in our DNA.Launching 25 April at 23:58 BST.Benchmark. Beaten.#McLaren #McLaren750S #750S #...",
+            "url": "https://www.youtube.com/watch?v=GsxQeLKDOFI",
+            "urlToImage": "https://i.ytimg.com/vi/GsxQeLKDOFI/maxresdefault.jpg",
+            "publishedAt": "2023-04-25T22:58:11Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "techcrunch",
+                "name": "TechCrunch"
+            },
+            "author": "Lauren Forristal",
+            "title": "AI startup Runway launches app to bring users video-to-video generative AI - TechCrunch",
+            "description": "Runway launched its first mobile app yesterday to give users access to Gen-1, its video-to-video generative AI model.",
+            "url": "https://techcrunch.com/2023/04/25/ai-startup-runway-launches-app-to-bring-users-video-to-video-generative-ai/",
+            "urlToImage": "https://techcrunch.com/wp-content/uploads/2023/04/Screen-Shot-2023-04-25-at-2.10.46-PM.png?resize=1200,618",
+            "publishedAt": "2023-04-25T22:33:21Z",
+            "content": "Runway, an AI startup that helped develop the AI image generator Stable Diffusion, launched its first mobile app yesterday to give users access to Gen-1, its video-to-video generative AI model. The a… [+4218 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "TrekMovie"
+            },
+            "author": null,
+            "title": "'Star Trek: Resurgence' Game Sets May Release Date - TrekMovie",
+            "description": "The interactive narrative game is coming to PC and consoles in a month.",
+            "url": "https://trekmovie.com/2023/04/25/star-trek-resurgence-game-sets-may-release-date/",
+            "urlToImage": "https://trekmovie.com/wp-content/uploads/2023/04/resurgence-date-head3.jpg",
+            "publishedAt": "2023-04-25T22:04:09Z",
+            "content": "Star Trek: Resurgence, an interactive narrative adventure game set in the Next Generation era, finally has a release date.\r\nDramatic Labs announced the game arrives May 23 on PlayStation 5, PlayStati… [+2549 chars]"
+        },
+        {
+            "source": {
+                "id": "engadget",
+                "name": "Engadget"
+            },
+            "author": "https://www.engadget.com/about/editors/jon-fingas",
+            "title": "Apple is reportedly developing an AI health coach for Apple Watch | Engadget - Engadget",
+            "description": "Apple is said to be working on an AI-powered health coach for Apple Watch users..",
+            "url": "https://www.engadget.com/apple-is-reportedly-developing-an-ai-health-coach-for-apple-watch-212515646.html",
+            "urlToImage": "https://s.yimg.com/uu/api/res/1.2/O_qK.H9PAMZlDySk6OBJqg--~B/Zmk9ZmlsbDtoPTYzMDtweW9mZj0wO3c9MTIwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2022-10/1b51eff0-4fab-11ed-bdf7-303ecc225182.cf.jpg",
+            "publishedAt": "2023-04-25T21:26:48Z",
+            "content": "Apple devices can already offer health insights, but they might soon tell you just how to improve. Bloombergsources claim Apple is developing an AI-based health coach, nicknamed Quartz, that draws on… [+1592 chars]"
+        }
+    ]
+}

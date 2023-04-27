@@ -11,7 +11,7 @@ import UIKit
 final class HomeModuleBuilder: ModuleBuilder {
     private var testMode = false
     
-    func buildModule(testMode: Bool) -> UIViewController {
+    func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
         let homeViewController = HomeViewController()
         
@@ -19,6 +19,7 @@ final class HomeModuleBuilder: ModuleBuilder {
         let repository = getRepository(testMode: testMode)
         let useCase = TopHeadlinesUseCase(repository: repository)
         let homeViewModel = HomeViewModel(useCase: useCase)
+        homeViewModel.coordinator = coordinator as? HomeViewControllerDelegate
         
         // Injecting view model
         homeViewController.viewModel = homeViewModel

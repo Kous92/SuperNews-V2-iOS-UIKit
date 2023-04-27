@@ -1,0 +1,266 @@
+{
+    "status": "ok",
+    "totalResults": 66,
+    "articles": [
+        {
+            "source": {
+                "id": null,
+                "name": "ScienceAlert"
+            },
+            "author": "ScienceAlert",
+            "title": "Throat Cancer Is Becoming an Epidemic, And Our Sex Lives Could Be Behind It - ScienceAlert",
+            "description": null,
+            "url": "https://www.sciencealert.com/throat-cancer-is-becoming-an-epidemic-and-our-sex-lives-could-be-behind-it",
+            "urlToImage": null,
+            "publishedAt": "2023-04-26T07:21:43Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Gray Matter Volume Linked to Language Deficits in Autism - Neuroscience News",
+            "description": "Children with Autism Spectrum Disorder (ASD) who have language impairment show lower gray matter volume and greater gyrification in the temporal and frontal lobes of the cerebral cortex, which are crucial for language function. The study's findings could help…",
+            "url": "https://neurosciencenews.com/asd-language-gray-matter-23112/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/gray-matter-volume-asd-language.jpg",
+            "publishedAt": "2023-04-26T06:44:00Z",
+            "content": "Summary: Children with Autism Spectrum Disorder (ASD) who have language impairment show lower gray matter volume and greater gyrification in the temporal and frontal lobes of the cerebral cortex, whi… [+6192 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "13WHAM-TV"
+            },
+            "author": "Carla Rogner",
+            "title": "'I felt excruciating pain': Victims recall rabid fox attack in Brighton - 13WHAM-TV",
+            "description": "The Monroe County Health Department confirmed the fox had tested postive for rabies on Tuesday.JACOBSON/ FOX ATTACK VICTIM32.28 this is as far as I have gone s",
+            "url": "https://13wham.com/news/local/i-felt-excruciating-pain-victims-recall-rabid-fox-attack-in-brighton",
+            "urlToImage": "https://13wham.com/resources/media/e505fb3e-e001-4490-abbc-dff79f867142-large16x9_RABIDFOX2.jpeg?1682473798576",
+            "publishedAt": "2023-04-26T03:52:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "Man spends millions to attempt to reverse aging - NBC News",
+            "description": "Bryan Johnson, 45, is using his life as a science experiment to see how long he can live and to reverse signs of aging as he goes. NBC News' Gadi Schwartz re...",
+            "url": "https://www.youtube.com/watch?v=r1hM_WG8slQ",
+            "urlToImage": "https://i.ytimg.com/vi/r1hM_WG8slQ/maxresdefault.jpg",
+            "publishedAt": "2023-04-26T03:30:31Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "BBC News"
+            },
+            "author": "https://www.facebook.com/bbcnews",
+            "title": "Livvy Haydock: 'Disabled gangsters supported me with my MS diagnosis' - BBC",
+            "description": "Investigative journalist Livvy Haydock on dealing with gangsters alongside an MS diagnosis.",
+            "url": "https://www.bbc.com/news/disability-65335599",
+            "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/17FC9/production/_129494289_dsc00033.jpg",
+            "publishedAt": "2023-04-26T02:05:53Z",
+            "content": "Known for making documentaries with some of the most notorious criminals in the world, investigative journalist Livvy Haydock had a shock closer to home when she was diagnosed with multiple sclerosis… [+5968 chars]"
+        },
+        {
+            "source": {
+                "id": "fox-news",
+                "name": "Fox News"
+            },
+            "author": "Melissa Rudy",
+            "title": "In Alzheimer’s study, sleeping pills are shown to reduce signs of disease in the brain - Fox News",
+            "description": "Researchers at Washington University School of Medicine in St. Louis, Missouri, found that taking sleep medication could reduce Alzheimer's-related proteins in the brain, but there are caveats.",
+            "url": "https://www.foxnews.com/health/alzheimers-study-sleeping-pills-shown-reduce-signs-disease-brain",
+            "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2023/04/older-woman-insomnia.jpg",
+            "publishedAt": "2023-04-26T00:10:00Z",
+            "content": "Sleep difficulties are a common complaint among those living with Alzheimers disease\r\n and experts say those challenges often start well before the diagnosis. \r\nIn a recent study published in Annals … [+7241 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Food for Thought: Nutrient Intake Linked to Cognition and Healthy Brain Aging - Neuroscience News",
+            "description": "A new study reveals that nutrient intake, brain structure and cognitive function jointly contribute to brain health in older adults. The research discovered that blood markers of certain fatty acids are linked with better memory and larger brain structures in…",
+            "url": "https://neurosciencenews.com/nutrition-cognition-brain-aging-23110/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/brain-aging-nutrition-cognition-neurosicenw-public.jpg",
+            "publishedAt": "2023-04-25T23:37:56Z",
+            "content": "Summary: A new study reveals that nutrient intake, brain structure and cognitive function jointly contribute to brain health in older adults. The research discovered that blood markers of certain fat… [+6728 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "KCRG"
+            },
+            "author": null,
+            "title": "Specialists at Univ. of Iowa Hospitals find and remove tumor after preschooler has mysterious symptoms - KCRG",
+            "description": "Many medical providers have never seen a case like this, which is why the team who treated Scarlette says there was a delay in diagnosis. What makes her case unique is just that; the team of specialists that acted fast to remove the tumor.",
+            "url": "https://www.kcrg.com/2023/04/25/specialists-univ-iowa-hospitals-find-remove-tumor-after-preschooler-has-mysterious-symptoms/",
+            "urlToImage": "https://gray-kcrg-prod.cdn.arcpublishing.com/resizer/6-djIYdQchsI7bQhGjpCWVeSA6A=/1200x600/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/PVGIHMX5ZVFUBMKCUJ5X7X6ECU.jpg",
+            "publishedAt": "2023-04-25T23:33:00Z",
+            "content": "IOWA CITY, Iowa (KCRG) - Scarlette Wheelock of Clinton is like any other 4-year-old: she loves her stuffed toys, coloring, and spending time with her mom. What makes her story different is her journe… [+1323 chars]"
+        },
+        {
+            "source": {
+                "id": "ars-technica",
+                "name": "Ars Technica"
+            },
+            "author": "Beth Mole",
+            "title": "Crazy variability of melatonin in sleep aid gummies may keep you up at night - Ars Technica",
+            "description": "JAMA study highlights quality control issues common in dietary supplements.",
+            "url": "https://arstechnica.com/science/2023/04/crazy-variability-of-melatonin-in-sleep-aid-gummies-may-keep-you-up-at-night/",
+            "urlToImage": "https://cdn.arstechnica.net/wp-content/uploads/2023/04/GettyImages-143194340-760x380.jpeg",
+            "publishedAt": "2023-04-25T22:33:53Z",
+            "content": "80 with \r\nAn eye-opening analysis of common, over-the-counter sleep aids finds they contain wildly variable amounts of melatonin, with some packing up to 347 percent of the amount on the label.\r\nThe … [+3738 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Unraveling the Genetic Mechanisms Behind Long-Lasting Memories in the Brain - Neuroscience News",
+            "description": null,
+            "url": "https://neurosciencenews.com/molecular-memory-brain-23107/",
+            "urlToImage": null,
+            "publishedAt": "2023-04-25T22:14:20Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Mind Over Muscle: The Surprising Power of the Exercise Placebo Effect - Neuroscience News",
+            "description": "If a person believes an exercise program has been optimized and created specifically for them, the regime will have a positive effect, regardless of the content of the program. Researchers say the placebo effect has health benefits when it comes to exercise.",
+            "url": "https://neurosciencenews.com/placebo-effect-exercise-23106/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/exercise-placebo-effect-neurosincces-public.jpg",
+            "publishedAt": "2023-04-25T21:51:57Z",
+            "content": "Summary: If a person believes an exercise program has been optimized and created specifically for them, the regime will have a positive effect, regardless of the content of the program. Researchers s… [+5734 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Genetic Driver of Anxiety Discovered - Neuroscience News",
+            "description": "An international team of scientists has identified a gene in the brain responsible for anxiety symptoms and found that modifying the gene can reduce anxiety levels, offering a novel drug target for anxiety disorders. The discovery highlights a new amygdala mi…",
+            "url": "https://neurosciencenews.com/anxiety-genetics-23105/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/anxiety-genetic-neuroscience-public.jpg",
+            "publishedAt": "2023-04-25T21:22:59Z",
+            "content": "Summary: An international team of scientists has identified a gene in the brain responsible for anxiety symptoms and found that modifying the gene can reduce anxiety levels, offering a novel drug tar… [+5759 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Theeverygirl.com"
+            },
+            "author": "katherine",
+            "title": "How to Eat More Protein: 6 Easy Hacks - The Everygirl",
+            "description": "the secret to getting more toned is actually in your nutrition",
+            "url": "http://theeverygirl.com/how-to-eat-more-protein/",
+            "urlToImage": "https://media.theeverygirl.com/wp-content/uploads/2023/04/protein-4.jpg",
+            "publishedAt": "2023-04-25T21:09:44Z",
+            "content": "Before sea moss gel, green powders, and celeb-backed Erewhon smoothies (hi, Hailey and Bella) became the “it” superfoods, incorporating enough protein in your diet was the name of the wellness game. … [+6794 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Depression and Anxiety Linked to Accelerated Biological Aging in Adults - Neuroscience News",
+            "description": "Adults with advanced biological age are at a higher risk of depression and anxiety, according to a study that found participants with older biological age were 6% more likely to develop these mental health conditions at the 8.7-year follow-up compared to thos…",
+            "url": "https://neurosciencenews.com/mental-health-accelerated-age-23104/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/accelerated-aging-depression-neurosicences-public.jpg",
+            "publishedAt": "2023-04-25T21:04:42Z",
+            "content": "Summary: Adults with advanced biological age are at a higher risk of depression and anxiety, according to a study that found participants with older biological age were 6% more likely to develop thes… [+7195 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Listen Up! Classical Music May Not Benefit Learning in Mild Cognitive Impairment - Neuroscience News",
+            "description": "According to a recent study, background classical music has no effect on learning levels in people with mild cognitive impairment (MCI). However, listening to high-arousal music may have a positive impact on individuals who use music as an emotional regulator…",
+            "url": "https://neurosciencenews.com/music-cognition-learning-23102/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/music-learning-neurosicences-public.jpg",
+            "publishedAt": "2023-04-25T20:14:59Z",
+            "content": "Summary: According to a recent study, background classical music has no effect on learning levels in people with mild cognitive impairment (MCI). However, listening to high-arousal music may have a p… [+7471 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Neurosciencenews.com"
+            },
+            "author": "Neuroscience News",
+            "title": "Enlightening Study Explores the Neurobiology of Psychedelics - Neuroscience News",
+            "description": "Researchers studied the brain activity of healthy participants under the influence of nitrous oxide, comparing it to data from studies with ketamine and LSD to see whether the neurobiology of the psychedelic experience was similar. They found that the pattern…",
+            "url": "https://neurosciencenews.com/psychedelic-neurobiology-23101/",
+            "urlToImage": "https://neurosciencenews.com/files/2023/04/neurobiology-psychedelics-neurosicence.jpg",
+            "publishedAt": "2023-04-25T19:53:07Z",
+            "content": "Summary: Researchers studied the brain activity of healthy participants under the influence of nitrous oxide, comparing it to data from studies with ketamine and LSD to see whether the neurobiology o… [+4196 chars]"
+        },
+        {
+            "source": {
+                "id": "the-hill",
+                "name": "The Hill"
+            },
+            "author": "Olafimihan Oshin",
+            "title": "American Samoa declares public health emergency over measles outbreak - The Hill",
+            "description": "American Samoa has declared a public health emergency over an outbreak of measles, forcing the territory’s Department of Education to close all schools until at least May 12, sending 12,000 students home.  The emergency declaration signed by Gov. Lemanu P.S. …",
+            "url": "https://thehill.com/policy/healthcare/3971093-american-samoa-declares-public-health-emergency-over-measles-outbreak/",
+            "urlToImage": "https://thehill.com/wp-content/uploads/sites/2/2019/12/ca_americansamoaflag_121319istock.jpg?w=1280",
+            "publishedAt": "2023-04-25T19:38:00Z",
+            "content": "Skip to content\r\nAmerican Samoa has declared a public health emergency over an outbreak of measles, forcing the territory’s Department of Education to close all schools until at least May 12, sending… [+1692 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Health.com"
+            },
+            "author": "https://www.facebook.com/Health/",
+            "title": "Is Lemon Coffee Healthy? - Health.com",
+            "description": "A new TikTok trend is encouraging viewers to add lemon to their morning coffee as a means of quick weight loss, as well as relief for diarrhea and headaches. While both coffee and lemon have individual health benefits, research on combining the two is lacking.",
+            "url": "https://www.health.com/lemon-coffee-weight-loss-7483815",
+            "urlToImage": "https://www.health.com/thmb/HjXBGYoxQX3Y3VoTlHTFzxAPgU0=/3495x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1318207993-46f50a6d4372436ab49920b5e557c855.jpg",
+            "publishedAt": "2023-04-25T19:35:45Z",
+            "content": "TikTok influencers are touting the benefits of putting lemon in your coffee, but does it actually work?\r\nFrom celery juice to apple cider vinegar concoctions, TikTok is leading the charge in wellness… [+5927 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "New York Post"
+            },
+            "author": "Brooke Steinberg",
+            "title": "Lyme disease vaccine could come as soon as 2025 - New York Post ",
+            "description": "A Lyme disease vaccine could be available soon, Axios reports.",
+            "url": "https://nypost.com/2023/04/25/lyme-disease-vaccine-could-come-as-soon-as-2025/",
+            "urlToImage": "https://nypost.com/wp-content/uploads/sites/2/2023/04/NYPICHPDPICT000010120125.jpg?quality=75&strip=all&w=1024",
+            "publishedAt": "2023-04-25T18:16:00Z",
+            "content": "A Lyme disease vaccine could be available soon, Axios reports.\r\nEarlier this month, Moderna announced two new development candidates for mRNA vaccines against Lyme disease.\r\nPfizer and Valneva also h… [+4443 chars]"
+        },
+        {
+            "source": {
+                "id": "fox-news",
+                "name": "Fox News"
+            },
+            "author": "Associated Press",
+            "title": "WHO, Gates Foundation seek to reverse decline in routine childhood vaccinations - Fox News",
+            "description": "UNICEF, WHO, and the Bill & Melinda Gates Foundation are planning to reverse a pandemic-driven decline in routine childhood vaccinations by launching a new initiative.",
+            "url": "https://www.foxnews.com/health/who-gates-foundation-seek-reverse-decline-routine-childhood-vaccinations",
+            "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2023/04/shot.jpg",
+            "publishedAt": "2023-04-25T17:58:00Z",
+            "content": "The World Health Organization is working with the Bill &amp; Melinda Gates Foundation and other not-for profit organizations and agencies to reverse a pandemic-driven decline in routine childhood vac… [+1364 chars]"
+        }
+    ]
+}

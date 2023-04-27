@@ -14,10 +14,10 @@ final class HomeViewModel {
     var viewModels = [NewsCellViewModel]()
     
     // Bindings
-    private var updateResult = PassthroughSubject<Bool, SuperNewsAPIError>()
+    private var updateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
     
-    var updateResultPublisher: AnyPublisher<Bool, SuperNewsAPIError> {
+    var updateResultPublisher: AnyPublisher<Bool, Never> {
         return updateResult.eraseToAnyPublisher()
     }
     
@@ -53,7 +53,12 @@ final class HomeViewModel {
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("ERREUR: " + error.rawValue)
-                self.updateResult.send(completion: .failure(error))
+                await self.sendErrorMessage(with: error.rawValue)
+                self.updateResult.send(false)
         }
+    }
+    
+    @MainActor private func sendErrorMessage(with errorMessage: String) {
+        coordinator?.displayErrorAlert(with: errorMessage)
     }
 }

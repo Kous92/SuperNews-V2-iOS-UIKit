@@ -19,6 +19,21 @@ final class HomeViewController: UIViewController {
     var viewModel: HomeViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
+    lazy var gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
+        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
+        gradient.type = .axial
+        gradient.colors = [
+            blue,
+            darkBlue,
+            darkBlue,
+            UIColor.black.cgColor
+        ]
+        gradient.locations = [0, 0.25, 0.5, 1]
+        return gradient
+    }()
+    
     private lazy var categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -89,7 +104,9 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor(named: "SuperNewsDarkBlue")
+        // view.backgroundColor = UIColor(named: "SuperNewsDarkBlue")
+        gradient.frame = view.bounds
+        view.layer.addSublayer(gradient)
         navigationItem.title = tabBarController?.tabBar.items?[0].title
         
         buildViewHierarchy()
@@ -147,14 +164,7 @@ final class HomeViewController: UIViewController {
         // Update binding
         viewModel?.updateResultPublisher
             .receive(on: RunLoop.main)
-            .sink { completion in
-                switch completion {
-                    case .finished:
-                        print("OK: terminé")
-                    case .failure(let error):
-                        print("Erreur reçue: \(error.rawValue)")
-                }
-            } receiveValue: { [weak self] updated in
+            .sink { [weak self] updated in
                 self?.loadingSpinner.stopAnimating()
                 self?.setLoadingSpinner(isLoading: false)
                 
@@ -175,7 +185,7 @@ extension HomeViewController {
     private func displayNoResult() {
         tableView.isHidden = true
         noResultLabel.isHidden = false
-        noResultLabel.text = "Aucun article disponible."
+        noResultLabel.text = "Aucun article disponible"
     }
     
     private func updateTableView() {
@@ -251,22 +261,24 @@ import SwiftUI
 struct HomeViewControllerPreview: PreviewProvider {
     static var previews: some View {
         
-        // Dark mode
-        UIViewControllerPreview {
-            let tabBar = GradientTabBarController()
-            let navigationController = UINavigationController()
-            let builder = HomeModuleBuilder()
-            let vc = builder.buildModule(testMode: true)
-            vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
-            navigationController.pushViewController(vc, animated: false)
-            tabBar.viewControllers = [navigationController]
-            
-            return tabBar
+        ForEach(deviceNames, id: \.self) { deviceName in
+            // Dark mode
+            UIViewControllerPreview {
+                let tabBar = GradientTabBarController()
+                let navigationController = UINavigationController()
+                let builder = HomeModuleBuilder()
+                let vc = builder.buildModule(testMode: true)
+                vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+                navigationController.pushViewController(vc, animated: false)
+                tabBar.viewControllers = [navigationController]
+                
+                return tabBar
+            }
+            .previewDevice(PreviewDevice(rawValue: deviceName))
+            .preferredColorScheme(.dark)
+            .previewDisplayName(deviceName)
+            .edgesIgnoringSafeArea(.all)
         }
-        .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-        .preferredColorScheme(.dark)
-        .previewDisplayName("iPhone 14 Pro")
-        .edgesIgnoringSafeArea(.all)
     }
 }
 #endif

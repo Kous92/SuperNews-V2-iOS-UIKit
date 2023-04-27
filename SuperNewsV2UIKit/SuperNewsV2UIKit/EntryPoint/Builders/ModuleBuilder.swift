@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 protocol ModuleBuilder {
-    func buildModule(testMode: Bool) -> UIViewController
+    func buildModule(testMode: Bool, coordinator: ParentCoordinator?) -> UIViewController
 }
