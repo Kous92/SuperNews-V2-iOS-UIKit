@@ -14,7 +14,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.minimumScaleFactor = 0.5
-        label.textColor = .white
+        label.textColor = .darkGray
         label.textAlignment = .center
         return label
     }()
@@ -50,7 +50,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            categoryTitleLabel.textColor = isSelected ? .orange : .white
+            categoryTitleLabel.textColor = isSelected ? .white : .darkGray
         }
     }
 }

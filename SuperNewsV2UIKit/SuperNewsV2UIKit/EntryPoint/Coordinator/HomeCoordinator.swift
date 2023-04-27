@@ -40,7 +40,8 @@ final class HomeCoordinator: ParentCoordinator, HomeViewControllerDelegate {
         // On n'oublie pas de faire l'injection de dépendance du ViewModel
         
         print("[HomeCoordinator] Home view ready.")
+        navigationController.pushViewController(homeViewController, animated: false)
         
-        return homeViewController
+        return navigationController
     }
 }

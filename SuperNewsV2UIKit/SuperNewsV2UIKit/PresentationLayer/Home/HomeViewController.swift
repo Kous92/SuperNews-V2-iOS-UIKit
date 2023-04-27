@@ -90,6 +90,8 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor(named: "SuperNewsDarkBlue")
+        navigationItem.title = tabBarController?.tabBar.items?[0].title
+        
         buildViewHierarchy()
         setConstraints()
         setBindings()
@@ -214,7 +216,9 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(SearchViewController(), animated: true)
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -226,7 +230,7 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-
+        
         cell.configure(with: categoryViewModels[indexPath.item].title)
         
         return cell
@@ -249,9 +253,15 @@ struct HomeViewControllerPreview: PreviewProvider {
         
         // Dark mode
         UIViewControllerPreview {
+            let tabBar = GradientTabBarController()
+            let navigationController = UINavigationController()
             let builder = HomeModuleBuilder()
             let vc = builder.buildModule(testMode: true)
-            return vc
+            vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+            navigationController.pushViewController(vc, animated: false)
+            tabBar.viewControllers = [navigationController]
+            
+            return tabBar
         }
         .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
         .preferredColorScheme(.dark)

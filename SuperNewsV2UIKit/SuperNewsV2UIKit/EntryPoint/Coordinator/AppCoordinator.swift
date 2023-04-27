@@ -22,7 +22,7 @@ final class AppCoordinator: Coordinator {
     func start() -> UIViewController {
         let homeViewController = homeCoordinator.start()
         homeCoordinator.parentCoordinator = self
-        homeViewController.tabBarItem = UITabBarItem(title: "Accueil", image: UIImage(systemName: "house.fill"), tag: 0)
+        homeViewController.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
         
         let searchViewController = searchCoordinator.start()
         searchCoordinator.parentCoordinator = self
