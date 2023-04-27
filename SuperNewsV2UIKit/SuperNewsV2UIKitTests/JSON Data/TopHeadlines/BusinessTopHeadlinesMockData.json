@@ -1,0 +1,266 @@
+{
+    "status": "ok",
+    "totalResults": 70,
+    "articles": [
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Katia Hetter",
+            "title": "Is the new Covid-19 booster for you? Our medical analyst explains - CNN",
+            "description": "The FDA authorized a second bivalent booster for certain individuals most vulnerable to severe outcomes from Covid-19. Here is what you need to know about whether to get it.",
+            "url": "https://www.cnn.com/2023/04/26/health/coronavirus-bivalent-booster-vaccine-pandemic-health-wellness/index.html",
+            "urlToImage": "https://media.cnn.com/api/v1/images/stellar/prod/230425173406-coronavirus-bivalent-booster-vaccine-pandemic-health-wellness.jpg?c=16x9&q=w_800,c_fill",
+            "publishedAt": "2023-04-26T09:19:00Z",
+            "content": "Is it time for another Covid-19 vaccine booster? Its the question many people are asking their doctors, given what happened last week the US Food and Drug Administration amended their authorization t… [+6544 chars]"
+        },
+        {
+            "source": {
+                "id": "fox-news",
+                "name": "Fox News"
+            },
+            "author": "Peter Kasperowicz",
+            "title": "Senate GOP slams ‘perverse’ Biden rule forcing people with good credit to subsidize high-risk mortgages - Fox News",
+            "description": "Senate Republicans on Wednesday said the Biden administration is putting individual homebuyers and the entire housing market in danger by forcing people with good credit to subsidize high-risk mortgages.",
+            "url": "https://www.foxnews.com/politics/senate-gop-slams-perverse-biden-rule-forcing-people-with-good-credit-to-subsidize-high-risk-mortgages",
+            "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2023/03/joe-biden-white-house-st-patricks-day.jpg",
+            "publishedAt": "2023-04-26T09:00:00Z",
+            "content": "Senate Republicans on Wednesday accused the Biden administration's Federal Housing Finance Agency (FHFA) of playing politics with the U.S. housing market by forcing people with good credit to subsidi… [+3918 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Yahoo Entertainment"
+            },
+            "author": "Julia Love, Dina Bass and Davey Alba",
+            "title": "Microsoft Sees AI Reshaping Search as Google Calms Investors - Yahoo Finance",
+            "description": "(Bloomberg) -- Alphabet Inc.’s Google and Microsoft Corp., whose quarterly earnings each got a boost from their established search and cloud-computing...",
+            "url": "https://finance.yahoo.com/news/microsoft-sees-ai-shaking-search-001650452.html",
+            "urlToImage": "https://s.yimg.com/ny/api/res/1.2/aeFOoYr8RftEff.xF.tG6A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://media.zenfs.com/en/bloomberg_technology_68/b7673e03a11ff72542191221bc06adbe",
+            "publishedAt": "2023-04-26T08:38:22Z",
+            "content": "(Bloomberg) -- Alphabet Inc.s Google and Microsoft Corp., whose quarterly earnings each got a boost from their established search and cloud-computing businesses, used their time with investors to emp… [+4024 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "CNBC"
+            },
+            "author": "Jenni Reid",
+            "title": "Brits need to accept they are now poorer, Bank of England chief economist says - CNBC",
+            "description": "Huw Pill, the U.K. central bank's chief economist, told a podcast workers and companies were in a game of \"pass the parcel\" over inflation.",
+            "url": "https://www.cnbc.com/2023/04/26/bank-of-englands-huw-pill-says-brits-need-to-accept-were-all-worse-off-.html",
+            "urlToImage": "https://image.cnbcfm.com/api/v1/image/107231175-1682497090182-gettyimages-1238580643-derelict_shop_front_170222_2.jpeg?v=1682497247&w=1920&h=1080",
+            "publishedAt": "2023-04-26T07:23:37Z",
+            "content": "LONDON Companies and workers are trying to pass the impact of inflation onto each other and that risks persistent inflation, according to Huw Pill, the Bank of England's chief economist.\r\n\"What we're… [+3155 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Fox Business"
+            },
+            "author": "Emma Colton",
+            "title": "Unpleasant customer service calls, endless wait times may have a tech fix - Fox Business",
+            "description": "Integrating generative artificial intelligence in the customer service field boosts productivity and leads to customers treating workers better, according to a new study.",
+            "url": "https://www.foxbusiness.com/technology/unpleasant-customer-service-calls-endless-wait-times-tech-fix",
+            "urlToImage": "https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2023/02/0/0/GettyImages-1246879777.jpg?ve=1&tl=1",
+            "publishedAt": "2023-04-26T06:05:53Z",
+            "content": "Generative artificial intelligence tools such as ChatGPT have a beneficial impact on customer service workers that can boost their productivity and improve how customers treat the workers, according … [+5097 chars]"
+        },
+        {
+            "source": {
+                "id": "associated-press",
+                "name": "Associated Press"
+            },
+            "author": "Dee-ann Durbin",
+            "title": "Bud Light fumbles, but experts say inclusive ads will stay - The Associated Press",
+            "description": "Bud Light may have fumbled its attempt to broaden its customer base by partnering with a transgender influencer. But experts say inclusive marketing is simply good business — and it’s here to stay.",
+            "url": "https://apnews.com/article/bud-light-transgender-dylan-mulvaney-nike-2fe1425ba09a3f0e271fda0ae4b67434",
+            "urlToImage": "https://storage.googleapis.com/afs-prod/media/bdb96dc00e9e4b2e8630cf290ef20754/3000.webp",
+            "publishedAt": "2023-04-26T05:34:51Z",
+            "content": "Bud Light may have fumbled its attempt to broaden its customer base by partnering with a transgender influencer. But experts say inclusive marketing is simply good business and its here to stay.\r\nA f… [+5893 chars]"
+        },
+        {
+            "source": {
+                "id": "engadget",
+                "name": "Engadget"
+            },
+            "author": "https://www.engadget.com/about/editors/mariella-moon",
+            "title": "Honda will debut a mid-to-large-size EV based on its e:Architecture in 2025 - Engadget",
+            "description": "Honda has announced that it's building a mid-to-large-size EV based on the e:Architecture and that will go on sale in North America by 2025..",
+            "url": "https://www.engadget.com/honda-will-debut-a-mid-to-large-size-ev-based-on-its-earchitecture-in-2025-051042586.html",
+            "urlToImage": "https://s.yimg.com/uu/api/res/1.2/OHGEnPey5B9j5VJLbXimdw--~B/Zmk9ZmlsbDtoPTYzMDtweW9mZj0wO3c9MTIwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2023-01/729be930-95d0-11ed-9545-f44824033328.cf.jpg",
+            "publishedAt": "2023-04-26T05:11:57Z",
+            "content": "We might see an electric vehicle based on Honda's e:Architecture, its dedicated EV platform, a year earlier than the company had previously announced. At a business briefing, wherein the automaker ta… [+1270 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "The Athletic"
+            },
+            "author": "Manny Navarro",
+            "title": "Prep sports powerhouse IMG Academy to be sold for $1.25 billion: What does it mean long term? - The Athletic",
+            "description": "From an athletics standpoint, nothing is expected to change in terms of day-to-day operations and setup at IMG’s Bradenton campus.",
+            "url": "https://theathletic.com/4450196/2023/04/25/img-academy-sale-endeavor-bpea-eqt/",
+            "urlToImage": "https://cdn.theathletic.com/app/uploads/2023/04/25134446/GettyImages-1167923873-scaled-e1682444761404-1024x681.jpg",
+            "publishedAt": "2023-04-26T03:22:55Z",
+            "content": "IMG Academy, the Florida boarding school which has trained thousands of athletes who have gone on to college and pro stardom in football, basketball, baseball, soccer, tennis and golf, is being sold … [+1913 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Cointelegraph"
+            },
+            "author": "Tom Mitchelhill",
+            "title": "Bitcoin price jumps in the wake of First Republic Bank price crash - Cointelegraph",
+            "description": "The price of Bitcoin has jumped a little over 3% immediately following the share price of First Republic Bank plunging more than 50% as the embattled firm stares down a massive fall in deposits.",
+            "url": "https://cointelegraph.com/news/bitcoin-price-jumps-in-the-wake-of-first-republic-bank-crash",
+            "urlToImage": "https://images.cointelegraph.com/cdn-cgi/image/format=auto,onerror=redirect,quality=90,width=1200/https://s3.cointelegraph.com/uploads/2023-04/687a8de3-a394-4af8-a339-6a2e472bb904.jpg",
+            "publishedAt": "2023-04-26T03:20:53Z",
+            "content": "The price of Bitcoin (BTC) spiked more than 3% in the last 24 hours as fears were sparked of another possible imminent bank failure as First Republic Bank (FRC) shares closed down more than 50% on Ap… [+3538 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "New York Post"
+            },
+            "author": "Katherine Donlevy",
+            "title": "Jeff Shell spotted outside Beverly Hills home for first time since NBC firing - New York Post ",
+            "description": "Ousted NBCUniversal CEO Jeff Shell was spotted walking his dog around his Beverly Hills neighborhood Tuesday in his first public sighting since he was dropped from the network.",
+            "url": "https://nypost.com/2023/04/25/ousted-nbc-ceo-jeff-shell-spotted-for-first-time-since-firing/",
+            "urlToImage": "https://nypost.com/wp-content/uploads/sites/2/2023/04/jeff-shell-comp-1.jpg?quality=75&strip=all&w=1024",
+            "publishedAt": "2023-04-26T03:20:00Z",
+            "content": "Ousted NBCUniversal CEO Jeff Shell was spotted walking his dog around his Beverly Hills neighborhood Tuesday in his first public sighting since he was dropped from the network.\r\nShell sported a white… [+1947 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Deadline"
+            },
+            "author": "Anthony D'Alessandro",
+            "title": "Disney Layoffs On Film Side Include Story, Distribution, Marketing Departments; Searchlight & More - Deadline",
+            "description": "EXCLUSIVE: As Disney cuts 4K staffers across the conglomerate in a goal to reach $5.5 billion in savings, Deadline has learned that on the feature side, those being laid off were largely comprised …",
+            "url": "https://deadline.com/2023/04/disney-layoffs-film-searchlight-1235337757/",
+            "urlToImage": "https://deadline.com/wp-content/uploads/2022/03/disney-gates-no-protests.jpeg?w=1024",
+            "publishedAt": "2023-04-26T02:57:00Z",
+            "content": "EXCLUSIVE: As Disney cuts 4K staffers across the conglomerate in a goal to reach $5.5 billion in savings, Deadline has learned that on the feature side, those being laid off were largely comprised of… [+1670 chars]"
+        },
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Ross Levitt,Pete Muntean",
+            "title": "3 TSA officers were injured in an 'unprovoked and brazen' attack by a female traveler at a Phoenix airport, agency says - CNN",
+            "description": "Three Transportation Security Administration officers were injured in an \"unprovoked and brazen\" attack by a female traveler at a Phoenix airport Tuesday morning, the agency said.",
+            "url": "https://www.cnn.com/2023/04/25/us/tsa-officers-injured-phoenix-airport/index.html",
+            "urlToImage": "https://media.cnn.com/api/v1/images/stellar/prod/230425200205-phoenix-airport-file.jpg?c=16x9&q=w_800,c_fill",
+            "publishedAt": "2023-04-26T02:32:00Z",
+            "content": "Three Transportation Security Administration officers were injured in an unprovoked and brazen attack by a female traveler at a Phoenix airport Tuesday morning, the agency said.\r\nThe TSA officers wer… [+1763 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Whec.com"
+            },
+            "author": "Bonnie Marrocco",
+            "title": "After her KIA was stolen, recovered and repaired, a victim gets KIA to refund her deductible - News10NBC",
+            "description": "ROCHESTER, N.Y. – Close to 800 people in the city of Rochester have had their KIA or Hyundai stolen this year. One of the victims called KIA and just kept pestering them about refunding what it cost her. And this week, the KIA check came in the mail.At the pe…",
+            "url": "https://www.whec.com/top-news/after-her-kia-was-stolen-recovered-and-repaired-a-victim-gets-kia-to-refund-her-deductible/",
+            "urlToImage": "https://www.whec.com/wp-content/uploads/akta/1CD179C3464C7EBC5A44CC578D5B9CBD.jpg",
+            "publishedAt": "2023-04-26T02:12:33Z",
+            "content": "ROCHESTER, N.Y. – Close to 800 people in the city of Rochester have had their KIA or Hyundai stolen this year. One of the victims called KIA and just kept pestering them about refunding what it cost … [+1904 chars]"
+        },
+        {
+            "source": {
+                "id": "the-wall-street-journal",
+                "name": "The Wall Street Journal"
+            },
+            "author": "Jiyoung Sohn",
+            "title": "South Korea Indicts Co-Founder of Failed TerraUSD Cryptocurrency - The Wall Street Journal",
+            "description": "Prosecutors charge Daniel Shin with violating capital-markets laws",
+            "url": "https://www.wsj.com/articles/south-korea-indicts-co-founder-of-failed-terrausd-cryptocurrency-f6e8e405",
+            "urlToImage": "https://images.wsj.net/im-769606/social",
+            "publishedAt": "2023-04-26T01:30:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Detroit Free Press"
+            },
+            "author": ", Detroit Free Press",
+            "title": "Rehabbed Book Depository near train depot aims to spur inventions - Detroit Free Press",
+            "description": "The Book Depository is part of the automaker's goal to create a new 30-acre Detroit mobility district in the city's trendy Corktown neighborhood.",
+            "url": "https://www.freep.com/story/money/business/2023/04/25/bill-ford-book-depository-in-detroit/70152182007/",
+            "urlToImage": "https://www.gannett-cdn.com/presto/2023/04/25/PDTF/1da47ee1-daaf-414d-96b8-e47ff419e697-MAIN-BookDepository_043523_03_MW.JPG?auto=webp&crop=2399,1350,x0,y84&format=pjpg&width=1200",
+            "publishedAt": "2023-04-26T00:30:48Z",
+            "content": "Hundred of visitors and local workers on Tuesday toured Ford Motor Co.'s new Book Depository in Detroit during the building's official unveiling after a dramatic four-year redevelopment project.\r\nAt … [+4214 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "The Guardian"
+            },
+            "author": "Kari Paul",
+            "title": "Alphabet revenue unexpectedly rises in first quarter amid industry slowdown - The Guardian",
+            "description": "Google’s parent company reported a revenue of $69.8bn even as it races to implement cost-saving measures",
+            "url": "https://www.theguardian.com/technology/2023/apr/25/alphabet-google-q1-2023-revenue-earning-report",
+            "urlToImage": "https://i.guim.co.uk/img/media/1fc671a63c1c283dcb03503c31f76699de40d5df/0_37_4602_2764/master/4602.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=39f8e95c6899dfba3cac15b9b75c8b8e",
+            "publishedAt": "2023-04-25T23:58:00Z",
+            "content": "Alphabet stocks rose in after-hours trading on Tuesday after the tech firm beat analyst expectations for first-quarter earnings, marking an unexpectedly bright spot in the otherwise struggling tech s… [+3823 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "WFAA.com"
+            },
+            "author": "Scoop Jefferson",
+            "title": "North Texas property owners prepare for another year of protesting appraisals - WFAA.com",
+            "description": "Some landlords stress renters may have to help bear the burden of increased property taxes in some cases.",
+            "url": "https://www.wfaa.com/article/news/local/north-texas-property-owners-prepare-another-year-protesting-appraisals/287-99cd3950-fb51-4fde-8ce5-b16040db22fc",
+            "urlToImage": "https://media.wfaa.com/assets/WFAA/images/a83a8bc4-8d4a-412a-913d-d7e5782e79d9/a83a8bc4-8d4a-412a-913d-d7e5782e79d9_1140x641.jpg",
+            "publishedAt": "2023-04-25T23:30:00Z",
+            "content": "FORT WORTH, Texas People across North Texas are in shock after opening their new home appraisals. Property values in some cases have increased by double digits. \r\nIn Dallas County some increased by 1… [+4986 chars]"
+        },
+        {
+            "source": {
+                "id": "the-wall-street-journal",
+                "name": "The Wall Street Journal"
+            },
+            "author": "Heather Haddon",
+            "title": "McDonald's, PepsiCo, GM Flex Their Pricing Power - The Wall Street Journal",
+            "description": "Shoppers pay up for food and diapers though some companies see tolerance for price hikes waning",
+            "url": "https://www.wsj.com/articles/mcdonalds-pepsico-flex-their-pricing-power-dfe2e295",
+            "urlToImage": "https://images.wsj.net/im-769489/social",
+            "publishedAt": "2023-04-25T23:17:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "CNBC"
+            },
+            "author": "Tanaya Macheel",
+            "title": "Stock futures rise Tuesday night after Microsoft, Alphabet post earnings beats: Live updates - CNBC",
+            "description": "Big Tech giants Microsoft and Alphabet posted quarterly results that surpassed the Street’s expectations.",
+            "url": "https://www.cnbc.com/2023/04/25/stock-market-today-live-updates.html",
+            "urlToImage": "https://image.cnbcfm.com/api/v1/image/107191343-1675881202681-NYSE-Traders-OB-Photo-20230208-CC-PRESS-3.jpg?v=1682460179&w=1920&h=1080",
+            "publishedAt": "2023-04-25T23:05:00Z",
+            "content": "U.S. stock futures rose Tuesday evening as Big Tech earnings began to roll out, led by Alphabet and Microsoft.\r\nFutures tied to the Dow Jones Industrial Average gained 47 points or 0.1%. S&amp;P 500 … [+2246 chars]"
+        },
+        {
+            "source": {
+                "id": "bloomberg",
+                "name": "Bloomberg"
+            },
+            "author": null,
+            "title": "Tesla Model Y Price Cuts Mean Elon Musk’s Either Disruptive or Desperate - Bloomberg",
+            "description": null,
+            "url": "https://www.bloomberg.com/news/articles/2023-04-25/tesla-model-y-price-cuts-mean-elon-musk-s-either-disruptive-or-desperate",
+            "urlToImage": null,
+            "publishedAt": "2023-04-25T23:01:06Z",
+            "content": "To continue, please click the box below to let us know you're not a robot."
+        }
+    ]
+}

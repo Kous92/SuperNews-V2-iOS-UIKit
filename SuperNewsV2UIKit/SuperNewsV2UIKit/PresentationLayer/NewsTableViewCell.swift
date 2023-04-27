@@ -10,9 +10,6 @@ import SnapKit
 
 final class NewsTableViewCell: UITableViewCell {
     
-    private var title: String = ""
-    private var source: String = ""
-    
     private lazy var cellView: UIView = {
         let view = UIView()
         return view

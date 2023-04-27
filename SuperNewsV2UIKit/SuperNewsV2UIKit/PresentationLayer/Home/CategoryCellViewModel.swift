@@ -20,6 +20,7 @@ struct CategoryCellViewModel {
 extension CategoryCellViewModel {
     static func getCategories() -> [CategoryCellViewModel] {
         return [
+            CategoryCellViewModel(title: "Actualités locales", categoryId: "local"),
             CategoryCellViewModel(title: "Business", categoryId: "business"),
             CategoryCellViewModel(title: "Divertissement", categoryId: "entertainment"),
             CategoryCellViewModel(title: "Général", categoryId: "general"),

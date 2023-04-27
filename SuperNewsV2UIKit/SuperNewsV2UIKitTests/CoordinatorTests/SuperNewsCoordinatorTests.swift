@@ -28,9 +28,18 @@ final class SuperNewsCoordinatorTests: XCTestCase {
     }
     
     func testHomeCoordinator() {
-        let homeCoordinator = HomeCoordinator(navigationController: UINavigationController(), builder: HomeModuleBuilder())
-        let homeViewController = homeCoordinator.start()
-        XCTAssertTrue(homeViewController is HomeViewController)
+        let homeCoordinator = HomeCoordinator(navigationController: UINavigationController(), builder: HomeModuleBuilder(), testMode: true)
+        let navigationController = homeCoordinator.start()
+        XCTAssertTrue(navigationController is UINavigationController)
+        
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        XCTAssertTrue(navigationController.viewControllers[0] is HomeViewController)
     }
     
     func testSearchCoordinator() {
