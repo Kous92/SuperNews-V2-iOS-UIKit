@@ -30,4 +30,13 @@ extension CategoryCellViewModel {
             CategoryCellViewModel(title: "Technologie", categoryId: "technology")
         ]
     }
+    
+    static func getSourceCategories() -> [CategoryCellViewModel] {
+        return [
+            CategoryCellViewModel(title: "Toutes les sources", categoryId: "allSources"),
+            CategoryCellViewModel(title: "Par langue", categoryId: "languageSources"),
+            CategoryCellViewModel(title: "Par catégorie", categoryId: "categorySources"),
+            CategoryCellViewModel(title: "Par pays", categoryId: "countrySources"),
+        ]
+    }
 }

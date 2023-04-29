@@ -1,5 +1,5 @@
 //
-//  StringToDate.swift
+//  StringExtensions.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 29/04/2023.
@@ -29,5 +29,17 @@ extension String {
         let timeString = formatter.string(from: date) // Heure, minutes
         
         return "Le " + dateString + " à " + timeString
+    }
+    
+    // From the ISO code, it gives the country full name.
+    func countryName() -> String? {
+        let current = Locale(identifier: "fr_FR")
+        return current.localizedString(forRegionCode: self)
+    }
+    
+    // From the ISO code, it gives the language full name.
+    func languageName() -> String? {
+        let current = Locale(identifier: "fr_FR")
+        return current.localizedString(forLanguageCode: self)
     }
 }
