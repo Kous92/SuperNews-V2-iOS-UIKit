@@ -1,0 +1,266 @@
+{
+    "status": "ok",
+    "totalResults": 67,
+    "articles": [
+        {
+            "source": {
+                "id": "ars-technica",
+                "name": "Ars Technica"
+            },
+            "author": "Jennifer Ouellette",
+            "title": "Scientists sequenced the genome of Balto, famous sled dog of 1925 “Serum Run” - Ars Technica",
+            "description": "Balto was just part Siberian husky and, contrary to popular legend, not part wolf.",
+            "url": "https://arstechnica.com/science/2023/04/scientists-sequenced-the-genome-of-balto-famous-sled-dog-of-1925-serum-run/",
+            "urlToImage": "https://cdn.arstechnica.net/wp-content/uploads/2023/04/balto1-760x380.jpg",
+            "publishedAt": "2023-04-27T18:00:27Z",
+            "content": "Enlarge/ After Balto died in 1933, his taxidermy mount was put on display at the Cleveland Museum of Natural History.\r\n19 with \r\nIn 1925, a sled dog named Balto led his plucky canine team on the last… [+3991 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Boing Boing"
+            },
+            "author": null,
+            "title": "Astonishing new photo of Martian moon Deimos reveals most detail ever seen - Boing Boing",
+            "description": "The UAE Space Agency’s “Hope Probe” in orbit around Mars captured this magnificent new image of the Red Planet and its moon Deimos. The most detailed photo of Deimos, it was taken…",
+            "url": "https://boingboing.net/2023/04/27/astonishing-new-photo-of-martian-moon-deimos-reveals-most-detail-ever-seen.html",
+            "urlToImage": "https://i0.wp.com/boingboing.net/wp-content/uploads/2023/04/marsmoon.jpg?fit=1200%2C900&ssl=1",
+            "publishedAt": "2023-04-27T17:07:25Z",
+            "content": "The UAE Space Agency's \"Hope Probe\" in orbit around Mars captured this magnificent new image of the Red Planet and its moon Deimos. The most detailed photo of Deimos, it was taken just 100km above th… [+922 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Spectrum"
+            },
+            "author": "Angie Voyles Askham",
+            "title": "Publisher retracts autism paper after spotting 'tortured phrases' - Spectrum - Autism Research News ",
+            "description": "The paper used more than two dozen such terms, which have cropped up in thousands of published papers in recent years.",
+            "url": "https://www.spectrumnews.org/news/publisher-retracts-autism-paper-after-spotting-tortured-phrases/",
+            "urlToImage": "https://spectrumnews-web-assets.s3.amazonaws.com/wp-content/uploads/2023/04/26113123/TorturedPhrases-autism-844.jpg",
+            "publishedAt": "2023-04-27T16:08:12Z",
+            "content": "The editors of a volume of conference proceedings have retracted a paper on machine-learning methods to predict autism, because of concerns about the authors use of unusual phrases, such as counterfe… [+2616 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "Self-Building Radio Telescope On The Far Side of The Moon [NIAC 2023] - Fraser Cain",
+            "description": "The FarView Observatory is a NIAC project that's a giant self-building radio telescope on the far side of the Moon. In this interview, I'm discussing the det...",
+            "url": "https://www.youtube.com/watch?v=a99QXRIO1g4",
+            "urlToImage": "https://i.ytimg.com/vi/a99QXRIO1g4/maxresdefault.jpg",
+            "publishedAt": "2023-04-27T16:03:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Phys.Org"
+            },
+            "author": "Science X",
+            "title": "Two of the most massive touching stars ever found will eventually collide as black holes, finds study - Phys.org",
+            "description": "Two massive touching stars in a neighboring galaxy are on course to become black holes that will eventually crash together, generating waves in the fabric of space-time, according to a new study by researchers at UCL (University College London) and the Univer…",
+            "url": "https://phys.org/news/2023-04-massive-stars-eventually-collide-black.html",
+            "urlToImage": "https://scx2.b-cdn.net/gfx/news/hires/2023/most-massive-touching-1.jpg",
+            "publishedAt": "2023-04-27T15:26:03Z",
+            "content": "Two massive touching stars in a neighboring galaxy are on course to become black holes that will eventually crash together, generating waves in the fabric of space-time, according to a new study by r… [+5933 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Outside"
+            },
+            "author": "Outside",
+            "title": "Yes, Even Slow-Twitchers Can Build Bigger Muscles - Outside",
+            "description": null,
+            "url": "https://www.outsideonline.com/health/training-performance/muscle-fiber-strength-research/",
+            "urlToImage": null,
+            "publishedAt": "2023-04-27T15:06:49Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "the-jerusalem-post",
+                "name": "The Jerusalem Post"
+            },
+            "author": "By  JUDY SIEGEL-ITZKOVICH",
+            "title": "Weizmann Institute solves the mystery of red blood cell production - The Jerusalem Post",
+            "description": "Weizmann Institute's identification of the cells producing the hormone EPO could lead to new therapies for treating anemia.",
+            "url": "https://www.jpost.com/health-and-wellness/article-741472",
+            "urlToImage": "https://images.jpost.com/image/upload/f_auto,fl_lossy/c_fill,g_faces:center,h_407,w_690/535985",
+            "publishedAt": "2023-04-27T15:00:00Z",
+            "content": "To get life-giving oxygen into every cell, the human body produces up to three million oxygen-carrying red blood cells – erythrocytes – every second. These are about one-quarter of all the new cells … [+7923 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Space.com"
+            },
+            "author": "Robert Lea",
+            "title": "The strange mystery of asteroid Phaethon's comet-like tail may have just been solved - Space.com",
+            "description": "The asteroid Phaethon's tail is not made of dust after all, scientists have discovered.",
+            "url": "https://www.space.com/asteroid-phaethon-sodium-tail-not-dust",
+            "urlToImage": "https://cdn.mos.cms.futurecdn.net/A97ujVfW7NeUpvU2ifqNf8-1200-80.jpg",
+            "publishedAt": "2023-04-27T14:00:29Z",
+            "content": "Astronomers observing the strange \"rock comet\" hybrid Phaethon as it passed the sun have found a surprise that could upend 14 years of thinking about the weird asteroid. \r\nThe asteroid Phaethon, whic… [+5806 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Phys.Org"
+            },
+            "author": "Calla Cofield",
+            "title": "NASA's Voyager will do more science with new power strategy - Phys.org",
+            "description": "The plan will keep Voyager 2's science instruments turned on a few years longer than previously anticipated, enabling yet more revelations from interstellar space.",
+            "url": "https://phys.org/news/2023-04-nasa-voyager-science-power-strategy.html",
+            "urlToImage": "https://scx2.b-cdn.net/gfx/news/2023/nasas-voyager-will-do.jpg",
+            "publishedAt": "2023-04-27T13:30:02Z",
+            "content": "The plan will keep Voyager 2's science instruments turned on a few years longer than previously anticipated, enabling yet more revelations from interstellar space.\r\nLaunched in 1977, the Voyager 2 sp… [+4326 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Phys.Org"
+            },
+            "author": "Robert Perkins",
+            "title": "Newly observed effect makes atoms transparent to certain frequencies of light - Phys.org",
+            "description": "A newly discovered phenomenon dubbed \"collectively induced transparency\" (CIT) causes groups of atoms to abruptly stop reflecting light at specific frequencies.",
+            "url": "https://phys.org/news/2023-04-newly-effect-atoms-transparent-frequencies.html",
+            "urlToImage": "https://scx2.b-cdn.net/gfx/news/hires/2023/newly-observed-effect.jpg",
+            "publishedAt": "2023-04-27T13:29:03Z",
+            "content": "A newly discovered phenomenon dubbed \"collectively induced transparency\" (CIT) causes groups of atoms to abruptly stop reflecting light at specific frequencies.\r\nCIT was discovered by confining ytter… [+3683 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Gizmodo.com"
+            },
+            "author": "Passant Rabie",
+            "title": "NASA Scientists Extract Oxygen From Simulated Moon Dirt - Gizmodo",
+            "description": "The space agency is hoping that future astronauts can use this technology for longterm habitation on the Moon as part of its Artemis program.",
+            "url": "https://gizmodo.com/nasa-scientists-extract-oxygen-simulated-moon-dirt-1850379611",
+            "urlToImage": "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/c173e32c50ebe75a3697a44347894138.jpg",
+            "publishedAt": "2023-04-27T13:10:00Z",
+            "content": "In a groundbreaking step towards establishing a human presence on the Moon, NASA extracted oxygen from simulated lunar soil in a dirty chamber with similar conditions to the Moons environment. \r\nDuri… [+2303 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "YouTube"
+            },
+            "author": null,
+            "title": "Watch an Artemis moon rocket engine gimbal in hot fire test - VideoFromSpace",
+            "description": "The Space Launch System rocket's RS-25 engine was run through a 720-second gimbal test on April 26, 2023. The test occurred at NASA's Stennis Space Center in...",
+            "url": "https://www.youtube.com/watch?v=eJTfzffUeLM",
+            "urlToImage": "https://i.ytimg.com/vi/eJTfzffUeLM/maxresdefault.jpg",
+            "publishedAt": "2023-04-27T13:07:16Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Daily Mail"
+            },
+            "author": "Shivali Best",
+            "title": "Scientists have finally cracked why we're addicted to SELFIES - Daily Mail",
+            "description": "Researchers from The Ohio State University say that selfies may serve as a helpul way to capture the deeper meaning of moments.",
+            "url": "https://www.dailymail.co.uk/sciencetech/article-12020355/Scientists-finally-cracked-addicted-SELFIES.html",
+            "urlToImage": "https://i.dailymail.co.uk/1s/2023/04/27/11/70295911-0-image-a-52_1682592073033.jpg",
+            "publishedAt": "2023-04-27T13:00:46Z",
+            "content": "If you see someone posing for a selfie, it's easy to assume that they're a narcissist. \r\nBut a new study suggests that this isn't always the case. \r\nInstead, researchers say that selfies may serve as… [+3604 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nature.com"
+            },
+            "author": null,
+            "title": "Schrödinger's cat is verified by a vibrating crystal - Nature.com",
+            "description": "The famed thought experiment, which posits that a cat can be alive and dead at the same time, is confirmed with classical evidence.",
+            "url": "https://www.nature.com/articles/d41586-023-01414-1",
+            "urlToImage": "https://media.nature.com/lw1024/magazine-assets/d41586-023-01414-1/d41586-023-01414-1_25279028.jpg",
+            "publishedAt": "2023-04-27T12:51:54Z",
+            "content": "Thank you for visiting nature.com. You are using a browser version with limited support for CSS. To obtain\r\n the best experience, we recommend you use a more up to date browser (or turn off compatibi… [+139 chars]"
+        },
+        {
+            "source": {
+                "id": "business-insider",
+                "name": "Business Insider"
+            },
+            "author": "Marianne Guenot",
+            "title": "First image of a supermassive black hole spewing out jets of plasma - Business Insider",
+            "description": "Astronomers hope the discovery will help us understand exactly how these jets are created — something that could help unlock the mystery of how galaxies form.",
+            "url": "https://www.businessinsider.com/image-first-supermassive-black-hole-spews-jets-of-plasma-2023-4",
+            "urlToImage": "https://i.insider.com/644a3be2b81bcf0018374a1c?width=1200&format=jpeg",
+            "publishedAt": "2023-04-27T11:33:00Z",
+            "content": "Scientists have captured the first-ever direct image of a supermassive black hole spewing out powerful jets of plasma.\r\nThe black hole, located at the center of the M87 galaxy 55 million light-years … [+2955 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Space.com"
+            },
+            "author": "Mike Wall",
+            "title": "Watch SpaceX launch 46 Starlink satellites on today after delay - Space.com",
+            "description": "Liftoff is scheduled for 9:40 a.m. ET no earlier than Thursday (April 27).",
+            "url": "https://www.space.com/spacex-starlink-launch-group-3-5",
+            "urlToImage": "https://cdn.mos.cms.futurecdn.net/wsBjvjE3ZXT4DUHYwyQTXd-1200-80.jpeg",
+            "publishedAt": "2023-04-27T11:26:42Z",
+            "content": "Update for April 26 at 9:50 a.m. EDT (1450 GMT): SpaceX is now targeting no earlier than Thursday (April 27) to launch of 46 Starlink satellites atop a Falcon 9 rocket due to the \"probability of land… [+3060 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Live Science"
+            },
+            "author": "Harry Baker",
+            "title": "Dark matter's secret identity could be hiding in distorted 'Einstein rings' - Livescience.com",
+            "description": "Researchers may be a step closer to identifying dark matter after studying unusual cases of gravitational lensing caused by \"dark matter halos\" surrounding distant galaxies.",
+            "url": "https://www.livescience.com/physics-mathematics/dark-matter/dark-matters-secret-identity-could-be-hiding-in-distorted-einstein-rings",
+            "urlToImage": "https://cdn.mos.cms.futurecdn.net/Mj4M7uVLH5ynSSLePqp6WE-1200-80.jpg",
+            "publishedAt": "2023-04-27T10:44:13Z",
+            "content": "A selection of Einstein rings that were photographed by the Hubble space telescope. (These rings have not been duplicated like the ones from the new study.) (Image credit: NASA)\r\nResearchers may be o… [+4621 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Live Science"
+            },
+            "author": "Joanna Thompson",
+            "title": "Days before dying, Japan's lunar lander snaps glorious photo of Earth during a total solar eclipse - Livescience.com",
+            "description": "Japan's Hakuto-R lander may have crashed on the moon, but the spacecraft still sent back valuable images.",
+            "url": "https://www.livescience.com/space/space-exploration/days-before-dying-japans-lunar-lander-snaps-glorious-photo-of-earth-during-a-total-solar-eclipse",
+            "urlToImage": "https://cdn.mos.cms.futurecdn.net/ePG6JakXoGxFpZmuvgN5wY-1200-80.jpg",
+            "publishedAt": "2023-04-27T10:00:00Z",
+            "content": "Days before Japan's Hakuto-R lunar lander apparently crashed into the moon's surface\r\n (opens in new tab) on Tuesday (April 25), it snapped a truly gorgeous picture of our planet. The image, which is… [+2481 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "The Guardian"
+            },
+            "author": "Sophie Kevany",
+            "title": "Life in ocean’s twilight zone ‘could disappear’ amid warming seas - The Guardian",
+            "description": "Less food is falling to dimly-lit waters, home to specially adapted marine life – but emissions cuts would stem decline",
+            "url": "https://www.theguardian.com/environment/2023/apr/27/life-in-oceans-twilight-zone-could-disappear-amid-warming-seas",
+            "urlToImage": "https://i.guim.co.uk/img/media/9a5cd8df3518751201467f9d41671dfb33237cde/101_0_3600_2160/master/3600.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=a8cef2c87cc6061939a948ad0a44dceb",
+            "publishedAt": "2023-04-27T10:00:00Z",
+            "content": "Life in the oceans twilight zone is expected to face dramatic declines and even extinction as seas warm and less food reaches the dimly lit waters, a study has found.\r\nThe twilight zone lies between … [+3083 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Florida Today"
+            },
+            "author": ", Florida Today",
+            "title": "It's Launch Day! Here's what you need to know about tonight's SpaceX Falcon Heavy liftoff - Florida Today",
+            "description": "Here's what you need to know about tonight's Falcon Heavy launch from Kennedy Space Center.",
+            "url": "https://www.floridatoday.com/story/tech/science/space/spacex/2023/04/27/its-launch-day-heres-what-you-need-to-know-about-tonights-spacex-falcon-heavy-liftoff/70154692007/",
+            "urlToImage": "https://www.gannett-cdn.com/presto/2023/01/18/PBRE/d1473ca4-47fd-46e3-b008-9eff244f67e2-crb011823_spacex_1_.jpg?auto=webp&crop=2669,1501,x1,y101&format=pjpg&width=1200",
+            "publishedAt": "2023-04-27T09:23:00Z",
+            "content": "It's launch day!\r\nSpaceX is on track to launch a Falcon Heavy rocket from Kennedy Space Center's Pad 39A on Thursday, April 27.\r\nHere's what you need to know for tonight's launch:\r\n<ul><li>Liftoff is… [+1294 chars]"
+        }
+    ]
+}

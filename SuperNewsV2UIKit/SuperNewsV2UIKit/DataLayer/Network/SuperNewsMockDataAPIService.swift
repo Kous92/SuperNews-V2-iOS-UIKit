@@ -107,7 +107,24 @@ final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
     
     func fetchTopHeadlinesNews(countryCode: String = "", category: String? = nil) async -> Result<[Article], SuperNewsAPIError> {
         if let category {
-            return category == "sports" ? getArticles(with: "SportsTopHeadlinesMockData") : .failure(.invalidURL)
+            switch category {
+                case "business":
+                    return getArticles(with: "BusinessTopHeadlinesMockData")
+                case "entertainment":
+                    return getArticles(with: "EntertainmentTopHeadlinesMockData")
+                case "general":
+                    return getArticles(with: "GeneralTopHeadlinesMockData")
+                case "science":
+                    return getArticles(with: "ScienceTopHeadlinesMockData")
+                case "health":
+                    return getArticles(with: "HealthTopHeadlinesMockData")
+                case "sports":
+                    return getArticles(with: "SportsTopHeadlinesMockData")
+                case "technology":
+                    return getArticles(with: "TechnologyTopHeadlinesMockData")
+                default:
+                    return .failure(.invalidURL)
+            }
         }
         
         return countryCode == "fr" ? getArticles(with: "FrenchTopHeadlinesMockData") : .failure(.invalidURL)

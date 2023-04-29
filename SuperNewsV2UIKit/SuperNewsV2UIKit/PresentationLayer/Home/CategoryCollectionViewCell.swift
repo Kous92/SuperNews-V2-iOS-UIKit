@@ -63,6 +63,7 @@ struct CategoryCollectionViewCellPreview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             let view = CategoryCollectionViewCell()
+            view.configure(with: "News category")
             return view
         }
         .previewLayout(PreviewLayout.sizeThatFits)
