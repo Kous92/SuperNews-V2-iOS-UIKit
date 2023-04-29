@@ -8,6 +8,5 @@
 import Foundation
 
 protocol TopHeadlinesUseCaseProtocol {
-    func execute(source: String) async -> Result<[NewsCellViewModel], SuperNewsAPIError>
-    func execute(countryCode: String, category: String?) async -> Result<[NewsCellViewModel], SuperNewsAPIError>
+    func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }

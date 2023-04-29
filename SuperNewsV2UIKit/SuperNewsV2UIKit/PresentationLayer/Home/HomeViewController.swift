@@ -103,12 +103,9 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        // view.backgroundColor = UIColor(named: "SuperNewsDarkBlue")
-        gradient.frame = view.bounds
-        view.layer.addSublayer(gradient)
-        navigationItem.title = tabBarController?.tabBar.items?[0].title
         
+        setNavigationBar()
+        setViewBackground()
         buildViewHierarchy()
         setConstraints()
         setBindings()
@@ -117,7 +114,6 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         tableView.layer.shadowPath = UIBezierPath(rect: tableView.bounds).cgPath
-        
     }
     
     private func buildViewHierarchy() {
@@ -175,9 +171,25 @@ final class HomeViewController: UIViewController {
                 }
             }.store(in: &subscriptions)
     }
+    
+    @objc func onClickSourceButton() {
+        print("Message")
+    }
 }
 
 extension HomeViewController {
+    private func setNavigationBar() {
+        navigationItem.title = tabBarController?.tabBar.items?[0].title
+        let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(onClickSourceButton))
+        navigationItem.rightBarButtonItem = item
+        navigationController?.navigationBar.tintColor = .white
+    }
+    
+    private func setViewBackground() {
+        gradient.frame = view.bounds
+        view.layer.addSublayer(gradient)
+    }
+    
     private func hideTableView() {
         tableView.isHidden = true
     }
@@ -205,7 +217,7 @@ extension HomeViewController {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.viewModels.count ?? 0
+        return viewModel?.cellViewModels.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -213,8 +225,8 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        if let articleViewModel = viewModel?.viewModels[indexPath.row] {
-            cell.configure(with: articleViewModel)
+        if let cellViewModel = viewModel?.cellViewModels[indexPath.row] {
+            cell.configure(with: cellViewModel)
         }
         
         cell.backgroundColor = .clear
@@ -241,6 +253,11 @@ extension HomeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        // When view is initialized, the first cell is selected by default
+        if indexPath.item == 0 {
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+        }
+        
         cell.configure(with: categoryViewModels[indexPath.item].title)
         
         return cell
@@ -249,7 +266,11 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel?.fetchTopHeadlines(with: categoryViewModels[indexPath.item].categoryId)
+        if categoryViewModels[indexPath.item].categoryId == "local" {
+            viewModel?.fetchTopHeadlines()
+        } else {
+            viewModel?.fetchTopHeadlines(with: categoryViewModels[indexPath.item].categoryId)
+        }
     }
 }
 

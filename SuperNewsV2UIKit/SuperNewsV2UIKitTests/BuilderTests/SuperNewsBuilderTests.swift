@@ -17,7 +17,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssertNotNil(moduleBuilder)
         
         // Checking dependency injections
-        let viewController = moduleBuilder?.buildModule(testMode: false)
+        let viewController = moduleBuilder?.buildModule(testMode: false, coordinator: nil)
         
         XCTAssertNotNil(viewController)
         XCTAssert(viewController is HomeViewController)
