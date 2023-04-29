@@ -10,3 +10,7 @@ import Foundation
 protocol TopHeadlinesUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
+
+protocol SourceSelectionUseCaseProtocol {
+    func execute() async -> Result<[ArticleViewModel], SuperNewsAPIError>
+}
