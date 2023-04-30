@@ -39,7 +39,39 @@ extension String {
     
     // From the ISO code, it gives the language full name.
     func languageName() -> String? {
+        // Urdu language
+        if self == "ud" {
+            return "ourdou"
+        }
+        
         let current = Locale(identifier: "fr_FR")
         return current.localizedString(forLanguageCode: self)
+    }
+    
+    // Fix some unavailable countries due to confusing codes and conform to NewsAPI options
+    func checkCountryISO3166_1Alpha1Code() -> String {
+        // "is" was normally Iceland, but NewsAPI refers "is" to Israel. Correct code is "il".
+        // "zh" is unknown, but NewsAPI refers "zh" to China. Correct code is "cn".
+        if self.lowercased() == "is" {
+            return "il"
+        } else if self.lowercased() == "zh" {
+            return "cn"
+        } else {
+            return self
+        }
+    }
+    
+    func getCategoryNameFromCategoryCode() -> String {
+        switch self {
+            case "local": return "Actualités locales"
+            case "general": return "Général"
+            case "business": return "Business"
+            case "entertainment": return "Divertissement"
+            case "health": return "Santé"
+            case "technology": return "Technologie"
+            case "sports": return "Sports"
+            case "science": return "Science"
+            default: return self
+        }
     }
 }

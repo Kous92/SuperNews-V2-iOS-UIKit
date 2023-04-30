@@ -11,8 +11,12 @@ import Combine
 
 final class SourceSelectionViewController: UIViewController {
     
+    // weak var coordinator: HomeViewControllerDelegate?
+    
     // MVVM with Reactive Programming
     private let categoryViewModels = CategoryCellViewModel.getSourceCategories()
+    var viewModel: SourceSelectionViewModel?
+    private var subscriptions = Set<AnyCancellable>()
     
     private lazy var loadingSpinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
@@ -84,7 +88,8 @@ final class SourceSelectionViewController: UIViewController {
         setNavigationBar()
         buildViewHierarchy()
         setConstraints()
-        // loadingSpinner.startAnimating()
+        setBindings()
+        // viewModel?.fetchAllSources()
     }
     
     private func buildViewHierarchy() {
@@ -111,8 +116,30 @@ final class SourceSelectionViewController: UIViewController {
         }
     }
     
-    @objc func segmentedValueChanged(_ sender: UISegmentedControl!) {
-        print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
+    private func setBindings() {
+        // Loading binding
+        viewModel?.isLoadingPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isLoading in
+                if isLoading {
+                    self?.setLoadingSpinner(isLoading: true)
+                    self?.hideTableView()
+                }
+            }.store(in: &subscriptions)
+        
+        // Update binding
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                self?.loadingSpinner.stopAnimating()
+                self?.setLoadingSpinner(isLoading: false)
+                
+                if updated {
+                    self?.updateTableView()
+                } else {
+                    self?.displayNoResult()
+                }
+            }.store(in: &subscriptions)
     }
 }
 
@@ -126,6 +153,34 @@ extension SourceSelectionViewController {
         gradient.frame = view.bounds
         view.layer.addSublayer(gradient)
     }
+    
+    private func hideTableView() {
+        tableView.isHidden = true
+    }
+    
+    private func displayNoResult() {
+        print("No result")
+        tableView.isHidden = true
+        /*
+        noResultLabel.isHidden = false
+        noResultLabel.text = "Aucun article disponible"
+         */
+    }
+    
+    private func updateTableView() {
+        print("Update TableView")
+        tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        tableView.isHidden = false
+    }
+    
+    private func setLoadingSpinner(isLoading: Bool) {
+        if isLoading {
+            loadingSpinner.startAnimating()
+        } else {
+            loadingSpinner.stopAnimating()
+        }
+    }
 }
 
 extension SourceSelectionViewController: UICollectionViewDataSource {
@@ -138,24 +193,43 @@ extension SourceSelectionViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        cell.configure(with: categoryViewModels[indexPath.item].title)
+        
         // When view is initialized, the first cell is selected by default
         if indexPath.item == 0 {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+            viewModel?.setSourceOption(with: categoryViewModels[indexPath.item].categoryId)
         }
-        
-        cell.configure(with: categoryViewModels[indexPath.item].title)
         
         return cell
     }
 }
 
 extension SourceSelectionViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel?.setSourceOption(with: categoryViewModels[indexPath.item].categoryId)
+    }
 }
 
 extension SourceSelectionViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = viewModel?.sectionViewModels.count, sections > 0 else {
+            return 1
+        }
+        
+        print("Sections à afficher: \(sections)")
+        return sections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        // print(section)
+        // print(viewModel?.sectionViewModels.count ?? 0)
+        
+        guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+            return 0
+        }
+        
+        return viewModel?.sectionViewModels[section].sourceCellViewModels.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,11 +237,28 @@ extension SourceSelectionViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        if let cellViewModel = viewModel?.sectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
+            cell.configure(with: cellViewModel)
+        }
+        
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard let sections = viewModel?.sections, sections > 0 else {
+            return nil
+        }
+        
+        guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+            return nil
+        }
+        
+        return viewModel?.sectionViewModels[section].sectionName
     }
 }
 
@@ -187,7 +278,10 @@ struct SourceSelectionControllerPreview: PreviewProvider {
             // Dark mode
             UIViewControllerPreview {
                 let navigationController = UINavigationController()
+                let useCase = SourceSelectionUseCase(repository: SuperNewsDataRepository(apiService: SuperNewsMockDataAPIService(forceFetchFailure: false)))
+                let viewModel = SourceSelectionViewModel(useCase: useCase)
                 let vc = SourceSelectionViewController()
+                vc.viewModel = viewModel
                 navigationController.pushViewController(vc, animated: false)
                 return navigationController
             }

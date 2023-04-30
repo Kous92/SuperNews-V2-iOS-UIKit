@@ -14,7 +14,9 @@ final class SourceTableViewCell: UITableViewCell {
     private lazy var cellView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        view.backgroundColor = UIColor(named: "SuperNewsBlue")
+        view.layer.borderColor = UIColor(named: "SuperNewsDarkBlue")?.cgColor
+        view.layer.borderWidth = 1
+        // view.backgroundColor = UIColor(named: "SuperNewsBlue")
         return view
     }()
     
@@ -99,6 +101,7 @@ final class SourceTableViewCell: UITableViewCell {
     
     private func buildViewHierarchy() {
         contentView.addSubview(cellView)
+        cellView.addSubview(labelStackView)
         cellView.addSubview(sourceTitleLabel)
         cellView.addSubview(sourceDescriptionLabel)
         cellView.addSubview(labelStackView)
@@ -133,8 +136,8 @@ final class SourceTableViewCell: UITableViewCell {
     func configure(with viewModel: SourceCellViewModel) {
         sourceTitleLabel.text = viewModel.name
         sourceDescriptionLabel.text = viewModel.description
-        sourceCategoryLabel.text = "Catégorie: \(viewModel.category)"
-        sourceCountryAndLanguageLabel.text = "Pays: \(viewModel.country), langue: \(viewModel.language)"
+        sourceCategoryLabel.text = "Catégorie: \(viewModel.category.getCategoryNameFromCategoryCode())"
+        sourceCountryAndLanguageLabel.text = "Pays: \(viewModel.country.countryName()?.capitalized ?? "??"), langue: \(viewModel.language.languageName()?.capitalized ?? "??")"
         sourceURLLabel.text = "URL du site du média: \(viewModel.url)"
     }
     
