@@ -66,8 +66,7 @@ final class SourceSelectionViewController: UIViewController {
         tableView.delegate = self
         tableView.register(SourceTableViewCell.self, forCellReuseIdentifier: "sourceCell")
         tableView.separatorStyle = .none
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        // tableView.isHidden = true
+        tableView.isHidden = true
         tableView.backgroundColor = .clear
         
         return tableView
@@ -233,7 +232,8 @@ extension SourceSelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "sourceCell", for: indexPath) as? SourceTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "sourceCell", for: indexPath) as? SourceTableViewCell,
+              let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
             return UITableViewCell()
         }
         
