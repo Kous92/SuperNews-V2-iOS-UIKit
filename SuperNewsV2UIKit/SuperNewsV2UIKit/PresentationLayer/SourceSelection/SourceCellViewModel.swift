@@ -32,8 +32,8 @@ struct SourceCellViewModel {
         self.description = source.description
         self.url = source.url
         self.category = source.category
-        self.language = source.language.languageName() ?? "??"
-        self.country = source.country.countryName() ?? "??"
+        self.language = source.language
+        self.country = source.country.checkCountryISO3166_1Alpha1Code()
     }
     
     func getURL() -> URL? {

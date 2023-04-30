@@ -174,6 +174,12 @@ final class HomeViewController: UIViewController {
     
     @objc func onClickSourceButton() {
         print("Message")
+        let useCase = SourceSelectionUseCase(repository: SuperNewsDataRepository(apiService: SuperNewsNetworkAPIService()))
+        let viewModel = SourceSelectionViewModel(useCase: useCase)
+        let vc = SourceSelectionViewController()
+        vc.viewModel = viewModel
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

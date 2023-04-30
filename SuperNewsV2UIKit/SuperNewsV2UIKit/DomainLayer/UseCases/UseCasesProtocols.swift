@@ -12,5 +12,5 @@ protocol TopHeadlinesUseCaseProtocol {
 }
 
 protocol SourceSelectionUseCaseProtocol {
-    func execute() async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
 }
