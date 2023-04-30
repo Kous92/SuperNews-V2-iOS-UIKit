@@ -104,10 +104,9 @@ final class SourceTableViewCell: UITableViewCell {
         cellView.addSubview(labelStackView)
         cellView.addSubview(sourceTitleLabel)
         cellView.addSubview(sourceDescriptionLabel)
-        cellView.addSubview(labelStackView)
-        labelStackView.addArrangedSubview(sourceCategoryLabel)
-        labelStackView.addArrangedSubview(sourceCountryAndLanguageLabel)
-        labelStackView.addArrangedSubview(sourceURLLabel)
+        cellView.addSubview(sourceCategoryLabel)
+        cellView.addSubview(sourceCountryAndLanguageLabel)
+        cellView.addSubview(sourceURLLabel)
     }
     
     private func setConstraints() {
@@ -116,20 +115,40 @@ final class SourceTableViewCell: UITableViewCell {
         }
         
         sourceTitleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
+            make.top.equalTo(cellView.snp.top).inset(10)
             make.horizontalEdges.equalToSuperview().inset(10)
         }
+        
+        sourceTitleLabel.setContentHuggingPriority(.defaultHigh + 4, for: .vertical)
         
         sourceDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(sourceTitleLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
         }
         
-        labelStackView.snp.makeConstraints { make in
+        sourceDescriptionLabel.setContentHuggingPriority(.defaultHigh + 3, for: .vertical)
+        
+        sourceCategoryLabel.snp.makeConstraints { make in
             make.top.equalTo(sourceDescriptionLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalToSuperview().inset(10)
-            make.bottom.equalToSuperview().inset(10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
         }
+        
+        sourceCategoryLabel.setContentHuggingPriority(.defaultHigh + 2, for: .vertical)
+        
+        sourceCountryAndLanguageLabel.snp.makeConstraints { make in
+            make.top.equalTo(sourceCategoryLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
+        }
+        
+        sourceCountryAndLanguageLabel.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
+        
+        sourceURLLabel.snp.makeConstraints { make in
+            make.top.equalTo(sourceCountryAndLanguageLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
+            make.bottom.equalTo(cellView.snp.bottom).inset(10)
+        }
+        
+        sourceURLLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
     /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
