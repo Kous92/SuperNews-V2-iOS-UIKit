@@ -82,12 +82,8 @@ final class HomeViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
-        label.text = "Aucun article disponible"
         label.textAlignment = .center
-        label.layer.shadowOpacity = 1
-        label.layer.shadowRadius = 3
-        label.layer.shadowOffset = .zero
-        label.layer.shadowColor = CGColor(red: 0, green: 0, blue: 255, alpha: 1)
+        label.setShadowLabel(string: "Aucun article disponible", font: UIFont.systemFont(ofSize: 18, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         label.isHidden = true
         
         return label
@@ -203,7 +199,6 @@ extension HomeViewController {
     private func displayNoResult() {
         tableView.isHidden = true
         noResultLabel.isHidden = false
-        noResultLabel.text = "Aucun article disponible"
     }
     
     private func updateTableView() {
