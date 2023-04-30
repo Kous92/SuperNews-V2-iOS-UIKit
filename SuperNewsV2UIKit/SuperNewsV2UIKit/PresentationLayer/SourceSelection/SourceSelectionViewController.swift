@@ -11,8 +11,6 @@ import Combine
 
 final class SourceSelectionViewController: UIViewController {
     
-    // weak var coordinator: HomeViewControllerDelegate?
-    
     // MVVM with Reactive Programming
     private let categoryViewModels = CategoryCellViewModel.getSourceCategories()
     var viewModel: SourceSelectionViewModel?
@@ -28,6 +26,19 @@ final class SourceSelectionViewController: UIViewController {
         return spinner
     }()
     
+    private lazy var noResultLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.isHidden = true
+        
+        return label
+    }()
+    
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
@@ -41,6 +52,18 @@ final class SourceSelectionViewController: UIViewController {
         ]
         gradient.locations = [0, 0.25, 0.5, 1]
         return gradient
+    }()
+    
+    // For filtering
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Rechercher"
+        searchBar.backgroundImage = UIImage()
+        searchBar.showsCancelButton = false
+        searchBar.delegate = self
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Annuler"
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
+        return searchBar
     }()
     
     private lazy var categoryCollectionView: UICollectionView = {
@@ -88,11 +111,20 @@ final class SourceSelectionViewController: UIViewController {
         buildViewHierarchy()
         setConstraints()
         setBindings()
-        // viewModel?.fetchAllSources()
+    }
+    
+    // WARNING: Cela se déclenche aussi bien lorsque l'écran est détruit que lorsque qu'il y a un écran qui va aller au-dessus de celui-ci.
+    override func viewWillDisappear(_ animated: Bool) {
+        // We make sure it will go back to previous view
+        if isMovingFromParent {
+            viewModel?.backToHomeView()
+        }
     }
     
     private func buildViewHierarchy() {
         view.addSubview(loadingSpinner)
+        view.addSubview(noResultLabel)
+        view.addSubview(searchBar)
         view.addSubview(categoryCollectionView)
         view.addSubview(tableView)
     }
@@ -102,14 +134,25 @@ final class SourceSelectionViewController: UIViewController {
             make.center.equalToSuperview()
         }
         
+        noResultLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(10)
+        }
+        
         categoryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(50)
         }
         
-        tableView.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
             make.top.equalTo(categoryCollectionView.snp.bottom)
+            // make.bottom.equalTo(categoryCollectionView.snp.bottom)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
         }
@@ -121,6 +164,7 @@ final class SourceSelectionViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] isLoading in
                 if isLoading {
+                    self?.noResultLabel.isHidden = true
                     self?.setLoadingSpinner(isLoading: true)
                     self?.hideTableView()
                 }
@@ -130,12 +174,14 @@ final class SourceSelectionViewController: UIViewController {
         viewModel?.updateResultPublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] updated in
+
                 self?.loadingSpinner.stopAnimating()
                 self?.setLoadingSpinner(isLoading: false)
                 
                 if updated {
                     self?.updateTableView()
                 } else {
+                    print("No result")
                     self?.displayNoResult()
                 }
             }.store(in: &subscriptions)
@@ -160,10 +206,8 @@ extension SourceSelectionViewController {
     private func displayNoResult() {
         print("No result")
         tableView.isHidden = true
-        /*
+        noResultLabel.setShadowLabel(string: "Aucune source trouvée avec \(viewModel?.searchQuery ?? "??")", font: UIFont.systemFont(ofSize: 18, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         noResultLabel.isHidden = false
-        noResultLabel.text = "Aucun article disponible"
-         */
     }
     
     private func updateTableView() {
@@ -212,7 +256,7 @@ extension SourceSelectionViewController: UICollectionViewDelegate {
 
 extension SourceSelectionViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = viewModel?.sectionViewModels.count, sections > 0 else {
+        guard let sections = viewModel?.filteredSectionViewModels.count, sections > 0 else {
             return 1
         }
         
@@ -221,20 +265,20 @@ extension SourceSelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+        guard let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
             return 0
         }
         
-        return viewModel?.sectionViewModels[section].sourceCellViewModels.count ?? 0
+        return viewModel?.filteredSectionViewModels[section].sourceCellViewModels.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "sourceCell", for: indexPath) as? SourceTableViewCell,
-              let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+              let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
             return UITableViewCell()
         }
         
-        if let cellViewModel = viewModel?.sectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
+        if let cellViewModel = viewModel?.filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
             cell.configure(with: cellViewModel)
         }
         
@@ -251,11 +295,11 @@ extension SourceSelectionViewController: UITableViewDataSource {
             return nil
         }
         
-        guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+        guard let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
             return nil
         }
         
-        return viewModel?.sectionViewModels[section].sectionName
+        return viewModel?.filteredSectionViewModels[section].sectionName
     }
 }
 
@@ -265,13 +309,35 @@ extension SourceSelectionViewController: UITableViewDelegate {
             return
         }
         
-        guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+        guard let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
             return
         }
         
-        if let cellViewModel = viewModel?.sectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
+        if let cellViewModel = viewModel?.filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
             viewModel?.backToHomeView(with: cellViewModel.id)
         }
+    }
+}
+
+extension SourceSelectionViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel?.searchQuery = searchText
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel?.searchQuery = ""
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
     }
 }
 

@@ -16,7 +16,7 @@ protocol HomeViewControllerDelegate: AnyObject {
 }
 
 protocol SourceToHomeControllerDelegate: AnyObject {
-    func backToHomeView(with selectedSourceId: String)
+    func backToHomeView(with selectedSourceId: String?)
 }
 
 protocol HomeViewModelDelegate: AnyObject {
@@ -93,7 +93,12 @@ extension HomeCoordinator: HomeViewControllerDelegate {
 }
 
 extension HomeCoordinator: SourceToHomeControllerDelegate {
-    func backToHomeView(with selectedSourceId: String) {
+    func backToHomeView(with selectedSourceId: String?) {
+        guard let selectedSourceId else {
+            print("User gone back with navigation bar, no source is selected. No update to do.")
+            return
+        }
+        
         print("Time to update HomeViewModel with new source: \(selectedSourceId)")
         delegate?.updateSelectedSource(with: selectedSourceId)
     }

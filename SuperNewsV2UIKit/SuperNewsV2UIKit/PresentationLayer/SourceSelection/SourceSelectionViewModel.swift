@@ -16,13 +16,17 @@ final class SourceSelectionViewModel {
     private(set) var sectionViewModels = [SourceSectionViewModel]() {
         didSet {
             sections = sectionViewModels.count
-            print("Sections = \(sections)")
+            // print("Sections = \(sections)")
         }
     }
     
+    private(set) var filteredSectionViewModels = [SourceSectionViewModel]()
+    
     var sections = 0
     
-    // Bindings
+    // Bindings and subscriptions
+    @Published var searchQuery = ""
+    private var subscriptions = Set<AnyCancellable>()
     private var updateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
     
@@ -36,9 +40,12 @@ final class SourceSelectionViewModel {
     
     init(useCase: SourceSelectionUseCaseProtocol) {
         self.useCase = useCase
+        setBindings()
     }
     
     func setSourceOption(with optionName: String) {
+        sectionViewModels.removeAll()
+        
         switch optionName {
             case "allSources":
                 fetchAllSources()
@@ -53,7 +60,18 @@ final class SourceSelectionViewModel {
         }
     }
     
-    func fetchAllSources() {
+    private func setBindings() {
+        $searchQuery
+            .receive(on: RunLoop.main)
+            .removeDuplicates()
+            .debounce(for: .seconds(0.8), scheduler: RunLoop.main)
+            .sink { [weak self] value in
+                self?.isLoading.send(true)
+                self?.filterSources()
+            }.store(in: &subscriptions)
+    }
+    
+    private func fetchAllSources() {
         guard cellViewModels.isEmpty else {
             return
         }
@@ -65,70 +83,14 @@ final class SourceSelectionViewModel {
         }
     }
     
-    func setLanguageSorting() {
-        sectionViewModels.removeAll()
-        let languageCodes = cellViewModels.map { $0.language }.removeDuplicates()
-        print(languageCodes)
-        
-        languageCodes.forEach { code in
-            sectionViewModels.append(parseSection(with: code.languageName()?.capitalized ?? "??", cellViewModels: cellViewModels.filter { $0.language == code }))
-        }
-        
-        sectionViewModels.sort { vm1, vm2 in
-            return vm1.sectionName < vm2.sectionName
-        }
-        
-        print("Sections langues:")
-        sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
-        updateResult.send(true)
-    }
-    
-    func setCategorySorting() {
-        sectionViewModels.removeAll()
-        let categories = cellViewModels.map { $0.category }.removeDuplicates()
-        print(categories)
-        
-        categories.forEach { category in
-            sectionViewModels.append(parseSection(with: category.getCategoryNameFromCategoryCode(), cellViewModels: cellViewModels.filter { $0.category == category }))
-        }
-        
-        sectionViewModels.sort { vm1, vm2 in
-            return vm1.sectionName < vm2.sectionName
-        }
-        
-        print("Sections catégories:")
-        sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
-        updateResult.send(true)
-    }
-    
-    func setCountrySorting() {
-        sectionViewModels.removeAll()
-        let countryCodes = cellViewModels.map { $0.country }.removeDuplicates()
-        
-        countryCodes.forEach { code in
-            sectionViewModels.append(parseSection(with: code.countryName()?.capitalized ?? "??", cellViewModels: cellViewModels.filter { $0.country == code }))
-        }
-        
-        sectionViewModels.sort { vm1, vm2 in
-            return vm1.sectionName < vm2.sectionName
-        }
-        
-        // print(countries)
-        print("Sections pays:")
-        sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
-        updateResult.send(true)
-    }
-    
     private func handleResult(with result: Result<[SourceCellViewModel], SuperNewsAPIError>) async {
         switch result {
             case .success(let viewModels):
                 self.cellViewModels = viewModels
-                sectionViewModels.removeAll()
                 self.sectionViewModels.append(self.parseSection(with: "Toutes les sources", cellViewModels: cellViewModels))
+                self.filteredSectionViewModels = sectionViewModels
                 print("[SourceSelectionViewModel] Données récupérées: \(self.cellViewModels.count) sources")
-                print("Sections pays:")
-                
-                sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
+                // sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("ERREUR: " + error.rawValue)
@@ -143,13 +105,86 @@ final class SourceSelectionViewModel {
 }
 
 extension SourceSelectionViewModel {
+    private func filterSources() {
+        guard !searchQuery.isEmpty else {
+            filteredSectionViewModels = sectionViewModels
+            updateResult.send(true)
+            return
+        }
+        
+        
+        print("Filtering sources list with: \(searchQuery)")
+        filteredSectionViewModels.removeAll()
+        sectionViewModels.forEach { sectionViewModel in
+            let filteredSources = sectionViewModel.sourceCellViewModels.filter { vm in
+                print("Filter: \(vm.name.lowercased())")
+                
+                return vm.name.lowercased().contains(searchQuery.lowercased())
+            }
+            
+            
+            print("Name: \(sectionViewModel.sectionName)")
+            print("Cells count before filtering: \(sectionViewModel.sourceCellViewModels.count)")
+            print("Cells: \(filteredSources)")
+            filteredSectionViewModels.append(SourceSectionViewModel(sectionName: sectionViewModel.sectionName, sourceCellViewModels: filteredSources))
+        }
+        
+        // To avoid crash if not any cell was found after filtering.
+        let cellCount = filteredSectionViewModels.reduce(0, { count, sectionViewModel in
+            count + sectionViewModel.sourceCellViewModels.count
+        })
+        
+        updateResult.send(cellCount > 0)
+    }
+    
+    /// Sort source view models by language, alphabetical order
+    private func setLanguageSorting() {
+        let languageCodes = cellViewModels.map { $0.language }.removeDuplicates()
+        languageCodes.forEach { code in
+            sectionViewModels.append(parseSection(with: code.languageName()?.capitalized ?? "??", cellViewModels: cellViewModels.filter { $0.language == code }))
+        }
+        
+        sortSectionViewModelsByNameAndUpdate()
+    }
+    
+    /// Sort source view models by category, alphabetical order
+    private func setCategorySorting() {
+        let categories = cellViewModels.map { $0.category }.removeDuplicates()
+        categories.forEach { category in
+            sectionViewModels.append(parseSection(with: category.getCategoryNameFromCategoryCode(), cellViewModels: cellViewModels.filter { $0.category == category }))
+        }
+        
+        sortSectionViewModelsByNameAndUpdate()
+    }
+    
+    /// Sort source view models by country, alphabetical order
+    private func setCountrySorting() {
+        let countryCodes = cellViewModels.map { $0.country }.removeDuplicates()
+        countryCodes.forEach { code in
+            sectionViewModels.append(parseSection(with: code.countryName()?.capitalized ?? "??", cellViewModels: cellViewModels.filter { $0.country == code }))
+        }
+        
+        sortSectionViewModelsByNameAndUpdate()
+    }
+    
+    private func sortSectionViewModelsByNameAndUpdate() {
+        sectionViewModels.sort { vm1, vm2 in
+            return vm1.sectionName < vm2.sectionName
+        }
+        
+        filteredSectionViewModels = sectionViewModels
+        updateResult.send(true)
+        // print("Sections:")
+        // sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
+    }
+    
     @MainActor private func sendErrorMessage(with errorMessage: String) {
         print("Error to display: \(errorMessage)")
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
-    func backToHomeView(with sourceId: String) {
-        print("Selected source: \(sourceId)")
+    func backToHomeView(with sourceId: String? = nil) {
+        print("Selected source: \(sourceId ?? "None")")
         coordinator?.backToHomeView(with: sourceId)
     }
 }

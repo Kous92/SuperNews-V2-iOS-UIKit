@@ -10,18 +10,13 @@ import UIKit
 
 protocol Coordinator: AnyObject {
     func start() -> UIViewController
-}
-
-protocol ParentCoordinator: Coordinator, AnyObject {
     var childCoordinators: [Coordinator] { get set }
-    var parentCoordinator: Coordinator? { get }
-    var navigationController: UINavigationController { get }
     
     func addChildCoordinator(childCoordinator: Coordinator)
     func removeChildCoordinator(childCoordinator: Coordinator)
 }
 
-extension ParentCoordinator {
+extension Coordinator {
     /// Adds a child coordinator to the parent, the parent will have a reference to the child one.
     func addChildCoordinator(childCoordinator: Coordinator) {
         self.childCoordinators.append(childCoordinator)
@@ -29,7 +24,13 @@ extension ParentCoordinator {
 
     /// Removes a child coordinator from the parent.
     func removeChildCoordinator(childCoordinator: Coordinator) {
-        // Il faut bien vérifier la référence entre les coordinators, on utilise du coup === au lieu de ==.
+        print("Removing child coordinator")
+        // Make sure to check reference between coordinators, use === instead of ==.
         self.childCoordinators = self.childCoordinators.filter { $0 !== childCoordinator }
     }
+}
+
+protocol ParentCoordinator: Coordinator, AnyObject {
+    var parentCoordinator: Coordinator? { get }
+    var navigationController: UINavigationController { get }
 }
