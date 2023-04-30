@@ -221,9 +221,6 @@ extension SourceSelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // print(section)
-        // print(viewModel?.sectionViewModels.count ?? 0)
-        
         guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
             return 0
         }
@@ -263,7 +260,19 @@ extension SourceSelectionViewController: UITableViewDataSource {
 }
 
 extension SourceSelectionViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let sections = viewModel?.sections, sections > 0 else {
+            return
+        }
+        
+        guard let viewModels = viewModel?.sectionViewModels, viewModels.count > 0 else {
+            return
+        }
+        
+        if let cellViewModel = viewModel?.sectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
+            viewModel?.backToHomeView(with: cellViewModel.id)
+        }
+    }
 }
 
 // Ready to live preview and make views much faster

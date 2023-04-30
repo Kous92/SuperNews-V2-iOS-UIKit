@@ -11,11 +11,13 @@ import UIKit
 // Ensure that the 4th and 5th SOLID principles are respected: Interface Segregation and Dependency Inversion
 protocol SourceSelectionViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
+    func backToHomeView(with selectedSourceId: String)
 }
 
 final class SourceSelectionCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the sub flow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
+    weak var delegate: SourceToHomeControllerDelegate?
     
     private(set) var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
@@ -40,13 +42,18 @@ final class SourceSelectionCoordinator: ParentCoordinator {
         let sourceSelectionViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
         print("[SourceSelectionCoordinator] Source selection view ready.")
-        navigationController.pushViewController(sourceSelectionViewController, animated: false)
+        navigationController.pushViewController(sourceSelectionViewController, animated: true)
         
         return navigationController
     }
 }
 
-extension SourceSelectionCoordinator {
+extension SourceSelectionCoordinator: SourceSelectionViewControllerDelegate {
+    func backToHomeView(with selectedSourceId: String) {
+        delegate?.backToHomeView(with: selectedSourceId)
+        navigationController.popViewController(animated: true)
+    }
+    
     func displayErrorAlert(with errorMessage: String) {
         print("[SourceSelectionCoordinator] Displaying error alert.")
         

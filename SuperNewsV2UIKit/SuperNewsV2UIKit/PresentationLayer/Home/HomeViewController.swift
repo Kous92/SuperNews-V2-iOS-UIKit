@@ -15,7 +15,7 @@ final class HomeViewController: UIViewController {
     weak var coordinator: HomeViewControllerDelegate?
     
     // MVVM with Reactive Programming
-    private let categoryViewModels = CategoryCellViewModel.getCategories()
+    // private let categoryViewModels = CategoryCellViewModel.getCategories()
     var viewModel: HomeViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
@@ -46,6 +46,7 @@ final class HomeViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
+        collectionView.isHidden = true
         
         return collectionView
     }()
@@ -105,6 +106,7 @@ final class HomeViewController: UIViewController {
         buildViewHierarchy()
         setConstraints()
         setBindings()
+        viewModel?.initCategories()
         viewModel?.fetchTopHeadlines()
     }
     
@@ -166,6 +168,18 @@ final class HomeViewController: UIViewController {
                     self?.displayNoResult()
                 }
             }.store(in: &subscriptions)
+        
+        viewModel?.categoryUpdateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                // self?.loadingSpinner.stopAnimating()
+                // self?.setLoadingSpinner(isLoading: false)
+                
+                if updated {
+                    self?.updateCollectionView()
+                }
+            }.store(in: &subscriptions)
+
     }
     
     @objc func onClickSourceButton() {
@@ -199,6 +213,12 @@ extension HomeViewController {
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         tableView.isHidden = false
+    }
+    
+    private func updateCollectionView() {
+        categoryCollectionView.reloadData()
+        // tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        categoryCollectionView.isHidden = false
     }
     
     private func setLoadingSpinner(isLoading: Bool) {
@@ -240,20 +260,21 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryViewModels.count
+        return viewModel?.categoryViewModels.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell,
+              let categoryViewModel = viewModel?.categoryViewModels[indexPath.item] else {
             return UICollectionViewCell()
         }
         
-        // When view is initialized, the first cell is selected by default
+        // When view is initialized, the first cell is selected by default. But apply it only once, the first time. Not after every reload data.
         if indexPath.item == 0 {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
         }
         
-        cell.configure(with: categoryViewModels[indexPath.item].title)
+        cell.configure(with: categoryViewModel.title)
         
         return cell
     }
@@ -261,14 +282,18 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if categoryViewModels[indexPath.item].categoryId == "local" {
+        guard let categoryViewModel = viewModel?.categoryViewModels[indexPath.item] else {
+            return
+        }
+        
+        if categoryViewModel.categoryId == "local" {
             viewModel?.fetchTopHeadlines()
         }
-        else if categoryViewModels[indexPath.item].categoryId == "source" {
+        else if categoryViewModel.categoryId == "source" {
             viewModel?.fetchTopHeadlinesWithSource()
         }
         else {
-            viewModel?.fetchTopHeadlines(with: categoryViewModels[indexPath.item].categoryId)
+            viewModel?.fetchTopHeadlines(with: categoryViewModel.categoryId)
         }
     }
 }

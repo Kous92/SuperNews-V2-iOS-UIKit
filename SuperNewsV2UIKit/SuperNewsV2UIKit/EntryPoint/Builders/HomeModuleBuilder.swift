@@ -21,6 +21,11 @@ final class HomeModuleBuilder: ModuleBuilder {
         let homeViewModel = HomeViewModel(useCase: useCase)
         homeViewModel.coordinator = coordinator as? HomeViewControllerDelegate
         
+        // Setting delegate for passing data backwards
+        if let homeCoordinator = coordinator as? HomeCoordinator {
+            homeCoordinator.delegate = homeViewModel
+        }
+        
         // Injecting view model
         homeViewController.viewModel = homeViewModel
         

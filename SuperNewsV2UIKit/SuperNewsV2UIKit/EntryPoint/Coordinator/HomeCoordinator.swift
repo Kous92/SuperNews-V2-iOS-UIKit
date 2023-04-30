@@ -15,9 +15,19 @@ protocol HomeViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
 }
 
+protocol SourceToHomeControllerDelegate: AnyObject {
+    func backToHomeView(with selectedSourceId: String)
+}
+
+protocol HomeViewModelDelegate: AnyObject {
+    func updateSelectedSource(with sourceId: String)
+}
+
 final class HomeCoordinator: ParentCoordinator {
     // Attention à la rétention de cycle, le sous-flux ne doit pas retenir la référence avec le parent.
     weak var parentCoordinator: Coordinator?
+    
+    weak var delegate: HomeViewModelDelegate?
     
     private(set) var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
@@ -61,6 +71,7 @@ extension HomeCoordinator: HomeViewControllerDelegate {
         
         // Adding link to the parent with self, be careful to retain cycle
         sourceSelectionCoordinator.parentCoordinator = self
+        sourceSelectionCoordinator.delegate = self
         addChildCoordinator(childCoordinator: sourceSelectionCoordinator)
         
         // Transition from home screen to source selection screen
@@ -78,5 +89,12 @@ extension HomeCoordinator: HomeViewControllerDelegate {
         }))
         
         navigationController.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension HomeCoordinator: SourceToHomeControllerDelegate {
+    func backToHomeView(with selectedSourceId: String) {
+        print("Time to update HomeViewModel with new source: \(selectedSourceId)")
+        delegate?.updateSelectedSource(with: selectedSourceId)
     }
 }
