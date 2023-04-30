@@ -16,7 +16,6 @@ extension UIImageView {
         let defaultImage = UIImage(named: "SuperNewsNotAvailableImage")
         
         guard !url.isEmpty, let imageURL = URL(string: url) else {
-            print("Default image")
             self.image = defaultImage
             return
         }

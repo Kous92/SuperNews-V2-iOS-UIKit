@@ -172,9 +172,6 @@ final class HomeViewController: UIViewController {
         viewModel?.categoryUpdateResultPublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] updated in
-                // self?.loadingSpinner.stopAnimating()
-                // self?.setLoadingSpinner(isLoading: false)
-                
                 if updated {
                     self?.updateCollectionView()
                 }

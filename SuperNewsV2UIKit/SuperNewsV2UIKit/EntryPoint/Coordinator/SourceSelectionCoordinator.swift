@@ -11,7 +11,7 @@ import UIKit
 // Ensure that the 4th and 5th SOLID principles are respected: Interface Segregation and Dependency Inversion
 protocol SourceSelectionViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
-    func backToHomeView(with selectedSourceId: String)
+    func backToHomeView(with selectedSourceId: String?)
 }
 
 final class SourceSelectionCoordinator: ParentCoordinator {
@@ -49,9 +49,14 @@ final class SourceSelectionCoordinator: ParentCoordinator {
 }
 
 extension SourceSelectionCoordinator: SourceSelectionViewControllerDelegate {
-    func backToHomeView(with selectedSourceId: String) {
+    func backToHomeView(with selectedSourceId: String? = nil) {
         delegate?.backToHomeView(with: selectedSourceId)
+        
+        // Removing child coordinator reference
+        parentCoordinator?.removeChildCoordinator(childCoordinator: self)
         navigationController.popViewController(animated: true)
+        print(navigationController.viewControllers)
+
     }
     
     func displayErrorAlert(with errorMessage: String) {
