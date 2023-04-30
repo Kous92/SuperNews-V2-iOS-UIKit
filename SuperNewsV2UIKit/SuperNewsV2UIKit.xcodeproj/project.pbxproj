@@ -66,6 +66,8 @@
 		4B82596629F8104C003CB627 /* SuperNewsBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B82596529F8104C003CB627 /* SuperNewsBuilderTests.swift */; };
 		4B82596929F81FDE003CB627 /* ShadowUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B82596829F81FDE003CB627 /* ShadowUILabel.swift */; };
 		4B8AC85C29EDB79D00BAE418 /* SuperNewsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AC85B29EDB79D00BAE418 /* SuperNewsCoordinatorTests.swift */; };
+		4B99F02129FECC0300FE198F /* SourceSelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B99F02029FECC0300FE198F /* SourceSelectionCoordinator.swift */; };
+		4B99F02329FECE3400FE198F /* SourceSelectionModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B99F02229FECE3400FE198F /* SourceSelectionModuleBuilder.swift */; };
 		4B9E901229ED929C006E541F /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E901129ED929C006E541F /* UIViewControllerPreview.swift */; };
 		4B9E901429ED92A4006E541F /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E901329ED92A4006E541F /* UIViewPreview.swift */; };
 		4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA595B629E6D506006B9460 /* SuperNewsV2UIKitTests.swift */; };
@@ -153,6 +155,8 @@
 		4B82596529F8104C003CB627 /* SuperNewsBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsBuilderTests.swift; sourceTree = "<group>"; };
 		4B82596829F81FDE003CB627 /* ShadowUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowUILabel.swift; sourceTree = "<group>"; };
 		4B8AC85B29EDB79D00BAE418 /* SuperNewsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsCoordinatorTests.swift; sourceTree = "<group>"; };
+		4B99F02029FECC0300FE198F /* SourceSelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSelectionCoordinator.swift; sourceTree = "<group>"; };
+		4B99F02229FECE3400FE198F /* SourceSelectionModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSelectionModuleBuilder.swift; sourceTree = "<group>"; };
 		4B9E901129ED929C006E541F /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
 		4B9E901329ED92A4006E541F /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		4BA595B429E6D506006B9460 /* SuperNewsV2UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperNewsV2UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +226,7 @@
 				4B08602829ED7CAC00AA32C0 /* AppCoordinator.swift */,
 				4B08602C29ED805900AA32C0 /* HomeCoordinator.swift */,
 				4B08602E29ED836600AA32C0 /* SearchCoordinator.swift */,
+				4B99F02029FECC0300FE198F /* SourceSelectionCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 			children = (
 				4B82596229F80B82003CB627 /* HomeModuleBuilder.swift */,
 				4B82596029F80B33003CB627 /* ModuleBuilder.swift */,
+				4B99F02229FECE3400FE198F /* SourceSelectionModuleBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -678,9 +684,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B99F02129FECC0300FE198F /* SourceSelectionCoordinator.swift in Sources */,
 				4BF6377729FC9B8E00AC469F /* SourceSelectionViewModel.swift in Sources */,
 				4BF6377529FC9B7800AC469F /* SourceSelectionViewController.swift in Sources */,
 				4B676DA429F95583003C5CE1 /* CategoryCollectionViewCell.swift in Sources */,
+				4B99F02329FECE3400FE198F /* SourceSelectionModuleBuilder.swift in Sources */,
 				4B82596329F80B82003CB627 /* HomeModuleBuilder.swift in Sources */,
 				4BF6376B29FC864500AC469F /* TopHeadlinesOption.swift in Sources */,
 				4B306F6529F68EE3009AA92D /* ArticleDTO.swift in Sources */,

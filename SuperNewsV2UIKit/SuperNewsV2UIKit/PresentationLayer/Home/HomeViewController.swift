@@ -169,13 +169,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func onClickSourceButton() {
-        print("Message")
-        let useCase = SourceSelectionUseCase(repository: SuperNewsDataRepository(apiService: SuperNewsNetworkAPIService()))
-        let viewModel = SourceSelectionViewModel(useCase: useCase)
-        let vc = SourceSelectionViewController()
-        vc.viewModel = viewModel
-        
-        navigationController?.pushViewController(vc, animated: true)
+        viewModel?.goToSourceSelectionView()
     }
 }
 
@@ -269,7 +263,11 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if categoryViewModels[indexPath.item].categoryId == "local" {
             viewModel?.fetchTopHeadlines()
-        } else {
+        }
+        else if categoryViewModels[indexPath.item].categoryId == "source" {
+            viewModel?.fetchTopHeadlinesWithSource()
+        }
+        else {
             viewModel?.fetchTopHeadlines(with: categoryViewModels[indexPath.item].categoryId)
         }
     }

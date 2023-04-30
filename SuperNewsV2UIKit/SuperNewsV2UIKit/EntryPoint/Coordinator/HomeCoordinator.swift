@@ -11,6 +11,7 @@ import UIKit
 // On respecte les 4ème et 5ème principe du SOLID de la ségrégation d'interface et de l'inversion de dépendances
 protocol HomeViewControllerDelegate: AnyObject {
     func goToDetailArticleView()
+    func goToSourceSelectionView()
     func displayErrorAlert(with errorMessage: String)
 }
 
@@ -48,8 +49,23 @@ final class HomeCoordinator: ParentCoordinator {
 }
 
 extension HomeCoordinator: HomeViewControllerDelegate {
+    
     func goToDetailArticleView() {
         
+    }
+    
+    func goToSourceSelectionView() {
+        // Transition is separated here into a child coordinator.
+        print("[HomeCoordinator] Setting child coordinator: SourceSelectionCoordinator.")
+        let sourceSelectionCoordinator = SourceSelectionCoordinator(navigationController: navigationController, builder: SourceSelectionModuleBuilder())
+        
+        // Adding link to the parent with self, be careful to retain cycle
+        sourceSelectionCoordinator.parentCoordinator = self
+        addChildCoordinator(childCoordinator: sourceSelectionCoordinator)
+        
+        // Transition from home screen to source selection screen
+        print("[HomeCoordinator] Go to SourceSelectionViewController.")
+        sourceSelectionCoordinator.start()
     }
     
     func displayErrorAlert(with errorMessage: String) {
