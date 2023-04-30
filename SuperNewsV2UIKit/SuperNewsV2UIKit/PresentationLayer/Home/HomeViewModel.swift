@@ -9,15 +9,24 @@ import Foundation
 import Combine
 
 final class HomeViewModel {
+    // Delegate
     weak var coordinator: HomeViewControllerDelegate?
+    
     private let useCase: TopHeadlinesUseCaseProtocol
-    private(set) var categoryViewModels = [NewsCellViewModel]()
+    private(set) var categoryViewModels = [CategoryCellViewModel]()
     private(set) var cellViewModels = [NewsCellViewModel]()
     private var articleViewModels = [ArticleViewModel]()
     
+    private var savedMediaSource = ""
+    
     // Bindings
+    private var categoryUpdateResult = PassthroughSubject<Bool, Never>()
     private var updateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
+    
+    var categoryUpdateResultPublisher: AnyPublisher<Bool, Never> {
+        return categoryUpdateResult.eraseToAnyPublisher()
+    }
     
     var updateResultPublisher: AnyPublisher<Bool, Never> {
         return updateResult.eraseToAnyPublisher()
@@ -31,6 +40,12 @@ final class HomeViewModel {
         self.useCase = useCase
     }
     
+    func initCategories() {
+        categoryViewModels = CategoryCellViewModel.getCategories()
+        updateSourceCategoryTitle()
+        categoryUpdateResult.send(true)
+    }
+    
     func fetchTopHeadlines() {
         Task {
             isLoading.send(true)
@@ -42,7 +57,7 @@ final class HomeViewModel {
     func fetchTopHeadlinesWithSource() {
         Task {
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: "lequipe"))
+            let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource))
             await handleResult(with: result)
         }
     }
@@ -73,15 +88,38 @@ final class HomeViewModel {
         cellViewModels = articleViewModels.map { $0.getNewsCellViewModel() }
     }
     
+    private func updateSourceCategoryTitle() {
+        if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "source" }) {
+            sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource)")
+        }
+    }
+    
     @MainActor private func sendErrorMessage(with errorMessage: String) {
         coordinator?.displayErrorAlert(with: errorMessage)
     }
 }
 
 // Navigation part
-extension HomeViewModel {
+extension HomeViewModel: HomeViewModelDelegate {
+    func updateSelectedSource(with sourceId: String) {
+        savedMediaSource = sourceId
+        print("Source actuelle: \(savedMediaSource)")
+        
+        updateSourceCategoryTitle()
+        categoryUpdateResult.send(true)
+
+    }
+    
     func goToSourceSelectionView() {
         print("Home -> Coordinator -> SourceSelection")
         coordinator?.goToSourceSelectionView()
+    }
+    
+    func updateSavedSource(with sourceId: String) {
+        savedMediaSource = sourceId
+        print("Source actuelle: \(savedMediaSource)")
+        
+        updateSourceCategoryTitle()
+        categoryUpdateResult.send(true)
     }
 }

@@ -7,13 +7,17 @@
 
 import Foundation
 
-struct CategoryCellViewModel {
-    let title: String
+final class CategoryCellViewModel {
+    private(set) var title: String
     let categoryId: String
     
     init(title: String, categoryId: String) {
         self.title = title
         self.categoryId = categoryId
+    }
+    
+    func setCategoryTitle(with title: String) {
+        self.title = title
     }
 }
 

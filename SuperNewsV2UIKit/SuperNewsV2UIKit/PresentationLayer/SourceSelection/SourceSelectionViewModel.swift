@@ -140,9 +140,16 @@ final class SourceSelectionViewModel {
     private func parseSection(with name: String, cellViewModels: [SourceCellViewModel]) -> SourceSectionViewModel {
         return SourceSectionViewModel(sectionName: name, sourceCellViewModels: cellViewModels)
     }
-    
+}
+
+extension SourceSelectionViewModel {
     @MainActor private func sendErrorMessage(with errorMessage: String) {
         print("Error to display: \(errorMessage)")
-        // coordinator?.displayErrorAlert(with: errorMessage)
+        coordinator?.displayErrorAlert(with: errorMessage)
+    }
+    
+    func backToHomeView(with sourceId: String) {
+        print("Selected source: \(sourceId)")
+        coordinator?.backToHomeView(with: sourceId)
     }
 }
