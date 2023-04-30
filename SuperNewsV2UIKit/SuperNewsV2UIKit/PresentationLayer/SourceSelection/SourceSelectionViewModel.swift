@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 final class SourceSelectionViewModel {
-    // weak var coordinator: HomeViewControllerDelegate?
+    weak var coordinator: SourceSelectionViewControllerDelegate?
+    
     private let useCase: SourceSelectionUseCaseProtocol
     private(set) var cellViewModels = [SourceCellViewModel]()
     private(set) var sectionViewModels = [SourceSectionViewModel]() {

@@ -21,6 +21,7 @@ extension CategoryCellViewModel {
     static func getCategories() -> [CategoryCellViewModel] {
         return [
             CategoryCellViewModel(title: "Actualités locales (France)", categoryId: "local"),
+            CategoryCellViewModel(title: "Actualités d'une source", categoryId: "source"),
             CategoryCellViewModel(title: "Business", categoryId: "business"),
             CategoryCellViewModel(title: "Divertissement", categoryId: "entertainment"),
             CategoryCellViewModel(title: "Général", categoryId: "general"),

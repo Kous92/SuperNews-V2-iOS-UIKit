@@ -39,6 +39,14 @@ final class HomeViewModel {
         }
     }
     
+    func fetchTopHeadlinesWithSource() {
+        Task {
+            isLoading.send(true)
+            let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: "lequipe"))
+            await handleResult(with: result)
+        }
+    }
+    
     func fetchTopHeadlines(with category: String) {
         Task {
             isLoading.send(true)
@@ -67,5 +75,13 @@ final class HomeViewModel {
     
     @MainActor private func sendErrorMessage(with errorMessage: String) {
         coordinator?.displayErrorAlert(with: errorMessage)
+    }
+}
+
+// Navigation part
+extension HomeViewModel {
+    func goToSourceSelectionView() {
+        print("Home -> Coordinator -> SourceSelection")
+        coordinator?.goToSourceSelectionView()
     }
 }
