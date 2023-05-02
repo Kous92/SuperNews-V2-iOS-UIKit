@@ -13,4 +13,5 @@ protocol TopHeadlinesUseCaseProtocol {
 
 protocol SourceSelectionUseCaseProtocol {
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
+    func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
 }

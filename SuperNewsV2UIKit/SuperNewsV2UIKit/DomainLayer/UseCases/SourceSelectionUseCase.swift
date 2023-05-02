@@ -9,14 +9,20 @@ import Foundation
 
 final class SourceSelectionUseCase: SourceSelectionUseCaseProtocol {
     
-    private let repository: SuperNewsRepository
+    private let dataRepository: SuperNewsRepository
+    private let settingsRepository: SuperNewsSettingsRepository
     
-    init(repository: SuperNewsRepository) {
-        self.repository = repository
+    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSettingsRepository) {
+        self.dataRepository = dataRepository
+        self.settingsRepository = settingsRepository
     }
     
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError> {
-        return handleResult(with: await repository.fetchAllNewsSources())
+        return handleResult(with: await dataRepository.fetchAllNewsSources())
+    }
+    
+    func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError> {
+        return await settingsRepository.saveSelectedMediaSource(source: savedSource)
     }
     
     private func handleResult(with result: Result<[SourceDTO], SuperNewsAPIError>) -> Result<[SourceCellViewModel], SuperNewsAPIError> {
