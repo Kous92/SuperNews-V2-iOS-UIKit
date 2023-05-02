@@ -16,8 +16,9 @@ final class SourceSelectionModuleBuilder: ModuleBuilder {
         let sourceSelectionViewController = SourceSelectionViewController()
         
         // Dependency injection
-        let repository = getRepository(testMode: testMode)
-        let useCase = SourceSelectionUseCase(repository: repository)
+        let dataRepository = getRepository(testMode: testMode)
+        let settingsRepository = getSettingsRepository(testMode: testMode)
+        let useCase = SourceSelectionUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
         let sourceSelectionViewModel = SourceSelectionViewModel(useCase: useCase)
         sourceSelectionViewModel.coordinator = coordinator as? SourceSelectionViewControllerDelegate
         
@@ -31,7 +32,15 @@ final class SourceSelectionModuleBuilder: ModuleBuilder {
         return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
     }
     
+    private func getSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
+        return SuperNewsUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
+    }
+    
     private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
         return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
+    }
+    
+    private func getSettingsService(testMode: Bool) -> SuperNewsLocalSettings {
+        return testMode ? SuperNewsMockLocalSettings() : SuperNewsUserDefaultsLocalSettings()
     }
 }

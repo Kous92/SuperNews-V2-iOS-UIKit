@@ -9,6 +9,7 @@ import Foundation
 
 /// The link between app layer (domain) and data layer of SuperNews app Clean Architecture. This class follows the Repository design pattern to provide an abstraction of data part, as interface to retrieve data.
 protocol SuperNewsRepository: AnyObject {
+    // Network and local database part
     func fetchAllNewsSources() async -> Result<[SourceDTO], SuperNewsAPIError>
     func fetchNewsSources(category: String) async -> Result<[SourceDTO], SuperNewsAPIError>
     func fetchNewsSources(language: String) async -> Result<[SourceDTO], SuperNewsAPIError>

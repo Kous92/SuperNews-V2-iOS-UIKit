@@ -12,17 +12,9 @@ final class SourceSelectionViewModel {
     weak var coordinator: SourceSelectionViewControllerDelegate?
     
     private let useCase: SourceSelectionUseCaseProtocol
-    private(set) var cellViewModels = [SourceCellViewModel]()
-    private(set) var sectionViewModels = [SourceSectionViewModel]() {
-        didSet {
-            sections = sectionViewModels.count
-            // print("Sections = \(sections)")
-        }
-    }
-    
+    private var cellViewModels = [SourceCellViewModel]()
+    private var sectionViewModels = [SourceSectionViewModel]()
     private(set) var filteredSectionViewModels = [SourceSectionViewModel]()
-    
-    var sections = 0
     
     // Bindings and subscriptions
     @Published var searchQuery = ""
@@ -45,6 +37,7 @@ final class SourceSelectionViewModel {
     
     func setSourceOption(with optionName: String) {
         sectionViewModels.removeAll()
+        isLoading.send(true)
         
         switch optionName {
             case "allSources":
@@ -72,13 +65,9 @@ final class SourceSelectionViewModel {
     }
     
     private func fetchAllSources() {
-        guard cellViewModels.isEmpty else {
-            return
-        }
-        
         Task {
-            isLoading.send(true)
-            let result = await useCase.execute()
+            // Download the data only once
+            let result = cellViewModels.isEmpty ? await useCase.execute() : .success(cellViewModels)
             await handleResult(with: result)
         }
     }
@@ -101,6 +90,51 @@ final class SourceSelectionViewModel {
     
     private func parseSection(with name: String, cellViewModels: [SourceCellViewModel]) -> SourceSectionViewModel {
         return SourceSectionViewModel(sectionName: name, sourceCellViewModels: cellViewModels)
+    }
+    
+    // MARK: TableView logic
+    func numberOfSections() -> Int {
+        // A TableView must have at least one section, crash othervise
+        guard filteredSectionViewModels.count > 0 else {
+            return 1
+        }
+        
+        return filteredSectionViewModels.count
+    }
+    
+    func getSectionHeaderTitle(sectionIndex: Int) -> String? {
+        // A TableView must have at least one section, crash othervise
+        guard filteredSectionViewModels.count > 0 else {
+            return nil
+        }
+        
+        return filteredSectionViewModels[sectionIndex].sectionName
+    }
+    
+    func numberOfRowsInSection(sectionIndex: Int) -> Int {
+        // A TableView must have at least one section, crash othervise
+        guard filteredSectionViewModels.count > 0 else {
+            return 0
+        }
+        
+        return filteredSectionViewModels[sectionIndex].sourceCellViewModels.count
+    }
+    
+    func getCellViewModel(at indexPath: IndexPath) -> SourceCellViewModel? {
+        let sectionCount = filteredSectionViewModels.count
+        
+        // A TableView must have at least one section and one element on CellViewModels list, crash othervise
+        guard sectionCount > 0, indexPath.section <= sectionCount else {
+            return nil
+        }
+        
+        let cellCount = filteredSectionViewModels[indexPath.section].sourceCellViewModels.count
+        
+        guard cellCount > 0, indexPath.row <= cellCount else {
+            return nil
+        }
+        
+        return filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row]
     }
 }
 
@@ -173,7 +207,7 @@ extension SourceSelectionViewModel {
         }
         
         filteredSectionViewModels = sectionViewModels
-        updateResult.send(true)
+        updateResult.send(filteredSectionViewModels.count > 0)
         // print("Sections:")
         // sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
     }
@@ -183,8 +217,35 @@ extension SourceSelectionViewModel {
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
-    func backToHomeView(with sourceId: String? = nil) {
+    func backToHomeView() {
+        print("Selected source: None")
+        coordinator?.backToHomeView(with: nil)
+    }
+    
+    @MainActor private func backToHomeView(with sourceId: String? = nil) {
         print("Selected source: \(sourceId ?? "None")")
         coordinator?.backToHomeView(with: sourceId)
+    }
+    
+    func saveSelectedSource(at indexPath: IndexPath) {
+        guard let cellViewModel = getCellViewModel(at: indexPath) else {
+            print("ERROR when selecting the cell")
+            return
+        }
+        
+        let savedSource = SavedSourceDTO(id: cellViewModel.id, name: cellViewModel.name)
+        print("Selected source: \(savedSource.name), ID: \(savedSource.id)")
+        
+        Task {
+            let result = await useCase.saveSelectedSource(with: savedSource)
+            
+            switch result {
+                case .success():
+                    print("Save succeeded")
+                    await backToHomeView(with: savedSource.id)
+                case .failure(let error):
+                    print("Saving failed. ERROR: \(error.rawValue)")
+            }
+        }
     }
 }

@@ -148,7 +148,6 @@ final class SourceSelectionViewController: UIViewController {
         searchBar.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(categoryCollectionView.snp.bottom)
-            // make.bottom.equalTo(categoryCollectionView.snp.bottom)
         }
         
         tableView.snp.makeConstraints { make in
@@ -213,7 +212,12 @@ extension SourceSelectionViewController {
     private func updateTableView() {
         print("Update TableView")
         tableView.reloadData()
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        
+        // To avoid some crashes
+        if let titles = viewModel?.filteredSectionViewModels.map({ $0.sectionName }), titles.count > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
+        
         tableView.isHidden = false
     }
     
@@ -256,32 +260,20 @@ extension SourceSelectionViewController: UICollectionViewDelegate {
 
 extension SourceSelectionViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = viewModel?.filteredSectionViewModels.count, sections > 0 else {
-            return 1
-        }
-        
-        print("Sections à afficher: \(sections)")
-        return sections
+        return viewModel?.numberOfSections() ?? 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
-            return 0
-        }
-        
-        return viewModel?.filteredSectionViewModels[section].sourceCellViewModels.count ?? 0
+        return viewModel?.numberOfRowsInSection(sectionIndex: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "sourceCell", for: indexPath) as? SourceTableViewCell,
-              let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
+              let cellViewModel = viewModel?.getCellViewModel(at: indexPath) else {
             return UITableViewCell()
         }
         
-        if let cellViewModel = viewModel?.filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
-            cell.configure(with: cellViewModel)
-        }
-        
+        cell.configure(with: cellViewModel)
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
@@ -290,21 +282,14 @@ extension SourceSelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        guard let sections = viewModel?.sections, sections > 0 else {
-            return nil
-        }
-        
-        guard let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
-            return nil
-        }
-        
-        return viewModel?.filteredSectionViewModels[section].sectionName
+        return viewModel?.getSectionHeaderTitle(sectionIndex: section)
     }
 }
 
 extension SourceSelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        /*
         guard let sections = viewModel?.sections, sections > 0 else {
             return
         }
@@ -316,6 +301,8 @@ extension SourceSelectionViewController: UITableViewDelegate {
         if let cellViewModel = viewModel?.filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
             viewModel?.backToHomeView(with: cellViewModel.id)
         }
+         */
+        viewModel?.saveSelectedSource(at: indexPath)
     }
 }
 
@@ -353,10 +340,9 @@ struct SourceSelectionControllerPreview: PreviewProvider {
             // Dark mode
             UIViewControllerPreview {
                 let navigationController = UINavigationController()
-                let useCase = SourceSelectionUseCase(repository: SuperNewsDataRepository(apiService: SuperNewsMockDataAPIService(forceFetchFailure: false)))
-                let viewModel = SourceSelectionViewModel(useCase: useCase)
-                let vc = SourceSelectionViewController()
-                vc.viewModel = viewModel
+                let builder = SourceSelectionModuleBuilder()
+                let vc = builder.buildModule(testMode: true)
+
                 navigationController.pushViewController(vc, animated: false)
                 return navigationController
             }
