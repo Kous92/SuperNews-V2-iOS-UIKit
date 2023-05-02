@@ -1,5 +1,5 @@
 //
-//  HomeModuleBuilder.swift
+//  TopHeadlinesModuleBuilder.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 25/04/2023.
@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-final class HomeModuleBuilder: ModuleBuilder {
+final class TopHeadlinesModuleBuilder: ModuleBuilder {
     private var testMode = false
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
-        let homeViewController = HomeViewController()
+        let homeViewController = TopHeadlinesViewController()
         
         // Dependency injection
         let repository = getRepository(testMode: testMode)

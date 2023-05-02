@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  TopHeadlinesViewController.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 12/04/2023.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-final class HomeViewController: UIViewController {
+final class TopHeadlinesViewController: UIViewController {
     
     private var dataAPI: SuperNewsDataAPIService?
     weak var coordinator: HomeViewControllerDelegate?
@@ -184,7 +184,7 @@ final class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController {
+extension TopHeadlinesViewController {
     private func setNavigationBar() {
         navigationItem.title = tabBarController?.tabBar.items?[0].title
         let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(onClickSourceButton))
@@ -227,7 +227,7 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController: UITableViewDataSource {
+extension TopHeadlinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.cellViewModels.count ?? 0
     }
@@ -249,13 +249,13 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
-extension HomeViewController: UITableViewDelegate {
+extension TopHeadlinesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(SearchViewController(), animated: true)
     }
 }
 
-extension HomeViewController: UICollectionViewDataSource {
+extension TopHeadlinesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel?.categoryViewModels.count ?? 0
     }
@@ -277,7 +277,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate {
+extension TopHeadlinesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let categoryViewModel = viewModel?.categoryViewModels[indexPath.item] else {
             return
