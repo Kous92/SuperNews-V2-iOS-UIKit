@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  TopHeadlinesViewModel.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 24/04/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class HomeViewModel {
+final class TopHeadlinesViewModel {
     // Delegate
     weak var coordinator: HomeViewControllerDelegate?
     
@@ -73,7 +73,7 @@ final class HomeViewModel {
     private func handleResult(with result: Result<[ArticleViewModel], SuperNewsAPIError>) async {
         switch result {
             case .success(let viewModels):
-                print("[HomeViewModel] Données récupérées: \(viewModels.count) articles")
+                print("[TopHeadlinesViewModel] Données récupérées: \(viewModels.count) articles")
                 self.articleViewModels = viewModels
                 await parseViewModels()
                 self.updateResult.send(viewModels.count > 0)
@@ -100,7 +100,7 @@ final class HomeViewModel {
 }
 
 // Navigation part
-extension HomeViewModel: HomeViewModelDelegate {
+extension TopHeadlinesViewModel: HomeViewModelDelegate {
     func updateSelectedSource(with sourceId: String) {
         savedMediaSource = sourceId
         print("Source actuelle: \(savedMediaSource)")

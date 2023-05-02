@@ -1,5 +1,5 @@
 //
-//  HomeCoordinator.swift
+//  TopHeadlinesCoordinator.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 17/04/2023.
@@ -23,7 +23,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func updateSelectedSource(with sourceId: String)
 }
 
-final class HomeCoordinator: ParentCoordinator {
+final class TopHeadlinesCoordinator: ParentCoordinator {
     // Attention à la rétention de cycle, le sous-flux ne doit pas retenir la référence avec le parent.
     weak var parentCoordinator: Coordinator?
     
@@ -35,7 +35,7 @@ final class HomeCoordinator: ParentCoordinator {
     private let testMode: Bool
     
     init(navigationController: UINavigationController, builder: ModuleBuilder, testMode: Bool = false) {
-        print("[HomeCoordinator] Initialising")
+        print("[TopHeadlinesCoordinator] Initialising")
         self.navigationController = navigationController
         self.builder = builder
         self.testMode = testMode
@@ -43,22 +43,22 @@ final class HomeCoordinator: ParentCoordinator {
     
     // À titre d'exemple pour vérifier que lorsqu'on retourne sur l'écran d'accueil qu'il n'y a pas de memory leak
     deinit {
-        print("[HomeCoordinator] Coordinator destroyed.")
+        print("[TopHeadlinesCoordinator] Coordinator destroyed.")
     }
     
     func start() -> UIViewController {        
-        print("[HomeCoordinator] Instantiating HomeViewController.")
+        print("[TopHeadlinesCoordinator] Instantiating HomeViewController.")
         let homeViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
         // On n'oublie pas de faire l'injection de dépendance du ViewModel
-        print("[HomeCoordinator] Home view ready.")
+        print("[TopHeadlinesCoordinator] Home view ready.")
         navigationController.pushViewController(homeViewController, animated: false)
         
         return navigationController
     }
 }
 
-extension HomeCoordinator: HomeViewControllerDelegate {
+extension TopHeadlinesCoordinator: HomeViewControllerDelegate {
     
     func goToDetailArticleView() {
         
@@ -66,7 +66,7 @@ extension HomeCoordinator: HomeViewControllerDelegate {
     
     func goToSourceSelectionView() {
         // Transition is separated here into a child coordinator.
-        print("[HomeCoordinator] Setting child coordinator: SourceSelectionCoordinator.")
+        print("[TopHeadlinesCoordinator] Setting child coordinator: SourceSelectionCoordinator.")
         let sourceSelectionCoordinator = SourceSelectionCoordinator(navigationController: navigationController, builder: SourceSelectionModuleBuilder())
         
         // Adding link to the parent with self, be careful to retain cycle
@@ -75,12 +75,12 @@ extension HomeCoordinator: HomeViewControllerDelegate {
         addChildCoordinator(childCoordinator: sourceSelectionCoordinator)
         
         // Transition from home screen to source selection screen
-        print("[HomeCoordinator] Go to SourceSelectionViewController.")
+        print("[TopHeadlinesCoordinator] Go to SourceSelectionViewController.")
         sourceSelectionCoordinator.start()
     }
     
     func displayErrorAlert(with errorMessage: String) {
-        print("[HomeCoordinator] Displaying error alert.")
+        print("[TopHeadlinesCoordinator] Displaying error alert.")
         
         let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: .alert)
         
@@ -92,7 +92,7 @@ extension HomeCoordinator: HomeViewControllerDelegate {
     }
 }
 
-extension HomeCoordinator: SourceToHomeControllerDelegate {
+extension TopHeadlinesCoordinator: SourceToHomeControllerDelegate {
     func backToHomeView(with selectedSourceId: String?) {
         guard let selectedSourceId else {
             print("User gone back with navigation bar, no source is selected. No update to do.")
