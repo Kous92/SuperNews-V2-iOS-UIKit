@@ -9,6 +9,7 @@ import Foundation
 
 protocol TopHeadlinesUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
 }
 
 protocol SourceSelectionUseCaseProtocol {

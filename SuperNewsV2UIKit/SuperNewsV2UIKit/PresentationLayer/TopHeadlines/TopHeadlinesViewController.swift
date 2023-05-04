@@ -12,7 +12,7 @@ import Combine
 final class TopHeadlinesViewController: UIViewController {
     
     private var dataAPI: SuperNewsDataAPIService?
-    weak var coordinator: HomeViewControllerDelegate?
+    weak var coordinator: TopHeadlinesViewControllerDelegate?
     
     // MVVM with Reactive Programming
     // private let categoryViewModels = CategoryCellViewModel.getCategories()
@@ -110,8 +110,8 @@ final class TopHeadlinesViewController: UIViewController {
         viewModel?.fetchTopHeadlines()
     }
     
-    override func viewDidLayoutSubviews() {
-        tableView.layer.shadowPath = UIBezierPath(rect: tableView.bounds).cgPath
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel?.loadAndUpdateSourceCategoryTitle()
     }
     
     private func buildViewHierarchy() {

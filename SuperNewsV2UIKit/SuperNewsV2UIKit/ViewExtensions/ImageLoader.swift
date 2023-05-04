@@ -15,14 +15,14 @@ extension UIImageView {
         self.image = nil
         let defaultImage = UIImage(named: "SuperNewsNotAvailableImage")
         
-        guard !url.isEmpty, let imageURL = URL(string: url) else {
+        guard !url.isEmpty, url.hasPrefix("https"), let imageURL = URL(string: url) else {
             self.image = defaultImage
             return
         }
         
         let resource = ImageResource(downloadURL: imageURL)
         self.kf.indicatorType = .activity // Download indicator
-        self.kf.setImage(with: resource, placeholder: defaultImage, options: [.transition(.fade(0.5))])
+        self.kf.setImage(with: resource, placeholder: nil, options: [.transition(.fade(0.5))])
     }
     
     // Needed to optimize performances while scrolling the TableView

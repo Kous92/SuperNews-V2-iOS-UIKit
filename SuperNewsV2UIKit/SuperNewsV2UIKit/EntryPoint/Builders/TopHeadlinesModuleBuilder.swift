@@ -13,25 +13,34 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
-        let homeViewController = TopHeadlinesViewController()
+        let topHeadlinesViewController = TopHeadlinesViewController()
         
         // Dependency injection
-        let repository = getRepository(testMode: testMode)
-        let useCase = TopHeadlinesUseCase(repository: repository)
-        let homeViewModel = TopHeadlinesViewModel(useCase: useCase)
-        homeViewModel.coordinator = coordinator as? HomeViewControllerDelegate
+        let dataRepository = getRepository(testMode: testMode)
+        let settingsRepository = getSettingsRepository(testMode: testMode)
+        let useCase = TopHeadlinesUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
+        let topHeadlinesViewModel = TopHeadlinesViewModel(useCase: useCase)
+        topHeadlinesViewModel.coordinator = coordinator as? TopHeadlinesViewControllerDelegate
         
         // Injecting view model
-        homeViewController.viewModel = homeViewModel
+        topHeadlinesViewController.viewModel = topHeadlinesViewModel
         
-        return homeViewController
+        return topHeadlinesViewController
     }
     
     private func getRepository(testMode: Bool) -> SuperNewsRepository {
         return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
     }
     
+    private func getSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
+        return SuperNewsUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
+    }
+    
     private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
         return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
+    }
+    
+    private func getSettingsService(testMode: Bool) -> SuperNewsLocalSettings {
+        return testMode ? SuperNewsMockLocalSettings() : SuperNewsUserDefaultsLocalSettings()
     }
 }
