@@ -19,6 +19,7 @@ protocol Coordinator: AnyObject {
 extension Coordinator {
     /// Adds a child coordinator to the parent, the parent will have a reference to the child one.
     func addChildCoordinator(childCoordinator: Coordinator) {
+        print("Adding child coordinator")
         self.childCoordinators.append(childCoordinator)
     }
 

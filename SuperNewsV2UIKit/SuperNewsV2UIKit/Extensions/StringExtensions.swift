@@ -21,12 +21,12 @@ extension String {
         formatter.locale = Locale(identifier: "fr_FR")
         formatter.dateStyle = .short
         
-        let dateString = formatter.string(from: date) // Jour, mois, année
+        let dateString = formatter.string(from: date) // Day, month, year
         
         formatter.dateStyle = .none
         formatter.timeStyle = .short
         
-        let timeString = formatter.string(from: date) // Heure, minutes
+        let timeString = formatter.string(from: date) // Hours, minutes
         
         return "Le " + dateString + " à " + timeString
     }

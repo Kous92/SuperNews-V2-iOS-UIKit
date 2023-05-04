@@ -14,12 +14,12 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     fileprivate func getApiKey() -> String? {
         guard let path = Bundle.main.path(forResource: "apiKey", ofType: "plist") else {
-            print("ERREUR: Fichier apiKey.plist inexistant")
+            print("ERROR: apiKey.plist file does not exists")
             return nil
         }
         
         guard let dictionary = NSDictionary(contentsOfFile: path) else {
-            print("ERREUR: Données indisponibles")
+            print("ERROR: Data not available")
             return nil
         }
         
@@ -32,7 +32,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     init() {
         self.apiKey = getApiKey() ?? ""
-        print("Initialisation avec la clé: \(apiKey)")
+        print("Initializing with API Key: \(apiKey)")
     }
     
     func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError> {
@@ -86,11 +86,8 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
             return .failure(.invalidURL)
         }
         
-        print("URL appelée: \(url.absoluteString)")
+        print("Called URL: \(url.absoluteString)")
         let request = AF.request(url, headers: getAuthorizationHeader()).validate()
-        // let request = AF.request(url).validate()
-        // let request = AF.request(url, headers: getAuthorizationHeader()).validate(statusCode: 200...201)
-
         let decodableResponse = await request.serializingDecodable(T.self).response
         
         switch decodableResponse.result {
@@ -102,11 +99,11 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
                 return .success(data)
             case let .failure(error):
                 guard let httpResponse = decodableResponse.response else {
-                    print("ERREUR: \(error)")
+                    print("ERROR: \(error)")
                     return .failure(.networkError)
                 }
                 
-                print("Code d'échec: \(httpResponse.statusCode)")
+                print("Failure code: \(httpResponse.statusCode)")
                 
                 switch httpResponse.statusCode {
                     case 400:

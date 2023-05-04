@@ -28,8 +28,8 @@ final class SuperNewsCoordinatorTests: XCTestCase {
     }
     
     func testHomeCoordinator() {
-        let homeCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder(), testMode: true)
-        let navigationController = homeCoordinator.start()
+        let topHeadlinesCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder(), testMode: true)
+        let navigationController = topHeadlinesCoordinator.start()
         XCTAssertTrue(navigationController is UINavigationController)
         
         guard let navigationController = navigationController as? UINavigationController else {

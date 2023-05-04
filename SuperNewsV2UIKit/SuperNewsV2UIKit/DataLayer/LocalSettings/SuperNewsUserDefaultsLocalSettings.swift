@@ -38,7 +38,7 @@ final class SuperNewsUserDefaultsLocalSettings: SuperNewsLocalSettings {
                 // Create JSON Decoder
                 let decoder = JSONDecoder()
 
-                // Decode Note
+                // Decode saved source
                 let savedSource = try decoder.decode(SavedSource.self, from: data)
                 
                 // Done, notify that loading has succeeded

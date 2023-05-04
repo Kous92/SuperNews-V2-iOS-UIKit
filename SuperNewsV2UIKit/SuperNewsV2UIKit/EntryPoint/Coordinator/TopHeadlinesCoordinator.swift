@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-// On respecte les 4ème et 5ème principe du SOLID de la ségrégation d'interface et de l'inversion de dépendances
+// We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol TopHeadlinesViewControllerDelegate: AnyObject {
     func goToDetailArticleView()
     func goToSourceSelectionView()
@@ -41,16 +41,16 @@ final class TopHeadlinesCoordinator: ParentCoordinator {
         self.testMode = testMode
     }
     
-    // À titre d'exemple pour vérifier que lorsqu'on retourne sur l'écran d'accueil qu'il n'y a pas de memory leak
+    // Make sure that the coordinator is destroyed correctly, useful for debug purposes
     deinit {
         print("[TopHeadlinesCoordinator] Coordinator destroyed.")
     }
     
     func start() -> UIViewController {        
         print("[TopHeadlinesCoordinator] Instantiating TopHeadlinesViewController.")
+        // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let topHeadlinesViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
-        // On n'oublie pas de faire l'injection de dépendance du ViewModel
         print("[TopHeadlinesCoordinator] Top Headlines view ready.")
         navigationController.pushViewController(topHeadlinesViewController, animated: false)
         
