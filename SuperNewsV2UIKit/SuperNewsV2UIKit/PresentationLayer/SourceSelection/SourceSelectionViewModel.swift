@@ -36,8 +36,8 @@ final class SourceSelectionViewModel {
     }
     
     func setSourceOption(with optionName: String) {
-        sectionViewModels.removeAll()
         isLoading.send(true)
+        sectionViewModels.removeAll()
         
         switch optionName {
             case "allSources":

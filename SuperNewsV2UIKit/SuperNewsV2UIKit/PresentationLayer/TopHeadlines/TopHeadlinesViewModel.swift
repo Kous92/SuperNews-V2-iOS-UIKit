@@ -10,14 +10,15 @@ import Combine
 
 final class TopHeadlinesViewModel {
     // Delegate
-    weak var coordinator: HomeViewControllerDelegate?
+    weak var coordinator: TopHeadlinesViewControllerDelegate?
     
     private let useCase: TopHeadlinesUseCaseProtocol
     private(set) var categoryViewModels = [CategoryCellViewModel]()
     private(set) var cellViewModels = [NewsCellViewModel]()
     private var articleViewModels = [ArticleViewModel]()
     
-    private var savedMediaSource = ""
+    private var savedMediaSource = SavedSourceDTO(id: "le-monde", name: "Le Monde")
+    private var isFirstLoad = true
     
     // Bindings
     private var categoryUpdateResult = PassthroughSubject<Bool, Never>()
@@ -42,7 +43,7 @@ final class TopHeadlinesViewModel {
     
     func initCategories() {
         categoryViewModels = CategoryCellViewModel.getCategories()
-        updateSourceCategoryTitle()
+        loadAndUpdateSourceCategoryTitle()
         categoryUpdateResult.send(true)
     }
     
@@ -57,7 +58,7 @@ final class TopHeadlinesViewModel {
     func fetchTopHeadlinesWithSource() {
         Task {
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource))
+            let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource.id))
             await handleResult(with: result)
         }
     }
@@ -88,9 +89,27 @@ final class TopHeadlinesViewModel {
         cellViewModels = articleViewModels.map { $0.getNewsCellViewModel() }
     }
     
-    private func updateSourceCategoryTitle() {
+    func loadAndUpdateSourceCategoryTitle() {
+        Task {
+            let result = await useCase.loadSavedSelectedSource()
+            
+            switch result {
+                case .success(let savedSource):
+                    print("[TopHeadlinesViewModel] Loading succeeded for saved source: \(savedSource.name), ID: \(savedSource.id)")
+                    self.savedMediaSource = savedSource
+                    self.updateSourceCategoryTitle()
+                    self.categoryUpdateResult.send(true)
+                case .failure(let error):
+                    print("ERREUR: " + error.rawValue)
+                    await self.sendErrorMessage(with: error.rawValue)
+                    self.updateResult.send(false)
+            }
+        }
+    }
+    
+    func updateSourceCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "source" }) {
-            sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource)")
+            sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource.name)")
         }
     }
     
@@ -102,10 +121,10 @@ final class TopHeadlinesViewModel {
 // Navigation part
 extension TopHeadlinesViewModel: HomeViewModelDelegate {
     func updateSelectedSource(with sourceId: String) {
-        savedMediaSource = sourceId
+        // savedMediaSource = sourceId
         print("Source actuelle: \(savedMediaSource)")
         
-        updateSourceCategoryTitle()
+        // updateSourceCategoryTitle()
         categoryUpdateResult.send(true)
 
     }
@@ -116,10 +135,10 @@ extension TopHeadlinesViewModel: HomeViewModelDelegate {
     }
     
     func updateSavedSource(with sourceId: String) {
-        savedMediaSource = sourceId
+        // savedMediaSource = sourceId
         print("Source actuelle: \(savedMediaSource)")
         
-        updateSourceCategoryTitle()
+        // updateSourceCategoryTitle()
         categoryUpdateResult.send(true)
     }
 }

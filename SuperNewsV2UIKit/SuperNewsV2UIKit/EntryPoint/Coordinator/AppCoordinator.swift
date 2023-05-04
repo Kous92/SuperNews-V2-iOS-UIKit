@@ -12,7 +12,7 @@ import UIKit
 /// The main app Coordinator, the root of navigation flow
 final class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
-    private let homeCoordinator = HomeCoordinator(navigationController: UINavigationController(), builder: HomeModuleBuilder())
+    private let homeCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder())
     private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
     private let rootViewController: UIViewController
     
@@ -21,22 +21,22 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() -> UIViewController {
-        let homeViewController = homeCoordinator.start()
+        let topHeadlinesViewController = homeCoordinator.start()
         homeCoordinator.parentCoordinator = self
-        homeViewController.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+        topHeadlinesViewController.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
         
         let searchViewController = searchCoordinator.start()
         searchCoordinator.parentCoordinator = self
         searchViewController.tabBarItem = UITabBarItem(title: "Recherche", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
-        (rootViewController as? UITabBarController)?.viewControllers = [homeViewController, searchViewController]
+        (rootViewController as? UITabBarController)?.viewControllers = [topHeadlinesViewController, searchViewController]
                 
         return rootViewController
     }
 }
 
 /*
-extension AppCoordinator: HomeViewControllerDelegate {
+extension AppCoordinator: TopHeadlinesViewControllerDelegate {
     func goToListView() {
         // La transition est séparée ici dans un sous-flux
         let listCoordinator = ListCoordinator(navigationController: navigationController)

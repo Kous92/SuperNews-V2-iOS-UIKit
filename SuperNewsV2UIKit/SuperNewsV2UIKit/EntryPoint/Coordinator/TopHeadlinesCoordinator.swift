@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // On respecte les 4ème et 5ème principe du SOLID de la ségrégation d'interface et de l'inversion de dépendances
-protocol HomeViewControllerDelegate: AnyObject {
+protocol TopHeadlinesViewControllerDelegate: AnyObject {
     func goToDetailArticleView()
     func goToSourceSelectionView()
     func displayErrorAlert(with errorMessage: String)
@@ -47,18 +47,18 @@ final class TopHeadlinesCoordinator: ParentCoordinator {
     }
     
     func start() -> UIViewController {        
-        print("[TopHeadlinesCoordinator] Instantiating HomeViewController.")
-        let homeViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
+        print("[TopHeadlinesCoordinator] Instantiating TopHeadlinesViewController.")
+        let topHeadlinesViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
         // On n'oublie pas de faire l'injection de dépendance du ViewModel
-        print("[TopHeadlinesCoordinator] Home view ready.")
-        navigationController.pushViewController(homeViewController, animated: false)
+        print("[TopHeadlinesCoordinator] Top Headlines view ready.")
+        navigationController.pushViewController(topHeadlinesViewController, animated: false)
         
         return navigationController
     }
 }
 
-extension TopHeadlinesCoordinator: HomeViewControllerDelegate {
+extension TopHeadlinesCoordinator: TopHeadlinesViewControllerDelegate {
     
     func goToDetailArticleView() {
         

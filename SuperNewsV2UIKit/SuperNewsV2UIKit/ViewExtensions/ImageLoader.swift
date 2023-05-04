@@ -22,7 +22,7 @@ extension UIImageView {
         
         let resource = ImageResource(downloadURL: imageURL)
         self.kf.indicatorType = .activity // Download indicator
-        self.kf.setImage(with: resource, placeholder: defaultImage, options: [.transition(.fade(0.5))])
+        self.kf.setImage(with: resource, placeholder: nil, options: [.transition(.fade(0.5))])
     }
     
     // Needed to optimize performances while scrolling the TableView

@@ -13,21 +13,21 @@ final class SuperNewsBuilderTests: XCTestCase {
     private var moduleBuilder: ModuleBuilder?
 
     func testHomeModuleBuilder() {
-        moduleBuilder = HomeModuleBuilder()
+        moduleBuilder = TopHeadlinesModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         
         // Checking dependency injections
         let viewController = moduleBuilder?.buildModule(testMode: false, coordinator: nil)
         
         XCTAssertNotNil(viewController)
-        XCTAssert(viewController is HomeViewController)
+        XCTAssert(viewController is TopHeadlinesViewController)
         
-        guard let homeViewController = viewController as? HomeViewController else {
-            XCTFail("The UIViewController is not a HomeViewController.")
+        guard let topHeadlinesViewController = viewController as? TopHeadlinesViewController else {
+            XCTFail("The UIViewController is not a TopHeadlinesViewController.")
             
             return
         }
         
-        XCTAssertNotNil(homeViewController.viewModel)
+        XCTAssertNotNil(topHeadlinesViewController.viewModel)
     }
 }

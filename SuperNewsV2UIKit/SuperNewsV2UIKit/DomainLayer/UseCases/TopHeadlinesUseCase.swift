@@ -8,21 +8,27 @@
 import Foundation
 
 final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
-    private let repository: SuperNewsRepository
+    private let dataRepository: SuperNewsRepository
+    private let settingsRepository: SuperNewsSettingsRepository
     
-    init(repository: SuperNewsRepository) {
-        self.repository = repository
+    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSettingsRepository) {
+        self.dataRepository = dataRepository
+        self.settingsRepository = settingsRepository
     }
     
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError> {
         switch topHeadlinesOption {
             case .sourceNews(name: let name):
-                return handleResult(with: await repository.fetchTopHeadlinesNews(sourceName: name))
+                return handleResult(with: await dataRepository.fetchTopHeadlinesNews(sourceName: name))
             case .categoryNews(name: let name, countryCode: let countryCode):
-                return handleResult(with: await repository.fetchTopHeadlinesNews(countryCode: countryCode, category: name))
+                return handleResult(with: await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: name))
             case .localCountryNews(countryCode: let countryCode):
-                return handleResult(with: await repository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
+                return handleResult(with: await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
         }
+    }
+    
+    func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError> {
+        return await settingsRepository.loadSelectedMediaSource()
     }
     
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {
