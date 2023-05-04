@@ -126,7 +126,6 @@ extension TopHeadlinesViewModel: HomeViewModelDelegate {
         
         // updateSourceCategoryTitle()
         categoryUpdateResult.send(true)
-
     }
     
     func goToSourceSelectionView() {

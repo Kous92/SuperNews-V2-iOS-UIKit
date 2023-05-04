@@ -46,7 +46,7 @@ final class TopHeadlinesCoordinator: ParentCoordinator {
         print("[TopHeadlinesCoordinator] Coordinator destroyed.")
     }
     
-    func start() -> UIViewController {        
+    func start() -> UIViewController {
         print("[TopHeadlinesCoordinator] Instantiating TopHeadlinesViewController.")
         let topHeadlinesViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
