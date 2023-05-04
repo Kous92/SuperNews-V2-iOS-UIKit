@@ -18,13 +18,8 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         // Dependency injection
         let repository = getRepository(testMode: testMode)
         let useCase = TopHeadlinesUseCase(repository: repository)
-        let homeViewModel = HomeViewModel(useCase: useCase)
+        let homeViewModel = TopHeadlinesViewModel(useCase: useCase)
         homeViewModel.coordinator = coordinator as? HomeViewControllerDelegate
-        
-        // Setting delegate for passing data backwards
-        if let homeCoordinator = coordinator as? HomeCoordinator {
-            homeCoordinator.delegate = homeViewModel
-        }
         
         // Injecting view model
         homeViewController.viewModel = homeViewModel

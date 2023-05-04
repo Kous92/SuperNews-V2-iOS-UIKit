@@ -28,7 +28,7 @@ final class SuperNewsCoordinatorTests: XCTestCase {
     }
     
     func testHomeCoordinator() {
-        let homeCoordinator = HomeCoordinator(navigationController: UINavigationController(), builder: HomeModuleBuilder(), testMode: true)
+        let homeCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder(), testMode: true)
         let navigationController = homeCoordinator.start()
         XCTAssertTrue(navigationController is UINavigationController)
         
@@ -39,7 +39,7 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         }
         
         XCTAssertEqual(navigationController.viewControllers.count, 1)
-        XCTAssertTrue(navigationController.viewControllers[0] is HomeViewController)
+        XCTAssertTrue(navigationController.viewControllers[0] is TopHeadlinesViewController)
     }
     
     func testSearchCoordinator() {

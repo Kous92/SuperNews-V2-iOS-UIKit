@@ -16,7 +16,7 @@ final class TopHeadlinesViewController: UIViewController {
     
     // MVVM with Reactive Programming
     // private let categoryViewModels = CategoryCellViewModel.getCategories()
-    var viewModel: HomeViewModel?
+    var viewModel: TopHeadlinesViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
     lazy var gradient: CAGradientLayer = {
@@ -308,7 +308,7 @@ struct HomeViewControllerPreview: PreviewProvider {
             UIViewControllerPreview {
                 let tabBar = GradientTabBarController()
                 let navigationController = UINavigationController()
-                let builder = HomeModuleBuilder()
+                let builder = TopHeadlinesModuleBuilder()
                 let vc = builder.buildModule(testMode: true)
                 vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
                 navigationController.pushViewController(vc, animated: false)

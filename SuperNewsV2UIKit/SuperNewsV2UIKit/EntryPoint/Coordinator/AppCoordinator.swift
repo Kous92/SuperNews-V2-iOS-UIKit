@@ -12,7 +12,7 @@ import UIKit
 /// The main app Coordinator, the root of navigation flow
 final class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
-    private let homeCoordinator = HomeCoordinator(navigationController: UINavigationController(), builder: HomeModuleBuilder())
+    private let homeCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder())
     private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
     private let rootViewController: UIViewController
     
