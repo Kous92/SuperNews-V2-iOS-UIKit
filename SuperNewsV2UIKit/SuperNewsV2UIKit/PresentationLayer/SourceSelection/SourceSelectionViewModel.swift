@@ -214,6 +214,7 @@ extension SourceSelectionViewModel {
     
     @MainActor private func sendErrorMessage(with errorMessage: String) {
         print("Error to display: \(errorMessage)")
+        
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     

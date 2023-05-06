@@ -27,7 +27,7 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         }
     }
     
-    func testHomeCoordinator() {
+    func testTopHeadlinesCoordinator() {
         let topHeadlinesCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder(), testMode: true)
         let navigationController = topHeadlinesCoordinator.start()
         XCTAssertTrue(navigationController is UINavigationController)
@@ -40,6 +40,22 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         
         XCTAssertEqual(navigationController.viewControllers.count, 1)
         XCTAssertTrue(navigationController.viewControllers[0] is TopHeadlinesViewController)
+    }
+    
+    func testSourceSelectionCoordinator() {
+        let sourceSelectionCoordinator = SourceSelectionCoordinator(navigationController: UINavigationController(), builder: SourceSelectionModuleBuilder(), testMode: true)
+        let navigationController = sourceSelectionCoordinator.start()
+        XCTAssertTrue(navigationController is UINavigationController)
+        
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        print(navigationController.viewControllers)
+        XCTAssertTrue(navigationController.viewControllers[0] is SourceSelectionViewController)
     }
     
     func testSearchCoordinator() {

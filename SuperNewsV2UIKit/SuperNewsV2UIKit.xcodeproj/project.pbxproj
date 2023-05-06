@@ -17,6 +17,8 @@
 		4B08602B29ED7FE900AA32C0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08602A29ED7FE900AA32C0 /* SearchViewController.swift */; };
 		4B08602F29ED836600AA32C0 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08602E29ED836600AA32C0 /* SearchCoordinator.swift */; };
 		4B08603229ED884600AA32C0 /* GradientTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B08603129ED884600AA32C0 /* GradientTabBarController.swift */; };
+		4B0A2CE32A03C5460018E0EA /* SuperNewsTopHeadlinesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2CE22A03C5460018E0EA /* SuperNewsTopHeadlinesViewModelTests.swift */; };
+		4B0A2CE52A03C5520018E0EA /* SuperNewsSourceSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A2CE42A03C5520018E0EA /* SuperNewsSourceSelectionViewModelTests.swift */; };
 		4B2DBB7929FA857B00996760 /* BusinessTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B2DBB7829FA857B00996760 /* BusinessTopHeadlinesMockData.json */; };
 		4B2DBB7B29FA858F00996760 /* HealthTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B2DBB7A29FA858F00996760 /* HealthTopHeadlinesMockData.json */; };
 		4B2DBB7D29FA85B500996760 /* TechnologyTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B2DBB7C29FA85B500996760 /* TechnologyTopHeadlinesMockData.json */; };
@@ -127,6 +129,8 @@
 		4B08602A29ED7FE900AA32C0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4B08602E29ED836600AA32C0 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		4B08603129ED884600AA32C0 /* GradientTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientTabBarController.swift; sourceTree = "<group>"; };
+		4B0A2CE22A03C5460018E0EA /* SuperNewsTopHeadlinesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsTopHeadlinesViewModelTests.swift; sourceTree = "<group>"; };
+		4B0A2CE42A03C5520018E0EA /* SuperNewsSourceSelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsSourceSelectionViewModelTests.swift; sourceTree = "<group>"; };
 		4B2DBB7829FA857B00996760 /* BusinessTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BusinessTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4B2DBB7A29FA858F00996760 /* HealthTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HealthTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4B2DBB7C29FA85B500996760 /* TechnologyTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TechnologyTopHeadlinesMockData.json; sourceTree = "<group>"; };
@@ -258,6 +262,15 @@
 				4B82596829F81FDE003CB627 /* ShadowUILabel.swift */,
 			);
 			path = ViewExtensions;
+			sourceTree = "<group>";
+		};
+		4B0A2CDD2A03C4960018E0EA /* ModuleViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				4B0A2CE22A03C5460018E0EA /* SuperNewsTopHeadlinesViewModelTests.swift */,
+				4B0A2CE42A03C5520018E0EA /* SuperNewsSourceSelectionViewModelTests.swift */,
+			);
+			path = ModuleViewModelTests;
 			sourceTree = "<group>";
 		};
 		4B306F6129F68D09009AA92D /* DomainLayer */ = {
@@ -447,6 +460,7 @@
 		4BA595B529E6D506006B9460 /* SuperNewsV2UIKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				4B0A2CDD2A03C4960018E0EA /* ModuleViewModelTests */,
 				4B82596429F81023003CB627 /* BuilderTests */,
 				4B8AC85A29EDB75F00BAE418 /* CoordinatorTests */,
 				4BC3D0F229EB199600EAD942 /* DataTests */,
@@ -707,11 +721,13 @@
 				4B306F7629F6DC1C009AA92D /* SuperNewsDTOTests.swift in Sources */,
 				4B82596629F8104C003CB627 /* SuperNewsBuilderTests.swift in Sources */,
 				4B306F6029F684B9009AA92D /* SuperNewsAPIEndpointTests.swift in Sources */,
+				4B0A2CE52A03C5520018E0EA /* SuperNewsSourceSelectionViewModelTests.swift in Sources */,
 				4BC3D0F129EB18FA00EAD942 /* SuperNewsDataAPITests.swift in Sources */,
 				4BC3D0F629EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift in Sources */,
 				4B8AC85C29EDB79D00BAE418 /* SuperNewsCoordinatorTests.swift in Sources */,
 				4BA595C429E6D6F8006B9460 /* SuperNewsModelTests.swift in Sources */,
 				4BA595B729E6D506006B9460 /* SuperNewsV2UIKitTests.swift in Sources */,
+				4B0A2CE32A03C5460018E0EA /* SuperNewsTopHeadlinesViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

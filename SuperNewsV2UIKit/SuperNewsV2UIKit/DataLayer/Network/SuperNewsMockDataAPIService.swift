@@ -131,7 +131,7 @@ final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
     }
     
     func fetchTopHeadlinesNews(sourceName: String) async -> Result<[Article], SuperNewsAPIError> {
-        return sourceName == "lequipe" ? getArticles(with: "SourcesTopHeadlinesMockData") : .failure(.invalidURL)
+        return sourceName == "le-monde" ? getArticles(with: "SourcesTopHeadlinesMockData") : .failure(.invalidURL)
     }
     
     func searchNewsFromEverything(with searchQuery: String, language: String = "fr", sortBy: String = "publishedAt") async -> Result<[Article], SuperNewsAPIError> {

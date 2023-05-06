@@ -10,8 +10,12 @@ import Foundation
 final class SuperNewsMockLocalSettings: SuperNewsLocalSettings {
     private var savedData: Data?
     
+    init() {
+        print("[SuperNewsMockLocalSettings] Starting mock Local Settings")
+    }
+    
     func saveSelectedMediaSource(source: SavedSource) async -> Result<Void, SuperNewsLocalSettingsError> {
-        print("Saving selected source: \(source.name), id: \(source.id)")
+        print("[SuperNewsMockLocalSettings] Saving selected source: \(source.name), id: \(source.id)")
         
         do {
             // Create JSON Encoder
@@ -33,7 +37,7 @@ final class SuperNewsMockLocalSettings: SuperNewsLocalSettings {
     }
     
     func loadSelectedMediaSource() async -> Result<SavedSource, SuperNewsLocalSettingsError> {
-        print("Loading selected source")
+        print("[SuperNewsMockLocalSettings] Loading selected source")
         
         if let data = savedData {
             do {

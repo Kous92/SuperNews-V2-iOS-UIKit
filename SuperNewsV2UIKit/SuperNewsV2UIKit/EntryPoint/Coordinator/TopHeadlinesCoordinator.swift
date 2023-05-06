@@ -19,15 +19,9 @@ protocol SourceToHomeControllerDelegate: AnyObject {
     func backToHomeView(with selectedSourceId: String?)
 }
 
-protocol HomeViewModelDelegate: AnyObject {
-    func updateSelectedSource(with sourceId: String)
-}
-
 final class TopHeadlinesCoordinator: ParentCoordinator {
     // Attention à la rétention de cycle, le sous-flux ne doit pas retenir la référence avec le parent.
     weak var parentCoordinator: Coordinator?
-    
-    weak var delegate: HomeViewModelDelegate?
     
     private(set) var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
@@ -100,6 +94,5 @@ extension TopHeadlinesCoordinator: SourceToHomeControllerDelegate {
         }
         
         print("Time to update HomeViewModel with new source: \(selectedSourceId)")
-        delegate?.updateSelectedSource(with: selectedSourceId)
     }
 }

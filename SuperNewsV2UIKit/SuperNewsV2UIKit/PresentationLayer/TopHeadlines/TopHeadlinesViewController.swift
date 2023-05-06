@@ -15,7 +15,6 @@ final class TopHeadlinesViewController: UIViewController {
     weak var coordinator: TopHeadlinesViewControllerDelegate?
     
     // MVVM with Reactive Programming
-    // private let categoryViewModels = CategoryCellViewModel.getCategories()
     var viewModel: TopHeadlinesViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
@@ -229,18 +228,15 @@ extension TopHeadlinesViewController {
 
 extension TopHeadlinesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.cellViewModels.count ?? 0
+        return viewModel?.numberOfRowsInTableView() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? NewsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? NewsTableViewCell, let cellViewModel = viewModel?.getNewsCellViewModel(at: indexPath) else {
             return UITableViewCell()
         }
         
-        if let cellViewModel = viewModel?.cellViewModels[indexPath.row] {
-            cell.configure(with: cellViewModel)
-        }
-        
+        cell.configure(with: cellViewModel)
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
@@ -257,12 +253,12 @@ extension TopHeadlinesViewController: UITableViewDelegate {
 
 extension TopHeadlinesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.categoryViewModels.count ?? 0
+        return viewModel?.numberOfItemsInCollectionView() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell,
-              let categoryViewModel = viewModel?.categoryViewModels[indexPath.item] else {
+              let categoryViewModel = viewModel?.getCategoryCellViewModel(at: indexPath) else {
             return UICollectionViewCell()
         }
         
@@ -279,7 +275,7 @@ extension TopHeadlinesViewController: UICollectionViewDataSource {
 
 extension TopHeadlinesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let categoryViewModel = viewModel?.categoryViewModels[indexPath.item] else {
+        guard let categoryViewModel = viewModel?.getCategoryCellViewModel(at: indexPath) else {
             return
         }
         

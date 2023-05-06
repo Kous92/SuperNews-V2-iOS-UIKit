@@ -117,7 +117,7 @@ final class SuperNewsDataAPIServiceTestCaller {
         invokedFetchTopHeadlinesNews = true
         invokedFetchTopHeadlinesNewsCount += 1
         
-        return await networkService.fetchTopHeadlinesNews(sourceName: "lequipe")
+        return await networkService.fetchTopHeadlinesNews(sourceName: "le-monde")
     }
     
     func fetchTopHeadlinesNewsWithSourceFailure() async -> Result<[Article], SuperNewsAPIError> {
