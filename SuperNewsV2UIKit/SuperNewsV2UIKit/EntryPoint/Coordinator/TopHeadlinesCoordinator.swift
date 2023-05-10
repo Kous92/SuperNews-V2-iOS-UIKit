@@ -15,10 +15,6 @@ protocol TopHeadlinesViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
 }
 
-protocol SourceToHomeControllerDelegate: AnyObject {
-    func backToHomeView(with selectedSourceId: String?)
-}
-
 final class TopHeadlinesCoordinator: ParentCoordinator {
     // Attention à la rétention de cycle, le sous-flux ne doit pas retenir la référence avec le parent.
     weak var parentCoordinator: Coordinator?
@@ -65,7 +61,6 @@ extension TopHeadlinesCoordinator: TopHeadlinesViewControllerDelegate {
         
         // Adding link to the parent with self, be careful to retain cycle
         sourceSelectionCoordinator.parentCoordinator = self
-        sourceSelectionCoordinator.delegate = self
         addChildCoordinator(childCoordinator: sourceSelectionCoordinator)
         
         // Transition from home screen to source selection screen
@@ -83,16 +78,5 @@ extension TopHeadlinesCoordinator: TopHeadlinesViewControllerDelegate {
         }))
         
         navigationController.present(alert, animated: true, completion: nil)
-    }
-}
-
-extension TopHeadlinesCoordinator: SourceToHomeControllerDelegate {
-    func backToHomeView(with selectedSourceId: String?) {
-        guard let selectedSourceId else {
-            print("User gone back with navigation bar, no source is selected. No update to do.")
-            return
-        }
-        
-        print("Time to update HomeViewModel with new source: \(selectedSourceId)")
     }
 }

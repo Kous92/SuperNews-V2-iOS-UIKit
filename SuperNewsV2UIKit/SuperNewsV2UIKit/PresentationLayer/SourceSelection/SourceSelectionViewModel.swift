@@ -11,6 +11,7 @@ import Combine
 final class SourceSelectionViewModel {
     weak var coordinator: SourceSelectionViewControllerDelegate?
     
+    private let categoryViewModels = CategoryCellViewModel.getSourceCategories()
     private let useCase: SourceSelectionUseCaseProtocol
     private var cellViewModels = [SourceCellViewModel]()
     private var sectionViewModels = [SourceSectionViewModel]()
@@ -20,10 +21,15 @@ final class SourceSelectionViewModel {
     @Published var searchQuery = ""
     private var subscriptions = Set<AnyCancellable>()
     private var updateResult = PassthroughSubject<Bool, Never>()
+    private var sortedUpdateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
     
     var updateResultPublisher: AnyPublisher<Bool, Never> {
         return updateResult.eraseToAnyPublisher()
+    }
+    
+    var sortedUpdateResultPublisher: AnyPublisher<Bool, Never> {
+        return sortedUpdateResult.eraseToAnyPublisher()
     }
     
     var isLoadingPublisher: AnyPublisher<Bool, Never> {
@@ -33,6 +39,7 @@ final class SourceSelectionViewModel {
     init(useCase: SourceSelectionUseCaseProtocol) {
         self.useCase = useCase
         setBindings()
+        fetchAllSources()
     }
     
     func setSourceOption(with optionName: String) {
@@ -65,6 +72,8 @@ final class SourceSelectionViewModel {
     }
     
     private func fetchAllSources() {
+        print("[SourceSelectionViewModel] Fetching all sources")
+        
         Task {
             // Download the data only once
             let result = cellViewModels.isEmpty ? await useCase.execute() : .success(cellViewModels)
@@ -78,11 +87,10 @@ final class SourceSelectionViewModel {
                 self.cellViewModels = viewModels
                 self.sectionViewModels.append(self.parseSection(with: "Toutes les sources", cellViewModels: cellViewModels))
                 self.filteredSectionViewModels = sectionViewModels
-                print("[SourceSelectionViewModel] Données récupérées: \(self.cellViewModels.count) sources")
-                // sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
+                print("[SourceSelectionViewModel] Retrieved data: \(self.cellViewModels.count) sources")
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
-                print("ERREUR: " + error.rawValue)
+                print("[SourceSelectionViewModel] ERROR: " + error.rawValue)
                 await self.sendErrorMessage(with: error.rawValue)
                 self.updateResult.send(false)
         }
@@ -92,7 +100,7 @@ final class SourceSelectionViewModel {
         return SourceSectionViewModel(sectionName: name, sourceCellViewModels: cellViewModels)
     }
     
-    // MARK: TableView logic
+    // MARK: - CollectionView and TableView logic
     func numberOfSections() -> Int {
         // A TableView must have at least one section, crash othervise
         guard filteredSectionViewModels.count > 0 else {
@@ -136,6 +144,21 @@ final class SourceSelectionViewModel {
         
         return filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row]
     }
+    
+    // In that case, it's a unique section CollectionView
+    func numberOfItemsInCollectionView() -> Int {
+        return categoryViewModels.count
+    }
+    
+    func getCategoryCellViewModel(at indexPath: IndexPath) -> CategoryCellViewModel? {
+        let cellCount = categoryViewModels.count
+        
+        guard cellCount > 0, indexPath.item <= cellCount else {
+            return nil
+        }
+        
+        return categoryViewModels[indexPath.item]
+    }
 }
 
 extension SourceSelectionViewModel {
@@ -146,8 +169,7 @@ extension SourceSelectionViewModel {
             return
         }
         
-        
-        print("Filtering sources list with: \(searchQuery)")
+        print("[SourceSelectionViewModel] Filtering sources list with: \(searchQuery)")
         filteredSectionViewModels.removeAll()
         sectionViewModels.forEach { sectionViewModel in
             let filteredSources = sectionViewModel.sourceCellViewModels.filter { vm in
@@ -207,45 +229,43 @@ extension SourceSelectionViewModel {
         }
         
         filteredSectionViewModels = sectionViewModels
-        updateResult.send(filteredSectionViewModels.count > 0)
-        // print("Sections:")
-        // sectionViewModels.forEach { print("\($0.sourceCellViewModels.count) sources \($0.sectionName):\n\($0.sourceCellViewModels)\n") }
+        sortedUpdateResult.send(filteredSectionViewModels.count > 0)
     }
     
     @MainActor private func sendErrorMessage(with errorMessage: String) {
-        print("Error to display: \(errorMessage)")
+        print("[SourceSelectionViewModel] Error to display: \(errorMessage)")
         
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
-    func backToHomeView() {
-        print("Selected source: None")
-        coordinator?.backToHomeView(with: nil)
+    func backToTopHeadlinesView() {
+        print("[SourceSelectionViewModel] Back to Top Headlines screen, no source selected")
+        coordinator?.backToHomeView()
     }
     
     @MainActor private func backToHomeView(with sourceId: String? = nil) {
-        print("Selected source: \(sourceId ?? "None")")
-        coordinator?.backToHomeView(with: sourceId)
+        print("[SourceSelectionViewModel] Back to Top Headlines screen. Selected source: \(sourceId ?? "None")")
+        coordinator?.backToHomeView()
     }
     
     func saveSelectedSource(at indexPath: IndexPath) {
         guard let cellViewModel = getCellViewModel(at: indexPath) else {
-            print("ERROR when selecting the cell")
+            print("[SourceSelectionViewModel] ERROR when selecting the cell")
             return
         }
         
         let savedSource = SavedSourceDTO(id: cellViewModel.id, name: cellViewModel.name)
-        print("Selected source: \(savedSource.name), ID: \(savedSource.id)")
+        print("[SourceSelectionViewModel] Selected source to save: \(savedSource.name), ID: \(savedSource.id)")
         
         Task {
             let result = await useCase.saveSelectedSource(with: savedSource)
             
             switch result {
                 case .success():
-                    print("Save succeeded")
+                    print("[SourceSelectionViewModel] Saving succeeded")
                     await backToHomeView(with: savedSource.id)
                 case .failure(let error):
-                    print("Saving failed. ERROR: \(error.rawValue)")
+                    print("[SourceSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
             }
         }
     }

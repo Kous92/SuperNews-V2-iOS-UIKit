@@ -12,7 +12,6 @@ import Combine
 final class SourceSelectionViewController: UIViewController {
     
     // MVVM with Reactive Programming
-    private let categoryViewModels = CategoryCellViewModel.getSourceCategories()
     var viewModel: SourceSelectionViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
@@ -117,7 +116,7 @@ final class SourceSelectionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // We make sure it will go back to previous view
         if isMovingFromParent {
-            viewModel?.backToHomeView()
+            viewModel?.backToTopHeadlinesView()
         }
     }
     
@@ -184,6 +183,22 @@ final class SourceSelectionViewController: UIViewController {
                     self?.displayNoResult()
                 }
             }.store(in: &subscriptions)
+        
+        // Update after sorting
+        viewModel?.sortedUpdateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+
+                self?.loadingSpinner.stopAnimating()
+                self?.setLoadingSpinner(isLoading: false)
+                
+                if updated {
+                    self?.updateTableView()
+                } else {
+                    print("No result")
+                    self?.displayNoResult()
+                }
+            }.store(in: &subscriptions)
     }
 }
 
@@ -232,20 +247,19 @@ extension SourceSelectionViewController {
 
 extension SourceSelectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryViewModels.count
+        return viewModel?.numberOfItemsInCollectionView() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell, let cellViewModel = viewModel?.getCategoryCellViewModel(at: indexPath) else {
             return UICollectionViewCell()
         }
         
-        cell.configure(with: categoryViewModels[indexPath.item].title)
+        cell.configure(with: cellViewModel.title)
         
         // When view is initialized, the first cell is selected by default
         if indexPath.item == 0 {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
-            viewModel?.setSourceOption(with: categoryViewModels[indexPath.item].categoryId)
         }
         
         return cell
@@ -254,7 +268,13 @@ extension SourceSelectionViewController: UICollectionViewDataSource {
 
 extension SourceSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel?.setSourceOption(with: categoryViewModels[indexPath.item].categoryId)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+        guard let cellViewModel = viewModel?.getCategoryCellViewModel(at: indexPath) else {
+            return
+        }
+        
+        viewModel?.setSourceOption(with: cellViewModel.categoryId)
     }
 }
 
@@ -288,20 +308,6 @@ extension SourceSelectionViewController: UITableViewDataSource {
 
 extension SourceSelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        /*
-        guard let sections = viewModel?.sections, sections > 0 else {
-            return
-        }
-        
-        guard let viewModels = viewModel?.filteredSectionViewModels, viewModels.count > 0 else {
-            return
-        }
-        
-        if let cellViewModel = viewModel?.filteredSectionViewModels[indexPath.section].sourceCellViewModels[indexPath.row] {
-            viewModel?.backToHomeView(with: cellViewModel.id)
-        }
-         */
         viewModel?.saveSelectedSource(at: indexPath)
     }
 }
