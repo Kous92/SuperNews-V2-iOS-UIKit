@@ -10,7 +10,7 @@ import UIKit
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol TopHeadlinesViewControllerDelegate: AnyObject {
-    func goToDetailArticleView()
+    func goToDetailArticleView(with articleViewModel: ArticleViewModel)
     func goToSourceSelectionView()
     func displayErrorAlert(with errorMessage: String)
 }
@@ -50,8 +50,18 @@ final class TopHeadlinesCoordinator: ParentCoordinator {
 
 extension TopHeadlinesCoordinator: TopHeadlinesViewControllerDelegate {
     
-    func goToDetailArticleView() {
+    func goToDetailArticleView(with articleViewModel: ArticleViewModel) {
+        // Transition is separated here into a child coordinator.
+        print("[TopHeadlinesCoordinator] Setting child coordinator: ArticleDetailSelectionCoordinator.")
+        let articleDetailCoordinator = ArticleDetailCoordinator(navigationController: navigationController, builder: ArticleDetailModuleBuilder(articleViewModel: articleViewModel))
         
+        // Adding link to the parent with self, be careful to retain cycle
+        articleDetailCoordinator.parentCoordinator = self
+        addChildCoordinator(childCoordinator: articleDetailCoordinator)
+        
+        // Transition from home screen to source selection screen
+        print("[TopHeadlinesCoordinator] Go to ArticleDetailViewController.")
+        articleDetailCoordinator.start()
     }
     
     func goToSourceSelectionView() {
