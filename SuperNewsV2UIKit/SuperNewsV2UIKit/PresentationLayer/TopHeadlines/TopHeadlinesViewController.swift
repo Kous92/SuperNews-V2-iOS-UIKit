@@ -247,7 +247,8 @@ extension TopHeadlinesViewController: UITableViewDataSource {
 
 extension TopHeadlinesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(SearchViewController(), animated: true)
+        // navigationController?.pushViewController(SearchViewController(), animated: true)
+        viewModel?.goToArticleDetailView(selectedViewModelIndex: indexPath.row)
     }
 }
 

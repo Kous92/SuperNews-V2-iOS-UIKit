@@ -159,7 +159,13 @@ final class TopHeadlinesViewModel {
 // Navigation part
 extension TopHeadlinesViewModel {
     func goToSourceSelectionView() {
-        print("[TopHeadlinesViewModel] Home -> Coordinator -> SourceSelection")
+        print("[TopHeadlinesViewModel] TopHeadlines -> Coordinator -> SourceSelection")
         coordinator?.goToSourceSelectionView()
+    }
+    
+    func goToArticleDetailView(selectedViewModelIndex: Int) {
+        print("[TopHeadlinesViewModel] TopHeadlines -> Coordinator -> ArticleDetail")
+        print("ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
+        coordinator?.goToDetailArticleView(with: articleViewModels[selectedViewModelIndex])
     }
 }
