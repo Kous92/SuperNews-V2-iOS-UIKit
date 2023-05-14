@@ -128,6 +128,7 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         // label.backgroundColor = .darkGray
         return label
     }()
@@ -247,7 +248,7 @@ final class ArticleDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         clockContainerView.layer.cornerRadius = 10
-        clockContainerView.layer.shadowColor = UIColor.black.cgColor
+        clockContainerView.layer.shadowColor = UIColor.blue.cgColor
         clockContainerView.layer.shadowOffset = .zero
         clockContainerView.layer.shadowRadius = 2
         clockContainerView.layer.shadowOpacity = 0.25
@@ -383,7 +384,7 @@ final class ArticleDetailViewController: UIViewController {
         self.articleViewModel = articleViewModel
         articleImageView.loadImage(with: articleViewModel.imageUrl)
         articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: 20, weight: .semibold), textColor: .white, shadowColor: .blue, radius: 3)
-        articleTitleLabel.setShadowLabel(string: articleViewModel.title, font: UIFont.systemFont(ofSize: 22, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
+        articleTitleLabel.text = articleViewModel.title
         articleAuthorLabel.text = articleViewModel.author
         articleDescriptionLabel.text = articleViewModel.description
         articleContentLabel.text = articleViewModel.content
