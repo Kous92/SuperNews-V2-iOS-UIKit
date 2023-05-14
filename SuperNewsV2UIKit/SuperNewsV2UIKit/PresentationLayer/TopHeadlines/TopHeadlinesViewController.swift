@@ -175,7 +175,6 @@ final class TopHeadlinesViewController: UIViewController {
                     self?.updateCollectionView()
                 }
             }.store(in: &subscriptions)
-
     }
     
     @objc func onClickSourceButton() {
