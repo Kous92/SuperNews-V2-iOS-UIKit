@@ -25,7 +25,7 @@ final class TopHeadlinesCoordinator: ParentCoordinator {
     private let testMode: Bool
     
     init(navigationController: UINavigationController, builder: ModuleBuilder, testMode: Bool = false) {
-        print("[TopHeadlinesCoordinator] Initialising")
+        print("[TopHeadlinesCoordinator] Initializing")
         self.navigationController = navigationController
         self.builder = builder
         self.testMode = testMode

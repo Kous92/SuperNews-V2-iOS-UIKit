@@ -7,10 +7,13 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 // Ensure that the 4th and 5th SOLID principles are respected: Interface Segregation and Dependency Inversion
 protocol ArticleDetailViewControllerDelegate: AnyObject {
     func backToPreviousScreen()
+    func openSafariWithArticleWebsite(websiteURL: String)
+    func openShareSheet(articleTitle: String, websiteURL: String)
 }
 
 final class ArticleDetailCoordinator: ParentCoordinator {
@@ -46,11 +49,48 @@ final class ArticleDetailCoordinator: ParentCoordinator {
     }
 }
 
-extension SourceSelectionCoordinator: ArticleDetailViewControllerDelegate {
+extension ArticleDetailCoordinator: ArticleDetailViewControllerDelegate {
     func backToPreviousScreen() {
         // Removing child coordinator reference
         parentCoordinator?.removeChildCoordinator(childCoordinator: self)
         navigationController.popViewController(animated: true)
         print(navigationController.viewControllers)
+    }
+    
+    func openSafariWithArticleWebsite(websiteURL: String) {
+        guard let url = URL(string: websiteURL) else {
+            // Display an alert
+            let alert = UIAlertController(title: "Erreur", message: "Une erreur est survenue pour l'ouverture du navigateur avec le lien suivant: \(websiteURL).", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            navigationController.present(alert, animated: true)
+            
+            return
+        }
+        
+        // Opening the browser
+        let safari = SFSafariViewController(url: url)
+        navigationController.present(safari, animated: true)
+    }
+    
+    func openShareSheet(articleTitle: String, websiteURL: String) {
+        guard let url = URL(string: websiteURL) else {
+            // Display an alert
+            let alert = UIAlertController(title: "Erreur", message: "Une erreur est survenue avec le lien suivant: \(websiteURL).", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            navigationController.present(alert, animated: true)
+            
+            return
+        }
+        
+        let items = [articleTitle, url] as [Any]
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
+        // To avoid crash on iPad
+        if let popover = activityViewController.popoverPresentationController {
+            popover.sourceView = navigationController.view
+            popover.barButtonItem = navigationController.popoverPresentationController?.barButtonItem
+        }
+            
+        navigationController.present(activityViewController, animated: true)
     }
 }

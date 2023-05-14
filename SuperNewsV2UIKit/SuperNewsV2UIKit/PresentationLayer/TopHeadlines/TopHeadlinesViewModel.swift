@@ -60,7 +60,7 @@ final class TopHeadlinesViewModel {
                 case .failure(let error):
                     print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
                     print("ERROR: \(error.rawValue)")
-                    await self.sendErrorMessage(with: error.rawValue)
+                    // await self.sendErrorMessage(with: error.rawValue)
             }
             
             // If it fails, it will use the default one.

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 extension UIButton {
     func applyGradient(colours: [UIColor]) {
@@ -24,6 +25,10 @@ extension UIButton {
 }
 
 final class ArticleDetailViewController: UIViewController {
+    
+    // MVVM with Reactive Programming
+    private var viewModel: ArticleDetailViewModel?
+    private var subscriptions = Set<AnyCancellable>()
     var articleViewModel: ArticleViewModel?
     
     private lazy var gradient: CAGradientLayer = {
@@ -243,7 +248,12 @@ final class ArticleDetailViewController: UIViewController {
         setNavigationBar()
         buildViewHierarchy()
         setConstraints()
+        setBindings()
         setButtonActions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel?.updateArticleView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -378,21 +388,14 @@ final class ArticleDetailViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
-    // Dependency injection
-    func configure(with articleViewModel: ArticleViewModel) {
-        self.articleViewModel = articleViewModel
-        articleImageView.loadImage(with: articleViewModel.imageUrl)
-        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: 20, weight: .semibold), textColor: .white, shadowColor: .blue, radius: 3)
-        articleTitleLabel.text = articleViewModel.title
-        articleAuthorLabel.text = articleViewModel.author
-        articleDescriptionLabel.text = articleViewModel.description
-        articleContentLabel.text = articleViewModel.content
-        articleSourceLabel.text = articleViewModel.sourceName
-    }
 }
 
 extension ArticleDetailViewController {
+    // Dependency injection
+    func configure(with viewModel: ArticleDetailViewModel) {
+        self.viewModel = viewModel
+    }
+    
     private func setNavigationBar() {
         let item = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.forward.fill"), style: .plain, target: self, action: #selector(onClickShareButton))
         navigationItem.rightBarButtonItem = item
@@ -404,10 +407,32 @@ extension ArticleDetailViewController {
         view.layer.addSublayer(gradient)
     }
     
+    private func setBindings() {
+        // Update binding
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] articleViewModel in
+                print("[ArticleDetailViewController] Ready to update.")
+                self?.updateView(with: articleViewModel)
+            }.store(in: &subscriptions)
+    }
+    
+    private func updateView(with articleViewModel: ArticleViewModel) {
+        self.articleViewModel = articleViewModel
+        articleImageView.loadImage(with: articleViewModel.imageUrl)
+        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: 20, weight: .semibold), textColor: .white, shadowColor: .blue, radius: 3)
+        articleTitleLabel.text = articleViewModel.title
+        articleAuthorLabel.text = articleViewModel.author
+        articleDescriptionLabel.text = articleViewModel.description
+        articleContentLabel.text = articleViewModel.content
+        articleSourceLabel.text = articleViewModel.sourceName
+    }
+    
     // This variant is available for UIKit in iOS 14 and later, no need anymore to use legacy addTarget with #selector.
     private func setButtonActions() {
-        let websiteOpenAction = UIAction { _ in
+        let websiteOpenAction = UIAction { [weak self] _ in
             print("Site web à ouvrir")
+            self?.viewModel?.openArticleWebsite()
         }
         
         articleWebsiteButton.addAction(websiteOpenAction, for: .touchUpInside)
@@ -415,6 +440,7 @@ extension ArticleDetailViewController {
     
     @objc func onClickShareButton() {
         print("Partage du site à ouvrir")
+        viewModel?.openShareSheetWindow()
     }
 }
 

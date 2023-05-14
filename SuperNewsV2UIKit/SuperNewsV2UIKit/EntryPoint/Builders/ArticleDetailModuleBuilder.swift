@@ -19,18 +19,11 @@ final class ArticleDetailModuleBuilder: ModuleBuilder {
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
         let articleDetailViewController = ArticleDetailViewController()
-        articleDetailViewController.configure(with: articleViewModel)
-        /*
-        // Dependency injection
-        let dataRepository = getRepository(testMode: testMode)
-        let settingsRepository = getSettingsRepository(testMode: testMode)
-        let useCase = TopHeadlinesUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
-        let topHeadlinesViewModel = TopHeadlinesViewModel(useCase: useCase)
-        topHeadlinesViewModel.coordinator = coordinator as? TopHeadlinesViewControllerDelegate
         
-        // Injecting view model
-        topHeadlinesViewController.viewModel = topHeadlinesViewModel
-         */
+        // Dependency injection. Don't forget to inject the coordinator delegate reference for navigation actions.
+        let articleDetailViewModel = ArticleDetailViewModel(with: articleViewModel)
+        articleDetailViewModel.coordinator = coordinator as? ArticleDetailViewControllerDelegate
+        articleDetailViewController.configure(with: articleDetailViewModel)
         
         return articleDetailViewController
     }
