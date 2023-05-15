@@ -17,7 +17,7 @@ protocol ArticleDetailViewControllerDelegate: AnyObject {
 }
 
 final class ArticleDetailCoordinator: ParentCoordinator {
-    // Be careful to retain cycle, the sub flow must not hold the reference with the parent.
+    // Be careful to retain cycle, the subflow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
     
     private(set) var navigationController: UINavigationController
