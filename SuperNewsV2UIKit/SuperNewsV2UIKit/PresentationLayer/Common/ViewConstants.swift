@@ -30,10 +30,11 @@ struct Constants {
         static let margin30: CGFloat = isPhone() ? 30 : 60
     }
     
-    struct HappyNewYearAnimation {
-        static let happyNewYearFontSize: CGFloat = isPhone() ? 50 : 100
-        static let yearFontSize: CGFloat = isPhone() ? 90 : 160
-        static let messageFontSize: CGFloat = isPhone() ? 30 : 50
-        static let messageYposition: CGFloat = isPhone() ? 80 : 120
+    struct NewsCell {
+        static let sourceLabelFontSize: CGFloat = isPhone() ? 14 : 26
+        static let titleLabelFontSize: CGFloat = isPhone() ? 17 : 32
+        static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
+        static let bottomMargin: CGFloat = isPhone() ? 5 : 12
+        static let imageCornerRadius: CGFloat = isPhone() ? 10 : 20
     }
 }
