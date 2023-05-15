@@ -83,7 +83,7 @@ final class TopHeadlinesViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
-        label.setShadowLabel(string: "Aucun article disponible", font: UIFont.systemFont(ofSize: 18, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        label.setShadowLabel(string: "Aucun article disponible", font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         label.isHidden = true
         
         return label
@@ -127,7 +127,7 @@ final class TopHeadlinesViewController: UIViewController {
         
         noResultLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(Constants.TopHeadlines.horizontalMargin)
         }
         
         tableView.snp.makeConstraints { make in
@@ -139,7 +139,7 @@ final class TopHeadlinesViewController: UIViewController {
         categoryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(Constants.CategoryCollectionView.collectionViewHeight)
         }
     }
     
@@ -246,7 +246,6 @@ extension TopHeadlinesViewController: UITableViewDataSource {
 
 extension TopHeadlinesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // navigationController?.pushViewController(SearchViewController(), animated: true)
         viewModel?.goToArticleDetailView(selectedViewModelIndex: indexPath.row)
     }
 }

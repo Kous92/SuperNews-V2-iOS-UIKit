@@ -14,6 +14,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: Constants.CategoryCollectionView.categoryTitleFontSize, weight: .regular)
         label.textColor = .darkGray
         label.textAlignment = .center
         return label
@@ -35,7 +36,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     private func setConstraints() {
         categoryTitleLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.edges.equalToSuperview().inset(Constants.CategoryCollectionView.categoryTitleInsets)
         }
     }
     
@@ -45,7 +46,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     // For live preview
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 40)
+        return CGSize(width: UIScreen.main.bounds.width, height: UIDevice.current.userInterfaceIdiom == .phone ? 40 : 70)
     }
     
     override var isSelected: Bool {

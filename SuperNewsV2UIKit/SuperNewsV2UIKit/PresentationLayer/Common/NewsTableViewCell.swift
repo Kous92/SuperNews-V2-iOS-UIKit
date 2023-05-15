@@ -63,7 +63,7 @@ final class NewsTableViewCell: UITableViewCell {
         }
         
         articleImageView.snp.makeConstraints { make in
-            make.edges.equalTo(cellView).inset(Constants.NewsCell.horizontalMargin)
+            make.edges.equalTo(cellView).inset(Constants.NewsCell.imageInsets)
         }
         
         titleLabel.snp.makeConstraints { make in
