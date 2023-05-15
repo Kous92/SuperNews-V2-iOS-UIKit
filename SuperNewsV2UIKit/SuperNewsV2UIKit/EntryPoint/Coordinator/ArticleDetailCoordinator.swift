@@ -85,10 +85,15 @@ extension ArticleDetailCoordinator: ArticleDetailViewControllerDelegate {
         let items = [articleTitle, url] as [Any]
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         
-        // To avoid crash on iPad
+        guard navigationController.topViewController is ArticleDetailViewController else {
+            print("[ArticleDetailCoordinator] ERROR: The ArticleDetailViewController UINavigationController is not present, cannot find the right bar button item to set the popover (for iPad).")
+            
+            return
+        }
+        
+        // To avoid crash on iPad. It needs to use a popover and it must define from where the share sheet will be displayed, not like an iPhone.
         if let popover = activityViewController.popoverPresentationController {
-            popover.sourceView = navigationController.view
-            popover.barButtonItem = navigationController.popoverPresentationController?.barButtonItem
+            popover.barButtonItem = navigationController.topViewController?.navigationItem.rightBarButtonItem
         }
             
         navigationController.present(activityViewController, animated: true)
