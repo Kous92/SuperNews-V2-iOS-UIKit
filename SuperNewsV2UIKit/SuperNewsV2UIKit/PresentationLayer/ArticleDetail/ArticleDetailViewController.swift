@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
+
 final class ArticleDetailViewController: UIViewController {
     
     // MVVM with Reactive Programming
@@ -73,7 +74,7 @@ final class ArticleDetailViewController: UIViewController {
     private let publishDateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = Constants.ArticleDetail.stackViewHorizontalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -110,14 +111,14 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
         return label
     }()
     
     private let authorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = Constants.ArticleDetail.stackViewHorizontalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -139,7 +140,7 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
         label.lineBreakMode = .byWordWrapping
         return label
     }()
@@ -149,7 +150,7 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.descriptionLabelFontSize, weight: .medium)
         label.lineBreakMode = .byWordWrapping
         return label
     }()
@@ -159,6 +160,7 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.contentLabelFontSize, weight: .regular)
         label.lineBreakMode = .byWordWrapping
         return label
     }()
@@ -166,7 +168,7 @@ final class ArticleDetailViewController: UIViewController {
     private let sourceStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = Constants.ArticleDetail.stackViewHorizontalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -176,7 +178,7 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
         return label
     }()
     
@@ -200,6 +202,7 @@ final class ArticleDetailViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
+        button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.buttonTitleFontSize, weight: .regular)
         return button
     }()
     
@@ -294,7 +297,7 @@ final class ArticleDetailViewController: UIViewController {
         // MARK: - Top view with image
         articleTopView.snp.makeConstraints { make in
             make.top.equalTo(scrollStackViewContainer.snp.top)
-            make.height.equalTo(250)
+            make.height.equalTo(Constants.ArticleDetail.topImageHeight)
         }
         
         articleImageView.snp.makeConstraints { make in
@@ -302,13 +305,12 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         publishDateStackView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(articleImageView).inset(10)
-            make.bottom.equalTo(articleImageView.snp.bottom).inset(10)
+            make.horizontalEdges.equalTo(articleImageView).inset(Constants.ArticleDetail.horizontalMargin)
+            make.bottom.equalTo(articleImageView.snp.bottom).inset(Constants.ArticleDetail.margin10)
         }
         
         clockContainerView.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.width.equalTo(20)
+            make.size.equalTo(Constants.ArticleDetail.imageIconSize)
         }
         
         clockImageView.snp.makeConstraints { make in
@@ -321,34 +323,37 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         articleTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(articleContentView).inset(10)
-            make.horizontalEdges.equalTo(articleContentView).inset(10)
+            make.top.equalTo(articleContentView).inset(Constants.ArticleDetail.margin10)
+            make.horizontalEdges.equalTo(articleContentView).inset(Constants.ArticleDetail.horizontalMargin)
         }
         
         authorStackView.snp.makeConstraints { make in
-            make.top.equalTo(articleTitleLabel.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(articleContentView).inset(10)
+            make.top.equalTo(articleTitleLabel.snp.bottom).offset(Constants.ArticleDetail.margin30)
+            make.horizontalEdges.equalTo(articleContentView).inset(Constants.ArticleDetail.horizontalMargin)
         }
         
         authorImageView.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.width.equalTo(20)
+            make.size.equalTo(Constants.ArticleDetail.imageIconSize)
         }
         
         articleDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(authorStackView.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(articleContentView).inset(10)
+            make.top.equalTo(authorStackView.snp.bottom).offset(Constants.ArticleDetail.margin30)
+            make.horizontalEdges.equalTo(articleContentView).inset(Constants.ArticleDetail.horizontalMargin)
         }
         
         articleContentLabel.snp.makeConstraints { make in
-            make.top.equalTo(articleDescriptionLabel.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(articleContentView).inset(10)
+            make.top.equalTo(articleDescriptionLabel.snp.bottom).offset(Constants.ArticleDetail.margin30)
+            make.horizontalEdges.equalTo(articleContentView).inset(Constants.ArticleDetail.horizontalMargin)
         }
         
         sourceStackView.snp.makeConstraints { make in
-            make.top.equalTo(articleContentLabel.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(articleContentView).inset(10)
-            make.bottom.equalTo(articleContentView.snp.bottom).inset(30)
+            make.top.equalTo(articleContentLabel.snp.bottom).offset(Constants.ArticleDetail.margin30)
+            make.horizontalEdges.equalTo(articleContentView).inset(Constants.ArticleDetail.horizontalMargin)
+            make.bottom.equalTo(articleContentView.snp.bottom).inset(Constants.ArticleDetail.margin30)
+        }
+        
+        sourceImageView.snp.makeConstraints { make in
+            make.size.equalTo(Constants.ArticleDetail.imageIconSize)
         }
         
         // MARK: - Under the middle view
@@ -358,10 +363,10 @@ final class ArticleDetailViewController: UIViewController {
         
         articleWebsiteButton.snp.makeConstraints { make in
             make.top.equalTo(articleBottomView.snp.top)
-            make.bottom.equalTo(articleBottomView.snp.bottom).inset(40)
+            make.bottom.equalTo(articleBottomView.snp.bottom).inset(Constants.ArticleDetail.buttonInset)
             make.centerX.equalTo(articleBottomView)
             make.width.equalTo(articleBottomView).multipliedBy(0.7)
-            make.height.equalTo(50)
+            make.height.equalTo(Constants.ArticleDetail.buttonHeight)
         }
     }
 }
@@ -395,7 +400,7 @@ extension ArticleDetailViewController {
     
     private func updateView(with articleViewModel: ArticleViewModel) {
         articleImageView.loadImage(with: articleViewModel.imageUrl)
-        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: 20, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
+        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
         articleTitleLabel.text = articleViewModel.title
         articleAuthorLabel.text = articleViewModel.author
         articleDescriptionLabel.text = articleViewModel.description

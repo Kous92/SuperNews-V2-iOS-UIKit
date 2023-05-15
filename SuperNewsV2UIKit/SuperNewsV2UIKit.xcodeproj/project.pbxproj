@@ -81,6 +81,7 @@
 		4BC3D0F629EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3D0F529EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift */; };
 		4BCC1ADD2A12CDEF00745E70 /* SuperNewsArticleDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCC1ADC2A12CDEF00745E70 /* SuperNewsArticleDetailViewModelTests.swift */; };
 		4BCC1ADF2A12D0D100745E70 /* GradientUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCC1ADE2A12D0D100745E70 /* GradientUIButton.swift */; };
+		4BCC1AE12A12D61100745E70 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCC1AE02A12D61100745E70 /* ViewConstants.swift */; };
 		4BD0D13A2A0B9F8F00EEB48A /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD0D1392A0B9F8F00EEB48A /* ArticleDetailViewController.swift */; };
 		4BD0D13C2A0BA01900EEB48A /* ArticleDetailModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD0D13B2A0BA01900EEB48A /* ArticleDetailModuleBuilder.swift */; };
 		4BD0D13E2A0BA06000EEB48A /* ArticleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD0D13D2A0BA06000EEB48A /* ArticleDetailCoordinator.swift */; };
@@ -191,6 +192,7 @@
 		4BC3D0F529EB1CA900EAD942 /* SuperNewsDataAPIServiceTestCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsDataAPIServiceTestCaller.swift; sourceTree = "<group>"; };
 		4BCC1ADC2A12CDEF00745E70 /* SuperNewsArticleDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsArticleDetailViewModelTests.swift; sourceTree = "<group>"; };
 		4BCC1ADE2A12D0D100745E70 /* GradientUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUIButton.swift; sourceTree = "<group>"; };
+		4BCC1AE02A12D61100745E70 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		4BD0D1392A0B9F8F00EEB48A /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
 		4BD0D13B2A0BA01900EEB48A /* ArticleDetailModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailModuleBuilder.swift; sourceTree = "<group>"; };
 		4BD0D13D2A0BA06000EEB48A /* ArticleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -304,9 +306,7 @@
 		4B306F6229F68D3E009AA92D /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				4B306F7D29F7081C009AA92D /* NewsTableViewCell.swift */,
-				4B306F7B29F6FA1F009AA92D /* NewsCellViewModel.swift */,
-				4BF6376C29FC87D700AC469F /* ArticleViewModel.swift */,
+				4BCC1AE22A12D61B00745E70 /* Common */,
 				4BD0D1382A0B9F6B00EEB48A /* ArticleDetail */,
 				4B7168042A0149D700C54EB6 /* TopHeadlines */,
 				4B306F7229F6D35E009AA92D /* Search */,
@@ -520,6 +520,17 @@
 				4B306F5F29F684B9009AA92D /* SuperNewsAPIEndpointTests.swift */,
 			);
 			path = DataTests;
+			sourceTree = "<group>";
+		};
+		4BCC1AE22A12D61B00745E70 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				4B306F7D29F7081C009AA92D /* NewsTableViewCell.swift */,
+				4B306F7B29F6FA1F009AA92D /* NewsCellViewModel.swift */,
+				4BF6376C29FC87D700AC469F /* ArticleViewModel.swift */,
+				4BCC1AE02A12D61100745E70 /* ViewConstants.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		4BD0D1382A0B9F6B00EEB48A /* ArticleDetail */ = {
@@ -792,6 +803,7 @@
 				4B306F7029F6CF54009AA92D /* TopHeadlinesUseCase.swift in Sources */,
 				4B7168102A014A8E00C54EB6 /* TopHeadlinesCoordinator.swift in Sources */,
 				4B08603229ED884600AA32C0 /* GradientTabBarController.swift in Sources */,
+				4BCC1AE12A12D61100745E70 /* ViewConstants.swift in Sources */,
 				4BF6377029FC889F00AC469F /* StringExtensions.swift in Sources */,
 				4BD0D1402A0BD01300EEB48A /* ShadowUIImage.swift in Sources */,
 				4B64685F29E6F0F500F35682 /* SuperNewsDataAPIService.swift in Sources */,
