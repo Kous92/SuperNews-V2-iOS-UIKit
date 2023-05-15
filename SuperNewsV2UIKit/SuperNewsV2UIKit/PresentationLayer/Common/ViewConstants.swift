@@ -14,6 +14,17 @@ fileprivate func isPhone() -> Bool {
 }
 
 struct Constants {
+    struct CategoryCollectionView {
+        static let collectionViewHeight: CGFloat = isPhone() ? 50 : 90
+        static let categoryTitleFontSize: CGFloat = isPhone() ? 17 : 24
+        static let categoryTitleInsets: CGFloat = isPhone() ? 10 : 20
+    }
+    
+    struct TopHeadlines {
+        static let noResultLabelFontSize: CGFloat = isPhone() ? 18 : 30
+        static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
+    }
+    
     struct ArticleDetail {
         static let stackViewHorizontalSpacing: CGFloat = isPhone() ? 8 : 16
         static let topImageHeight: CGFloat = isPhone() ? 250 : 450
@@ -33,6 +44,7 @@ struct Constants {
     struct NewsCell {
         static let sourceLabelFontSize: CGFloat = isPhone() ? 14 : 26
         static let titleLabelFontSize: CGFloat = isPhone() ? 17 : 32
+        static let imageInsets: CGFloat = isPhone() ? 10 : 25
         static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
         static let bottomMargin: CGFloat = isPhone() ? 5 : 12
         static let imageCornerRadius: CGFloat = isPhone() ? 10 : 20
