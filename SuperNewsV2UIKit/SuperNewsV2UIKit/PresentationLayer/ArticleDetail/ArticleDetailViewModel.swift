@@ -31,6 +31,10 @@ final class ArticleDetailViewModel {
 }
 
 extension ArticleDetailViewModel {
+    func backToPreviousScreen() {
+        coordinator?.backToPreviousScreen()
+    }
+    
     func openShareSheetWindow() {
         coordinator?.openShareSheet(articleTitle: articleViewModel.title, websiteURL: articleViewModel.sourceUrl)
     }

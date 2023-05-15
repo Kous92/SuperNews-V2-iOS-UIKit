@@ -256,6 +256,14 @@ final class ArticleDetailViewController: UIViewController {
         viewModel?.updateArticleView()
     }
     
+    // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
+    override func viewWillDisappear(_ animated: Bool) {
+        // We make sure it will go back to previous view
+        if isMovingFromParent {
+            viewModel?.backToPreviousScreen()
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         clockContainerView.layer.cornerRadius = 10
         clockContainerView.layer.shadowColor = UIColor.blue.cgColor
@@ -315,8 +323,6 @@ final class ArticleDetailViewController: UIViewController {
         
         // MARK: - Top view with image
         articleTopView.snp.makeConstraints { make in
-            // make.right.equalTo(scrollStackViewContainer).inset(15)
-            // make.edges.equalTo(scrollStackViewContainer).inset(10)
             make.top.equalTo(scrollStackViewContainer.snp.top)
             make.height.equalTo(250)
         }

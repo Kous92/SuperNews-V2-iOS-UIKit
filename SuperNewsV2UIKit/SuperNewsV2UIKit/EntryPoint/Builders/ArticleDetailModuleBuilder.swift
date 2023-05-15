@@ -27,20 +27,4 @@ final class ArticleDetailModuleBuilder: ModuleBuilder {
         
         return articleDetailViewController
     }
-    
-    private func getRepository(testMode: Bool) -> SuperNewsRepository {
-        return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
-    }
-    
-    private func getSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
-        return SuperNewsUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
-    }
-    
-    private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
-        return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
-    }
-    
-    private func getSettingsService(testMode: Bool) -> SuperNewsLocalSettings {
-        return testMode ? SuperNewsMockLocalSettings() : SuperNewsUserDefaultsLocalSettings()
-    }
 }
