@@ -278,6 +278,8 @@ extension TopHeadlinesViewController: UICollectionViewDelegate {
             return
         }
         
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
         if categoryViewModel.categoryId == "local" {
             viewModel?.fetchTopHeadlines()
         }
