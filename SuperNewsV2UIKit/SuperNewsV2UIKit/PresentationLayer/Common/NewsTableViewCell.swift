@@ -18,7 +18,7 @@ final class NewsTableViewCell: UITableViewCell {
     private lazy var articleImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 10
+        image.layer.cornerRadius = Constants.NewsCell.imageCornerRadius
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         return image
@@ -63,25 +63,25 @@ final class NewsTableViewCell: UITableViewCell {
         }
         
         articleImageView.snp.makeConstraints { make in
-            make.edges.equalTo(cellView).inset(10)
+            make.edges.equalTo(cellView).inset(Constants.NewsCell.horizontalMargin)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(articleImageView.snp.bottomMargin).inset(5)
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.bottom.equalTo(articleImageView.snp.bottomMargin).inset(Constants.NewsCell.bottomMargin)
+            make.horizontalEdges.equalToSuperview().inset(Constants.NewsCell.horizontalMargin)
         }
         
         sourceLabel.snp.makeConstraints { make in
-            make.top.equalTo(articleImageView.snp.top).inset(10)
-            make.horizontalEdges.equalTo(articleImageView).inset(10)
+            make.top.equalTo(articleImageView.snp.top).inset(Constants.NewsCell.horizontalMargin)
+            make.horizontalEdges.equalTo(articleImageView).inset(Constants.ArticleDetail.horizontalMargin)
         }
     }
     
     /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
     func configure(with viewModel: NewsCellViewModel) {
         articleImageView.loadImage(with: viewModel.imageURL)
-        sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: 14, weight: .medium), textColor: .white, shadowColor: .black, radius: 3)
-        titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: 17, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
+        sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: Constants.NewsCell.sourceLabelFontSize, weight: .medium), textColor: .white, shadowColor: .black, radius: 3)
+        titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: Constants.NewsCell.titleLabelFontSize, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
     }
     
     // For live preview
