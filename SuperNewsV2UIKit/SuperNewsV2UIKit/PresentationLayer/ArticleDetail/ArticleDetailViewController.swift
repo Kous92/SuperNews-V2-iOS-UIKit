@@ -9,27 +9,11 @@ import UIKit
 import SnapKit
 import Combine
 
-extension UIButton {
-    func applyGradient(colours: [UIColor]) {
-        self.applyGradient(colours: colours, locations: nil)
-    }
-    
-    func applyGradient(colours: [UIColor], locations: [NSNumber]?) {
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = self.bounds
-        gradient.colors = colours.map { $0.cgColor }
-        gradient.locations = locations
-        gradient.cornerRadius = 10
-        self.layer.insertSublayer(gradient, at: 0)
-    }
-}
-
 final class ArticleDetailViewController: UIViewController {
     
     // MVVM with Reactive Programming
     private var viewModel: ArticleDetailViewModel?
     private var subscriptions = Set<AnyCancellable>()
-    var articleViewModel: ArticleViewModel?
     
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
@@ -57,27 +41,23 @@ final class ArticleDetailViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
         stackView.distribution = .fill
-        // stackView.backgroundColor = .orange
         return stackView
     }()
     
     private lazy var articleTopView: UIView = {
         let view = UIView()
-        // view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var articleContentView: UIView = {
         let view = UIView()
-        // view.backgroundColor = .green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var articleBottomView: UIView = {
         let view = UIView()
-        // view.backgroundColor = .yellow
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -93,10 +73,8 @@ final class ArticleDetailViewController: UIViewController {
     private let publishDateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        // stackView.distribution = .fill
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        // stackView.backgroundColor = .orange
         return stackView
     }()
     
@@ -123,7 +101,6 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        // label.backgroundColor = .systemGreen
         return label
     }()
     
@@ -134,17 +111,14 @@ final class ArticleDetailViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        // label.backgroundColor = .darkGray
         return label
     }()
     
     private let authorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        // stackView.distribution = .fill
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        // stackView.backgroundColor = .orange
         return stackView
     }()
     
@@ -177,7 +151,6 @@ final class ArticleDetailViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.lineBreakMode = .byWordWrapping
-        // label.backgroundColor = .red
         return label
     }()
     
@@ -187,17 +160,14 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
-        // label.backgroundColor = .brown
         return label
     }()
     
     private let sourceStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        // stackView.distribution = .fill
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        // stackView.backgroundColor = .orange
         return stackView
     }()
     
@@ -266,7 +236,7 @@ final class ArticleDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         clockContainerView.layer.cornerRadius = 10
-        clockContainerView.layer.shadowColor = UIColor.blue.cgColor
+        clockContainerView.layer.shadowColor = UIColor.black.cgColor
         clockContainerView.layer.shadowOffset = .zero
         clockContainerView.layer.shadowRadius = 2
         clockContainerView.layer.shadowOpacity = 0.25
@@ -424,9 +394,8 @@ extension ArticleDetailViewController {
     }
     
     private func updateView(with articleViewModel: ArticleViewModel) {
-        self.articleViewModel = articleViewModel
         articleImageView.loadImage(with: articleViewModel.imageUrl)
-        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: 20, weight: .semibold), textColor: .white, shadowColor: .blue, radius: 3)
+        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: 20, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
         articleTitleLabel.text = articleViewModel.title
         articleAuthorLabel.text = articleViewModel.author
         articleDescriptionLabel.text = articleViewModel.description
@@ -437,7 +406,6 @@ extension ArticleDetailViewController {
     // This variant is available for UIKit in iOS 14 and later, no need anymore to use legacy addTarget with #selector.
     private func setButtonActions() {
         let websiteOpenAction = UIAction { [weak self] _ in
-            print("Site web à ouvrir")
             self?.viewModel?.openArticleWebsite()
         }
         
@@ -445,7 +413,6 @@ extension ArticleDetailViewController {
     }
     
     @objc func onClickShareButton() {
-        print("Partage du site à ouvrir")
         viewModel?.openShareSheetWindow()
     }
 }

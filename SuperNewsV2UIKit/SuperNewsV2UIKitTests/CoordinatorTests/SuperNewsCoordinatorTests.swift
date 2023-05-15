@@ -58,6 +58,24 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         XCTAssertTrue(navigationController.viewControllers[0] is SourceSelectionViewController)
     }
     
+    func testArticleDetailCoordinator() {
+        let viewModel = ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle())
+        let moduleBuilder = ArticleDetailModuleBuilder(articleViewModel: viewModel)
+        let articleDetailCoordinator = ArticleDetailCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        let navigationController = articleDetailCoordinator.start()
+        XCTAssertTrue(navigationController is UINavigationController)
+        
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        print(navigationController.viewControllers)
+        XCTAssertTrue(navigationController.viewControllers[0] is ArticleDetailViewController)
+    }
+    
     func testSearchCoordinator() {
         let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
         let searchViewController = searchCoordinator.start()

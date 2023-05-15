@@ -49,4 +49,16 @@ final class SuperNewsBuilderTests: XCTestCase {
         
         XCTAssertNotNil(sourceSelectionViewController.viewModel)
     }
+    
+    func testArticleDetailModuleBuilder() {
+        let viewModel = ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle())
+        moduleBuilder = ArticleDetailModuleBuilder(articleViewModel: viewModel)
+        XCTAssertNotNil(moduleBuilder)
+        
+        // Checking dependency injections
+        let viewController = moduleBuilder?.buildModule(testMode: true, coordinator: nil)
+        
+        XCTAssertNotNil(viewController)
+        XCTAssert(viewController is ArticleDetailViewController, "The UIViewController is not a ArticleDetailViewController.")
+    }
 }
