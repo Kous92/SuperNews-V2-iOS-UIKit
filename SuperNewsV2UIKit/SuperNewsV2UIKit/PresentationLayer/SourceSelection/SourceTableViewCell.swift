@@ -13,7 +13,7 @@ final class SourceTableViewCell: UITableViewCell {
     
     private lazy var cellView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = Constants.SourceSelectionCell.viewCornerRadius
         view.layer.borderColor = UIColor(named: "SuperNewsDarkBlue")?.cgColor
         view.layer.borderWidth = 1
         // view.backgroundColor = UIColor(named: "SuperNewsBlue")
@@ -25,7 +25,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.titleLabelFontSize, weight: .semibold)
         label.text = "Nom du média source"
         label.textColor = .white
         return label
@@ -36,7 +36,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.descriptionLabelFontSize, weight: .medium)
         label.text = "Description complète du média source, nom, sa catégorie, le lieu, la langue, ..."
         label.textColor = .white
         return label
@@ -47,7 +47,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
         label.text = "Catégorie (business,...)"
         label.textColor = .white
         return label
@@ -58,7 +58,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
         label.text = "Pays et langue du média"
         label.textColor = .white
         return label
@@ -69,7 +69,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
         label.text = "URL du média"
         label.textColor = .white
         return label
@@ -78,7 +78,7 @@ final class SourceTableViewCell: UITableViewCell {
     private lazy var labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = Constants.SourceSelectionCell.labelStackViewSpacing
         return stackView
     }()
     
@@ -111,41 +111,41 @@ final class SourceTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         cellView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.edges.equalToSuperview().inset(Constants.SourceSelectionCell.viewInsets)
         }
         
         sourceTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(cellView.snp.top).inset(10)
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.top.equalTo(cellView.snp.top).inset(Constants.SourceSelectionCell.margin10)
+            make.horizontalEdges.equalToSuperview().inset(Constants.SourceSelectionCell.horizontalMargin)
         }
         
         sourceTitleLabel.setContentHuggingPriority(.defaultHigh + 4, for: .vertical)
         
         sourceDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(sourceTitleLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
+            make.top.equalTo(sourceTitleLabel.snp.bottom).offset(Constants.SourceSelectionCell.margin10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(Constants.SourceSelectionCell.horizontalMargin)
         }
         
         sourceDescriptionLabel.setContentHuggingPriority(.defaultHigh + 3, for: .vertical)
         
         sourceCategoryLabel.snp.makeConstraints { make in
-            make.top.equalTo(sourceDescriptionLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
+            make.top.equalTo(sourceDescriptionLabel.snp.bottom).offset(Constants.SourceSelectionCell.margin10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(Constants.SourceSelectionCell.horizontalMargin)
         }
         
         sourceCategoryLabel.setContentHuggingPriority(.defaultHigh + 2, for: .vertical)
         
         sourceCountryAndLanguageLabel.snp.makeConstraints { make in
-            make.top.equalTo(sourceCategoryLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
+            make.top.equalTo(sourceCategoryLabel.snp.bottom).offset(Constants.SourceSelectionCell.margin10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(Constants.SourceSelectionCell.horizontalMargin)
         }
         
         sourceCountryAndLanguageLabel.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
         
         sourceURLLabel.snp.makeConstraints { make in
-            make.top.equalTo(sourceCountryAndLanguageLabel.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(10)
-            make.bottom.equalTo(cellView.snp.bottom).inset(10)
+            make.top.equalTo(sourceCountryAndLanguageLabel.snp.bottom).offset(Constants.SourceSelectionCell.margin10)
+            make.horizontalEdges.equalTo(cellView.snp.horizontalEdges).inset(Constants.SourceSelectionCell.horizontalMargin)
+            make.bottom.equalTo(cellView.snp.bottom).inset(Constants.SourceSelectionCell.margin10)
         }
         
         sourceURLLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)

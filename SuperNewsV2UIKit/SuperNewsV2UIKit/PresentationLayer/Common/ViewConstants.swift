@@ -25,6 +25,11 @@ struct Constants {
         static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
     }
     
+    struct SourceSelection {
+        static let noResultLabelFontSize: CGFloat = isPhone() ? 18 : 30
+        static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
+    }
+    
     struct ArticleDetail {
         static let stackViewHorizontalSpacing: CGFloat = isPhone() ? 8 : 16
         static let topImageHeight: CGFloat = isPhone() ? 250 : 450
@@ -48,5 +53,16 @@ struct Constants {
         static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
         static let bottomMargin: CGFloat = isPhone() ? 5 : 12
         static let imageCornerRadius: CGFloat = isPhone() ? 10 : 20
+    }
+    
+    struct SourceSelectionCell {
+        static let viewCornerRadius: CGFloat = isPhone() ? 10 : 25
+        static let viewInsets: CGFloat = isPhone() ? 10 : 25
+        static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
+        static let margin10: CGFloat = isPhone() ? 10 : 20
+        static let labelStackViewSpacing: CGFloat = isPhone() ? 10 : 20
+        static let titleLabelFontSize: CGFloat = isPhone() ? 18 : 26
+        static let descriptionLabelFontSize: CGFloat = isPhone() ? 15 : 22
+        static let otherLabelFontSize: CGFloat = isPhone() ? 13 : 19
     }
 }

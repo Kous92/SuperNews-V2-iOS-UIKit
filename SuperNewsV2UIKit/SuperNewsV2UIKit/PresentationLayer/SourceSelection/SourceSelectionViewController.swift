@@ -112,7 +112,7 @@ final class SourceSelectionViewController: UIViewController {
         setBindings()
     }
     
-    // WARNING: Cela se déclenche aussi bien lorsque l'écran est détruit que lorsque qu'il y a un écran qui va aller au-dessus de celui-ci.
+    // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
     override func viewWillDisappear(_ animated: Bool) {
         // We make sure it will go back to previous view
         if isMovingFromParent {
@@ -135,13 +135,13 @@ final class SourceSelectionViewController: UIViewController {
         
         noResultLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(Constants.SourceSelection.horizontalMargin)
         }
         
         categoryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(Constants.CategoryCollectionView.collectionViewHeight)
         }
         
         searchBar.snp.makeConstraints { make in
