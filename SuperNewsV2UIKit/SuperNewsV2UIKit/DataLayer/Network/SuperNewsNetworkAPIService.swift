@@ -60,7 +60,9 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     }
     
     func searchNewsFromEverything(with searchQuery: String, language: String = "fr", sortBy: String = "publishedAt") async -> Result<[Article], SuperNewsAPIError> {
-        return handleArticlesResult(with: await getRequest(endpoint: .searchNewsFromEverything(searchQuery: searchQuery, language: language, sortBy: sortBy)))
+        // Required to avoid any error when searching with some special characters
+        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? ""
+        return handleArticlesResult(with: await getRequest(endpoint: .searchNewsFromEverything(searchQuery: encodedQuery, language: language, sortBy: sortBy)))
     }
     
     private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>) -> Result<[MediaSource], SuperNewsAPIError> {
