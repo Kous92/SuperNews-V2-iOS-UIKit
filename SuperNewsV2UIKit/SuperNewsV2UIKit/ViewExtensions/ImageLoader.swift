@@ -13,9 +13,16 @@ extension UIImageView {
     // Asynchronous image download.
     func loadImage(with url: String) {
         self.image = nil
+        var url = url
         let defaultImage = UIImage(named: "SuperNewsNotAvailableImage")
+        var urlComponents = url.split(separator: "/", omittingEmptySubsequences: true)
         
-        guard !url.isEmpty, let imageURL = URL(string: url) else {
+        // In order to download images if the image URL target uses http scheme instead of https, due to ATS restrictions
+        if urlComponents.count > 0 {
+            urlComponents[0] = "https:/"
+        }
+        
+        guard !url.isEmpty, let imageURL = URL(string: urlComponents.joined(separator: "/")) else {
             self.image = defaultImage
             return
         }
