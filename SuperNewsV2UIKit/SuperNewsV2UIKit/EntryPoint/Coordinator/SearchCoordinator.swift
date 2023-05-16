@@ -35,9 +35,9 @@ final class SearchCoordinator: ParentCoordinator, SearchViewControllerDelegate {
         // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let searchViewController = SearchViewController()
         searchViewController.coordinator = self
-        
+        navigationController.pushViewController(searchViewController, animated: false)
         print("[SearchCoordinator] Search view ready.")
         
-        return searchViewController
+        return navigationController
     }
 }
