@@ -13,7 +13,7 @@ import UIKit
 final class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     private let topHeadlinesCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder())
-    private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
+    private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController(), builder: SearchModuleBuilder())
     private let rootViewController: UIViewController
     
     init(with rootViewController: UIViewController = UITabBarController()) {

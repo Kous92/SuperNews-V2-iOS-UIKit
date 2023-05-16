@@ -16,3 +16,7 @@ protocol SourceSelectionUseCaseProtocol {
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
     func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
 }
+
+protocol SearchUseCaseProtocol {
+    func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+}

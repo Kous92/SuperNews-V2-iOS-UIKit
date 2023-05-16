@@ -10,8 +10,12 @@ import SnapKit
 import Combine
 
 final class SearchViewController: UIViewController {
-
+    
     weak var coordinator: SearchViewControllerDelegate?
+    
+    // MVVM with Reactive Programming
+    var viewModel: SearchViewModel?
+    private var subscriptions = Set<AnyCancellable>()
     
     // Background
     lazy var backgroundGradient: CAGradientLayer = {
@@ -128,13 +132,36 @@ final class SearchViewController: UIViewController {
     }
     
     private func setBindings() {
+        // Loading binding
+        viewModel?.isLoadingPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isLoading in
+                if isLoading {
+                    self?.noResultLabel.isHidden = true
+                    self?.setLoadingSpinner(isLoading: true)
+                    self?.hideTableView()
+                }
+            }.store(in: &subscriptions)
         
+        // Update binding
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                self?.loadingSpinner.stopAnimating()
+                self?.setLoadingSpinner(isLoading: false)
+                
+                if updated {
+                    self?.updateTableView()
+                } else {
+                    self?.displayNoResult()
+                }
+            }.store(in: &subscriptions)
     }
 }
 
 extension SearchViewController {
-    private func setNavigationBar() {
-        navigationItem.title = tabBarController?.tabBar.items?[1].title
+    private func setNavigationBar() {        
+        navigationItem.title = "Recherche"
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -149,6 +176,7 @@ extension SearchViewController {
     
     private func displayNoResult() {
         tableView.isHidden = true
+        noResultLabel.text = "Aucun résultat pour \"\(viewModel?.searchQuery ?? "??")\". Veuillez réessayer avec une autre recherche."
         noResultLabel.isHidden = false
     }
     
@@ -169,12 +197,11 @@ extension SearchViewController {
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return viewModel?.numberOfRowsInTableView() ?? 0
-        return 0
+        return viewModel?.numberOfRowsInTableView() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? NewsTableViewCell, let cellViewModel = viewModel?.getNewsCellViewModel(at: indexPath) else {
             return UITableViewCell()
         }
@@ -185,14 +212,12 @@ extension SearchViewController: UITableViewDataSource {
         cell.selectedBackgroundView = UIView()
         
         return cell
-         */
-        return UITableViewCell()
     }
 }
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // viewModel?.goToArticleDetailView(selectedViewModelIndex: indexPath.row)
+        viewModel?.goToArticleDetailView(selectedViewModelIndex: indexPath.row)
     }
 }
 
@@ -202,11 +227,11 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // viewModel?.searchQuery = searchText
+        viewModel?.searchQuery = searchText
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // viewModel?.searchQuery = ""
+        viewModel?.searchQuery = ""
         self.searchBar.text = ""
         self.searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
@@ -225,16 +250,24 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct SearchViewControllerPreview: PreviewProvider {
     static var previews: some View {
-
-        // Dark mode
-        UIViewControllerPreview {
-            let vc = SearchViewController()
-            return vc
+        ForEach(deviceNames, id: \.self) { deviceName in
+            // Dark mode
+            UIViewControllerPreview {
+                let tabBar = GradientTabBarController()
+                let navigationController = UINavigationController()
+                let builder = SearchModuleBuilder()
+                let vc = builder.buildModule(testMode: true)
+                vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+                navigationController.pushViewController(vc, animated: false)
+                tabBar.viewControllers = [navigationController]
+                
+                return tabBar
+            }
+            .previewDevice(PreviewDevice(rawValue: deviceName))
+            .preferredColorScheme(.dark)
+            .previewDisplayName(deviceName)
+            .edgesIgnoringSafeArea(.all)
         }
-        .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-        .preferredColorScheme(.dark)
-        .previewDisplayName("iPhone 14 Pro")
-        .edgesIgnoringSafeArea(.all)
     }
 }
 #endif
