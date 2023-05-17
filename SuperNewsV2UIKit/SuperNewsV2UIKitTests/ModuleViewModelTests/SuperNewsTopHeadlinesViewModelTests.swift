@@ -21,10 +21,6 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
         viewModel = TopHeadlinesViewModel(useCase: TopHeadlinesUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository))
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testInitNewsCategories() {
         let expectation1 = XCTestExpectation(description: "Retrieve different top headlines news categories")
         
