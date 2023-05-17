@@ -41,11 +41,11 @@ final class SearchViewModel {
             .removeDuplicates()
             .debounce(for: .seconds(0.8), scheduler: RunLoop.main)
             .sink { [weak self] value in
-                self?.fetchSourcesWithQuery()
+                self?.fetchNewsWithQuery()
             }.store(in: &subscriptions)
     }
     
-    private func fetchSourcesWithQuery() {
+    private func fetchNewsWithQuery() {
         // Contenu vide
         guard !searchQuery.isEmpty else {
             print("[SearchViewModel] Nothing to search, ignoring fetching data from network.")

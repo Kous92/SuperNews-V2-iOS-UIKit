@@ -61,4 +61,15 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssertNotNil(viewController)
         XCTAssert(viewController is ArticleDetailViewController, "The UIViewController is not a ArticleDetailViewController.")
     }
+    
+    func testSearchModuleBuilder() {
+        moduleBuilder = SearchModuleBuilder()
+        XCTAssertNotNil(moduleBuilder)
+        
+        // Checking dependency injections
+        let viewController = moduleBuilder?.buildModule(testMode: true, coordinator: nil)
+        
+        XCTAssertNotNil(viewController)
+        XCTAssert(viewController is SearchViewController, "The UIViewController is not a SearchViewController.")
+    }
 }

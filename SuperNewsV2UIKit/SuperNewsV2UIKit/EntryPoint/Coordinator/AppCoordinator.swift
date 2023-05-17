@@ -36,19 +36,3 @@ final class AppCoordinator: Coordinator {
         return rootViewController
     }
 }
-
-/*
-extension AppCoordinator: TopHeadlinesViewControllerDelegate {
-    func goToListView() {
-        // La transition est séparée ici dans un sous-flux
-        let listCoordinator = ListCoordinator(navigationController: navigationController)
-        
-        // Ajout du lien vers le parent avec self, attention à la rétention de cycle
-        listCoordinator.parentCoordinator = self
-        addChildCoordinator(childCoordinator: listCoordinator)
-        
-        // On transite de l'écran liste à l'écran détail
-        listCoordinator.start()
-    }
-}
-*/
