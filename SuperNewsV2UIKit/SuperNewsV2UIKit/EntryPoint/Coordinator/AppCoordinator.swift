@@ -14,6 +14,7 @@ final class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     private let topHeadlinesCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder())
     private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController(), builder: SearchModuleBuilder())
+    private let mapCoordinator = MapCoordinator(navigationController: UINavigationController(), builder: MapModuleBuilder())
     private let rootViewController: UIViewController
     
     init(with rootViewController: UIViewController = UITabBarController()) {
@@ -31,7 +32,11 @@ final class AppCoordinator: Coordinator {
         searchCoordinator.parentCoordinator = self
         searchViewController.tabBarItem = UITabBarItem(title: "Recherche", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
-        (rootViewController as? UITabBarController)?.viewControllers = [topHeadlinesViewController, searchViewController]
+        let mapViewController = mapCoordinator.start()
+        mapCoordinator.parentCoordinator = self
+        mapViewController.tabBarItem = UITabBarItem(title: "Carte du monde", image: UIImage(systemName: "map"), tag: 2)
+        
+        (rootViewController as? UITabBarController)?.viewControllers = [topHeadlinesViewController, searchViewController, mapViewController]
                 
         return rootViewController
     }
