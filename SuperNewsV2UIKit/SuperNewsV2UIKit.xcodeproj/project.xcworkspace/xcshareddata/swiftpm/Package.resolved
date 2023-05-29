@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "asynclocationkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AsyncSwift/AsyncLocationKit",
+      "state" : {
+        "revision" : "4fb1ba1865dacc4dff1d5529af26abbbebc934bc",
+        "version" : "1.6.2"
+      }
+    },
+    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",

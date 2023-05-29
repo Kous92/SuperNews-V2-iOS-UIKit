@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol TopHeadlinesUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
@@ -19,4 +20,8 @@ protocol SourceSelectionUseCaseProtocol {
 
 protocol SearchUseCaseProtocol {
     func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+}
+
+protocol MapUseCaseProtocol {
+    func fetchUserLocation() async -> Result<CLLocation, SuperNewsGPSError>
 }
