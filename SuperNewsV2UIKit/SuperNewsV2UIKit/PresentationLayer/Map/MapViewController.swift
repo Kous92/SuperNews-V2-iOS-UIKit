@@ -42,7 +42,7 @@ final class MapViewController: UIViewController {
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.delegate = self
-        // mapView.showsUserLocation = true
+        mapView.showsUserLocation = true
         mapView.register(CountryAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryAnnotation")
         mapView.register(CountryClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryCluster")
 
@@ -69,12 +69,6 @@ final class MapViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    /*
-     deinit {
-     mapView.delegate = nil
-     }
-     */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,8 +83,7 @@ final class MapViewController: UIViewController {
             mapView.addAnnotation(annotation)
         }
         
-        let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169), latitudinalMeters: 150000, longitudinalMeters: 150000)
-        mapView.setRegion(coordinateRegion, animated: true)
+        viewModel?.getLocation()
     }
     
     private func buildViewHierarchy() {
@@ -110,7 +103,21 @@ final class MapViewController: UIViewController {
     }
     
     private func setBindings() {
-        
+        viewModel?.userLocationPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    print("OK: done")
+                case .failure(let error):
+                    print(error.rawValue)
+                    // Default position set in Paris
+                    self?.centerMapToPosition(with: CLLocation(latitude: 48.866667, longitude: 2.333333), and: 1000000)
+                }
+            } receiveValue: { [weak self] location in
+                print("[MapViewController] Location succeeded")
+                self?.centerMapToPosition(with: location, and: 10000)
+            }.store(in: &subscriptions)
     }
 }
 
@@ -119,20 +126,43 @@ extension MapViewController {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
     }
+    
+    private func centerMapToPosition(with location: CLLocation, and radius: CLLocationDistance) {
+        // Set a visible region in meters
+        let regionRadius = radius
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else {
+            print("It's MKUserLocation")
+            return nil
+        }
+        
+        print("It's not MKUserLocation")
+        
         guard let countryAnnotation = annotation as? CountryPointAnnotation,
-              let annotationViewModel = countryAnnotation.viewModel
-        else {
+            let annotationViewModel = countryAnnotation.viewModel else {
+            print("It's a cluster")
             return CountryClusterAnnotationView(annotation: annotation, reuseIdentifier: "countryCluster")
         }
         
+        print("It's a country annotation")
         let annotationView = CountryAnnotationView(annotation: countryAnnotation, reuseIdentifier: "countryAnnotation")
         annotationView.configure(with: annotationViewModel)
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view is CountryClusterAnnotationView {
+            print("Cluster selected")
+        } else {
+            print("Country annotation selected")
+        }
     }
 }
 

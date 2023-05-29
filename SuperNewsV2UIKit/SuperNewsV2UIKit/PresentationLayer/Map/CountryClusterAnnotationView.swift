@@ -18,7 +18,7 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
         let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
         gradient.type = .axial
-        gradient.cornerRadius = 10
+        gradient.cornerRadius = 15
         gradient.colors = [
             blue,
             darkBlue,
@@ -40,29 +40,13 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         return label
     }()
     
-    /*
-    override var annotation: MKAnnotation? {
-        didSet {
-            guard let annotation = annotation as? MKClusterAnnotation else {
-                assertionFailure("Using LocationDataMapClusterView with wrong annotation type")
-                return
-            }
-            
-            // countryCountLabel.text = annotation.memberAnnotations.count < 100 ? "\(annotation.memberAnnotations.count)" : "99+"
-            countryCountLabel.setShadowLabel(string: String(annotation.memberAnnotations.count), font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
-        }
-    }
-     */
-    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         collisionMode = .rectangle
         
         frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         centerOffset = CGPoint(x: 0, y: 0)
-        // backgroundColor = .blue
-        // self.layer.cornerRadius = 35
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 15
         self.clipsToBounds = true
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
@@ -72,9 +56,7 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         setViewBackground()
         buildViewHierarchy()
         setConstraints()
-        // String(annotation.memberAnnotations.count), font: UIFont.systemFont(ofSize: 12, weight: .medium)
-        // countryCountLabel.setShadowLabel(string: String(annotation.memberAnnotations.count), font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
-        countryCountLabel.setShadowLabel(string: "100", font: UIFont.systemFont(ofSize: 17, weight: .medium), shadowColor: .blue, radius: 3)
+        countryCountLabel.setShadowLabel(string: "0", font: UIFont.systemFont(ofSize: 17, weight: .medium), shadowColor: .blue, radius: 3)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,26 +79,6 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         } else {
             displayPriority = .defaultHigh
         }
-        
-        /*
-        if let cluster = annotation as? MKClusterAnnotation {
-            let totalBikes = cluster.memberAnnotations.count
-            
-            
-            if count(cycleType: .unicycle) > 0 {
-                image = drawUnicycleCount(count: totalBikes)
-            } else {
-                let tricycleCount = count(cycleType: .tricycle)
-                image = drawRatioBicycleToTricycle(tricycleCount, to: totalBikes)
-            }
-            
-            if count(cycleType: .unicycle) > 0 {
-                displayPriority = .defaultLow
-            } else {
-                displayPriority = .defaultHigh
-            }
-        }
-         */
     }
     
     func buildViewHierarchy() {
@@ -148,7 +110,6 @@ struct CountryClusterAnnotationViewPreview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             let annotationView = CountryClusterAnnotationView()
-            // annotationView.configure(with: CountryAnnotationViewModel(countryName: "France", countryCode: "fr", coordinates: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169)))
             return annotationView
         }
         .previewLayout(PreviewLayout.sizeThatFits)

@@ -20,7 +20,10 @@ final class MapModuleBuilder: ModuleBuilder {
         // let settingsRepository = getSettingsRepository(testMode: testMode)
         // let useCase = MapUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
         // let mapViewModel = MapViewModel(useCase: useCase)
-        let mapViewModel = MapViewModel()
+        
+        let gpsService = SuperNewsGPSLocationService()
+        let locationRepository = SuperNewsGPSRepository(locationService: gpsService)
+        let mapViewModel = MapViewModel(useCase: MapUseCase(locationRepository: locationRepository))
         mapViewModel.coordinator = coordinator as? MapViewControllerDelegate
         
         // Injecting view model
