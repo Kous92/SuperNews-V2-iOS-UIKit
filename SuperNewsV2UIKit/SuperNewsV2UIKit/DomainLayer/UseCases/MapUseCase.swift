@@ -10,12 +10,39 @@ import CoreLocation
 
 final class MapUseCase: MapUseCaseProtocol {
     private let locationRepository: SuperNewsLocationRepository
+    private let localFileRepository: SuperNewsLocalFileRepository
     
-    init(locationRepository: SuperNewsLocationRepository) {
+    init(locationRepository: SuperNewsLocationRepository, localFileRepository: SuperNewsLocalFileRepository) {
         self.locationRepository = locationRepository
+        self.localFileRepository = localFileRepository
     }
     
     func fetchUserLocation() async -> Result<CLLocation, SuperNewsGPSError> {
         return await locationRepository.fetchLocation()
+    }
+    
+    func execute() async -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {
+        return handleResult(with: await localFileRepository.loadCountries())
+    }
+    
+    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
+        return await locationRepository.reverseGeocoding(location: location)
+    }
+    
+    private func handleResult(with result: Result<[CountryDTO], SuperNewsLocalFileError>) -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {
+        switch result {
+            case .success(let countries):
+                // print("DTOs:\n\(articles)")
+                return .success(parseViewModels(with: countries))
+            case .failure(let error):
+                return .failure(error)
+        }
+    }
+    
+    private func parseViewModels(with countries: [CountryDTO]) -> [CountryAnnotationViewModel] {
+        var viewModels = [CountryAnnotationViewModel]()
+        countries.forEach { viewModels.append(CountryAnnotationViewModel(with: $0)) }
+        
+        return viewModels
     }
 }

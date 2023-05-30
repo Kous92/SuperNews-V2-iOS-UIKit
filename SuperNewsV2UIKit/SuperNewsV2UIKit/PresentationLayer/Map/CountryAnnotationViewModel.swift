@@ -18,4 +18,10 @@ struct CountryAnnotationViewModel {
         self.countryCode = countryCode
         self.coordinates = coordinates
     }
+    
+    init(with country: CountryDTO) {
+        self.countryName = country.countryName
+        self.countryCode = country.countryCode
+        self.coordinates = CLLocationCoordinate2D(latitude: country.lat, longitude: country.lon)
+    }
 }
