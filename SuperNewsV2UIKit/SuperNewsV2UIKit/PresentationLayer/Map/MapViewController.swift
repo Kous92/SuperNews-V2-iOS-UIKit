@@ -78,11 +78,7 @@ final class MapViewController: UIViewController {
         setConstraints()
         setBindings()
         
-        for viewModel in annotationViewModels {
-            let annotation = CountryPointAnnotation(viewModel: viewModel)
-            mapView.addAnnotation(annotation)
-        }
-        
+        viewModel?.loadCountries()
         viewModel?.getLocation()
     }
     
@@ -118,6 +114,14 @@ final class MapViewController: UIViewController {
                 print("[MapViewController] Location succeeded")
                 self?.centerMapToPosition(with: location, and: 10000)
             }.store(in: &subscriptions)
+        
+        viewModel?.countryAnnotationPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] loaded in
+                if loaded {
+                    self?.placeAnnotations()
+                }
+            }.store(in: &subscriptions)
     }
 }
 
@@ -125,6 +129,15 @@ extension MapViewController {
     private func setViewBackground() {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
+    }
+    
+    private func placeAnnotations() {
+        let annotationViewModels = viewModel?.getAnnotationViewModels() ?? []
+        
+        for viewModel in annotationViewModels {
+            let annotation = CountryPointAnnotation(viewModel: viewModel)
+            mapView.addAnnotation(annotation)
+        }
     }
     
     private func centerMapToPosition(with location: CLLocation, and radius: CLLocationDistance) {
@@ -137,20 +150,18 @@ extension MapViewController {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // User position on map: blue dot
         guard !(annotation is MKUserLocation) else {
-            print("It's MKUserLocation")
             return nil
         }
         
-        print("It's not MKUserLocation")
-        
         guard let countryAnnotation = annotation as? CountryPointAnnotation,
             let annotationViewModel = countryAnnotation.viewModel else {
-            print("It's a cluster")
+            // Cluster of countries annotations
             return CountryClusterAnnotationView(annotation: annotation, reuseIdentifier: "countryCluster")
         }
         
-        print("It's a country annotation")
+        // Single country annotation
         let annotationView = CountryAnnotationView(annotation: countryAnnotation, reuseIdentifier: "countryAnnotation")
         annotationView.configure(with: annotationViewModel)
         

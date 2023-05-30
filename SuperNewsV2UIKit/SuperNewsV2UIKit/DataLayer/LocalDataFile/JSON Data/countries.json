@@ -1,0 +1,326 @@
+[
+    {
+        "countryCode": "ae",
+        "countryName": "Émirats Arabes Unis",
+        "lat": 24.18250292309135,
+        "lon": 54.27920525789581
+    },
+    {
+        "countryCode": "ar",
+        "countryName": "Argentine",
+        "lat": -35.697270518120085,
+        "lon": -64.53238503843076
+    },
+    {
+        "countryCode": "at",
+        "countryName": "Autriche",
+        "lat": 47.631858269895794,
+        "lon": 13.797778364631036
+    },
+    {
+        "countryCode": "au",
+        "countryName": "Australie",
+        "lat": -25.697337673983082,
+        "lon": 134.02277170916162
+    },
+    {
+        "countryCode": "be",
+        "countryName": "Belgique",
+        "lat": 50.6182138854095,
+        "lon": 4.675010154696485
+    },
+    {
+        "countryCode": "bg",
+        "countryName": "Bulgarie",
+        "lat": 42.82043677302438,
+        "lon": 25.251739122561908
+    },
+    {
+        "countryCode": "br",
+        "countryName": "Brésil",
+        "lat": -11.524630416426652,
+        "lon": -54.355206608256424
+    },
+    {
+        "countryCode": "ca",
+        "countryName": "Canada",
+        "lat": 57.550480044655636,
+        "lon": -98.41680517868062
+    },
+    {
+        "countryCode": "ch",
+        "countryName": "Suisse",
+        "lat": 46.73678128684938,
+        "lon": 8.286928794895285
+    },
+    {
+        "countryCode": "cn",
+        "countryName": "Chine",
+        "lat": 38.07325481105728,
+        "lon": 104.69113855849604
+    },
+    {
+        "countryCode": "co",
+        "countryName": "Colombie",
+        "lat": 4.187753877352739,
+        "lon": -72.6445066243485
+    },
+    {
+        "countryCode": "cu",
+        "countryName": "Cuba",
+        "lat": 21.476176522869448,
+        "lon": -79.69817857618705
+    },
+    {
+        "countryCode": "cz",
+        "countryName": "République Tchèque",
+        "lat": 49.74917370930982,
+        "lon": 15.383273292023533
+    },
+    {
+        "countryCode": "de",
+        "countryName": "Allemagne",
+        "lat": 51.08304539800482,
+        "lon": 10.426171427430804
+    },
+    {
+        "countryCode": "eg",
+        "countryName": "Égypte",
+        "lat": 26.6051703445062,
+        "lon": 30.240135435012338
+    },
+    {
+        "countryCode": "fr",
+        "countryName": "France",
+        "lat": 46.6423682169416,
+        "lon": 2.1940236627886227
+    },
+    {
+        "countryCode": "gb",
+        "countryName": "Royaume-Uni",
+        "lat": 53.97844735080214,
+        "lon": -2.852943909329258
+    },
+    {
+        "countryCode": "gr",
+        "countryName": "Grèce",
+        "lat": 39.42012261727978,
+        "lon": 23.110368936161876
+    },
+    {
+        "countryCode": "hk",
+        "countryName": "Hong Kong",
+        "lat": 22.28416553,
+        "lon": 114.152666056
+    },
+    {
+        "countryCode": "hu",
+        "countryName": "Hongrie",
+        "lat": 47.22527332486294,
+        "lon": 19.39620048366142
+    },
+    {
+        "countryCode": "id",
+        "countryName": "Indonésie",
+        "lat": 0.15591979959037652,
+        "lon": 113.96538246847302
+    },
+    {
+        "countryCode": "ie",
+        "countryName": "Irlande",
+        "lat": 53.30489539816495,
+        "lon": -8.241128545554096
+    },
+    {
+        "countryCode": "il",
+        "countryName": "Israël",
+        "lat": 31.513542220043195,
+        "lon": 35.027923472437024
+    },
+    {
+        "countryCode": "in",
+        "countryName": "Inde",
+        "lat": 23.586300567746722,
+        "lon": 81.17300408530181
+    },
+    {
+        "countryCode": "it",
+        "countryName": "Italie",
+        "lat": 42.98201127614267,
+        "lon": 12.763657166123137
+    },
+    {
+        "countryCode": "jp",
+        "countryName": "Japon",
+        "lat": 36.76738832597829,
+        "lon": 137.46934234351835
+    },
+    {
+        "countryCode": "kr",
+        "countryName": "Corée du Sud",
+        "lat": 36.402386712544114,
+        "lon": 127.76224551357649
+    },
+    {
+        "countryCode": "lt",
+        "countryName": "Lituanie",
+        "lat": 55.29437393417175,
+        "lon": 23.946021605013534
+    },
+    {
+        "countryCode": "lv",
+        "countryName": "Lettonie",
+        "lat": 56.813853047554154,
+        "lon": 24.693671325654403
+    },
+    {
+        "countryCode": "ma",
+        "countryName": "Maroc",
+        "lat": 28.687598134979325,
+        "lon": -8.817212587250811
+    },
+    {
+        "countryCode": "mx",
+        "countryName": "Mexique",
+        "lat": 23.87436068093592,
+        "lon": -101.55399731630118
+    },
+    {
+        "countryCode": "my",
+        "countryName": "Malaisie",
+        "lat": 3.6716608556387857,
+        "lon": 114.63330303992869
+    },
+    {
+        "countryCode": "ng",
+        "countryName": "Nigéria",
+        "lat": 9.61029352034213,
+        "lon": 8.147714845256194
+    },
+    {
+        "countryCode": "nl",
+        "countryName": "Pays-Bas",
+        "lat": 52.134054128923886,
+        "lon": 5.554136426128487
+    },
+    {
+        "countryCode": "no",
+        "countryName": "Norvège",
+        "lat": 64.97775882947745,
+        "lon": 16.670259272390894
+    },
+    {
+        "countryCode": "nz",
+        "countryName": "Nouvelle-Zélande",
+        "lat": -43.82765432544426,
+        "lon": 170.69035541428696
+    },
+    {
+        "countryCode": "ph",
+        "countryName": "Philippines",
+        "lat": 15.586542251094242,
+        "lon": 121.82208941416745
+    },
+    {
+        "countryCode": "pl",
+        "countryName": "Pologne",
+        "lat": 52.06848055692473,
+        "lon": 19.43573279234468
+    },
+    {
+        "countryCode": "pt",
+        "countryName": "Portugal",
+        "lat": 39.67529214702138,
+        "lon": -7.933662183874006
+    },
+    {
+        "countryCode": "ro",
+        "countryName": "Roumanie",
+        "lat": 45.82454894397586,
+        "lon": 25.094158201563292
+    },
+    {
+        "countryCode": "rs",
+        "countryName": "Serbie",
+        "lat": 44.02679870131969,
+        "lon": 20.85677444395745
+    },
+    {
+        "countryCode": "ru",
+        "countryName": "Russie",
+        "lat": 59.039434214106194,
+        "lon": 98.6704990698032
+    },
+    {
+        "countryCode": "sa",
+        "countryName": "Arabie Saoudite",
+        "lat": 24.136038144757897,
+        "lon": 44.600958178225596
+    },
+    {
+        "countryCode": "se",
+        "countryName": "Suède",
+        "lat": 62.73420986108448,
+        "lon": 17.062431988004956
+    },
+    {
+        "countryCode": "sg",
+        "countryName": "Singapour",
+        "lat": 1.3528251890006349,
+        "lon": 103.81025757634053
+    },
+    {
+        "countryCode": "si",
+        "countryName": "Slovénie",
+        "lat": 46.13759229564504,
+        "lon": 14.890636899973781
+    },
+    {
+        "countryCode": "sk",
+        "countryName": "Slovaquie",
+        "lat": 48.69808390520484,
+        "lon": 19.581015362490966
+    },
+    {
+        "countryCode": "th",
+        "countryName": "Thaïlande",
+        "lat": 13.66222784745538,
+        "lon": 101.08675116214552
+    },
+    {
+        "countryCode": "tr",
+        "countryName": "Turquie",
+        "lat": 38.93207363123396,
+        "lon": 35.56886764076691
+    },
+    {
+        "countryCode": "tw",
+        "countryName": "Taïwan",
+        "lat": 23.810063,
+        "lon": 120.991246
+    },
+    {
+        "countryCode": "ua",
+        "countryName": "Ukraine",
+        "lat": 48.657532515563794,
+        "lon": 31.27377208442636
+    },
+    {
+        "countryCode": "us",
+        "countryName": "États-Unis",
+        "lat": 38.8208089190304,
+        "lon": -96.33161660829639
+    },
+    {
+        "countryCode": "ve",
+        "countryName": "Venezuela",
+        "lat": 7.148324760507107,
+        "lon": -66.36492135985132
+    },
+    {
+        "countryCode": "za",
+        "countryName": "Afrique du Sud",
+        "lat": -33.928992,
+        "lon": 18.417396
+    }
+]

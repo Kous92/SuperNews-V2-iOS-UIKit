@@ -16,14 +16,10 @@ final class MapModuleBuilder: ModuleBuilder {
         let mapViewController = MapViewController()
         
         // Dependency injection
-        // let dataRepository = getRepository(testMode: testMode)
-        // let settingsRepository = getSettingsRepository(testMode: testMode)
-        // let useCase = MapUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
-        // let mapViewModel = MapViewModel(useCase: useCase)
-        
-        let gpsService = SuperNewsGPSLocationService()
-        let locationRepository = SuperNewsGPSRepository(locationService: gpsService)
-        let mapViewModel = MapViewModel(useCase: MapUseCase(locationRepository: locationRepository))
+        let locationRepository = getLocationRepository(testMode: testMode)
+        let localFileRepository = getLocalFileRepository(testMode: testMode)
+        let useCase = MapUseCase(locationRepository: locationRepository, localFileRepository: localFileRepository)
+        let mapViewModel = MapViewModel(useCase: useCase)
         mapViewModel.coordinator = coordinator as? MapViewControllerDelegate
         
         // Injecting view model
@@ -32,21 +28,19 @@ final class MapModuleBuilder: ModuleBuilder {
         return mapViewController
     }
     
-    /*
-    private func getRepository(testMode: Bool) -> SuperNewsRepository {
-        return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
+    private func getLocationRepository(testMode: Bool) -> SuperNewsLocationRepository {
+        return SuperNewsGPSRepository(locationService: getLocationService(testMode: testMode))
     }
     
-    private func getSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
-        return SuperNewsUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
+    private func getLocalFileRepository(testMode: Bool) -> SuperNewsLocalFileRepository {
+        return SuperNewsJSONFileRepository(localFileService: getLocalFileService(testMode: testMode))
     }
     
-    private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
-        return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
+    private func getLocationService(testMode: Bool) -> SuperNewsLocationService {
+        return testMode ? SuperNewsGPSLocationService() : SuperNewsGPSLocationService()
     }
     
-    private func getSettingsService(testMode: Bool) -> SuperNewsLocalSettings {
-        return testMode ? SuperNewsMockLocalSettings() : SuperNewsUserDefaultsLocalSettings()
+    private func getLocalFileService(testMode: Bool) -> SuperNewsLocalDataFileService {
+        return testMode ? SuperNewsJSONFileService() : SuperNewsJSONFileService()
     }
-     */
 }
