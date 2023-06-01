@@ -16,13 +16,6 @@ final class MapViewController: UIViewController {
     var viewModel: MapViewModel?
     private var subscriptions = Set<AnyCancellable>()
     
-    let annotationViewModels: [CountryAnnotationViewModel] = [
-        CountryAnnotationViewModel(countryName: "France", countryCode: "fr", coordinates: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169)),
-        CountryAnnotationViewModel(countryName: "Émirats Arabes Unis", countryCode: "ae", coordinates: CLLocationCoordinate2D(latitude: 24.453835, longitude: 54.377401)),
-        CountryAnnotationViewModel(countryName: "Belgique", countryCode: "be", coordinates: CLLocationCoordinate2D(latitude: 50.846557, longitude: 4.351697)),
-        CountryAnnotationViewModel(countryName: "Allemagne", countryCode: "de", coordinates: CLLocationCoordinate2D(latitude: 52.517037, longitude: 13.38886))
-    ]
-    
     // Background
     private lazy var backgroundGradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
@@ -45,7 +38,7 @@ final class MapViewController: UIViewController {
         mapView.showsUserLocation = true
         mapView.register(CountryAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryAnnotation")
         mapView.register(CountryClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryCluster")
-
+        
         return mapView
     }()
     
@@ -59,6 +52,17 @@ final class MapViewController: UIViewController {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Annuler"
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
         return searchBar
+    }()
+    
+    private lazy var countryAutoCompletionTableView: UITableView = {
+        let tableView = UITableView()
+        // tableView.backgroundColor = .blue
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.layer.cornerRadius = 10
+        tableView.register(CountryAutoCompletionTableViewCell.self, forCellReuseIdentifier: "autoCompletionCell")
+        tableView.isHidden = true
+        return tableView
     }()
     
     init() {
@@ -85,6 +89,7 @@ final class MapViewController: UIViewController {
     private func buildViewHierarchy() {
         view.addSubview(mapView)
         mapView.addSubview(searchBar)
+        mapView.addSubview(countryAutoCompletionTableView)
     }
     
     private func setConstraints() {
@@ -96,19 +101,38 @@ final class MapViewController: UIViewController {
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
+        
+        countryAutoCompletionTableView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(10)
+            make.top.equalTo(searchBar.snp.bottom)
+            make.height.equalTo(300)
+        }
     }
     
     private func setBindings() {
+        // Update binding
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                if updated {
+                    print("Ready to update autocompletion")
+                    self?.updateTableView()
+                } else {
+                    print("No result found")
+                    // self?.displayNoResult()
+                }
+            }.store(in: &subscriptions)
+        
         viewModel?.userLocationPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .finished:
-                    print("OK: done")
-                case .failure(let error):
-                    print(error.rawValue)
-                    // Default position set in Paris
-                    self?.centerMapToPosition(with: CLLocation(latitude: 48.866667, longitude: 2.333333), and: 1000000)
+                    case .finished:
+                        print("OK: done")
+                    case .failure(let error):
+                        print(error.rawValue)
+                        // Default position set in Paris
+                        self?.centerMapToPosition(with: CLLocation(latitude: 48.866667, longitude: 2.333333), and: 1000000)
                 }
             } receiveValue: { [weak self] location in
                 print("[MapViewController] Location succeeded")
@@ -129,6 +153,13 @@ extension MapViewController {
     private func setViewBackground() {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
+        
+        // backgroundGradient.frame = countryAutoCompletionTableView.bounds
+        // countryAutoCompletionTableView.layer.addSublayer(backgroundGradient)
+    }
+    
+    private func updateTableView() {
+        countryAutoCompletionTableView.reloadData()
     }
     
     private func placeAnnotations() {
@@ -156,7 +187,7 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         guard let countryAnnotation = annotation as? CountryPointAnnotation,
-            let annotationViewModel = countryAnnotation.viewModel else {
+              let annotationViewModel = countryAnnotation.viewModel else {
             // Cluster of countries annotations
             return CountryClusterAnnotationView(annotation: annotation, reuseIdentifier: "countryCluster")
         }
@@ -180,22 +211,64 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchBar.setShowsCancelButton(true, animated: true)
+        countryAutoCompletionTableView.isHidden = false
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // viewModel?.searchQuery = searchText
+        viewModel?.searchQuery = searchText
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // viewModel?.searchQuery = ""
+        viewModel?.searchQuery = ""
         self.searchBar.text = ""
         self.searchBar.setShowsCancelButton(false, animated: true)
+        countryAutoCompletionTableView.isHidden = true
         searchBar.resignFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: true)
+    }
+}
+
+extension MapViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Autocompletion with: \(viewModel?.numberOfRowsInTableView() ?? 0) rows")
+        return viewModel?.numberOfRowsInTableView() ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompletionCell", for: indexPath) as? CountryAutoCompletionTableViewCell,
+              let autoCompletionViewModel = viewModel?.getAutoCompletionViewModel(at: indexPath) else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(with: autoCompletionViewModel)
+        cell.backgroundColor = .clear
+        cell.backgroundView = UIView()
+        cell.selectedBackgroundView = UIView()
+        return cell
+    }
+}
+
+extension MapViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Unselect the row.
+        countryAutoCompletionTableView.deselectRow(at: indexPath, animated: false)
+        countryAutoCompletionTableView.isHidden = true
+        countryAutoCompletionTableView.isHidden = true
+        searchBar.resignFirstResponder() // Le clavier disparaît (ce n'est pas automatique de base)
+        
+        guard let searchCountry = viewModel?.getAutoCompletionViewModel(at: indexPath) else {
+            return
+        }
+        
+        searchBar.text = searchCountry.countryName
+        
+        // Centrer sur le pays en question
+        let coordinates = searchCountry.coordinates
+        centerMapToPosition(with: CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude), and: 100000)
     }
 }
 

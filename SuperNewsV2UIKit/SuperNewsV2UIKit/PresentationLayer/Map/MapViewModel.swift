@@ -11,14 +11,22 @@ import CoreLocation
 
 final class MapViewModel {
     private var annotationsViewModels = [CountryAnnotationViewModel]()
+    private var autocompletionViewModels = [CountryAnnotationViewModel]()
     
     // Delegate
     weak var coordinator: MapViewControllerDelegate?
     private let useCase: MapUseCaseProtocol
     
     // MARK: - Bindings
+    private var updateResult = PassthroughSubject<Bool, Never>()
     private var userLocation = PassthroughSubject<CLLocation, SuperNewsGPSError>()
     private var countryAnnotations = PassthroughSubject<Bool, Never>()
+    @Published var searchQuery = ""
+    private var subscriptions = Set<AnyCancellable>()
+    
+    var updateResultPublisher: AnyPublisher<Bool, Never> {
+        return updateResult.eraseToAnyPublisher()
+    }
     
     var userLocationPublisher: AnyPublisher<CLLocation, SuperNewsGPSError> {
         return userLocation.eraseToAnyPublisher()
@@ -30,6 +38,7 @@ final class MapViewModel {
     
     init(useCase: MapUseCaseProtocol) {
         self.useCase = useCase
+        setBindings()
     }
     
     func getLocation() {
@@ -57,8 +66,10 @@ final class MapViewModel {
             switch result {
                 case .success(let annotations):
                     self.annotationsViewModels = annotations
+                    self.autocompletionViewModels = annotations
                     print("[MapViewModel] Countries loaded successfully, ready to display on map")
                     self.countryAnnotations.send(true)
+                    self.updateResult.send(true)
                 case .failure(let error):
                     print("[MapViewModel] Loading failed.")
                     print("ERROR: \(error.rawValue)")
@@ -76,7 +87,46 @@ final class MapViewModel {
     }
 }
 
-// Navigation part
 extension MapViewModel {
+    private func setBindings() {
+        $searchQuery
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+            .sink { [weak self] value in
+                self?.searchCountry()
+            }.store(in: &subscriptions)
+    }
     
+    private func searchCountry() {
+        autocompletionViewModels.removeAll()
+        
+        guard !searchQuery.isEmpty else {
+            autocompletionViewModels = annotationsViewModels
+            updateResult.send(true)
+            return
+        }
+        
+        autocompletionViewModels = annotationsViewModels.filter { viewModel in
+            viewModel.countryName.lowercased().contains(searchQuery.lowercased())
+        }
+        
+        updateResult.send(true)
+    }
+    
+    // In that case, it's a unique section TableView
+    func numberOfRowsInTableView() -> Int {
+        return autocompletionViewModels.count
+    }
+    
+    func getAutoCompletionViewModel(at indexPath: IndexPath) -> CountryAnnotationViewModel? {
+        // A TableView must have at least one section and one element on CellViewModels list, crash othervise
+        let cellCount = autocompletionViewModels.count
+        
+        guard cellCount > 0, indexPath.row <= cellCount else {
+            return nil
+        }
+        
+        return autocompletionViewModels[indexPath.row]
+    }
 }

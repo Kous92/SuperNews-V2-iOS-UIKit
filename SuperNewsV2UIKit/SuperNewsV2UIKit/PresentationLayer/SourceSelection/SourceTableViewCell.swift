@@ -16,7 +16,6 @@ final class SourceTableViewCell: UITableViewCell {
         view.layer.cornerRadius = Constants.SourceSelectionCell.viewCornerRadius
         view.layer.borderColor = UIColor(named: "SuperNewsDarkBlue")?.cgColor
         view.layer.borderWidth = 1
-        // view.backgroundColor = UIColor(named: "SuperNewsBlue")
         return view
     }()
     
