@@ -245,7 +245,7 @@ final class ArticleDetailViewController: UIViewController {
         clockContainerView.layer.shadowOpacity = 0.25
         clockContainerView.layer.shadowPath = UIBezierPath(roundedRect: clockImageView.bounds, cornerRadius: 10).cgPath
         
-        articleWebsiteButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1])
+        articleWebsiteButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: 10)
     }
     
     private func buildViewHierarchy() {

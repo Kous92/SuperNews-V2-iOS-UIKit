@@ -34,6 +34,7 @@ final class MapViewController: UIViewController {
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.register(CountryAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryAnnotation")
@@ -45,6 +46,7 @@ final class MapViewController: UIViewController {
     // For searching news
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.placeholder = "Rechercher"
         searchBar.backgroundImage = UIImage()
         searchBar.showsCancelButton = false
@@ -54,15 +56,38 @@ final class MapViewController: UIViewController {
         return searchBar
     }()
     
+    private lazy var autoCompletionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 10
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 1
+        view.isHidden = true
+        return view
+    }()
+    
     private lazy var countryAutoCompletionTableView: UITableView = {
         let tableView = UITableView()
-        // tableView.backgroundColor = .blue
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.layer.cornerRadius = 10
         tableView.register(CountryAutoCompletionTableViewCell.self, forCellReuseIdentifier: "autoCompletionCell")
-        tableView.isHidden = true
         return tableView
+    }()
+    
+    private lazy var locationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        button.isEnabled = false
+        button.isHidden = true
+        return button
     }()
     
     init() {
@@ -81,6 +106,7 @@ final class MapViewController: UIViewController {
         buildViewHierarchy()
         setConstraints()
         setBindings()
+        setButtonActions()
         
         viewModel?.loadCountries()
         viewModel?.getLocation()
@@ -89,7 +115,9 @@ final class MapViewController: UIViewController {
     private func buildViewHierarchy() {
         view.addSubview(mapView)
         mapView.addSubview(searchBar)
-        mapView.addSubview(countryAutoCompletionTableView)
+        mapView.addSubview(autoCompletionView)
+        autoCompletionView.addSubview(countryAutoCompletionTableView)
+        mapView.addSubview(locationButton)
     }
     
     private func setConstraints() {
@@ -102,11 +130,26 @@ final class MapViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
-        countryAutoCompletionTableView.snp.makeConstraints { make in
+        autoCompletionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(searchBar.snp.bottom)
             make.height.equalTo(300)
         }
+        
+        countryAutoCompletionTableView.snp.makeConstraints { make in
+            make.edges.equalTo(autoCompletionView)
+        }
+        
+        locationButton.snp.makeConstraints { make in
+            make.size.equalTo(50)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(15)
+            make.trailing.equalToSuperview().inset(15)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        autoCompletionView.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.25, 0.5, 1], cornerRadius: 10)
+        locationButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: 10)
     }
     
     private func setBindings() {
@@ -119,7 +162,6 @@ final class MapViewController: UIViewController {
                     self?.updateTableView()
                 } else {
                     print("No result found")
-                    // self?.displayNoResult()
                 }
             }.store(in: &subscriptions)
         
@@ -136,6 +178,7 @@ final class MapViewController: UIViewController {
                 }
             } receiveValue: { [weak self] location in
                 print("[MapViewController] Location succeeded")
+                self?.activateLocationButton()
                 self?.centerMapToPosition(with: location, and: 10000)
             }.store(in: &subscriptions)
         
@@ -153,9 +196,22 @@ extension MapViewController {
     private func setViewBackground() {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
+    }
+    
+    // This variant is available for UIKit in iOS 14 and later, no need anymore to use legacy addTarget with #selector.
+    private func setButtonActions() {
+        let locationAction = UIAction { [weak self] _ in
+            if let userPosition = self?.viewModel?.getUserMapPosition() {
+                self?.centerMapToPosition(with: userPosition, and: 10000)
+            }
+        }
         
-        // backgroundGradient.frame = countryAutoCompletionTableView.bounds
-        // countryAutoCompletionTableView.layer.addSublayer(backgroundGradient)
+        locationButton.addAction(locationAction, for: .touchUpInside)
+    }
+    
+    private func activateLocationButton() {
+        locationButton.isEnabled = true
+        locationButton.isHidden = false
     }
     
     private func updateTableView() {
@@ -201,7 +257,12 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view is CountryClusterAnnotationView {
-            print("Cluster selected")
+            // if the user taps a cluster, zoom in
+            let currentSpan = mapView.region.span
+            let zoomSpan = MKCoordinateSpan(latitudeDelta: currentSpan.latitudeDelta / 2.0, longitudeDelta: currentSpan.longitudeDelta / 2.0)
+            let zoomCoordinate = view.annotation?.coordinate ?? mapView.region.center
+            let zoomed = MKCoordinateRegion(center: zoomCoordinate, span: zoomSpan)
+            mapView.setRegion(zoomed, animated: true)
         } else {
             print("Country annotation selected")
         }
@@ -211,7 +272,7 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchBar.setShowsCancelButton(true, animated: true)
-        countryAutoCompletionTableView.isHidden = false
+        autoCompletionView.isHidden = false
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -222,7 +283,7 @@ extension MapViewController: UISearchBarDelegate {
         viewModel?.searchQuery = ""
         self.searchBar.text = ""
         self.searchBar.setShowsCancelButton(false, animated: true)
-        countryAutoCompletionTableView.isHidden = true
+        autoCompletionView.isHidden = true
         searchBar.resignFirstResponder()
     }
     
@@ -256,8 +317,7 @@ extension MapViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Unselect the row.
         countryAutoCompletionTableView.deselectRow(at: indexPath, animated: false)
-        countryAutoCompletionTableView.isHidden = true
-        countryAutoCompletionTableView.isHidden = true
+        autoCompletionView.isHidden = true
         searchBar.resignFirstResponder() // Le clavier disparaît (ce n'est pas automatique de base)
         
         guard let searchCountry = viewModel?.getAutoCompletionViewModel(at: indexPath) else {
