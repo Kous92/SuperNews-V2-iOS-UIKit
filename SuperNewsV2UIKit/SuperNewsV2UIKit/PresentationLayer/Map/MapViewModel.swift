@@ -17,6 +17,8 @@ final class MapViewModel {
     weak var coordinator: MapViewControllerDelegate?
     private let useCase: MapUseCaseProtocol
     
+    private var userMapPosition = CLLocation()
+    
     // MARK: - Bindings
     private var updateResult = PassthroughSubject<Bool, Never>()
     private var userLocation = PassthroughSubject<CLLocation, SuperNewsGPSError>()
@@ -50,6 +52,7 @@ final class MapViewModel {
                 case .success(let userCoordinates):
                     print("[MapViewModel] User location retrieved, ready for map with coordinates: x = \(userCoordinates.coordinate.longitude), y = \(userCoordinates.coordinate.latitude)")
                     self.userLocation.send(userCoordinates)
+                    self.userMapPosition = userCoordinates
                 case .failure(let error):
                     print("[MapViewModel] Impossible to retrieve user location.")
                     print("ERROR: \(error.rawValue)")
@@ -128,5 +131,9 @@ extension MapViewModel {
         }
         
         return autocompletionViewModels[indexPath.row]
+    }
+    
+    func getUserMapPosition() -> CLLocation {
+        return userMapPosition
     }
 }
