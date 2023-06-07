@@ -136,4 +136,8 @@ extension MapViewModel {
     func getUserMapPosition() -> CLLocation {
         return userMapPosition
     }
+    
+    func goToCountryNewsView(selectedCountryCode: String) {
+        coordinator?.goToCountryNewsView(countryCode: selectedCountryCode)
+    }
 }

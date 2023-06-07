@@ -11,6 +11,7 @@ import UIKit
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol MapViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
+    func goToCountryNewsView(countryCode: String)
 }
 
 final class MapCoordinator: ParentCoordinator {
@@ -47,21 +48,19 @@ final class MapCoordinator: ParentCoordinator {
 }
 
 extension MapCoordinator: MapViewControllerDelegate {
-    /*
-    func goToDetailArticleView(with articleViewModel: ArticleViewModel) {
+    func goToCountryNewsView(countryCode: String) {
         // Transition is separated here into a child coordinator.
-        print("[MapCoordinator] Setting child coordinator: ArticleDetailSelectionCoordinator.")
-        let articleDetailCoordinator = ArticleDetailCoordinator(navigationController: navigationController, builder: ArticleDetailModuleBuilder(articleViewModel: articleViewModel))
+        print("[MapCoordinator] Setting child coordinator: CountryNewsCoordinator.")
+        let countryNewsCoordinator = CountryNewsCoordinator(navigationController: navigationController, builder: CountryNewsModuleBuilder(countryCode: countryCode))
         
         // Adding link to the parent with self, be careful to retain cycle
-        articleDetailCoordinator.parentCoordinator = self
-        addChildCoordinator(childCoordinator: articleDetailCoordinator)
+        countryNewsCoordinator.parentCoordinator = self
+        addChildCoordinator(childCoordinator: countryNewsCoordinator)
         
         // Transition from home screen to source selection screen
-        print("[SearchCoordinator] Go to ArticleDetailViewController.")
-        articleDetailCoordinator.start()
+        print("[MapCoordinator] Go to CountryNewsViewController.")
+        countryNewsCoordinator.start()
     }
-     */
     
     func displayErrorAlert(with errorMessage: String) {
         print("[SearchCoordinator] Displaying error alert.")

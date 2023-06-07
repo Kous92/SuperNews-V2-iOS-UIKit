@@ -12,6 +12,8 @@ import CoreLocation
 import SnapKit
 
 final class CountryAnnotationView: MKAnnotationView {
+    private(set) var viewModel: CountryAnnotationViewModel?
+    
     // Background
     private lazy var backgroundGradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
@@ -98,6 +100,7 @@ final class CountryAnnotationView: MKAnnotationView {
     
     /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
     func configure(with viewModel: CountryAnnotationViewModel) {
+        self.viewModel = viewModel
         countryNameLabel.setShadowLabel(string: viewModel.countryName, font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
         flagImageView.image = UIImage(named: viewModel.countryCode)
     }

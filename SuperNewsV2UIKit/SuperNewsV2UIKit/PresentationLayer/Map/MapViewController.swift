@@ -101,15 +101,17 @@ final class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isHidden = true
         setViewBackground()
         buildViewHierarchy()
         setConstraints()
         setBindings()
         setButtonActions()
-        
         viewModel?.loadCountries()
         viewModel?.getLocation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func buildViewHierarchy() {
@@ -263,9 +265,16 @@ extension MapViewController: MKMapViewDelegate {
             let zoomCoordinate = view.annotation?.coordinate ?? mapView.region.center
             let zoomed = MKCoordinateRegion(center: zoomCoordinate, span: zoomSpan)
             mapView.setRegion(zoomed, animated: true)
-        } else {
-            print("Country annotation selected")
+        } else if view is CountryAnnotationView {
+            guard let countryAnnotationView = view as? CountryAnnotationView,
+                  let countryCode = countryAnnotationView.viewModel?.countryCode else {
+                return
+            }
+            
+            viewModel?.goToCountryNewsView(selectedCountryCode: countryCode)
         }
+        
+        mapView.deselectAnnotation(view.annotation, animated: false)
     }
 }
 
