@@ -13,6 +13,10 @@ protocol TopHeadlinesUseCaseProtocol {
     func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
 }
 
+protocol CountryNewsUseCaseProtocol {
+    func execute(countryCode: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+}
+
 protocol SourceSelectionUseCaseProtocol {
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
     func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
