@@ -160,10 +160,7 @@ final class MapViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] updated in
                 if updated {
-                    print("Ready to update autocompletion")
                     self?.updateTableView()
-                } else {
-                    print("No result found")
                 }
             }.store(in: &subscriptions)
         
@@ -172,7 +169,7 @@ final class MapViewController: UIViewController {
             .sink { [weak self] completion in
                 switch completion {
                     case .finished:
-                        print("OK: done")
+                        print("[MapViewController] OK: done")
                     case .failure(let error):
                         print(error.rawValue)
                         // Default position set in Paris
@@ -304,7 +301,6 @@ extension MapViewController: UISearchBarDelegate {
 
 extension MapViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Autocompletion with: \(viewModel?.numberOfRowsInTableView() ?? 0) rows")
         return viewModel?.numberOfRowsInTableView() ?? 0
     }
     
@@ -327,7 +323,7 @@ extension MapViewController: UITableViewDelegate {
         // Unselect the row.
         countryAutoCompletionTableView.deselectRow(at: indexPath, animated: false)
         autoCompletionView.isHidden = true
-        searchBar.resignFirstResponder() // Le clavier disparaît (ce n'est pas automatique de base)
+        searchBar.resignFirstResponder()
         
         guard let searchCountry = viewModel?.getAutoCompletionViewModel(at: indexPath) else {
             return
@@ -335,7 +331,6 @@ extension MapViewController: UITableViewDelegate {
         
         searchBar.text = searchCountry.countryName
         
-        // Centrer sur le pays en question
         let coordinates = searchCountry.coordinates
         centerMapToPosition(with: CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude), and: 100000)
     }
@@ -358,7 +353,6 @@ struct MapViewControllerPreview: PreviewProvider {
                 let vc = builder.buildModule(testMode: true)
                 vc.tabBarItem = UITabBarItem(title: "Carte du monde", image: UIImage(systemName: "map"), tag: 0)
                 navigationController.pushViewController(vc, animated: false)
-                // vc.navigationController?.navigationBar.isHidden = true
                 tabBar.viewControllers = [navigationController]
                 
                 return tabBar

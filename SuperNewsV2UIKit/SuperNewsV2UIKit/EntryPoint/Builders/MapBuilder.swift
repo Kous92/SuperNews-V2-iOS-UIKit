@@ -20,6 +20,7 @@ final class MapModuleBuilder: ModuleBuilder {
         let localFileRepository = getLocalFileRepository(testMode: testMode)
         let useCase = MapUseCase(locationRepository: locationRepository, localFileRepository: localFileRepository)
         let mapViewModel = MapViewModel(useCase: useCase)
+        
         mapViewModel.coordinator = coordinator as? MapViewControllerDelegate
         
         // Injecting view model
