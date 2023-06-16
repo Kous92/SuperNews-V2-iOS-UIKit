@@ -7,11 +7,14 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+import Combine
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol MapViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
     func goToCountryNewsView(countryCode: String)
+    func displaySuggestedLocationAlert(with actualLocation: (location: CLLocation, countryName: String), to suggestedLocation: (location: CLLocation, countryName: String), completion: @escaping (_ answer: Bool) -> ())
 }
 
 final class MapCoordinator: ParentCoordinator {
@@ -69,6 +72,28 @@ extension MapCoordinator: MapViewControllerDelegate {
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             print("OK")
+        }))
+        
+        navigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    func displaySuggestedLocationAlert(with actualLocation: (location: CLLocation, countryName: String), to suggestedLocation: (location: CLLocation, countryName: String), completion: @escaping (_ answer: Bool) -> ()) {
+        print("[SearchCoordinator] Displaying error alert.")
+        
+        var message = ""
+        
+        if actualLocation.countryName == suggestedLocation.countryName {
+            message = "Vous êtes localisé dans le même pays que celui est disponible sur la carte, ici: \(actualLocation.countryName). Voulez-vous centrer la carte sur la source du pays ? Sinon, la carte sera centrée sur votre position actuelle."
+        } else {
+            message = "Vous êtes localisé dans un pays (\(actualLocation.countryName)) qui n'est pas disponible sur la carte. Le pays le plus proche qui est suggéré est: \(suggestedLocation.countryName). Voulez-vous centrer la carte sur la source du pays suggéré ? Sinon, la carte sera centrée sur votre position actuelle."
+        }
+        
+        let alert = UIAlertController(title: "Suggestion", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { _ in
+            completion(true)
+        }))
+        alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { _ in
+            completion(false)
         }))
         
         navigationController.present(alert, animated: true, completion: nil)

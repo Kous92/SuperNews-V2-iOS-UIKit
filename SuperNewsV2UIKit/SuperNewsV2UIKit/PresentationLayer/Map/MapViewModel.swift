@@ -17,7 +17,9 @@ final class MapViewModel {
     weak var coordinator: MapViewControllerDelegate?
     private let useCase: MapUseCaseProtocol
     
+    // User position on map
     private var userMapPosition = CLLocation()
+    private var locatedCountryName: String = ""
     
     // MARK: - Bindings
     private var updateResult = PassthroughSubject<Bool, Never>()
@@ -51,8 +53,9 @@ final class MapViewModel {
             switch result {
                 case .success(let userCoordinates):
                     print("[MapViewModel] User location retrieved, ready for map with coordinates: x = \(userCoordinates.coordinate.longitude), y = \(userCoordinates.coordinate.latitude)")
-                    self.userLocation.send(userCoordinates)
                     self.userMapPosition = userCoordinates
+                    print("[MapViewModel] Ready for reverse geocoding")
+                    await positionReverseGeocoding()
                 case .failure(let error):
                     print("[MapViewModel] Impossible to retrieve user location.")
                     print("ERROR: \(error.rawValue)")
@@ -79,6 +82,60 @@ final class MapViewModel {
                     await self.sendErrorMessage(with: error.rawValue)
             }
         }
+    }
+    
+    private func positionReverseGeocoding() async {
+        let result = await useCase.reverseGeocoding(location: userMapPosition)
+        
+        switch result {
+            case .success(let address):
+                self.locatedCountryName = address
+                print("[MapViewModel] Reverse geocoding succeeded, located country is \(address)")
+                await self.getClosestCountryFromPosition()
+            case .failure(let error):
+                print("[MapViewModel] Reverse geocoding failed. ERROR: \(error.rawValue)")
+                self.userLocation.send(userMapPosition)
+        }
+    }
+    
+    private func getClosestCountryFromPosition() async {
+        print("[MapViewModel] Calculating closest country from position.")
+        guard !locatedCountryName.isEmpty else {
+            return
+        }
+        
+        var suggestedCoordinates = CLLocation()
+        
+        // If the user is located in an available country on the map.
+        if annotationsViewModels.contains(where: { $0.countryName == locatedCountryName }), let viewModel = annotationsViewModels.first(where: { $0.countryName == locatedCountryName }) {
+            print("[MapViewModel] Country already here: \(locatedCountryName)")
+            suggestedCoordinates = CLLocation(latitude: viewModel.coordinates.latitude, longitude: viewModel.coordinates.longitude)
+            
+            print("[MapViewModel] Actual: \(userMapPosition), suggested: \(suggestedCoordinates)")
+            await showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, locatedCountryName))
+            
+            return
+        }
+        
+        // We use the actual location and we calculate the distance bettween the 2 countries
+        var closestDistance = Double.infinity
+        var suggestedCountry = ""
+        
+        annotationsViewModels.forEach { country in
+            let coordinates = CLLocation(latitude: country.coordinates.latitude, longitude: country.coordinates.longitude)
+            let distance = coordinates.distance(from: userMapPosition)
+            
+            if distance < closestDistance {
+                closestDistance = distance
+                suggestedCountry = country.countryName
+                suggestedCoordinates = coordinates
+                print("[MapViewModel] Closest country from \(locatedCountryName): \(country.countryName)")
+            }
+        }
+        
+        
+        print("[MapViewModel] Country to suggest: \(suggestedCountry)")
+        await showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, suggestedCountry))
     }
     
     @MainActor private func sendErrorMessage(with errorMessage: String) {
@@ -139,5 +196,12 @@ extension MapViewModel {
     
     func goToCountryNewsView(selectedCountryCode: String) {
         coordinator?.goToCountryNewsView(countryCode: selectedCountryCode)
+    }
+    
+    @MainActor private func showSuggestedLocationAlert(with actualLocation: (location: CLLocation, countryName: String), to suggestedLocation: (location: CLLocation, countryName: String)) {
+        coordinator?.displaySuggestedLocationAlert(with: actualLocation, to: suggestedLocation) { answer in
+            print("[MapViewModel] Answer for centering: \(answer)")
+            self.userLocation.send(answer ? suggestedLocation.location : actualLocation.location)
+        }
     }
 }
