@@ -31,6 +31,23 @@ final class CountryAnnotationView: MKAnnotationView {
         return gradient
     }()
     
+    private lazy var annotationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        // stackView.backgroundColor = .green
+        stackView.alignment = .fill
+        return stackView
+    }()
+    
     private lazy var flagImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,9 +79,8 @@ final class CountryAnnotationView: MKAnnotationView {
         super.prepareForDisplay()
         
         displayPriority = .defaultHigh
-        frame = CGRect(x: 0, y: 0, width: 85, height: 85)
+        frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-        // backgroundColor = .blue
         self.layer.cornerRadius = 35
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
@@ -74,21 +90,26 @@ final class CountryAnnotationView: MKAnnotationView {
         setConstraints()
     }
     
-    func buildViewHierarchy() {
-        addSubview(flagImageView)
-        addSubview(countryNameLabel)
+    private func buildViewHierarchy() {
+        addSubview(annotationView)
+        annotationView.addSubview(flagImageView)
+        annotationView.addSubview(countryNameLabel)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
+        annotationView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         countryNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
-            make.horizontalEdges.equalToSuperview().inset(5)
+            make.top.equalTo(annotationView).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(15)
         }
         
         flagImageView.snp.makeConstraints { make in
-            make.height.equalTo(25)
-            make.width.equalTo(32)
-            make.centerX.equalToSuperview()
+            make.height.equalTo(30)
+            make.width.equalTo(35)
+            make.centerX.equalTo(annotationView)
             make.top.equalTo(countryNameLabel.snp.bottom).offset(5)
         }
     }
@@ -107,7 +128,7 @@ final class CountryAnnotationView: MKAnnotationView {
     
     // For live preview
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 85, height: 85)
+        return CGSize(width: 100, height: 100)
     }
 }
 
@@ -119,7 +140,7 @@ struct CountryAnnotationViewPreview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             let annotationView = CountryAnnotationView()
-            annotationView.configure(with: CountryAnnotationViewModel(countryName: "France", countryCode: "fr", coordinates: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169)))
+            annotationView.configure(with: CountryAnnotationViewModel(countryName: "Émirats Arabes Unis", countryCode: "ae", coordinates: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169)))
             return annotationView
         }
         .previewLayout(PreviewLayout.sizeThatFits)

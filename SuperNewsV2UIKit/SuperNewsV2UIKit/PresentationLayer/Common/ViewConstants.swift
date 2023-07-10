@@ -65,4 +65,12 @@ struct Constants {
         static let descriptionLabelFontSize: CGFloat = isPhone() ? 15 : 22
         static let otherLabelFontSize: CGFloat = isPhone() ? 13 : 19
     }
+    
+    struct MapView {
+        static let cornerRadius: CGFloat = isPhone() ? 10 : 15
+        static let buttonSize: CGFloat = isPhone() ? 50 : 75
+        static let buttonSymbolSize: CGFloat = isPhone() ? 18 : 27
+        static let buttonInset: CGFloat = isPhone() ? 15 : 30
+        static let autoCompletionHeight: CGFloat = isPhone() ? 300 : 450
+    }
 }
