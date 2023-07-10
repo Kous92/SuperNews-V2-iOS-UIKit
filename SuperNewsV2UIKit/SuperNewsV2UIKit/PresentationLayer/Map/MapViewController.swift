@@ -59,7 +59,7 @@ final class MapViewController: UIViewController {
     private lazy var autoCompletionView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = Constants.MapView.cornerRadius
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 1
         view.isHidden = true
@@ -78,15 +78,26 @@ final class MapViewController: UIViewController {
     }()
     
     private lazy var locationButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(configuration: getButtonConfiguration(symbolName: "location.fill"))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Constants.MapView.cornerRadius
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
         button.setImage(UIImage(systemName: "location.fill"), for: .normal)
         button.isEnabled = false
         button.isHidden = true
+        return button
+    }()
+    
+    private lazy var worldZoomButton: UIButton = {
+        let button = UIButton(configuration: getButtonConfiguration(symbolName: "globe"))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        button.layer.cornerRadius = Constants.MapView.cornerRadius
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+
         return button
     }()
     
@@ -120,6 +131,7 @@ final class MapViewController: UIViewController {
         mapView.addSubview(autoCompletionView)
         autoCompletionView.addSubview(countryAutoCompletionTableView)
         mapView.addSubview(locationButton)
+        mapView.addSubview(worldZoomButton)
     }
     
     private func setConstraints() {
@@ -135,23 +147,30 @@ final class MapViewController: UIViewController {
         autoCompletionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(searchBar.snp.bottom)
-            make.height.equalTo(300)
+            make.height.equalTo(Constants.MapView.autoCompletionHeight)
         }
         
         countryAutoCompletionTableView.snp.makeConstraints { make in
             make.edges.equalTo(autoCompletionView)
         }
         
+        worldZoomButton.snp.makeConstraints { make in
+            make.size.equalTo(Constants.MapView.buttonSize)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.MapView.buttonInset)
+            make.leading.equalToSuperview().inset(Constants.MapView.buttonInset)
+        }
+        
         locationButton.snp.makeConstraints { make in
-            make.size.equalTo(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(15)
-            make.trailing.equalToSuperview().inset(15)
+            make.size.equalTo(Constants.MapView.buttonSize)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.MapView.buttonInset)
+            make.trailing.equalToSuperview().inset(Constants.MapView.buttonInset)
         }
     }
     
     override func viewDidLayoutSubviews() {
-        autoCompletionView.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.25, 0.5, 1], cornerRadius: 10)
-        locationButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: 10)
+        autoCompletionView.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.25, 0.5, 1], cornerRadius: Constants.MapView.cornerRadius)
+        locationButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
+        worldZoomButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
     }
     
     private func setBindings() {
@@ -192,6 +211,14 @@ final class MapViewController: UIViewController {
 }
 
 extension MapViewController {
+    private func getButtonConfiguration(symbolName: String) -> UIButton.Configuration {
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: symbolName)
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: Constants.MapView.buttonSymbolSize)
+        
+        return configuration
+    }
+    
     private func setViewBackground() {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
@@ -205,7 +232,12 @@ extension MapViewController {
             }
         }
         
+        let worldZoomAction = UIAction { [weak self] _ in
+            self?.centerMapToPosition(with: CLLocation(latitude: 0, longitude: 0), and: 15000000)
+        }
+        
         locationButton.addAction(locationAction, for: .touchUpInside)
+        worldZoomButton.addAction(worldZoomAction, for: .touchUpInside)
     }
     
     private func activateLocationButton() {
