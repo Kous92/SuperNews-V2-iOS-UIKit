@@ -38,7 +38,7 @@ final class MapModuleBuilder: ModuleBuilder {
     }
     
     private func getLocationService(testMode: Bool) -> SuperNewsLocationService {
-        return testMode ? SuperNewsGPSLocationService() : SuperNewsGPSLocationService()
+        return testMode ? SuperNewsMockLocationService(forceFetchFailure: false) : SuperNewsGPSLocationService()
     }
     
     private func getLocalFileService(testMode: Bool) -> SuperNewsLocalDataFileService {

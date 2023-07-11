@@ -21,7 +21,7 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         XCTAssertTrue(viewController is GradientTabBarController)
         
         if let gradientTabBar = viewController as? GradientTabBarController {
-            XCTAssertEqual(gradientTabBar.tabBar.items?.count ?? 0, 2)
+            XCTAssertEqual(gradientTabBar.tabBar.items?.count ?? 0, 3)
         } else {
             XCTFail()
         }
@@ -150,9 +150,58 @@ final class SuperNewsCoordinatorTests: XCTestCase {
     func testSearchChildCoordinator() {
         let moduleBuilder = SearchModuleBuilder()
         let searchCoordinator = SearchCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
-        let navigationController = searchCoordinator.start()
         
         searchCoordinator.goToDetailArticleView(with: ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle()))
         XCTAssertEqual(searchCoordinator.childCoordinators.count, 1)
+    }
+    
+    func testMapCoordinator() {
+        let moduleBuilder = MapModuleBuilder()
+        let mapCoordinator = MapCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        let navigationController = mapCoordinator.start()
+        
+        XCTAssertTrue(navigationController is UINavigationController)
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        print(navigationController.viewControllers)
+        XCTAssertTrue(navigationController.viewControllers[0] is MapViewController)
+    }
+    
+    func testMapChildCoordinator() {
+        let moduleBuilder = MapModuleBuilder()
+        let mapCoordinator = MapCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        
+        mapCoordinator.goToCountryNewsView(countryCode: "fr")
+        XCTAssertEqual(mapCoordinator.childCoordinators.count, 1)
+    }
+    
+    func testCountryNewsCoordinator() {
+        let moduleBuilder = CountryNewsModuleBuilder(countryCode: "fr")
+        let countryNewsCoordinator = CountryNewsCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        let navigationController = countryNewsCoordinator.start()
+        
+        XCTAssertTrue(navigationController is UINavigationController)
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        print(navigationController.viewControllers)
+        XCTAssertTrue(navigationController.viewControllers[0] is CountryNewsViewController)
+    }
+    
+    func testCountryNewsChildCoordinator() {
+        let moduleBuilder = CountryNewsModuleBuilder(countryCode: "fr")
+        let countryNewsCoordinator = CountryNewsCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        
+        countryNewsCoordinator.goToDetailArticleView(with: ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle()))
+        XCTAssertEqual(countryNewsCoordinator.childCoordinators.count, 1)
     }
 }

@@ -72,4 +72,26 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssertNotNil(viewController)
         XCTAssert(viewController is SearchViewController, "The UIViewController is not a SearchViewController.")
     }
+    
+    func testMapModuleBuilder() {
+        moduleBuilder = MapModuleBuilder()
+        XCTAssertNotNil(moduleBuilder)
+        
+        // Checking dependency injections
+        let viewController = moduleBuilder?.buildModule(testMode: true, coordinator: nil)
+        
+        XCTAssertNotNil(viewController)
+        XCTAssert(viewController is MapViewController, "The UIViewController is not a MapViewController.")
+    }
+    
+    func testCountryModuleBuilder() {
+        moduleBuilder = CountryNewsModuleBuilder(countryCode: "fr")
+        XCTAssertNotNil(moduleBuilder)
+        
+        // Checking dependency injections
+        let viewController = moduleBuilder?.buildModule(testMode: true, coordinator: nil)
+        
+        XCTAssertNotNil(viewController)
+        XCTAssert(viewController is CountryNewsViewController, "The UIViewController is not a CountryNewsViewController.")
+    }
 }
