@@ -12,7 +12,7 @@ final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
     private let forceFetchFailure: Bool
     
     init(forceFetchFailure: Bool) {
-        print("Initialisation mock data")
+        print("[SuperNewsMockDataAPIService] Starting")
         self.forceFetchFailure = forceFetchFailure
     }
     
