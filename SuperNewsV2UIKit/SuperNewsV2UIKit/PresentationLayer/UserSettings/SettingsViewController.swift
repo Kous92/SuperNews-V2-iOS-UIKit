@@ -10,11 +10,66 @@ import SnapKit
 import Combine
 
 final class SettingsViewController: UIViewController {
-
+    
+    // MVVM with Reactive Programming
+    var viewModel: SettingsViewModel?
+    private var subscriptions = Set<AnyCancellable>()
+    
+    private lazy var gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
+        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
+        gradient.type = .axial
+        gradient.colors = [
+            blue,
+            darkBlue,
+            darkBlue,
+            UIColor.black.cgColor
+        ]
+        gradient.locations = [0, 0.25, 0.5, 1]
+        return gradient
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setViewBackground()
+        setNavigationBar()
+        buildViewHierarchy()
+        setConstraints()
+        setBindings()
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func buildViewHierarchy() {
+        
+    }
+    
+    private func setConstraints() {
+        
+    }
+    
+    private func setBindings() {
+        
+    }
+}
+
+extension SettingsViewController {
+    private func setNavigationBar() {
+        navigationItem.title = "Paramètres"
+        navigationController?.navigationBar.tintColor = .white
+    }
+    
+    private func setViewBackground() {
+        gradient.frame = view.bounds
+        view.layer.addSublayer(gradient)
     }
 }
 
@@ -30,10 +85,9 @@ struct SettingsViewControllerPreview: PreviewProvider {
             // Dark mode
             UIViewControllerPreview {
                 let navigationController = UINavigationController()
-                // let builder = ArticleDetailModuleBuilder(articleViewModel: ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle()))
-                // let vc = builder.buildModule(testMode: true)
-                
-                // navigationController.pushViewController(vc, animated: false)
+                let builder = SettingsModuleBuilder()
+                let vc = builder.buildModule(testMode: true)
+                navigationController.pushViewController(vc, animated: false)
                 return navigationController
             }
             .previewDevice(PreviewDevice(rawValue: deviceName))

@@ -35,11 +35,11 @@ final class SettingsCoordinator: ParentCoordinator {
     }
     
     func start() -> UIViewController {
-        print("[SettingsCoordinator] Instantiating SettingsiewController.")
+        print("[SettingsCoordinator] Instantiating SettingsViewController.")
         // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let settingsViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
-        print("[MapCoordinator] Map view ready.")
+        print("[MapCoordinator] Settings view ready.")
         navigationController.pushViewController(settingsViewController, animated: false)
         
         return navigationController
