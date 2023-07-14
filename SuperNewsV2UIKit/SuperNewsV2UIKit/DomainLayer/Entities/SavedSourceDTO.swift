@@ -25,3 +25,9 @@ struct SavedSourceDTO {
         return SavedSource(id: self.id, name: self.name)
     }
 }
+
+extension SavedSourceDTO {
+    static func getFakeObjectFromSavedSource() -> SavedSourceDTO {
+        return SavedSourceDTO(with: SavedSource(id: "le-parisien", name: "Le Parisien"))
+    }
+}

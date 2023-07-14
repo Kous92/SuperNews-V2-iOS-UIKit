@@ -25,3 +25,9 @@ struct CountryAnnotationViewModel {
         self.coordinates = CLLocationCoordinate2D(latitude: country.lat, longitude: country.lon)
     }
 }
+
+extension CountryAnnotationViewModel {
+    static func getFakeCountryAnnotationViewModel() -> CountryAnnotationViewModel {
+        return CountryAnnotationViewModel(with: CountryDTO.getFakeObjectFromCountry())
+    }
+}
