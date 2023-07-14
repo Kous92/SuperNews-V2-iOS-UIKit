@@ -133,7 +133,6 @@ final class MapViewModel {
             }
         }
         
-        
         print("[MapViewModel] Country to suggest: \(suggestedCountry)")
         await showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, suggestedCountry))
     }
@@ -199,6 +198,12 @@ extension MapViewModel {
     }
     
     @MainActor private func showSuggestedLocationAlert(with actualLocation: (location: CLLocation, countryName: String), to suggestedLocation: (location: CLLocation, countryName: String)) {
+        // Especially for test cases or other cases to be independent of UI.
+        guard coordinator != nil else {
+            self.userLocation.send(actualLocation.location)
+            return
+        }
+        
         coordinator?.displaySuggestedLocationAlert(with: actualLocation, to: suggestedLocation) { answer in
             print("[MapViewModel] Answer for centering: \(answer)")
             self.userLocation.send(answer ? suggestedLocation.location : actualLocation.location)
