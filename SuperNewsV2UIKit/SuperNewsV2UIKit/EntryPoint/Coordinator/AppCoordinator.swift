@@ -39,7 +39,7 @@ final class AppCoordinator: Coordinator {
         
         let settingsViewController = settingsCoordinator.start()
         settingsCoordinator.parentCoordinator = self
-        settingsViewController.tabBarItem = UITabBarItem(title: "Paramètres", image: UIImage(systemName: "gear"), tag: 2)
+        settingsViewController.tabBarItem = UITabBarItem(title: "Paramètres", image: UIImage(systemName: "gear"), tag: 3)
         
         (rootViewController as? UITabBarController)?.viewControllers = [topHeadlinesViewController, searchViewController, mapViewController, settingsViewController]
                 
