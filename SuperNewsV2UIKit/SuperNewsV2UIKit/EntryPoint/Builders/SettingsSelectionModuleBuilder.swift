@@ -1,30 +1,30 @@
 //
-//  SettingsModuleBuilder.swift
+//  SettingsSelectionModuleBuilder.swift
 //  SuperNewsV2UIKit
 //
-//  Created by Koussaïla Ben Mamar on 14/07/2023.
+//  Created by Koussaïla Ben Mamar on 04/08/2023.
 //
 
 import Foundation
 import UIKit
 
-final class SettingsModuleBuilder: ModuleBuilder {
+final class SettingsSelectionModuleBuilder: ModuleBuilder {
     private var testMode = false
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
-        let settingsViewController = SettingsViewController()
+        let settingsSelectionViewController = SettingsSelectionViewController()
         
         // Dependency injection
         // let dataRepository = getRepository(testMode: testMode)
         // let useCase = SettingsUseCase(dataRepository: dataRepository)
-        let settingsViewModel = SettingsViewModel()
-        settingsViewModel.coordinator = coordinator as? SettingsViewControllerDelegate
+        let settingsSelectionViewModel = SettingsSelectionViewModel()
+        settingsSelectionViewModel.coordinator = coordinator as? SettingsSelectionViewControllerDelegate
         
         // Injecting view model
-        settingsViewController.viewModel = settingsViewModel
+        settingsSelectionViewController.viewModel = settingsSelectionViewModel
         
-        return settingsViewController
+        return settingsSelectionViewController
     }
     
     private func getRepository(testMode: Bool) -> SuperNewsRepository {
