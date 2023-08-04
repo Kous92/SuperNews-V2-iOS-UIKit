@@ -30,6 +30,18 @@ final class SettingsViewController: UIViewController {
         return gradient
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(CountrySettingTableViewCell.self, forCellReuseIdentifier: "countrySettingCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,15 +61,26 @@ final class SettingsViewController: UIViewController {
     }
     
     private func buildViewHierarchy() {
-        
+        view.addSubview(tableView)
     }
     
     private func setConstraints() {
-        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+        }
     }
     
     private func setBindings() {
-        
+        // Update binding
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                if updated {
+                    self?.updateTableView()
+                }
+            }.store(in: &subscriptions)
     }
 }
 
@@ -71,6 +94,36 @@ extension SettingsViewController {
         gradient.frame = view.bounds
         view.layer.addSublayer(gradient)
     }
+    
+    private func updateTableView() {
+        print("Update TableView")
+        tableView.reloadData()
+    }
+}
+
+extension SettingsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfRows() ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cellViewModel = viewModel?.getCellViewModel(at: indexPath) else {
+            return UITableViewCell()
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = cellViewModel.detail
+        cell.accessoryType = .disclosureIndicator
+        cell.backgroundColor = .clear
+        cell.backgroundView = UIView()
+        cell.selectedBackgroundView = UIView()
+         
+        return cell
+    }
+}
+
+extension SettingsViewController: UITableViewDelegate {
+    
 }
 
 // Ready to live preview and make views much faster

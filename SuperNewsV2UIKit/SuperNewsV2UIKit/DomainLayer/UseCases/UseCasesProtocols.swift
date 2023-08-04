@@ -31,3 +31,9 @@ protocol MapUseCaseProtocol {
     func fetchUserLocation() async -> Result<CLLocation, SuperNewsGPSError>
     func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError>
 }
+
+protocol UserSettingsUseCaseProtocol {
+    func execute() async
+    func saveSetting() async
+    // func loadSetting() async -> Result<SettingsSection>
+}
