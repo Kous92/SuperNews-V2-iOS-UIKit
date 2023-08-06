@@ -16,8 +16,6 @@ final class SettingsModuleBuilder: ModuleBuilder {
         let settingsViewController = SettingsViewController()
         
         // Dependency injection
-        // let dataRepository = getRepository(testMode: testMode)
-        // let useCase = SettingsUseCase(dataRepository: dataRepository)
         let settingsViewModel = SettingsViewModel()
         settingsViewModel.coordinator = coordinator as? SettingsViewControllerDelegate
         
@@ -25,13 +23,5 @@ final class SettingsModuleBuilder: ModuleBuilder {
         settingsViewController.viewModel = settingsViewModel
         
         return settingsViewController
-    }
-    
-    private func getRepository(testMode: Bool) -> SuperNewsRepository {
-        return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
-    }
-    
-    private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
-        return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
     }
 }

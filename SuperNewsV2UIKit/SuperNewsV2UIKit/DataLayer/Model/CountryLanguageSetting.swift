@@ -7,13 +7,17 @@
 
 import Foundation
 
-struct CountryLanguageSetting {
+struct CountryLanguageSetting: Codable {
     let name: String
     let code: String
     
     init(name: String, code: String) {
         self.name = name
         self.code = code
+    }
+    
+    func getDTO() -> CountryLanguageSettingDTO {
+        return CountryLanguageSettingDTO(name: self.name, code: self.code)
     }
 }
 

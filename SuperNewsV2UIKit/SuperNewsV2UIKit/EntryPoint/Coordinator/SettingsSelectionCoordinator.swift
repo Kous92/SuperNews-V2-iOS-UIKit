@@ -10,6 +10,7 @@ import UIKit
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol SettingsSelectionViewControllerDelegate: AnyObject {
+    func backToPreviousScreen()
     func displayErrorAlert(with errorMessage: String)
 }
 
@@ -34,14 +35,35 @@ final class SettingsSelectionCoordinator: ParentCoordinator {
         print("[SettingsSelectionCoordinator] Coordinator destroyed.")
     }
     
-    func start() -> UIViewController {
+    @discardableResult func start() -> UIViewController {
         print("[SettingsSelectionCoordinator] Instantiating SettingsSelectionViewController.")
         // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let settingsSelectionViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
         print("[MapCoordinator] Settings view ready.")
-        navigationController.pushViewController(settingsSelectionViewController, animated: false)
+        navigationController.pushViewController(settingsSelectionViewController, animated: true)
         
         return navigationController
+    }
+}
+
+extension SettingsSelectionCoordinator: SettingsSelectionViewControllerDelegate {
+    func backToPreviousScreen() {
+        // Removing child coordinator reference
+        parentCoordinator?.removeChildCoordinator(childCoordinator: self)
+        navigationController.popViewController(animated: true)
+        print(navigationController.viewControllers)
+    }
+    
+    func displayErrorAlert(with errorMessage: String) {
+        print("[SettingsSelectionCoordinator] Displaying error alert.")
+        
+        let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            print("OK")
+        }))
+        
+        navigationController.present(alert, animated: true, completion: nil)
     }
 }

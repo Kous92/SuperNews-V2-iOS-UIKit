@@ -11,6 +11,7 @@ import UIKit
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol SettingsViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
+    func goToSettingsSelectionView(settingOption: String)
 }
 
 final class SettingsCoordinator: ParentCoordinator {
@@ -34,7 +35,7 @@ final class SettingsCoordinator: ParentCoordinator {
         print("[SettingsCoordinator] Coordinator destroyed.")
     }
     
-    func start() -> UIViewController {
+    @discardableResult func start() -> UIViewController {
         print("[SettingsCoordinator] Instantiating SettingsViewController.")
         // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let settingsViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
@@ -43,5 +44,33 @@ final class SettingsCoordinator: ParentCoordinator {
         navigationController.pushViewController(settingsViewController, animated: false)
         
         return navigationController
+    }
+}
+
+extension SettingsCoordinator: SettingsViewControllerDelegate {
+    func displayErrorAlert(with errorMessage: String) {
+        print("[SettingsCoordinator] Displaying error alert.")
+        
+        let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            print("OK")
+        }))
+        
+        navigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    func goToSettingsSelectionView(settingOption: String) {
+        // Transition is separated here into a child coordinator.
+        print("[SettingsCoordinator] Setting child coordinator: SettingsSelectionCoordinator.")
+        let settingsSelectionCoordinator = SettingsSelectionCoordinator(navigationController: navigationController, builder: SettingsSelectionModuleBuilder(settingOption: settingOption))
+        
+        // Adding link to the parent with self, be careful to retain cycle
+        settingsSelectionCoordinator.parentCoordinator = self
+        addChildCoordinator(childCoordinator: settingsSelectionCoordinator)
+        
+        // Transition from settings screen to settings selection screen
+        print("[SettingsCoordinator] Go to SettingsSelectionViewController.")
+        settingsSelectionCoordinator.start()
     }
 }

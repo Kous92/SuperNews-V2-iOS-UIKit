@@ -38,3 +38,15 @@ final class SettingsViewModel {
         return sectionViewModels[indexPath.row]
     }
 }
+
+extension SettingsViewModel {
+    @MainActor private func sendErrorMessage(with errorMessage: String) {
+        print("[SourceSelectionViewModel] Error to display: \(errorMessage)")
+        
+        coordinator?.displayErrorAlert(with: errorMessage)
+    }
+    
+    func goToSettingsSelectionView(at indexPath: IndexPath) {
+        coordinator?.goToSettingsSelectionView(settingOption: "")
+    }
+}

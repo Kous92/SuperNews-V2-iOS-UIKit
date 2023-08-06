@@ -88,6 +88,9 @@ extension SettingsViewController {
     private func setNavigationBar() {
         navigationItem.title = "Paramètres"
         navigationController?.navigationBar.tintColor = .white
+        
+        // In order to have the following title on next ViewController. Won't work otherwise if set directly on next ViewController
+        navigationItem.backButtonTitle = "Retour"
     }
     
     private func setViewBackground() {
@@ -123,7 +126,9 @@ extension SettingsViewController: UITableViewDataSource {
 }
 
 extension SettingsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.goToSettingsSelectionView(at: indexPath)
+    }
 }
 
 // Ready to live preview and make views much faster

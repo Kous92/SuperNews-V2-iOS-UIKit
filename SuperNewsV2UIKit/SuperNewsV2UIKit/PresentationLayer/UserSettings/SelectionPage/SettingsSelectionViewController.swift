@@ -43,9 +43,9 @@ final class SettingsSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setViewBackground()
-        setNavigationBar()
+        setNavigationBar(with: "Langue et pays")
         buildViewHierarchy()
         setConstraints()
         setBindings()
@@ -74,20 +74,20 @@ final class SettingsSelectionViewController: UIViewController {
     private func setBindings() {
         // Update binding
         /*
-        viewModel?.updateResultPublisher
-            .receive(on: RunLoop.main)
-            .sink { [weak self] updated in
-                if updated {
-                    self?.updateTableView()
-                }
-            }.store(in: &subscriptions)
+         viewModel?.updateResultPublisher
+         .receive(on: RunLoop.main)
+         .sink { [weak self] updated in
+         if updated {
+         self?.updateTableView()
+         }
+         }.store(in: &subscriptions)
          */
     }
 }
 
 extension SettingsSelectionViewController {
-    private func setNavigationBar() {
-        navigationItem.title = "Paramètres"
+    private func setNavigationBar(with name: String) {
+        navigationItem.title = name
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -114,7 +114,7 @@ extension SettingsSelectionViewController: UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
-         
+        
         return cell
     }
 }
@@ -135,7 +135,7 @@ struct SettingsSelectionViewControllerPreview: PreviewProvider {
             // Dark mode
             UIViewControllerPreview {
                 let navigationController = UINavigationController()
-                let builder = SettingsSelectionModuleBuilder()
+                let builder = SettingsSelectionModuleBuilder(settingOption: "")
                 let vc = builder.buildModule(testMode: true)
                 navigationController.pushViewController(vc, animated: false)
                 return navigationController

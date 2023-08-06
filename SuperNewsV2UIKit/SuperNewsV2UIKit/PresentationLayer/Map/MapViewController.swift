@@ -123,6 +123,8 @@ final class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        // In order to have the following title on next ViewController. Won't work otherwise if set directly on next ViewController
+        navigationItem.backButtonTitle = "Retour"
     }
     
     private func buildViewHierarchy() {
