@@ -9,9 +9,9 @@ import Foundation
 
 final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
     private let dataRepository: SuperNewsRepository
-    private let settingsRepository: SuperNewsSettingsRepository
+    private let settingsRepository: SuperNewsSourceSettingsRepository
     
-    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSettingsRepository) {
+    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSourceSettingsRepository) {
         self.dataRepository = dataRepository
         self.settingsRepository = settingsRepository
     }

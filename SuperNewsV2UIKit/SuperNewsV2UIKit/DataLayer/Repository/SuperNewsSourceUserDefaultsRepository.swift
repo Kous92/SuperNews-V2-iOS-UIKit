@@ -1,5 +1,5 @@
 //
-//  SuperNewsUserDefaultsRepository.swift
+//  SuperNewsSourceUserDefaultsRepository.swift
 //  SuperNewsV2UIKit
 //
 //  Created by Koussaïla Ben Mamar on 02/05/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SuperNewsUserDefaultsRepository: SuperNewsSettingsRepository {
+final class SuperNewsSourceUserDefaultsRepository: SuperNewsSourceSettingsRepository {
     
     private let settingsService: SuperNewsLocalSettings?
     

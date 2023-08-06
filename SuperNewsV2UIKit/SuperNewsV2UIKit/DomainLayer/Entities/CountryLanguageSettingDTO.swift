@@ -20,6 +20,10 @@ struct CountryLanguageSettingDTO {
         self.name = setting.name
         self.code = setting.code
     }
+    
+    func getCountryLanguageSetting() -> CountryLanguageSetting {
+        return CountryLanguageSetting(name: self.name, code: self.code)
+    }
 }
 
 extension CountryLanguageSettingDTO {

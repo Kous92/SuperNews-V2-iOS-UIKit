@@ -32,8 +32,8 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
     }
     
-    private func getSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
-        return SuperNewsUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
+    private func getSettingsRepository(testMode: Bool) -> SuperNewsSourceSettingsRepository {
+        return SuperNewsSourceUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
     }
     
     private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
