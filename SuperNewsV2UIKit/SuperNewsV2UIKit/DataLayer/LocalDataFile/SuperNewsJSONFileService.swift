@@ -47,4 +47,27 @@ final class SuperNewsJSONFileService: SuperNewsLocalDataFileService {
             return .failure(.decodeError)
         }
     }
+    
+    func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError> {
+        guard let fileURL = getFilePath(name: "languages") else {
+            return .failure(.localFileError)
+        }
+        
+        do {
+            // Récupération des données JSON en type Data
+            let data = try Data(contentsOf: fileURL)
+            
+            // Décodage des données JSON en objets exploitables
+            guard let languages = decode([Language].self, from: data) else {
+                print("[SuperNewsJSONFileService] Data decoding has failed.")
+                return .failure(.decodeError)
+            }
+            
+            print("[SuperNewsJSONFileService] \(languages.count) languages loaded.")
+            return .success(languages)
+        } catch {
+            print("[SuperNewsJSONFileService] An error has occured: \(error)")
+            return .failure(.decodeError)
+        }
+    }
 }

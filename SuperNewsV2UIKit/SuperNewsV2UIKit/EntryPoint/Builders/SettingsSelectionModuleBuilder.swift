@@ -10,10 +10,10 @@ import UIKit
 
 final class SettingsSelectionModuleBuilder: ModuleBuilder {
     private var testMode = false
-    private let settingOption: String
+    private let settingSection: SettingsSection
     
-    init(settingOption: String) {
-        self.settingOption = settingOption
+    init(settingSection: SettingsSection) {
+        self.settingSection = settingSection
     }
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
@@ -24,7 +24,7 @@ final class SettingsSelectionModuleBuilder: ModuleBuilder {
         let userSettingRepository = getUserSettingRepository(testMode: testMode)
         let localFileRepository = getLocalFileRepository(testMode: testMode)
         let useCase = UserSettingsUseCase(userSettingsRepository: userSettingRepository, localFileRepository: localFileRepository)
-        let settingsSelectionViewModel = SettingsSelectionViewModel(countryCode: settingOption, useCase: useCase)
+        let settingsSelectionViewModel = SettingsSelectionViewModel(settingSection: settingSection, useCase: useCase)
         settingsSelectionViewModel.coordinator = coordinator as? SettingsSelectionViewControllerDelegate
         
         // Injecting view model
@@ -42,7 +42,7 @@ final class SettingsSelectionModuleBuilder: ModuleBuilder {
     }
     
     private func getUserSettingsService(testMode: Bool) -> SuperNewsUserSettings {
-        return testMode ? SuperNewsUserDefaultsCountryLanguageSettings(with: settingOption) : SuperNewsUserDefaultsCountryLanguageSettings(with: settingOption)
+        return testMode ? SuperNewsUserDefaultsCountryLanguageSettings(with: settingSection.description) : SuperNewsUserDefaultsCountryLanguageSettings(with: settingSection.description)
     }
     
     private func getLocalFileService(testMode: Bool) -> SuperNewsLocalDataFileService {

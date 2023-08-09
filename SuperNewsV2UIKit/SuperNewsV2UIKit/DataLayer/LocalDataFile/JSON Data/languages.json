@@ -1,0 +1,86 @@
+[
+    {
+        "languageCode": "ar",
+        "languageName": "Arabe",
+        "languageDefaultFlag": "sa",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "de",
+        "languageName": "Allemand",
+        "languageDefaultFlag": "de",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "en",
+        "languageName": "Anglais",
+        "languageDefaultFlag": "gb",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "es",
+        "languageName": "Espagnol",
+        "languageDefaultFlag": "es",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "fr",
+        "languageName": "Français",
+        "languageDefaultFlag": "fr",
+        "defaultLanguage": true
+    },
+    {
+        "languageCode": "he",
+        "languageName": "Hébreu",
+        "languageDefaultFlag": "il",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "it",
+        "languageName": "Italien",
+        "languageDefaultFlag": "it",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "nl",
+        "languageName": "Néerlandais",
+        "languageDefaultFlag": "nl",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "no",
+        "languageName": "Norvégien",
+        "languageDefaultFlag": "no",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "pt",
+        "languageName": "Portugais",
+        "languageDefaultFlag": "pt",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "ru",
+        "languageName": "Russe",
+        "languageDefaultFlag": "ru",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "se",
+        "languageName": "Suédois",
+        "languageDefaultFlag": "se",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "ud",
+        "languageName": "Ourdou",
+        "languageDefaultFlag": "pk",
+        "defaultLanguage": false
+    },
+    {
+        "languageCode": "zh",
+        "languageName": "Chinois",
+        "languageDefaultFlag": "cn",
+        "defaultLanguage": false
+    }
+]

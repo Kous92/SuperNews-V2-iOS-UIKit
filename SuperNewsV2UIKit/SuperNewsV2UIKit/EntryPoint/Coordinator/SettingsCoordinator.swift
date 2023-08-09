@@ -11,7 +11,7 @@ import UIKit
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
 protocol SettingsViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
-    func goToSettingsSelectionView(settingOption: String)
+    func goToSettingsSelectionView(settingSection: SettingsSection)
 }
 
 final class SettingsCoordinator: ParentCoordinator {
@@ -60,10 +60,10 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         navigationController.present(alert, animated: true, completion: nil)
     }
     
-    func goToSettingsSelectionView(settingOption: String) {
+    func goToSettingsSelectionView(settingSection: SettingsSection) {
         // Transition is separated here into a child coordinator.
         print("[SettingsCoordinator] Setting child coordinator: SettingsSelectionCoordinator.")
-        let settingsSelectionCoordinator = SettingsSelectionCoordinator(navigationController: navigationController, builder: SettingsSelectionModuleBuilder(settingOption: settingOption))
+        let settingsSelectionCoordinator = SettingsSelectionCoordinator(navigationController: navigationController, builder: SettingsSelectionModuleBuilder(settingSection: settingSection))
         
         // Adding link to the parent with self, be careful to retain cycle
         settingsSelectionCoordinator.parentCoordinator = self

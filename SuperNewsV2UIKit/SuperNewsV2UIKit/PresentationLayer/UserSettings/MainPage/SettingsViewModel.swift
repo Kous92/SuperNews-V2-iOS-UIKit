@@ -47,6 +47,14 @@ extension SettingsViewModel {
     }
     
     func goToSettingsSelectionView(at indexPath: IndexPath) {
-        coordinator?.goToSettingsSelectionView(settingOption: "")
+        let option = sectionViewModels[indexPath.row].description
+        print("[SourceSelectionViewModel] Selected option: \(option)")
+        
+        guard option != "reset" else {
+            print("[SourceSelectionViewModel] Resetting parameters.")
+            return
+        }
+        
+        coordinator?.goToSettingsSelectionView(settingSection: sectionViewModels[indexPath.row].getSettingSection())
     }
 }

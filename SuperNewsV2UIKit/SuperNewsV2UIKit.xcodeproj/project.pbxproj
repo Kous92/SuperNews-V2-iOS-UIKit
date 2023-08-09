@@ -54,6 +54,9 @@
 		4B4B15DF29FDC7DC00050BF3 /* SourceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B15DE29FDC7DC00050BF3 /* SourceCellViewModel.swift */; };
 		4B4B15E229FDD82500050BF3 /* SourceSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B15E129FDD82500050BF3 /* SourceSectionViewModel.swift */; };
 		4B4B15E429FDDB9200050BF3 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B15E329FDDB9200050BF3 /* ArrayExtensions.swift */; };
+		4B5220CF2A843F3900F86569 /* languages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B5220CE2A843F3900F86569 /* languages.json */; };
+		4B5220D12A843F6E00F86569 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5220D02A843F6E00F86569 /* Language.swift */; };
+		4B5220D32A8440C900F86569 /* LanguageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5220D22A8440C900F86569 /* LanguageDTO.swift */; };
 		4B5626432A2FE95C00C19A26 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5626422A2FE95C00C19A26 /* GradientView.swift */; };
 		4B5626462A2FF2DB00C19A26 /* CountryNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5626452A2FF2DB00C19A26 /* CountryNewsViewController.swift */; };
 		4B5626482A2FF36600C19A26 /* CountryNewsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5626472A2FF36600C19A26 /* CountryNewsModuleBuilder.swift */; };
@@ -233,6 +236,9 @@
 		4B4B15DE29FDC7DC00050BF3 /* SourceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCellViewModel.swift; sourceTree = "<group>"; };
 		4B4B15E129FDD82500050BF3 /* SourceSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSectionViewModel.swift; sourceTree = "<group>"; };
 		4B4B15E329FDDB9200050BF3 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		4B5220CE2A843F3900F86569 /* languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = languages.json; sourceTree = "<group>"; };
+		4B5220D02A843F6E00F86569 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		4B5220D22A8440C900F86569 /* LanguageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDTO.swift; sourceTree = "<group>"; };
 		4B5626422A2FE95C00C19A26 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		4B5626452A2FF2DB00C19A26 /* CountryNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryNewsViewController.swift; sourceTree = "<group>"; };
 		4B5626472A2FF36600C19A26 /* CountryNewsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryNewsModuleBuilder.swift; sourceTree = "<group>"; };
@@ -473,6 +479,7 @@
 				4BF447012A0006F9001FA87A /* SavedSourceDTO.swift */,
 				4B8DC8362A256E8F000E9490 /* CountryDTO.swift */,
 				4BA8032A2A7CFDD5004EFA3A /* CountryLanguageSettingDTO.swift */,
+				4B5220D22A8440C900F86569 /* LanguageDTO.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -670,6 +677,7 @@
 			isa = PBXGroup;
 			children = (
 				4B8DC8302A25657A000E9490 /* countries.json */,
+				4B5220CE2A843F3900F86569 /* languages.json */,
 			);
 			path = "JSON Data";
 			sourceTree = "<group>";
@@ -840,6 +848,7 @@
 				4BF446F92A0001EE001FA87A /* SavedSource.swift */,
 				4B8DC8262A256210000E9490 /* Country.swift */,
 				4BA803282A7CFD46004EFA3A /* CountryLanguageSetting.swift */,
+				4B5220D02A843F6E00F86569 /* Language.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -992,6 +1001,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BF6375E29FC84DE00AC469F /* GeneralTopHeadlinesMockData.json in Resources */,
+				4B5220CF2A843F3900F86569 /* languages.json in Resources */,
 				4BF6376229FC84E900AC469F /* HealthTopHeadlinesMockData.json in Resources */,
 				4B73F60D29EC731400CD412C /* FranceSourcesMockData.json in Resources */,
 				4B08602329ED503300AA32C0 /* apiKey.plist in Resources */,
@@ -1064,6 +1074,7 @@
 				4BE6C33D2A143A4500CC73D1 /* SearchBuilder.swift in Sources */,
 				4B95B1782A803B16001437C7 /* SuperNewsSettingsRepository.swift in Sources */,
 				4B08602129ED4D3300AA32C0 /* SuperNewsAPIEndpoint.swift in Sources */,
+				4B5220D12A843F6E00F86569 /* Language.swift in Sources */,
 				4B306F7E29F7081C009AA92D /* NewsTableViewCell.swift in Sources */,
 				4B82596129F80B33003CB627 /* ModuleBuilder.swift in Sources */,
 				4B8B3B5D2A1105F600EE9A41 /* ArticleDetailViewModel.swift in Sources */,
@@ -1145,6 +1156,7 @@
 				4B2C92B12A61604900D23196 /* SettingsCoordinator.swift in Sources */,
 				4B95B1822A80438A001437C7 /* SuperNewsMockCountryLanguageSettings.swift in Sources */,
 				4BF6376D29FC87D700AC469F /* ArticleViewModel.swift in Sources */,
+				4B5220D32A8440C900F86569 /* LanguageDTO.swift in Sources */,
 				4BD806512A79B9BF00ECF812 /* SettingsSectionViewModel.swift in Sources */,
 				4B306F7C29F6FA1F009AA92D /* NewsCellViewModel.swift in Sources */,
 				4BD806452A79B74900ECF812 /* SuperNewsUserSettings.swift in Sources */,
