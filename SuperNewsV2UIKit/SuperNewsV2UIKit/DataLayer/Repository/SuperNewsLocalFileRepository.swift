@@ -9,4 +9,5 @@ import Foundation
 
 protocol SuperNewsLocalFileRepository {
     func loadCountries() async -> Result<[CountryDTO], SuperNewsLocalFileError>
+    func loadLanguages() async -> Result<[LanguageDTO], SuperNewsLocalFileError>
 }

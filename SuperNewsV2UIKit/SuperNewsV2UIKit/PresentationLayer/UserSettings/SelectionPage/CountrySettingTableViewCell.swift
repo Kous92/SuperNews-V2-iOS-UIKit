@@ -60,8 +60,9 @@ final class CountrySettingTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(with country: Country) {
-        
+    func configure(with viewModel: CountrySettingViewModel) {
+        countryFlagImage.image = UIImage(named: viewModel.flagCode)
+        countryNameLabel.text = viewModel.name
     }
     
     // For live preview
@@ -78,7 +79,7 @@ struct CountrySettingTableViewCellPreview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
             let view = CountrySettingTableViewCell()
-            // view.configure(with: SourceCellViewModel(with: SourceDTO.getFakeObjectFromSource()))
+            view.configure(with: CountrySettingViewModel.init(code: "fr", name: "France", flagCode: "fr", isSaved: false))
             return view
         }
         .previewLayout(PreviewLayout.sizeThatFits)

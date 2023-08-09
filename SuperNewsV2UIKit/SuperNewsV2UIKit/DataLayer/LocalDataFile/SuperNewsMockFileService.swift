@@ -28,4 +28,18 @@ final class SuperNewsMockFileService: SuperNewsLocalDataFileService {
         
         return .success(countries)
     }
+    
+    func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError> {
+        guard forceLoadFailure == false else {
+            return .failure(.localFileError)
+        }
+        
+        let languages = [
+            Language(languageCode: "fr", languageName: "French", languageDefaultFlag: "fr", defaultLanguage: true),
+            Language(languageCode: "en", languageName: "English", languageDefaultFlag: "uk", defaultLanguage: false),
+            Language(languageCode: "ar", languageName: "Arabic", languageDefaultFlag: "sa", defaultLanguage: false)
+        ]
+        
+        return .success(languages)
+    }
 }

@@ -45,10 +45,11 @@ final class SettingsSelectionViewController: UIViewController {
         super.viewDidLoad()
         
         setViewBackground()
-        setNavigationBar(with: "Langue et pays")
+        // setNavigationBar(with: "Langue et pays")
         buildViewHierarchy()
         setConstraints()
         setBindings()
+        viewModel?.loadCountryLanguageOptions()
     }
     
     init() {
@@ -73,15 +74,19 @@ final class SettingsSelectionViewController: UIViewController {
     
     private func setBindings() {
         // Update binding
-        /*
-         viewModel?.updateResultPublisher
-         .receive(on: RunLoop.main)
-         .sink { [weak self] updated in
-         if updated {
-         self?.updateTableView()
-         }
-         }.store(in: &subscriptions)
-         */
+        viewModel?.settingOption
+            .receive(on: RunLoop.main)
+            .sink { [weak self] name in
+                self?.setNavigationBar(with: name)
+            }.store(in: &subscriptions)
+        
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                if updated {
+                    self?.updateTableView()
+                }
+            }.store(in: &subscriptions)
     }
 }
 
@@ -104,13 +109,19 @@ extension SettingsSelectionViewController {
 
 extension SettingsSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.numberOfRowsInTableView() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Paramètre \(indexPath.row)"
-        cell.accessoryType = .disclosureIndicator
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "countrySettingCell", for: indexPath) as? CountrySettingTableViewCell,
+              let countrySettingViewModel = viewModel?.getCellViewModel(at: indexPath) else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(with: countrySettingViewModel)
+        // let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        // cell.textLabel?.text = "Paramètre \(indexPath.row)"
+        // cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
@@ -135,14 +146,26 @@ struct SettingsSelectionViewControllerPreview: PreviewProvider {
             // Dark mode
             UIViewControllerPreview {
                 let navigationController = UINavigationController()
-                let builder = SettingsSelectionModuleBuilder(settingOption: "")
+                let builder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsCountry)
                 let vc = builder.buildModule(testMode: true)
                 navigationController.pushViewController(vc, animated: false)
                 return navigationController
             }
             .previewDevice(PreviewDevice(rawValue: deviceName))
             .preferredColorScheme(.dark)
-            .previewDisplayName(deviceName)
+            .previewDisplayName("\(deviceName): country mode")
+            .edgesIgnoringSafeArea(.all)
+            
+            UIViewControllerPreview {
+                let navigationController = UINavigationController()
+                let builder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsLanguage)
+                let vc = builder.buildModule(testMode: true)
+                navigationController.pushViewController(vc, animated: false)
+                return navigationController
+            }
+            .previewDevice(PreviewDevice(rawValue: deviceName))
+            .preferredColorScheme(.dark)
+            .previewDisplayName("\(deviceName): language mode")
             .edgesIgnoringSafeArea(.all)
         }
     }

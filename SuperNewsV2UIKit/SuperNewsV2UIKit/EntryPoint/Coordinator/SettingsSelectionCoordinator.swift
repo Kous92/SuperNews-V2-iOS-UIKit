@@ -40,7 +40,7 @@ final class SettingsSelectionCoordinator: ParentCoordinator {
         // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let settingsSelectionViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
-        print("[MapCoordinator] Settings view ready.")
+        print("[SettingsSelectionCoordinator] Settings selection view ready.")
         navigationController.pushViewController(settingsSelectionViewController, animated: true)
         
         return navigationController

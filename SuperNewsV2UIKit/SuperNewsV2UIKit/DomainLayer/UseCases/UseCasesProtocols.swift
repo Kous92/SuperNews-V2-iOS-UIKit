@@ -33,7 +33,7 @@ protocol MapUseCaseProtocol {
 }
 
 protocol UserSettingsUseCaseProtocol {
-    func execute() async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError>
+    func execute(with option: String) async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError>
     func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
     func loadSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
 }
