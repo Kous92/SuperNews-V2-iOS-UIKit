@@ -9,7 +9,7 @@ import Foundation
 
 final class SuperNewsUserDefaultsLocalSettings: SuperNewsLocalSettings {
     func saveSelectedMediaSource(source: SavedSource) async -> Result<Void, SuperNewsLocalSettingsError> {
-        print("Saving selected source: \(source.name), id: \(source.id)")
+        print("[SuperNewsUserDefaultsLocalSettings] Saving selected source: \(source.name), id: \(source.id)")
         
         do {
             // Create JSON Encoder
@@ -25,13 +25,13 @@ final class SuperNewsUserDefaultsLocalSettings: SuperNewsLocalSettings {
             return .success(())
 
         } catch {
-            print("ERROR: Unable to encode the selected source to save (\(error))")
+            print("[SuperNewsUserDefaultsLocalSettings] ERROR: Unable to encode the selected source to save (\(error))")
             return .failure(.encodeError)
         }
     }
     
     func loadSelectedMediaSource() async -> Result<SavedSource, SuperNewsLocalSettingsError> {
-        print("Loading selected source")
+        print("[SuperNewsUserDefaultsLocalSettings] Loading selected source")
         
         if let data = UserDefaults.standard.data(forKey: "savedSource") {
             do {
@@ -44,7 +44,7 @@ final class SuperNewsUserDefaultsLocalSettings: SuperNewsLocalSettings {
                 // Done, notify that loading has succeeded
                 return .success(savedSource)
             } catch {
-                print("ERROR: Unable to decode the loaded source (\(error))")
+                print("[SuperNewsUserDefaultsLocalSettings] ERROR: Unable to decode the loaded source (\(error))")
                 return .failure(.decodeError)
             }
         }

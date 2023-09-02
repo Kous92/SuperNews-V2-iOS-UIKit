@@ -17,8 +17,14 @@ final class TopHeadlinesViewModel {
     private var cellViewModels = [NewsCellViewModel]()
     private var articleViewModels = [ArticleViewModel]()
     
+    /// Category as key and country code as value. It will be useful to not fire up HTTP requests everytime to download the same existing data.
+    private var fetchedData = [String: String]()
+    
+    // Settings
     private var savedMediaSource = SavedSourceDTO(id: "le-monde", name: "Le Monde")
-    private var isFirstLoad = true
+    private var savedLocalCountry = CountryLanguageSettingDTO(name: "France", code: "fr", flagCode: "fr")
+    private var previousSavedCountryCode = "fr"
+    private var userSettingloadingCount = 0
     
     // MARK: - Bindings
     private var categoryUpdateResult = PassthroughSubject<Bool, Never>()
@@ -44,11 +50,12 @@ final class TopHeadlinesViewModel {
     // MARK: - Category management
     func initCategories() {
         categoryViewModels = CategoryCellViewModel.getCategories()
-        loadAndUpdateSourceCategoryTitle()
     }
     
     func loadAndUpdateSourceCategoryTitle() {
         print("[TopHeadlinesViewModel] Loading saved source if existing...")
+        userSettingloadingCount += 1
+        previousSavedCountryCode = savedLocalCountry.code
         
         Task {
             let result = await useCase.loadSavedSelectedSource()
@@ -59,8 +66,7 @@ final class TopHeadlinesViewModel {
                     self.savedMediaSource = savedSource
                 case .failure(let error):
                     print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
-                    print("ERROR: \(error.rawValue)")
-                    // await self.sendErrorMessage(with: error.rawValue)
+                    print("[TopHeadlinesViewModel] ERROR: \(error.rawValue)")
             }
             
             // If it fails, it will use the default one.
@@ -70,23 +76,74 @@ final class TopHeadlinesViewModel {
         }
     }
     
-    func updateSourceCategoryTitle() {
+    func loadAndUpdateUserCountrySettingTitle() {
+        print("[TopHeadlinesViewModel] Loading saved user country if existing...")
+        
+        Task {
+            let result = await useCase.loadUserCountryLanguageSetting()
+            
+            switch result {
+                case .success(let userSetting):
+                    print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
+                    self.savedLocalCountry = userSetting
+                case .failure(let error):
+                    print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
+                    print("[TopHeadlinesViewModel] ERROR: \(error.rawValue)")
+            }
+            
+            // If it fails, it will use the default one.
+            self.updateCountryCategoryTitle()
+            print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
+            self.categoryUpdateResult.send(true)
+            self.fetchTopHeadlines()
+        }
+    }
+    
+    // Check if the user has set a different country in the setting when using the app
+    func checkSavedCountry() {
+        // Update country top headlines only if country setting has been changed during the use of the app
+        if savedLocalCountry.code != previousSavedCountryCode {
+            print("\(savedLocalCountry.code) != \(previousSavedCountryCode)")
+            print("[TopHeadlinesViewModel] Top headlines will be updated for new country set: \(savedLocalCountry.name)")
+            self.fetchTopHeadlines()
+        }
+    }
+    
+    private func updateSourceCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "source" }) {
             sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource.name)")
         }
     }
     
+    private func updateCountryCategoryTitle() {
+        if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "local" }) {
+            sourceCategoryViewModel.setCategoryTitle(with: "Actualités locales (\(savedLocalCountry.name))")
+        }
+    }
+    
     // MARK: - Top headlines
     func fetchTopHeadlines() {
+        guard fetchedData["local"] != savedLocalCountry.code else {
+            print("[TopHeadlinesViewModel] Top headlines local news from country code \(savedLocalCountry.code) are already downloaded.")
+            return
+        }
+        
         Task {
+            fetchedData["local"] = savedLocalCountry.code
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .localCountryNews(countryCode: "fr"))
+            let result = await useCase.execute(topHeadlinesOption: .localCountryNews(countryCode: savedLocalCountry.code))
             await handleResult(with: result)
         }
     }
     
     func fetchTopHeadlinesWithSource() {
+        guard fetchedData["source"] != savedMediaSource.id else {
+            print("[TopHeadlinesViewModel] Top headlines news from \(savedMediaSource.name) are already downloaded.")
+            return
+        }
+        
         Task {
+            fetchedData["source"] = savedMediaSource.id
             isLoading.send(true)
             let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource.id))
             await handleResult(with: result)
@@ -94,9 +151,15 @@ final class TopHeadlinesViewModel {
     }
     
     func fetchTopHeadlines(with category: String) {
+        guard fetchedData[category] != savedLocalCountry.code else {
+            print("[TopHeadlinesViewModel] Top headlines \(category) news from country code \(savedLocalCountry.code) are already downloaded.")
+            return
+        }
+        
         Task {
+            fetchedData[category] = savedLocalCountry.code
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .categoryNews(name: category, countryCode: "us"))
+            let result = await useCase.execute(topHeadlinesOption: .categoryNews(name: category, countryCode: savedLocalCountry.code))
             await handleResult(with: result)
         }
     }
@@ -109,7 +172,7 @@ final class TopHeadlinesViewModel {
                 await parseViewModels()
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
-                print("ERROR: " + error.rawValue)
+                print("[TopHeadlinesViewModel] ERROR: " + error.rawValue)
                 await self.sendErrorMessage(with: error.rawValue)
                 self.updateResult.send(false)
         }
@@ -165,7 +228,7 @@ extension TopHeadlinesViewModel {
     
     func goToArticleDetailView(selectedViewModelIndex: Int) {
         print("[TopHeadlinesViewModel] TopHeadlines -> Coordinator -> ArticleDetail")
-        print("ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
+        print("[TopHeadlinesViewModel] ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
         coordinator?.goToDetailArticleView(with: articleViewModels[selectedViewModelIndex])
     }
 }

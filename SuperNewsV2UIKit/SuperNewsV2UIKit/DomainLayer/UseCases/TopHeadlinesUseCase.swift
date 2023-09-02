@@ -9,11 +9,13 @@ import Foundation
 
 final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
     private let dataRepository: SuperNewsRepository
-    private let settingsRepository: SuperNewsSourceSettingsRepository
+    private let sourceSettingsRepository: SuperNewsSourceSettingsRepository
+    private let userSettingsRepository: SuperNewsSettingsRepository
     
-    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSourceSettingsRepository) {
+    init(dataRepository: SuperNewsRepository, sourceSettingsRepository: SuperNewsSourceSettingsRepository, userSettingsRepository: SuperNewsSettingsRepository) {
         self.dataRepository = dataRepository
-        self.settingsRepository = settingsRepository
+        self.sourceSettingsRepository = sourceSettingsRepository
+        self.userSettingsRepository = userSettingsRepository
     }
     
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError> {
@@ -28,13 +30,17 @@ final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
     }
     
     func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError> {
-        return await settingsRepository.loadSelectedMediaSource()
+        return await sourceSettingsRepository.loadSelectedMediaSource()
+    }
+    
+    /// It loads here the country setting for the top headlines.
+    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
+        return await userSettingsRepository.loadUserSetting()
     }
     
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {
         switch result {
             case .success(let articles):
-                // print("DTOs:\n\(articles)")
                 return .success(parseViewModels(with: articles))
             case .failure(let error):
                 return .failure(error)

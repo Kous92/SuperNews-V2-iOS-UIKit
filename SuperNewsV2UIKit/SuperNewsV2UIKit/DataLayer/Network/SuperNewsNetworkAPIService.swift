@@ -14,12 +14,12 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     fileprivate func getApiKey() -> String? {
         guard let path = Bundle.main.path(forResource: "apiKey", ofType: "plist") else {
-            print("ERROR: apiKey.plist file does not exists")
+            print("[SuperNewsNetworkAPIService] ERROR: apiKey.plist file does not exists")
             return nil
         }
         
         guard let dictionary = NSDictionary(contentsOfFile: path) else {
-            print("ERROR: Data not available")
+            print("[SuperNewsNetworkAPIService] ERROR: Data not available")
             return nil
         }
         
@@ -32,7 +32,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     init() {
         self.apiKey = getApiKey() ?? ""
-        print("Initializing with API Key: \(apiKey)")
+        print("[SuperNewsNetworkAPIService] Initializing with API Key: \(apiKey)")
     }
     
     func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError> {
@@ -88,7 +88,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
             return .failure(.invalidURL)
         }
         
-        print("Called URL: \(url.absoluteString)")
+        print("[SuperNewsNetworkAPIService] Called URL for data download: \(url.absoluteString)")
         let request = AF.request(url, headers: getAuthorizationHeader()).validate()
         let decodableResponse = await request.serializingDecodable(T.self).response
         
@@ -101,11 +101,11 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
                 return .success(data)
             case let .failure(error):
                 guard let httpResponse = decodableResponse.response else {
-                    print("ERROR: \(error)")
+                    print("[SuperNewsNetworkAPIService] ERROR: \(error)")
                     return .failure(.networkError)
                 }
                 
-                print("Failure code: \(httpResponse.statusCode)")
+                print("[SuperNewsNetworkAPIService] Failure code: \(httpResponse.statusCode)")
                 
                 switch httpResponse.statusCode {
                     case 400:

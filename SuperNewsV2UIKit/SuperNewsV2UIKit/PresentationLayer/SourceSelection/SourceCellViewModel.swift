@@ -38,7 +38,7 @@ struct SourceCellViewModel {
     
     func getURL() -> URL? {
         guard !url.isEmpty, let url = URL(string: url) else {
-            print("-> ERROR: Source URL not available.")
+            print("[SourceCellViewModel] ERROR: Source URL not available.")
             return nil
         }
         

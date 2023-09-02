@@ -46,12 +46,12 @@ final class CountryNewsViewModel {
     private func handleResult(with result: Result<[ArticleViewModel], SuperNewsAPIError>) async {
         switch result {
             case .success(let viewModels):
-                print("[TopHeadlinesViewModel] Données récupérées: \(viewModels.count) articles")
+                print("[CountryNewsViewModel] Data retrieved: \(viewModels.count) articles")
                 self.articleViewModels = viewModels
                 await parseViewModels()
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
-                print("ERROR: " + error.rawValue)
+                print("[CountryNewsViewModel] ERROR: " + error.rawValue)
                 await self.sendErrorMessage(with: error.rawValue)
                 self.updateResult.send(false)
         }
@@ -94,7 +94,7 @@ extension CountryNewsViewModel {
     
     func goToArticleDetailView(selectedViewModelIndex: Int) {
         print("[CountryNewsViewModel] TopHeadlines -> Coordinator -> ArticleDetail")
-        print("ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
+        print("[CountryNewsViewModel] ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
         coordinator?.goToDetailArticleView(with: articleViewModels[selectedViewModelIndex])
     }
 }

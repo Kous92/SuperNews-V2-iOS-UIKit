@@ -14,6 +14,10 @@ final class SettingsSelectionViewModel {
     private let settingSection: SettingsSection
     private let useCase: UserSettingsUseCaseProtocol
     private var cellViewModels = [CountrySettingViewModel]()
+    private var actualSelectedIndex = 0
+    
+    // User setting
+    private var savedCountryLanguageSetting: CountryLanguageSettingDTO
     
     // MARK: - Binding
     private var settingOptionResult = PassthroughSubject<String, Never>()
@@ -30,6 +34,12 @@ final class SettingsSelectionViewModel {
     init(settingSection: SettingsSection, useCase: UserSettingsUseCaseProtocol) {
         self.settingSection = settingSection
         self.useCase = useCase
+        
+        if settingSection.description == "country" {
+            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "France", code: "fr", flagCode: "fr")
+        } else {
+            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "Français", code: "fr", flagCode: "fr")
+        }
     }
     
     @MainActor private func sendErrorMessage(with errorMessage: String) {
@@ -50,10 +60,10 @@ final class SettingsSelectionViewModel {
             switch result {
                 case .success(let viewModels):
                     self.cellViewModels = viewModels
-                    self.updateResult.send(true)
+                    await loadSetting()
                 case .failure(let error):
                     print("[SettingsSelectionViewModel] Loading failed.")
-                    print("ERROR: \(error.rawValue)")
+                    print("[SettingsSelectionViewModel] ERROR: \(error.rawValue)")
                     await self.sendErrorMessage(with: error.rawValue)
             }
         }
@@ -67,11 +77,62 @@ final class SettingsSelectionViewModel {
             switch result {
                 case .success(let viewModels):
                     self.cellViewModels = viewModels
-                    self.updateResult.send(true)
+                    await loadSetting()
                 case .failure(let error):
                     print("[SettingsSelectionViewModel] Loading failed.")
-                    print("ERROR: \(error.rawValue)")
+                    print("[SettingsSelectionViewModel] ERROR: \(error.rawValue)")
                     await self.sendErrorMessage(with: error.rawValue)
+            }
+        }
+    }
+    
+    private func loadSetting() async {
+        let result = await useCase.loadUserCountryLanguageSetting()
+        
+        switch result {
+            case .success(let userSetting):
+                print("[SettingsSelectionViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
+                self.savedCountryLanguageSetting = userSetting
+            case .failure(let error):
+                print("[SettingsSelectionViewModel] Loading failed, the default user country setting will be used: \(savedCountryLanguageSetting.name), code: \(savedCountryLanguageSetting.code), flagCode: \(savedCountryLanguageSetting.flagCode)")
+                print("[SettingsSelectionViewModel] ERROR: \(error.rawValue)")
+        }
+        
+        await updateViewModelsWithSavedSetting()
+        self.updateResult.send(true)
+        // If it fails, it will use the default one.
+        // self.updateCountryCategoryTitle()
+        // print("[SettingsSelectionViewModel] Categories: \(categoryViewModels.count)")
+        // self.categoryUpdateResult.send(true)
+    }
+    
+    private func updateViewModelsWithSavedSetting() async {
+        if let index = cellViewModels.firstIndex(where: { $0.name == savedCountryLanguageSetting.name }) {
+            cellViewModels[index].setIsSaved(saved: true)
+            actualSelectedIndex = index
+        }
+    }
+    
+    func saveSelectedSetting(at indexPath: IndexPath) {
+        guard let cellViewModel = getCellViewModel(at: indexPath) else {
+            print("[SettingsSelectionViewModel] ERROR when selecting the cell")
+            return
+        }
+        
+        actualSelectedIndex = indexPath.row
+        let savedSelectedSetting = CountryLanguageSettingDTO(name: cellViewModel.name, code: cellViewModel.code, flagCode: cellViewModel.flagCode)
+        print("[SettingsSelectionViewModel] Selected \(settingSection.description) to save: \(savedSelectedSetting.name), code: \(savedSelectedSetting.code), flagCode: \(savedSelectedSetting.flagCode)")
+        
+        Task {
+            let result = await useCase.saveSetting(with: savedSelectedSetting)
+            
+            switch result {
+                case .success():
+                    print("[SettingsSelectionViewModel] Saving succeeded")
+                    // await backToHomeView(with: savedSource.id)
+                    savedCountryLanguageSetting = savedSelectedSetting
+                case .failure(let error):
+                    print("[SettingsSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
             }
         }
     }
@@ -81,6 +142,10 @@ extension SettingsSelectionViewModel {
     // In that case, it's a unique section TableView
     func numberOfRowsInTableView() -> Int {
         return cellViewModels.count
+    }
+    
+    func getActualSelectedIndex() -> Int {
+        return actualSelectedIndex
     }
     
     func getCellViewModel(at indexPath: IndexPath) -> CountrySettingViewModel? {

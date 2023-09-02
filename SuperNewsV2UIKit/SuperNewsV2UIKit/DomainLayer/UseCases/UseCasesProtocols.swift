@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-protocol TopHeadlinesUseCaseProtocol {
+protocol TopHeadlinesUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
     func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
 }
@@ -22,7 +22,7 @@ protocol SourceSelectionUseCaseProtocol {
     func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
 }
 
-protocol SearchUseCaseProtocol {
+protocol SearchUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
     func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
@@ -32,8 +32,11 @@ protocol MapUseCaseProtocol {
     func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError>
 }
 
-protocol UserSettingsUseCaseProtocol {
+protocol LoadUserSettingsUseCaseProtocol {
+    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
+}
+
+protocol UserSettingsUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
     func execute(with option: String) async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError>
     func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
-    func loadSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
 }
