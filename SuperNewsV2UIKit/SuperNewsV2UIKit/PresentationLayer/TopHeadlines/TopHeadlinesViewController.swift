@@ -106,11 +106,13 @@ final class TopHeadlinesViewController: UIViewController {
         setConstraints()
         setBindings()
         viewModel?.initCategories()
-        viewModel?.fetchTopHeadlines()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel?.loadAndUpdateSourceCategoryTitle()
+        viewModel?.loadAndUpdateUserCountrySettingTitle()
+        viewModel?.checkSavedCountry()
     }
     
     private func buildViewHierarchy() {

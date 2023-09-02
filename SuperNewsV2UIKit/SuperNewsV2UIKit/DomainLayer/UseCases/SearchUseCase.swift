@@ -9,15 +9,22 @@ import Foundation
 
 final class SearchUseCase: SearchUseCaseProtocol {
     private let dataRepository: SuperNewsRepository
-    private let settingsRepository: SuperNewsSourceSettingsRepository
+    private let sourceSettingsRepository: SuperNewsSourceSettingsRepository
+    private let userSettingsRepository: SuperNewsSettingsRepository
     
-    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSourceSettingsRepository) {
+    init(dataRepository: SuperNewsRepository, sourceSettingsRepository: SuperNewsSourceSettingsRepository, userSettingsRepository: SuperNewsSettingsRepository) {
         self.dataRepository = dataRepository
-        self.settingsRepository = settingsRepository
+        self.sourceSettingsRepository = sourceSettingsRepository
+        self.userSettingsRepository = userSettingsRepository
     }
     
     func execute(searchQuery: String, language: String, sortBy: String = "publishedAt") async -> Result<[ArticleViewModel], SuperNewsAPIError> {
         return handleResult(with: await dataRepository.searchNewsFromEverything(with: searchQuery, language: language, sortBy: sortBy))
+    }
+    
+    /// It loads here the language setting for the top headlines.
+    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
+        return await userSettingsRepository.loadUserSetting()
     }
     
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {

@@ -31,7 +31,7 @@ final class SuperNewsMockLocalSettings: SuperNewsLocalSettings {
             return .success(())
 
         } catch {
-            print("ERROR: Unable to encode the selected source to save (\(error))")
+            print("[SuperNewsMockLocalSettings] ERROR: Unable to encode the selected source to save (\(error))")
             return .failure(.encodeError)
         }
     }
@@ -50,7 +50,7 @@ final class SuperNewsMockLocalSettings: SuperNewsLocalSettings {
                 // Done, notify that loading has succeeded
                 return .success(savedSource)
             } catch {
-                print("ERROR: Unable to decode the loaded source (\(error))")
+                print("[SuperNewsMockLocalSettings] ERROR: Unable to decode the loaded source (\(error))")
                 return .failure(.decodeError)
             }
         }

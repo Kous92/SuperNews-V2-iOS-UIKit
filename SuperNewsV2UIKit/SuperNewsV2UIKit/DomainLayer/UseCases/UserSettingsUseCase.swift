@@ -25,11 +25,11 @@ final class UserSettingsUseCase: UserSettingsUseCaseProtocol {
     }
     
     func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError> {
-        return .failure(.savingError)
+        return await userSettingsRepository.saveUserSetting(userSetting: countryLanguageSetting)
     }
     
-    func loadSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
-        return .failure(.loadingError)
+    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
+        return await userSettingsRepository.loadUserSetting()
     }
     
     private func handleResultWithCountries(with result: Result<[CountryDTO], SuperNewsLocalFileError>) -> Result<[CountrySettingViewModel], SuperNewsLocalFileError> {

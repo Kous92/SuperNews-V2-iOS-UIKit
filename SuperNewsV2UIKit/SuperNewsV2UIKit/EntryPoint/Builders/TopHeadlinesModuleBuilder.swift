@@ -18,7 +18,8 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         // Dependency injection
         let dataRepository = getRepository(testMode: testMode)
         let settingsRepository = getSettingsRepository(testMode: testMode)
-        let useCase = TopHeadlinesUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
+        let userSettingsRepository = getUserSettingsRepository(testMode: testMode)
+        let useCase = TopHeadlinesUseCase(dataRepository: dataRepository, sourceSettingsRepository: settingsRepository, userSettingsRepository: userSettingsRepository)
         let topHeadlinesViewModel = TopHeadlinesViewModel(useCase: useCase)
         topHeadlinesViewModel.coordinator = coordinator as? TopHeadlinesViewControllerDelegate
         
@@ -36,11 +37,19 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         return SuperNewsSourceUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
     }
     
+    private func getUserSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
+        return SuperNewsUserSettingsRepository(settingsService: getUserSettingsService(testMode: testMode))
+    }
+    
     private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
         return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
     }
     
     private func getSettingsService(testMode: Bool) -> SuperNewsLocalSettings {
         return testMode ? SuperNewsMockLocalSettings() : SuperNewsUserDefaultsLocalSettings()
+    }
+    
+    private func getUserSettingsService(testMode: Bool) -> SuperNewsUserSettings {
+        return testMode ? SuperNewsMockCountryLanguageSettings(with: "country") : SuperNewsUserDefaultsCountryLanguageSettings(with: "country")
     }
 }

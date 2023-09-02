@@ -58,7 +58,7 @@ final class MapViewModel {
                     await positionReverseGeocoding()
                 case .failure(let error):
                     print("[MapViewModel] Impossible to retrieve user location.")
-                    print("ERROR: \(error.rawValue)")
+                    print("[MapViewModel] ERROR: \(error.rawValue)")
                     await self.sendErrorMessage(with: error.rawValue)
             }
         }
@@ -78,7 +78,7 @@ final class MapViewModel {
                     self.updateResult.send(true)
                 case .failure(let error):
                     print("[MapViewModel] Loading failed.")
-                    print("ERROR: \(error.rawValue)")
+                    print("[MapViewModel] ERROR: \(error.rawValue)")
                     await self.sendErrorMessage(with: error.rawValue)
             }
         }

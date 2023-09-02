@@ -31,7 +31,7 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
             return .success(())
 
         } catch {
-            print("ERROR: Unable to encode the selected source to save (\(error))")
+            print("[SuperNewsUserDefaultsCountryLanguageSettings] ERROR: Unable to encode the selected source to save (\(error))")
             return .failure(.encodeError)
         }
     }
@@ -50,7 +50,7 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
                 // Done, notify that loading has succeeded
                 return .success(userSetting)
             } catch {
-                print("ERROR: Unable to decode the user setting (\(error))")
+                print("[SuperNewsUserDefaultsCountryLanguageSettings] ERROR: Unable to decode the user setting (\(error))")
                 return .failure(.decodeError)
             }
         }

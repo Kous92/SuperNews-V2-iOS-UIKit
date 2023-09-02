@@ -45,7 +45,6 @@ final class SettingsSelectionViewController: UIViewController {
         super.viewDidLoad()
         
         setViewBackground()
-        // setNavigationBar(with: "Langue et pays")
         buildViewHierarchy()
         setConstraints()
         setBindings()
@@ -119,9 +118,14 @@ extension SettingsSelectionViewController: UITableViewDataSource {
         }
         
         cell.configure(with: countrySettingViewModel)
-        // let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        // cell.textLabel?.text = "Paramètre \(indexPath.row)"
-        // cell.accessoryType = .disclosureIndicator
+        
+        if countrySettingViewModel.isSaved == true {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
+        cell.tintColor = .green
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
@@ -131,7 +135,31 @@ extension SettingsSelectionViewController: UITableViewDataSource {
 }
 
 extension SettingsSelectionViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Unselect the row.
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let selected = indexPath.row
+        let actualSelectedIndex = viewModel?.getActualSelectedIndex() ?? 0
+        print(actualSelectedIndex)
+        
+        // Did the user tap on a selected filter item? If so, do nothing.
+        if selected == actualSelectedIndex {
+            return
+        }
+        
+        // Remove the checkmark from the previously selected filter item.
+        if let previousCell = tableView.cellForRow(at: IndexPath(row: actualSelectedIndex, section: indexPath.section)) {
+            previousCell.accessoryType = .none
+        }
+        
+        // Mark the newly selected filter item with a checkmark.
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+        }
+        
+        viewModel?.saveSelectedSetting(at: indexPath)
+    }
 }
 
 // Ready to live preview and make views much faster
