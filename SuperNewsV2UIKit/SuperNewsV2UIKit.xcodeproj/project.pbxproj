@@ -450,7 +450,6 @@
 			isa = PBXGroup;
 			children = (
 				4B306F6929F6CBBC009AA92D /* UseCases */,
-				4B306F6829F6CBB0009AA92D /* Repositories */,
 				4B306F6329F68D51009AA92D /* Entities */,
 			);
 			path = DomainLayer;
@@ -482,13 +481,6 @@
 				4B5220D22A8440C900F86569 /* LanguageDTO.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		4B306F6829F6CBB0009AA92D /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		4B306F6929F6CBBC009AA92D /* UseCases */ = {
