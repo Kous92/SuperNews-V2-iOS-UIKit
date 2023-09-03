@@ -102,6 +102,10 @@ final class SearchViewController: UIViewController {
         setBindings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel?.loadAndUpdateUserLanguageSettingTitle()
+    }
+    
     private func buildViewHierarchy() {
         view.addSubview(loadingSpinner)
         view.addSubview(noResultLabel)
@@ -143,6 +147,13 @@ final class SearchViewController: UIViewController {
                 }
             }.store(in: &subscriptions)
         
+        // Setting binding
+        viewModel?.languageSettingPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] languageName in
+                self?.setSearchBar(languageName: languageName)
+            }.store(in: &subscriptions)
+        
         // Update binding
         viewModel?.updateResultPublisher
             .receive(on: RunLoop.main)
@@ -163,6 +174,10 @@ extension SearchViewController {
     private func setNavigationBar() {        
         navigationItem.title = "Recherche"
         navigationController?.navigationBar.tintColor = .white
+    }
+    
+    private func setSearchBar(languageName: String) {
+        searchBar.placeholder = "Rechercher (langue: \(languageName))"
     }
     
     private func setViewBackground() {

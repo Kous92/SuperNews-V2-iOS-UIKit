@@ -16,11 +16,15 @@ final class SearchViewModel {
     private var cellViewModels = [NewsCellViewModel]()
     private var articleViewModels = [ArticleViewModel]()
     
+    // Settings
+    private var savedLocalLanguage = CountryLanguageSettingDTO(name: "Français", code: "fr", flagCode: "fr")
+    
     // MARK: - Bindings and subscriptions
     @Published var searchQuery = ""
     private var subscriptions = Set<AnyCancellable>()
     private var updateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
+    private var languageSetting = PassthroughSubject<String, Never>()
     
     var updateResultPublisher: AnyPublisher<Bool, Never> {
         return updateResult.eraseToAnyPublisher()
@@ -28,6 +32,10 @@ final class SearchViewModel {
     
     var isLoadingPublisher: AnyPublisher<Bool, Never> {
         return isLoading.eraseToAnyPublisher()
+    }
+    
+    var languageSettingPublisher: AnyPublisher<String, Never> {
+        return languageSetting.eraseToAnyPublisher()
     }
     
     init(useCase: SearchUseCaseProtocol) {
@@ -45,8 +53,28 @@ final class SearchViewModel {
             }.store(in: &subscriptions)
     }
     
+    func loadAndUpdateUserLanguageSettingTitle() {
+        print("[SearchViewModel] Loading saved user language if existing...")
+        
+        Task {
+            let result = await useCase.loadUserCountryLanguageSetting()
+            
+            // If it fails, it will use the default one.
+            switch result {
+                case .success(let userSetting):
+                    print("[SearchViewModel] Loading succeeded for saved user language setting: \(userSetting.name), code: \(userSetting.code)")
+                    self.savedLocalLanguage = userSetting
+                case .failure(let error):
+                    print("[SearchViewModel] Loading failed, the default language will be used: \(savedLocalLanguage.name), code: \(savedLocalLanguage.code)")
+                    print("[SearchViewModel] ERROR: \(error.rawValue)")
+            }
+            
+            self.languageSetting.send(savedLocalLanguage.name)
+        }
+    }
+    
     private func fetchNewsWithQuery() {
-        // Contenu vide
+        // Empty content
         guard !searchQuery.isEmpty else {
             print("[SearchViewModel] Nothing to search, ignoring fetching data from network.")
             return
@@ -54,7 +82,7 @@ final class SearchViewModel {
         
         Task {
             isLoading.send(true)
-            let result = await useCase.execute(searchQuery: searchQuery, language: "fr", sortBy: "publishedAt")
+            let result = await useCase.execute(searchQuery: searchQuery, language: savedLocalLanguage.code, sortBy: "publishedAt")
             await handleResult(with: result)
         }
     }
@@ -62,12 +90,12 @@ final class SearchViewModel {
     private func handleResult(with result: Result<[ArticleViewModel], SuperNewsAPIError>) async {
         switch result {
             case .success(let viewModels):
-                print("[TopHeadlinesViewModel] Données récupérées: \(viewModels.count) articles")
+                print("[SearchViewModel] Downloaded data: \(viewModels.count) articles")
                 self.articleViewModels = viewModels
                 await parseViewModels()
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
-                print("ERROR: " + error.rawValue)
+                print("[SearchViewModel] ERROR: " + error.rawValue)
                 await self.sendErrorMessage(with: error.rawValue)
                 self.updateResult.send(false)
         }
@@ -103,7 +131,7 @@ extension SearchViewModel {
     
     func goToArticleDetailView(selectedViewModelIndex: Int) {
         print("[SearchViewModel] Search -> Coordinator -> ArticleDetail")
-        print("ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
+        print("[SearchViewModel] ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
         coordinator?.goToDetailArticleView(with: articleViewModels[selectedViewModelIndex])
     }
 }
