@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SuperNewsUserSettingsRepository: SuperNewsSettingsRepository {    
+final class SuperNewsUserSettingsRepository: SuperNewsSettingsRepository {
     private let settingsService: SuperNewsUserSettings?
     
     init(settingsService: SuperNewsUserSettings?) {
@@ -28,6 +28,14 @@ final class SuperNewsUserSettingsRepository: SuperNewsSettingsRepository {
         }
         
         return handleSavedCountryLanguageSetting(with: result)
+    }
+    
+    func resetUserSettings() async -> Result<Void, SuperNewsUserSettingsError> {
+        guard let result = await settingsService?.resetSettings()else {
+            return .failure(.userSettingsError)
+        }
+        
+        return result
     }
     
     private func handleSavedCountryLanguageSetting(with result: Result<CountryLanguageSetting, SuperNewsUserSettingsError>) -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {

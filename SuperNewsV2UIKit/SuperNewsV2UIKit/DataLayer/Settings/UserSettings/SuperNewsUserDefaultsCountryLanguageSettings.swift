@@ -59,6 +59,25 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
     }
     
     func resetSettings() async -> Result<Void, SuperNewsUserSettingsError> {
-        return .failure(.userSettingsError)
+        print("[SettingsCoordinator] Resetting user parameters.")
+        // Resetting to default parameters
+        do {
+            // Create JSON Encoder
+            let encoder = JSONEncoder()
+
+            // Encode saved source
+            let languageData = try encoder.encode(CountryLanguageSetting(name: "Français", code: "fr", flagCode: "fr"))
+            let countryData = try encoder.encode(CountryLanguageSetting(name: "France", code: "fr", flagCode: "fr"))
+
+            // Write/Set Data
+            UserDefaults.standard.set(languageData, forKey: "language")
+            UserDefaults.standard.set(countryData, forKey: "country")
+            
+            print("[SettingsCoordinator] Resetting succeeded.")
+            return .success(())
+        } catch {
+            print("[SettingsCoordinator] Resetting failed.")
+            return .failure(.userSettingsError)
+        }
     }
 }

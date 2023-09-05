@@ -11,6 +11,9 @@ import Combine
 final class SettingsViewModel {
     weak var coordinator: SettingsViewControllerDelegate?
     
+    // For resetting user settings to default settings
+    private let useCase: ResetUserSettingsUseCaseProtocol
+    
     // private let useCase: UserSettingsUseCaseProtocol
     private var sectionViewModels = [SettingsSectionViewModel]()
     
@@ -22,7 +25,8 @@ final class SettingsViewModel {
         return updateResult.eraseToAnyPublisher()
     }
     
-    init() {
+    init(useCase: ResetUserSettingsUseCaseProtocol) {
+        self.useCase = useCase
         loadSettingsSections()
     }
     
@@ -41,20 +45,40 @@ final class SettingsViewModel {
 
 extension SettingsViewModel {
     @MainActor private func sendErrorMessage(with errorMessage: String) {
-        print("[SourceSelectionViewModel] Error to display: \(errorMessage)")
+        print("[SettingsViewModel] Error to display: \(errorMessage)")
         
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
     func goToSettingsSelectionView(at indexPath: IndexPath) {
         let option = sectionViewModels[indexPath.row].description
-        print("[SourceSelectionViewModel] Selected option: \(option)")
+        print("[SettingsViewModel] Selected option: \(option)")
         
         guard option != "reset" else {
-            print("[SourceSelectionViewModel] Resetting parameters.")
+            print("[SettingsViewModel] Resetting parameters.")
+            coordinator?.showResetSettingsAlert(completion: { [weak self] reset in
+                if reset {
+                    self?.resetUserSettings()
+                }
+            })
             return
         }
         
         coordinator?.goToSettingsSelectionView(settingSection: sectionViewModels[indexPath.row].getSettingSection())
+    }
+    
+    private func resetUserSettings() {
+        Task {
+            print("[SettingsViewModel] Resetting user settings to default.")
+            let result = await useCase.execute()
+            
+            switch result {
+                case .success():
+                    print("[SettingsViewModel] Resetting succeeded to default settings.")
+                case .failure(let error):
+                    print("[SettingsViewModel] Resetting failed. ERROR: \(error.rawValue)")
+                    await self.sendErrorMessage(with: error.rawValue)
+            }
+        }
     }
 }
