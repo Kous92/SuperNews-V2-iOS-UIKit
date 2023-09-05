@@ -32,6 +32,10 @@ protocol MapUseCaseProtocol {
     func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError>
 }
 
+protocol ResetUserSettingsUseCaseProtocol {
+    func execute() async -> Result<Void, SuperNewsUserSettingsError>
+}
+
 protocol LoadUserSettingsUseCaseProtocol {
     func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
 }

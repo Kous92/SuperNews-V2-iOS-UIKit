@@ -16,12 +16,22 @@ final class SettingsModuleBuilder: ModuleBuilder {
         let settingsViewController = SettingsViewController()
         
         // Dependency injection
-        let settingsViewModel = SettingsViewModel()
+        let userSettingRepository = getUserSettingRepository(testMode: testMode)
+        let useCase = ResetUserSettingsUseCase(userSettingsRepository: userSettingRepository)
+        let settingsViewModel = SettingsViewModel(useCase: useCase)
         settingsViewModel.coordinator = coordinator as? SettingsViewControllerDelegate
         
         // Injecting view model
         settingsViewController.viewModel = settingsViewModel
         
         return settingsViewController
+    }
+    
+    private func getUserSettingRepository(testMode: Bool) -> SuperNewsUserSettingsRepository {
+        return SuperNewsUserSettingsRepository(settingsService: getUserSettingsService(testMode: testMode))
+    }
+    
+    private func getUserSettingsService(testMode: Bool) -> SuperNewsUserSettings {
+        return testMode ? SuperNewsUserDefaultsCountryLanguageSettings(with: "reset") : SuperNewsUserDefaultsCountryLanguageSettings(with: "reset")
     }
 }

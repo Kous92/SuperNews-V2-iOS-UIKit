@@ -100,10 +100,6 @@ final class SettingsSelectionViewModel {
         
         await updateViewModelsWithSavedSetting()
         self.updateResult.send(true)
-        // If it fails, it will use the default one.
-        // self.updateCountryCategoryTitle()
-        // print("[SettingsSelectionViewModel] Categories: \(categoryViewModels.count)")
-        // self.categoryUpdateResult.send(true)
     }
     
     private func updateViewModelsWithSavedSetting() async {
@@ -129,7 +125,6 @@ final class SettingsSelectionViewModel {
             switch result {
                 case .success():
                     print("[SettingsSelectionViewModel] Saving succeeded")
-                    // await backToHomeView(with: savedSource.id)
                     savedCountryLanguageSetting = savedSelectedSetting
                 case .failure(let error):
                     print("[SettingsSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")

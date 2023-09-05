@@ -11,4 +11,5 @@ import Foundation
 protocol SuperNewsSettingsRepository: AnyObject {
     func saveUserSetting(userSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
     func loadUserSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
+    func resetUserSettings() async -> Result<Void, SuperNewsUserSettingsError>
 }

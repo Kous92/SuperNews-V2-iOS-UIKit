@@ -12,6 +12,8 @@ import UIKit
 protocol SettingsViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
     func goToSettingsSelectionView(settingSection: SettingsSection)
+    // func showResetSettingsAlert()
+    func showResetSettingsAlert(completion: @escaping (Bool) -> ())
 }
 
 final class SettingsCoordinator: ParentCoordinator {
@@ -60,6 +62,22 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         navigationController.present(alert, animated: true, completion: nil)
     }
     
+    func showResetSettingsAlert(completion: @escaping (Bool) -> ()) {
+        print("[SettingsCoordinator] Displaying reset settings alert.")
+        
+        let alert = UIAlertController(title: "Attention", message: "Voulez-vous réinitialiser les paramètres des actualités et de la langue de recherche des news ? Si oui, les paramètres seront réinitialisés par défaut.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { _ in
+            completion(true)
+        }))
+        alert.addAction(UIAlertAction(title: "Non", style: .cancel, handler: { _ in
+            completion(false)
+        }))
+        
+        navigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    
     func goToSettingsSelectionView(settingSection: SettingsSection) {
         // Transition is separated here into a child coordinator.
         print("[SettingsCoordinator] Setting child coordinator: SettingsSelectionCoordinator.")
@@ -72,5 +90,26 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         // Transition from settings screen to settings selection screen
         print("[SettingsCoordinator] Go to SettingsSelectionViewController.")
         settingsSelectionCoordinator.start()
+    }
+    
+    private func resetUserSettings() {
+        print("[SettingsCoordinator] Resetting user parameters.")
+        // Resetting to default parameters
+        do {
+            // Create JSON Encoder
+            let encoder = JSONEncoder()
+
+            // Encode saved source
+            let languageData = try encoder.encode(CountryLanguageSetting(name: "Français", code: "fr", flagCode: "fr"))
+            let countryData = try encoder.encode(CountryLanguageSetting(name: "France", code: "fr", flagCode: "fr"))
+
+            // Write/Set Data
+            UserDefaults.standard.set(languageData, forKey: "language")
+            UserDefaults.standard.set(countryData, forKey: "country")
+            
+            print("[SettingsCoordinator] Resetting succeeded.")
+        } catch {
+            print("[SettingsCoordinator] Resetting failed.")
+        }
     }
 }
