@@ -46,6 +46,6 @@ final class SettingsSelectionModuleBuilder: ModuleBuilder {
     }
     
     private func getLocalFileService(testMode: Bool) -> SuperNewsLocalDataFileService {
-        return testMode ? SuperNewsJSONFileService() : SuperNewsJSONFileService()
+        return testMode ? SuperNewsMockFileService(forceLoadFailure: false) : SuperNewsJSONFileService()
     }
 }

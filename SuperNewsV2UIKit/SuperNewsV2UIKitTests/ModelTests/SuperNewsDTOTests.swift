@@ -37,4 +37,13 @@ final class SuperNewsDTOTests: XCTestCase {
         XCTAssertEqual(fakeCountryDTO.lat, 46.6423682169416)
         XCTAssertEqual(fakeCountryDTO.lon, 2.1940236627886227)
     }
+    
+    func testLanguageDTO() {
+        let fakeLanguageDTO = LanguageDTO.getFakeObjectFromLanguage()
+        
+        XCTAssertEqual(fakeLanguageDTO.languageCode, "fr")
+        XCTAssertEqual(fakeLanguageDTO.languageDefaultFlag, "fr")
+        XCTAssertEqual(fakeLanguageDTO.defaultLanguage, true)
+        XCTAssertEqual(fakeLanguageDTO.languageName, "French")
+    }
 }
