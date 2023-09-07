@@ -21,7 +21,7 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         XCTAssertTrue(viewController is GradientTabBarController)
         
         if let gradientTabBar = viewController as? GradientTabBarController {
-            XCTAssertEqual(gradientTabBar.tabBar.items?.count ?? 0, 3)
+            XCTAssertEqual(gradientTabBar.tabBar.items?.count ?? 0, 4)
         } else {
             XCTFail()
         }
@@ -203,5 +203,30 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         
         countryNewsCoordinator.goToDetailArticleView(with: ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle()))
         XCTAssertEqual(countryNewsCoordinator.childCoordinators.count, 1)
+    }
+    
+    func testSettingsCoordinator() {
+        let moduleBuilder = SettingsModuleBuilder()
+        let settingsCoordinator = SettingsCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        
+        settingsCoordinator.goToSettingsSelectionView(settingSection: .newsCountry)
+        XCTAssertEqual(settingsCoordinator.childCoordinators.count, 1)
+    }
+    
+    func testSettingsSelectionCoordinator() {
+        let moduleBuilder = SettingsSelectionModuleBuilder(settingSection: .newsCountry)
+        let settingsSelectionCoordinator = SettingsSelectionCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        let navigationController = settingsSelectionCoordinator.start()
+        
+        XCTAssertTrue(navigationController is UINavigationController)
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        print(navigationController.viewControllers)
+        XCTAssertTrue(navigationController.viewControllers[0] is SettingsSelectionViewController)
     }
 }

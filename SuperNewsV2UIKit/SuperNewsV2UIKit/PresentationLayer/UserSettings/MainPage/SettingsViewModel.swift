@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 final class SettingsViewModel {
     weak var coordinator: SettingsViewControllerDelegate?
@@ -16,14 +15,6 @@ final class SettingsViewModel {
     
     // private let useCase: UserSettingsUseCaseProtocol
     private var sectionViewModels = [SettingsSectionViewModel]()
-    
-    // Bindings and subscriptions
-    @Published var searchQuery = ""
-    private var updateResult = PassthroughSubject<Bool, Never>()
-    
-    var updateResultPublisher: AnyPublisher<Bool, Never> {
-        return updateResult.eraseToAnyPublisher()
-    }
     
     init(useCase: ResetUserSettingsUseCaseProtocol) {
         self.useCase = useCase

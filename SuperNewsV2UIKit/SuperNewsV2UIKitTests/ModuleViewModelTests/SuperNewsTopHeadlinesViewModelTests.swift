@@ -18,7 +18,8 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let dataRepository = SuperNewsDataRepository(apiService: SuperNewsMockDataAPIService(forceFetchFailure: false))
         let settingsRepository = SuperNewsSourceUserDefaultsRepository(settingsService: SuperNewsMockLocalSettings())
-        viewModel = TopHeadlinesViewModel(useCase: TopHeadlinesUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository))
+        let userSettingsRepository = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
+        viewModel = TopHeadlinesViewModel(useCase: TopHeadlinesUseCase(dataRepository: dataRepository, sourceSettingsRepository: settingsRepository, userSettingsRepository: userSettingsRepository))
     }
 
     func testInitNewsCategories() {
@@ -36,6 +37,7 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
             }.store(in: &subscriptions)
         
         viewModel?.initCategories()
+        viewModel?.loadAndUpdateSourceCategoryTitle()
         wait(for: [expectation1], timeout: 10)
         
         XCTAssertGreaterThan(viewModel?.numberOfItemsInCollectionView() ?? 0, 0)

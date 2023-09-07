@@ -73,7 +73,7 @@ final class SettingsSelectionViewController: UIViewController {
     
     private func setBindings() {
         // Update binding
-        viewModel?.settingOption
+        viewModel?.settingOptionResultPublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] name in
                 self?.setNavigationBar(with: name)

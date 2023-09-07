@@ -154,4 +154,13 @@ final class SuperNewsModelTests: XCTestCase {
         
         XCTAssertGreaterThan(articles.count, 0)
     }
+    
+    func testSavedSource() {
+        let fakeSavedSource = SavedSource(id: "le-monde", name: "Le Monde")
+        let fakeSavedSource2 = SavedSource(with: SavedSourceDTO.getFakeObjectFromSavedSource())
+        
+        XCTAssertEqual(fakeSavedSource.name, "Le Monde")
+        XCTAssertEqual(fakeSavedSource.getDTO().name, "Le Monde")
+        XCTAssertEqual(fakeSavedSource2.name, "Le Parisien")
+    }
 }

@@ -27,7 +27,7 @@ final class SettingsSelectionViewModel {
         return updateResult.eraseToAnyPublisher()
     }
     
-    var settingOption: AnyPublisher<String, Never> {
+    var settingOptionResultPublisher: AnyPublisher<String, Never> {
         return settingOptionResult.eraseToAnyPublisher()
     }
     

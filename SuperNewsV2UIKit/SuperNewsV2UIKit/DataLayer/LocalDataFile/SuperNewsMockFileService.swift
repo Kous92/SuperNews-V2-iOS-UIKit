@@ -16,6 +16,7 @@ final class SuperNewsMockFileService: SuperNewsLocalDataFileService {
     }
     
     func loadCountries() async -> Result<[Country], SuperNewsLocalFileError> {
+        print("[SuperNewsMockFileService] Loading countries")
         guard forceLoadFailure == false else {
             return .failure(.localFileError)
         }
@@ -30,6 +31,7 @@ final class SuperNewsMockFileService: SuperNewsLocalDataFileService {
     }
     
     func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError> {
+        print("[SuperNewsMockFileService] Loading languages")
         guard forceLoadFailure == false else {
             return .failure(.localFileError)
         }

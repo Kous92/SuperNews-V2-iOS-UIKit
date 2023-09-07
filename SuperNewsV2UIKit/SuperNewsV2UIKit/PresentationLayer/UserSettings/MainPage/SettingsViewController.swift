@@ -7,13 +7,11 @@
 
 import UIKit
 import SnapKit
-import Combine
 
 final class SettingsViewController: UIViewController {
     
     // MVVM with Reactive Programming
     var viewModel: SettingsViewModel?
-    private var subscriptions = Set<AnyCancellable>()
     
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
@@ -49,7 +47,6 @@ final class SettingsViewController: UIViewController {
         setNavigationBar()
         buildViewHierarchy()
         setConstraints()
-        setBindings()
     }
     
     init() {
@@ -71,17 +68,6 @@ final class SettingsViewController: UIViewController {
             make.horizontalEdges.equalToSuperview()
         }
     }
-    
-    private func setBindings() {
-        // Update binding
-        viewModel?.updateResultPublisher
-            .receive(on: RunLoop.main)
-            .sink { [weak self] updated in
-                if updated {
-                    self?.updateTableView()
-                }
-            }.store(in: &subscriptions)
-    }
 }
 
 extension SettingsViewController {
@@ -96,11 +82,6 @@ extension SettingsViewController {
     private func setViewBackground() {
         gradient.frame = view.bounds
         view.layer.addSublayer(gradient)
-    }
-    
-    private func updateTableView() {
-        print("Update TableView")
-        tableView.reloadData()
     }
 }
 
