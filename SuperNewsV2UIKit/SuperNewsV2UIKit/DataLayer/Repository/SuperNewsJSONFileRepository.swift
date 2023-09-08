@@ -23,7 +23,7 @@ final class SuperNewsJSONFileRepository: SuperNewsLocalFileRepository {
     }
     
     func loadLanguages() async -> Result<[LanguageDTO], SuperNewsLocalFileError> {
-        guard let result = await localFileService?.loadLanguages() else {
+         guard let result = await localFileService?.loadLanguages() else {
             return .failure(.localFileError)
         }
         

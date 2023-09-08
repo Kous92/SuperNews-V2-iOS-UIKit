@@ -154,6 +154,7 @@ extension CountryNewsViewController {
         navigationItem.title = "News locales: \(viewModel?.getCountryName() ?? "??")"
         navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func setViewBackground() {

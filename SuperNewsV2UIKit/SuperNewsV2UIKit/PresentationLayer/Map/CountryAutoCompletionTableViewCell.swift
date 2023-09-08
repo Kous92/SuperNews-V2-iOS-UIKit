@@ -14,7 +14,6 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        // image.image = UIImage(named: "fr")
         return image
     }()
     
@@ -23,8 +22,7 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        // label.text = "France"
-        UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .white
         return label
     }()
     

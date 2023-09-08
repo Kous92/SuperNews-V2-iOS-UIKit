@@ -112,6 +112,12 @@ final class SourceSelectionViewController: UIViewController {
         setBindings()
     }
     
+    // Will not work before in cycle (viewDidLoad,...)
+    override func viewWillAppear(_ animated: Bool) {
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Rechercher", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        searchBar.searchTextField.leftView?.tintColor = .lightGray
+    }
+    
     // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
     override func viewWillDisappear(_ animated: Bool) {
         // We make sure it will go back to previous view
@@ -206,6 +212,7 @@ extension SourceSelectionViewController {
     private func setNavigationBar() {
         navigationItem.title = "Choix de la source"
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func setViewBackground() {

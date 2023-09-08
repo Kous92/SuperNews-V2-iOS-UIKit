@@ -190,6 +190,7 @@ extension TopHeadlinesViewController {
         let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(onClickSourceButton))
         navigationItem.rightBarButtonItem = item
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func setViewBackground() {
@@ -316,7 +317,7 @@ struct HomeViewControllerPreview: PreviewProvider {
                 return tabBar
             }
             .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
             .previewDisplayName(deviceName)
             .edgesIgnoringSafeArea(.all)
         }

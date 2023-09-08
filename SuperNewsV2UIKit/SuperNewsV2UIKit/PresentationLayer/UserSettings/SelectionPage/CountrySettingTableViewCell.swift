@@ -47,8 +47,8 @@ final class CountrySettingTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         countryFlagImage.snp.makeConstraints { make in
-            make.height.equalTo(35)
-            make.width.equalTo(50)
+            make.height.equalTo(45)
+            make.width.equalTo(55)
             make.leading.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
         }

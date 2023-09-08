@@ -93,6 +93,7 @@ extension SettingsSelectionViewController {
     private func setNavigationBar(with name: String) {
         navigationItem.title = name
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func setViewBackground() {

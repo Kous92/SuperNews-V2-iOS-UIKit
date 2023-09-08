@@ -101,6 +101,7 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
+        label.textColor = .white
         return label
     }()
     
@@ -111,6 +112,7 @@ final class ArticleDetailViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
@@ -141,6 +143,7 @@ final class ArticleDetailViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
         label.lineBreakMode = .byWordWrapping
+        label.textColor = .white
         return label
     }()
     
@@ -151,6 +154,7 @@ final class ArticleDetailViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.descriptionLabelFontSize, weight: .medium)
         label.lineBreakMode = .byWordWrapping
+        label.textColor = .white
         return label
     }()
     
@@ -161,6 +165,7 @@ final class ArticleDetailViewController: UIViewController {
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.contentLabelFontSize, weight: .regular)
         label.lineBreakMode = .byWordWrapping
+        label.textColor = .white
         return label
     }()
     
@@ -178,6 +183,7 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        label.textColor = .white
         return label
     }()
     

@@ -174,10 +174,12 @@ extension SearchViewController {
     private func setNavigationBar() {        
         navigationItem.title = "Recherche"
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func setSearchBar(languageName: String) {
-        searchBar.placeholder = "Rechercher (langue: \(languageName))"
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Rechercher (langue: \(languageName))", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        searchBar.searchTextField.leftView?.tintColor = .lightGray
     }
     
     private func setViewBackground() {
@@ -279,7 +281,7 @@ struct SearchViewControllerPreview: PreviewProvider {
                 return tabBar
             }
             .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
             .previewDisplayName(deviceName)
             .edgesIgnoringSafeArea(.all)
         }

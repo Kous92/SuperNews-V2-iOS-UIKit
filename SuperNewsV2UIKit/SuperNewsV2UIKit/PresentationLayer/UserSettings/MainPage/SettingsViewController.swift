@@ -74,6 +74,7 @@ extension SettingsViewController {
     private func setNavigationBar() {
         navigationItem.title = "Paramètres"
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         // In order to have the following title on next ViewController. Won't work otherwise if set directly on next ViewController
         navigationItem.backButtonTitle = "Retour"
@@ -96,11 +97,17 @@ extension SettingsViewController: UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = cellViewModel.detail
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
+        
+        var content = cell.defaultContentConfiguration()
+
+        // Configure content.
+        content.text = cellViewModel.detail
+        content.textProperties.color = .white
+        cell.contentConfiguration = content
          
         return cell
     }
