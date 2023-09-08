@@ -27,19 +27,19 @@ final class AppCoordinator: Coordinator {
         print("[AppCoordinator] Setting root view with TabBarController")
         let topHeadlinesViewController = topHeadlinesCoordinator.start()
         topHeadlinesCoordinator.parentCoordinator = self
-        topHeadlinesViewController.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+        topHeadlinesViewController.tabBarItem = UITabBarItem(title: String(localized: "news"), image: UIImage(systemName: "newspaper"), tag: 0)
         
         let searchViewController = searchCoordinator.start()
         searchCoordinator.parentCoordinator = self
-        searchViewController.tabBarItem = UITabBarItem(title: "Recherche", image: UIImage(systemName: "magnifyingglass"), tag: 1)
+        searchViewController.tabBarItem = UITabBarItem(title: String(localized: "search"), image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
         let mapViewController = mapCoordinator.start()
         mapCoordinator.parentCoordinator = self
-        mapViewController.tabBarItem = UITabBarItem(title: "Carte du monde", image: UIImage(systemName: "map"), tag: 2)
+        mapViewController.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 2)
         
         let settingsViewController = settingsCoordinator.start()
         settingsCoordinator.parentCoordinator = self
-        settingsViewController.tabBarItem = UITabBarItem(title: "Paramètres", image: UIImage(systemName: "gear"), tag: 3)
+        settingsViewController.tabBarItem = UITabBarItem(title: String(localized: "settings"), image: UIImage(systemName: "gear"), tag: 3)
         
         (rootViewController as? UITabBarController)?.viewControllers = [topHeadlinesViewController, searchViewController, mapViewController, settingsViewController]
                 

@@ -72,12 +72,12 @@ final class SettingsViewController: UIViewController {
 
 extension SettingsViewController {
     private func setNavigationBar() {
-        navigationItem.title = "Paramètres"
+        navigationItem.title = String(localized: "settings")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         // In order to have the following title on next ViewController. Won't work otherwise if set directly on next ViewController
-        navigationItem.backButtonTitle = "Retour"
+        navigationItem.backButtonTitle = String(localized: "back")
     }
     
     private func setViewBackground() {

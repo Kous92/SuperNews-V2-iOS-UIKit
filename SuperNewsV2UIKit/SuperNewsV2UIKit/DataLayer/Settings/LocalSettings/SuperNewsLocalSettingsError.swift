@@ -8,8 +8,8 @@
 import Foundation
 
 enum SuperNewsLocalSettingsError: String, Error {
-    case localSettingsError = "Une erreur est survenue."
-    case encodeError = "Une erreur est survenue à l'encodage des données avant sauvegarde."
-    case decodeError = "Une erreur est survenue au décodage des données chargées."
-    case unknown = "Erreur inconnue."
+    case localSettingsError = "errorOccured"
+    case encodeError = "encodeSavingError"
+    case decodeError = "decodeSavingError"
+    case unknown = "unknown"
 }

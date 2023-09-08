@@ -85,7 +85,7 @@ final class SourceSelectionViewModel {
         switch result {
             case .success(let viewModels):
                 self.cellViewModels = viewModels
-                self.sectionViewModels.append(self.parseSection(with: "Toutes les sources", cellViewModels: cellViewModels))
+                self.sectionViewModels.append(self.parseSection(with: String(localized: "allSources"), cellViewModels: cellViewModels))
                 self.filteredSectionViewModels = sectionViewModels
                 print("[SourceSelectionViewModel] Retrieved data: \(self.cellViewModels.count) sources")
                 self.updateResult.send(viewModels.count > 0)

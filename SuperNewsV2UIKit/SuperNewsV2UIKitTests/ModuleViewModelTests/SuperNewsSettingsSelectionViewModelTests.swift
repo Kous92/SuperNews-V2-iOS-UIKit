@@ -82,7 +82,7 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
         XCTAssertEqual(index, 0)
         
         let cellViewModel = try XCTUnwrap(viewModel?.getCellViewModel(at: IndexPath(row: 0, section: 0)))
-        XCTAssertEqual(cellViewModel.name, "French")
+        XCTAssertEqual(cellViewModel.name, String(localized: "french"))
     }
     
     func testSettingCountryOptions() throws {
@@ -106,6 +106,6 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
         XCTAssertEqual(index, 0)
         
         let cellViewModel = try XCTUnwrap(viewModel2?.getCellViewModel(at: IndexPath(row: 2, section: 0)))
-        XCTAssertEqual(cellViewModel.name, "Algeria")
+        XCTAssertEqual(cellViewModel.name, cellViewModel.code.countryName())
     }
 }

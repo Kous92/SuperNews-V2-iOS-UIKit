@@ -26,11 +26,11 @@ enum SettingsSection: Int, CaseIterable, CustomStringConvertible {
     var detail: String {
         switch self {
         case .newsLanguage:
-            return "Langue des news"
+            return String(localized: "newsLanguage")
         case .newsCountry:
-            return "Pays des news"
+            return String(localized: "newsCountry")
         case .newsReset:
-            return "Réinitialiser les paramètres"
+            return String(localized: "newsReset")
         }
     }
 }

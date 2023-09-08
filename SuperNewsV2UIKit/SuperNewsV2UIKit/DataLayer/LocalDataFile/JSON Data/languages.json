@@ -1,85 +1,85 @@
 [
     {
         "languageCode": "ar",
-        "languageName": "Arabe",
+        "languageName": "arabic",
         "languageDefaultFlag": "sa",
         "defaultLanguage": false
     },
     {
         "languageCode": "de",
-        "languageName": "Allemand",
+        "languageName": "german",
         "languageDefaultFlag": "de",
         "defaultLanguage": false
     },
     {
         "languageCode": "en",
-        "languageName": "Anglais",
+        "languageName": "english",
         "languageDefaultFlag": "gb",
         "defaultLanguage": false
     },
     {
         "languageCode": "es",
-        "languageName": "Espagnol",
+        "languageName": "spanish",
         "languageDefaultFlag": "es",
         "defaultLanguage": false
     },
     {
         "languageCode": "fr",
-        "languageName": "Français",
+        "languageName": "french",
         "languageDefaultFlag": "fr",
         "defaultLanguage": true
     },
     {
         "languageCode": "he",
-        "languageName": "Hébreu",
+        "languageName": "hebrew",
         "languageDefaultFlag": "il",
         "defaultLanguage": false
     },
     {
         "languageCode": "it",
-        "languageName": "Italien",
+        "languageName": "italian",
         "languageDefaultFlag": "it",
         "defaultLanguage": false
     },
     {
         "languageCode": "nl",
-        "languageName": "Néerlandais",
+        "languageName": "dutch",
         "languageDefaultFlag": "nl",
         "defaultLanguage": false
     },
     {
         "languageCode": "no",
-        "languageName": "Norvégien",
+        "languageName": "norwegian",
         "languageDefaultFlag": "no",
         "defaultLanguage": false
     },
     {
         "languageCode": "pt",
-        "languageName": "Portugais",
+        "languageName": "portuguese",
         "languageDefaultFlag": "pt",
         "defaultLanguage": false
     },
     {
         "languageCode": "ru",
-        "languageName": "Russe",
+        "languageName": "russian",
         "languageDefaultFlag": "ru",
         "defaultLanguage": false
     },
     {
-        "languageCode": "se",
-        "languageName": "Suédois",
+        "languageCode": "sv",
+        "languageName": "swedish",
         "languageDefaultFlag": "se",
         "defaultLanguage": false
     },
     {
         "languageCode": "ud",
-        "languageName": "Ourdou",
+        "languageName": "urdu",
         "languageDefaultFlag": "pk",
         "defaultLanguage": false
     },
     {
         "languageCode": "zh",
-        "languageName": "Chinois",
+        "languageName": "chinese",
         "languageDefaultFlag": "cn",
         "defaultLanguage": false
     }

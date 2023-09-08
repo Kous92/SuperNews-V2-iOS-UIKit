@@ -72,7 +72,7 @@ extension CountryNewsCoordinator: CountryNewsViewControllerDelegate {
     func displayErrorAlert(with errorMessage: String) {
         print("[CountryNewsCoordinator] Displaying error alert.")
         
-        let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: .alert)
+        let alert = UIAlertController(title: String(localized: "error"), message: errorMessage, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             print("OK")

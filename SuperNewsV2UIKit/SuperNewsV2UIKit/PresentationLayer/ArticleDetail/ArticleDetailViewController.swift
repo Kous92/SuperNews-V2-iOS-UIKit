@@ -202,7 +202,7 @@ final class ArticleDetailViewController: UIViewController {
     private lazy var articleWebsiteButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Site web de l'article", for: .normal)
+        button.setTitle(String(localized: "articleWebsite"), for: .normal)
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.white.cgColor

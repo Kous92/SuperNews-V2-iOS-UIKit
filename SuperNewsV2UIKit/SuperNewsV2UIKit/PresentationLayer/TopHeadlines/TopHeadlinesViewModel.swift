@@ -111,13 +111,15 @@ final class TopHeadlinesViewModel {
     
     private func updateSourceCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "source" }) {
-            sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource.name)")
+            // sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource.name)")
+            sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "mediaNews")) \(savedMediaSource.name)")
         }
     }
     
     private func updateCountryCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "local" }) {
-            sourceCategoryViewModel.setCategoryTitle(with: "Actualités locales (\(savedLocalCountry.name))")
+            // sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews"))Actualités locales (\(savedLocalCountry.name))")
+            sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews")) (\(savedLocalCountry.name))")
         }
     }
     

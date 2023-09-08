@@ -47,11 +47,13 @@ final class MapViewController: UIViewController {
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.placeholder = "Rechercher"
+        searchBar.placeholder = String(localized: "search")
         searchBar.backgroundImage = UIImage()
         searchBar.showsCancelButton = false
         searchBar.delegate = self
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Annuler"
+        searchBar.searchTextField.textColor = traitCollection.userInterfaceStyle == .light ? .black :.white
+        // searchBar.searchTextField.textColor = .cyan
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .label
         return searchBar
     }()
@@ -124,7 +126,7 @@ final class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         // In order to have the following title on next ViewController. Won't work otherwise if set directly on next ViewController
-        navigationItem.backButtonTitle = "Retour"
+        navigationItem.backButtonTitle = String(localized: "back")
     }
     
     private func buildViewHierarchy() {
@@ -385,7 +387,7 @@ struct MapViewControllerPreview: PreviewProvider {
                 let navigationController = UINavigationController()
                 let builder = MapModuleBuilder()
                 let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: "Carte du monde", image: UIImage(systemName: "map"), tag: 0)
+                vc.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 0)
                 navigationController.pushViewController(vc, animated: false)
                 tabBar.viewControllers = [navigationController]
                 

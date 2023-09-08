@@ -21,7 +21,7 @@ struct LanguageDTO {
     
     init(with language: Language) {
         self.languageCode = language.languageCode
-        self.languageName = language.languageName
+        self.languageName = language.languageCode.languageName()?.capitalized ?? language.languageName
         self.languageDefaultFlag = language.languageDefaultFlag
         self.defaultLanguage = language.defaultLanguage
     }

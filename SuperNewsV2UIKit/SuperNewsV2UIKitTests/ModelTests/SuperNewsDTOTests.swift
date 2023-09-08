@@ -44,6 +44,6 @@ final class SuperNewsDTOTests: XCTestCase {
         XCTAssertEqual(fakeLanguageDTO.languageCode, "fr")
         XCTAssertEqual(fakeLanguageDTO.languageDefaultFlag, "fr")
         XCTAssertEqual(fakeLanguageDTO.defaultLanguage, true)
-        XCTAssertEqual(fakeLanguageDTO.languageName, "French")
+        XCTAssertEqual(fakeLanguageDTO.languageName, String(localized: "french"))
     }
 }

@@ -60,7 +60,7 @@ extension ArticleDetailCoordinator: ArticleDetailViewControllerDelegate {
     func openSafariWithArticleWebsite(websiteURL: String) {
         guard let url = URL(string: websiteURL) else {
             // Display an alert
-            let alert = UIAlertController(title: "Erreur", message: "Une erreur est survenue pour l'ouverture du navigateur avec le lien suivant: \(websiteURL).", preferredStyle: .alert)
+            let alert = UIAlertController(title: String(localized: "error"), message: "Une erreur est survenue pour l'ouverture du navigateur avec le lien suivant: \(websiteURL).", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             navigationController.present(alert, animated: true)
             
@@ -75,7 +75,7 @@ extension ArticleDetailCoordinator: ArticleDetailViewControllerDelegate {
     func openShareSheet(articleTitle: String, websiteURL: String) {
         guard let url = URL(string: websiteURL) else {
             // Display an alert
-            let alert = UIAlertController(title: "Erreur", message: "Une erreur est survenue avec le lien suivant: \(websiteURL).", preferredStyle: .alert)
+            let alert = UIAlertController(title: String(localized: "error"), message: "Une erreur est survenue avec le lien suivant: \(websiteURL).", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             navigationController.present(alert, animated: true)
             

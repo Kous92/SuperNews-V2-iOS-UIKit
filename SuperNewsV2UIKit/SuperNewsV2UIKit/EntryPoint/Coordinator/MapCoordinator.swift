@@ -68,7 +68,7 @@ extension MapCoordinator: MapViewControllerDelegate {
     func displayErrorAlert(with errorMessage: String) {
         print("[SearchCoordinator] Displaying error alert.")
         
-        let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: .alert)
+        let alert = UIAlertController(title: String(localized: "error"), message: errorMessage, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             print("OK")
@@ -83,16 +83,16 @@ extension MapCoordinator: MapViewControllerDelegate {
         var message = ""
         
         if actualLocation.countryName == suggestedLocation.countryName {
-            message = "Vous êtes localisé dans le même pays que celui est disponible sur la carte, ici: \(actualLocation.countryName). Voulez-vous centrer la carte sur la source du pays ? Sinon, la carte sera centrée sur votre position actuelle."
+            message = "\(String(localized: "sameCountryAlertMessage1")) \(actualLocation.countryName). \(String(localized: "sameCountryAlertMessage2"))"
         } else {
-            message = "Vous êtes localisé dans un pays (\(actualLocation.countryName)) qui n'est pas disponible sur la carte. Le pays le plus proche qui est suggéré est: \(suggestedLocation.countryName). Voulez-vous centrer la carte sur la source du pays suggéré ? Sinon, la carte sera centrée sur votre position actuelle."
+            message = "\(String(localized: "differentCountryMessageAlert1")) (\(actualLocation.countryName)) \(String(localized: "differentCountryMessageAlert2")) \(suggestedLocation.countryName). \(String(localized: "differentCountryMessageAlert3"))"
         }
         
-        let alert = UIAlertController(title: "Suggestion", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { _ in
+        let alert = UIAlertController(title: String(localized: "suggestion"), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: String(localized: "yes"), style: .default, handler: { _ in
             completion(true)
         }))
-        alert.addAction(UIAlertAction(title: "Non", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: String(localized: "no"), style: .destructive, handler: { _ in
             completion(false)
         }))
         

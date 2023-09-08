@@ -51,11 +51,11 @@ final class SearchViewController: UIViewController {
     // For searching news
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Rechercher"
         searchBar.backgroundImage = UIImage()
         searchBar.showsCancelButton = false
         searchBar.delegate = self
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Annuler"
+        searchBar.searchTextField.textColor = .white
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
         return searchBar
     }()
@@ -78,7 +78,7 @@ final class SearchViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
-        label.setShadowLabel(string: "Aucun article disponible", font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        label.setShadowLabel(string: String(localized: "noArticleAvailable"), font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         label.isHidden = true
         
         return label
@@ -172,13 +172,13 @@ final class SearchViewController: UIViewController {
 
 extension SearchViewController {
     private func setNavigationBar() {        
-        navigationItem.title = "Recherche"
+        navigationItem.title = String(localized: "search")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     private func setSearchBar(languageName: String) {
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Rechercher (langue: \(languageName))", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "\(String(localized: "search")) (\(String(localized: "language")): \(languageName))", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         searchBar.searchTextField.leftView?.tintColor = .lightGray
     }
     
@@ -193,7 +193,7 @@ extension SearchViewController {
     
     private func displayNoResult() {
         tableView.isHidden = true
-        noResultLabel.text = "Aucun résultat pour \"\(viewModel?.searchQuery ?? "??")\". Veuillez réessayer avec une autre recherche."
+        noResultLabel.text = "\(String(localized: "noResultFoundFor")) \"\(viewModel?.searchQuery ?? "??")\". \(String(localized: "pleaseTryOtherSearch"))."
         noResultLabel.isHidden = false
     }
     
@@ -274,7 +274,7 @@ struct SearchViewControllerPreview: PreviewProvider {
                 let navigationController = UINavigationController()
                 let builder = SearchModuleBuilder()
                 let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+                vc.tabBarItem = UITabBarItem(title: String(localized: "news"), image: UIImage(systemName: "newspaper"), tag: 0)
                 navigationController.pushViewController(vc, animated: false)
                 tabBar.viewControllers = [navigationController]
                 

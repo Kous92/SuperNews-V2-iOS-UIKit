@@ -43,7 +43,6 @@ final class CountryAnnotationView: MKAnnotationView {
         stackView.axis = .vertical
         stackView.spacing = 1
         stackView.distribution = .fillEqually
-        // stackView.backgroundColor = .green
         stackView.alignment = .fill
         return stackView
     }()

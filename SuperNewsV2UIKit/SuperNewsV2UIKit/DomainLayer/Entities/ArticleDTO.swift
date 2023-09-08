@@ -30,14 +30,14 @@ struct ArticleDTO {
     }
     
     init(with article: Article) {
-        self.author = article.author ?? "Auteur inconnu"
-        self.title = article.title ?? "Titre indisponible"
-        self.description = article.description ?? "Aucune description"
-        self.content = article.content ?? "Aucun contenu disponible"
+        self.author = article.author ?? String(localized: "unknownAuthor")
+        self.title = article.title ?? String(localized: "noTitle")
+        self.description = article.description ?? String(localized: "noDescription")
+        self.content = article.content ?? String(localized: "noAvailableContent")
         self.sourceUrl = article.url ?? ""
         self.imageUrl = article.urlToImage ?? ""
-        self.sourceName = article.source?.name ?? "Source inconnue"
-        self.publishedAt = article.publishedAt ?? "Date inconnue"
+        self.sourceName = article.source?.name ?? String(localized: "unknownSource")
+        self.publishedAt = article.publishedAt ?? String(localized: "unknownDate")
     }
 }
 

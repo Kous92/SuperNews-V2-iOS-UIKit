@@ -52,8 +52,8 @@ final class SettingsCoordinator: ParentCoordinator {
 extension SettingsCoordinator: SettingsViewControllerDelegate {
     func displayErrorAlert(with errorMessage: String) {
         print("[SettingsCoordinator] Displaying error alert.")
-        
-        let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: .alert)
+        let localizedErrorMessage = String(localized: String.LocalizationValue(errorMessage))
+        let alert = UIAlertController(title: String(localized: "error"), message: localizedErrorMessage, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             print("OK")
@@ -65,12 +65,12 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     func showResetSettingsAlert(completion: @escaping (Bool) -> ()) {
         print("[SettingsCoordinator] Displaying reset settings alert.")
         
-        let alert = UIAlertController(title: "Attention", message: "Voulez-vous réinitialiser les paramètres des actualités et de la langue de recherche des news ? Si oui, les paramètres seront réinitialisés par défaut.", preferredStyle: .alert)
+        let alert = UIAlertController(title: String(localized: "warning"), message: String(localized: "resetSettingsAlertMessage"), preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Oui", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: String(localized: "yes"), style: .default, handler: { _ in
             completion(true)
         }))
-        alert.addAction(UIAlertAction(title: "Non", style: .cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: String(localized: "no"), style: .destructive, handler: { _ in
             completion(false)
         }))
         

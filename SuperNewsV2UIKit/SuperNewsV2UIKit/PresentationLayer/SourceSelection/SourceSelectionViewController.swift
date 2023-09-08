@@ -56,11 +56,12 @@ final class SourceSelectionViewController: UIViewController {
     // For filtering
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Rechercher"
+        searchBar.placeholder = String(localized: "search")
         searchBar.backgroundImage = UIImage()
         searchBar.showsCancelButton = false
         searchBar.delegate = self
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Annuler"
+        searchBar.searchTextField.textColor = .white
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
         return searchBar
     }()
@@ -114,7 +115,7 @@ final class SourceSelectionViewController: UIViewController {
     
     // Will not work before in cycle (viewDidLoad,...)
     override func viewWillAppear(_ animated: Bool) {
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Rechercher", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: String(localized: "search"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         searchBar.searchTextField.leftView?.tintColor = .lightGray
     }
     
@@ -210,7 +211,7 @@ final class SourceSelectionViewController: UIViewController {
 
 extension SourceSelectionViewController {
     private func setNavigationBar() {
-        navigationItem.title = "Choix de la source"
+        navigationItem.title = String(localized: "allSources")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
@@ -227,7 +228,7 @@ extension SourceSelectionViewController {
     private func displayNoResult() {
         print("No result")
         tableView.isHidden = true
-        noResultLabel.setShadowLabel(string: "Aucune source trouvée avec \(viewModel?.searchQuery ?? "??")", font: UIFont.systemFont(ofSize: 18, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        noResultLabel.setShadowLabel(string: "\(String(localized: "noSourceFound")) \(viewModel?.searchQuery ?? "??")", font: UIFont.systemFont(ofSize: 18, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         noResultLabel.isHidden = false
     }
     

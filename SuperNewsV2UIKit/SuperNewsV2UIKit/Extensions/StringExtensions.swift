@@ -15,10 +15,14 @@ extension String {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
 
         guard let date = formatter.date(from: self) else {
-            return "Date de publication inconnue"
+            return String(localized: "unknownDate")
         }
         
-        formatter.locale = Locale(identifier: "fr_FR")
+        let locale = Locale.current
+        if locale.languageCode == "fr" {
+            formatter.locale = Locale(identifier: "fr_FR")
+        }
+        
         formatter.dateStyle = .short
         
         let dateString = formatter.string(from: date) // Day, month, year
@@ -28,12 +32,12 @@ extension String {
         
         let timeString = formatter.string(from: date) // Hours, minutes
         
-        return "Le " + dateString + " à " + timeString
+        return locale.languageCode == "fr" ? "Le " + dateString + " à " + timeString : dateString + " at " + timeString
     }
     
     // From the ISO code, it gives the country full name.
     func countryName() -> String? {
-        let current = Locale(identifier: "fr_FR")
+        let current = Locale.current
         return current.localizedString(forRegionCode: self)
     }
     
@@ -41,10 +45,10 @@ extension String {
     func languageName() -> String? {
         // Urdu language
         if self == "ud" {
-            return "ourdou"
+            return String(localized: "urdu")
         }
         
-        let current = Locale(identifier: "fr_FR")
+        let current = Locale.current
         return current.localizedString(forLanguageCode: self)
     }
     
@@ -63,14 +67,14 @@ extension String {
     
     func getCategoryNameFromCategoryCode() -> String {
         switch self {
-            case "local": return "Actualités locales"
-            case "general": return "Général"
-            case "business": return "Business"
-            case "entertainment": return "Divertissement"
-            case "health": return "Santé"
-            case "technology": return "Technologie"
-            case "sports": return "Sports"
-            case "science": return "Science"
+            case "local": return String(localized: "localNews")
+            case "general": return String(localized: "general")
+            case "business": return String(localized: "business")
+            case "entertainment": return String(localized: "entertainment")
+            case "health": return String(localized: "health")
+            case "technology": return String(localized: "technology")
+            case "sports": return String(localized: "sports")
+            case "science": return String(localized: "science")
             default: return self
         }
     }

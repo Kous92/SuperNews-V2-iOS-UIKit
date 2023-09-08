@@ -15,6 +15,6 @@ struct Language: Decodable {
 extension Language {
     /// Returns a fake object with all available fields. For unit tests and SwiftUI previews
     static func getFakeLanguage() -> Language {
-        return Language(languageCode: "fr", languageName: "French", languageDefaultFlag: "fr", defaultLanguage: true)
+        return Language(languageCode: "fr", languageName: String(localized: "french"), languageDefaultFlag: "fr", defaultLanguage: true)
     }
 }

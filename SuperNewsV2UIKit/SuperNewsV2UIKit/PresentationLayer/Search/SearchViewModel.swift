@@ -17,7 +17,7 @@ final class SearchViewModel {
     private var articleViewModels = [ArticleViewModel]()
     
     // Settings
-    private var savedLocalLanguage = CountryLanguageSettingDTO(name: "Français", code: "fr", flagCode: "fr")
+    private var savedLocalLanguage = CountryLanguageSettingDTO(name: "fr".languageName() ?? "French", code: "fr", flagCode: "fr")
     
     // MARK: - Bindings and subscriptions
     @Published var searchQuery = ""
