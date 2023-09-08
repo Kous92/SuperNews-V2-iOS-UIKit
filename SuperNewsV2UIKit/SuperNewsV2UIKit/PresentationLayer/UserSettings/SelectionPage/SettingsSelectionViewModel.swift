@@ -38,7 +38,7 @@ final class SettingsSelectionViewModel {
         if settingSection.description == "country" {
             savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "France", code: "fr", flagCode: "fr")
         } else {
-            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "Français", code: "fr", flagCode: "fr")
+            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "French", code: "fr", flagCode: "fr")
         }
     }
     

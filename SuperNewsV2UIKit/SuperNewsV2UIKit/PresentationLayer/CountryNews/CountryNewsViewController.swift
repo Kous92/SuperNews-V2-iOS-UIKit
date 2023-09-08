@@ -64,7 +64,7 @@ final class CountryNewsViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
-        label.setShadowLabel(string: "Aucun article disponible", font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        label.setShadowLabel(string: String(localized: "noArticleAvailable"), font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         label.isHidden = true
         
         return label
@@ -151,7 +151,7 @@ final class CountryNewsViewController: UIViewController {
 
 extension CountryNewsViewController {
     private func setNavigationBar() {
-        navigationItem.title = "News locales: \(viewModel?.getCountryName() ?? "??")"
+        navigationItem.title = "\(String(localized: "localNews")): \(viewModel?.getCountryName() ?? "??")"
         navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -226,7 +226,7 @@ struct CountryNewsViewControllerPreview: PreviewProvider {
                 let navigationController = UINavigationController()
                 let builder = CountryNewsModuleBuilder(countryCode: "fr")
                 let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: "Carte du monde", image: UIImage(systemName: "map"), tag: 0)
+                vc.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 0)
                 navigationController.pushViewController(vc, animated: false)
                 tabBar.viewControllers = [navigationController]
                 

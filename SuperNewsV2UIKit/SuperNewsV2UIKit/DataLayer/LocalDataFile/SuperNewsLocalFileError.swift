@@ -8,8 +8,8 @@
 import Foundation
 
 enum SuperNewsLocalFileError: String, Error {
-    case noCountries = "Aucun pays disponible."
-    case localFileError = "Le fichier n'existe pas."
-    case decodeError = "Une erreur est survenue au décodage des données chargées."
-    case unknown = "Erreur inconnue."
+    case noCountries = "noCountries"
+    case localFileError = "localFileError"
+    case decodeError = "decodeSavingError"
+    case unknown = "unknown"
 }

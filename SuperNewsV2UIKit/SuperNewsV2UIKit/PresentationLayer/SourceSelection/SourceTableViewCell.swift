@@ -25,7 +25,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.titleLabelFontSize, weight: .semibold)
-        label.text = "Nom du média source"
+        label.text = String(localized: "mediaSourceName")
         label.textColor = .white
         return label
     }()
@@ -36,7 +36,6 @@ final class SourceTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.descriptionLabelFontSize, weight: .medium)
-        label.text = "Description complète du média source, nom, sa catégorie, le lieu, la langue, ..."
         label.textColor = .white
         return label
     }()
@@ -47,7 +46,6 @@ final class SourceTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
-        label.text = "Catégorie (business,...)"
         label.textColor = .white
         return label
     }()
@@ -58,7 +56,6 @@ final class SourceTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
-        label.text = "Pays et langue du média"
         label.textColor = .white
         return label
     }()
@@ -69,7 +66,7 @@ final class SourceTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
-        label.text = "URL du média"
+        label.text = String(localized: "mediaURL")
         label.textColor = .white
         return label
     }()
@@ -154,9 +151,9 @@ final class SourceTableViewCell: UITableViewCell {
     func configure(with viewModel: SourceCellViewModel) {
         sourceTitleLabel.text = viewModel.name
         sourceDescriptionLabel.text = viewModel.description
-        sourceCategoryLabel.text = "Catégorie: \(viewModel.category.getCategoryNameFromCategoryCode())"
-        sourceCountryAndLanguageLabel.text = "Pays: \(viewModel.country.countryName()?.capitalized ?? "??"), langue: \(viewModel.language.languageName()?.capitalized ?? "??")"
-        sourceURLLabel.text = "URL du site du média: \(viewModel.url)"
+        sourceCategoryLabel.text = "\(String(localized: "category")): \(viewModel.category.getCategoryNameFromCategoryCode())"
+        sourceCountryAndLanguageLabel.text = "\(String(localized: "country")): \(viewModel.country.countryName()?.capitalized ?? "??"), \(String(localized: "language")): \(viewModel.language.languageName()?.capitalized ?? "??")"
+        sourceURLLabel.text = "\(String(localized: "mediaURL")): \(viewModel.url)"
     }
     
     // For live preview

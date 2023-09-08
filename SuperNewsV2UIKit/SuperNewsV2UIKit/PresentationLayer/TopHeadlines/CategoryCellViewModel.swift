@@ -24,24 +24,24 @@ final class CategoryCellViewModel {
 extension CategoryCellViewModel {
     static func getCategories() -> [CategoryCellViewModel] {
         return [
-            CategoryCellViewModel(title: "Actualités locales (France)", categoryId: "local"),
-            CategoryCellViewModel(title: "Actualités d'une source", categoryId: "source"),
-            CategoryCellViewModel(title: "Business", categoryId: "business"),
-            CategoryCellViewModel(title: "Divertissement", categoryId: "entertainment"),
-            CategoryCellViewModel(title: "Général", categoryId: "general"),
-            CategoryCellViewModel(title: "Santé", categoryId: "health"),
-            CategoryCellViewModel(title: "Science", categoryId: "science"),
-            CategoryCellViewModel(title: "Sports", categoryId: "sports"),
-            CategoryCellViewModel(title: "Technologie", categoryId: "technology")
+            CategoryCellViewModel(title: String(localized: "localNews"), categoryId: "local"),
+            CategoryCellViewModel(title: String(localized: "sourceNews"), categoryId: "source"),
+            CategoryCellViewModel(title: String(localized: "business"), categoryId: "business"),
+            CategoryCellViewModel(title: String(localized: "entertainment"), categoryId: "entertainment"),
+            CategoryCellViewModel(title: String(localized: "general"), categoryId: "general"),
+            CategoryCellViewModel(title: String(localized: "health"), categoryId: "health"),
+            CategoryCellViewModel(title: String(localized: "science"), categoryId: "science"),
+            CategoryCellViewModel(title: String(localized: "sports"), categoryId: "sports"),
+            CategoryCellViewModel(title: String(localized: "technology"), categoryId: "technology")
         ]
     }
     
     static func getSourceCategories() -> [CategoryCellViewModel] {
         return [
-            CategoryCellViewModel(title: "Toutes les sources", categoryId: "allSources"),
-            CategoryCellViewModel(title: "Par langue", categoryId: "languageSources"),
-            CategoryCellViewModel(title: "Par catégorie", categoryId: "categorySources"),
-            CategoryCellViewModel(title: "Par pays", categoryId: "countrySources"),
+            CategoryCellViewModel(title: String(localized: "allSources"), categoryId: "allSources"),
+            CategoryCellViewModel(title: String(localized: "byLanguage"), categoryId: "languageSources"),
+            CategoryCellViewModel(title: String(localized: "byCategory"), categoryId: "categorySources"),
+            CategoryCellViewModel(title: String(localized: "byCountry"), categoryId: "countrySources"),
         ]
     }
 }

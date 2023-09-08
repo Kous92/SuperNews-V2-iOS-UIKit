@@ -67,6 +67,7 @@
 		4B56264E2A2FF85500C19A26 /* CountryNewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56264D2A2FF85500C19A26 /* CountryNewsUseCase.swift */; };
 		4B5836802A1E6B7F005DCF6A /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4B58367F2A1E6B7F005DCF6A /* AsyncLocationKit */; };
 		4B5F0BEB2A28A05D00D647DC /* CountryAutoCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5F0BEA2A28A05D00D647DC /* CountryAutoCompletionTableViewCell.swift */; };
+		4B60E6322AAB26C9003202FD /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4B60E6312AAB26C9003202FD /* Localizable.xcstrings */; };
 		4B64685029E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
 		4B64685129E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
 		4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685429E6ED1F00F35682 /* Kingfisher */; };
@@ -251,6 +252,8 @@
 		4B56264B2A2FF4E300C19A26 /* CountryNewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryNewsCoordinator.swift; sourceTree = "<group>"; };
 		4B56264D2A2FF85500C19A26 /* CountryNewsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryNewsUseCase.swift; sourceTree = "<group>"; };
 		4B5F0BEA2A28A05D00D647DC /* CountryAutoCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAutoCompletionTableViewCell.swift; sourceTree = "<group>"; };
+		4B60E6302AAB264C003202FD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4B60E6312AAB26C9003202FD /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EverythingArticleOutputMockData.json; sourceTree = "<group>"; };
 		4B64685E29E6F0F500F35682 /* SuperNewsDataAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsDataAPIService.swift; sourceTree = "<group>"; };
 		4B64686029E6F15600F35682 /* SuperNewsAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsAPIError.swift; sourceTree = "<group>"; };
@@ -666,7 +669,6 @@
 			isa = PBXGroup;
 			children = (
 				4B8DC82F2A256566000E9490 /* JSON Data */,
-				4B8DC8292A2562D4000E9490 /* SuperNewsLocalDataFileService.swift */,
 				4B8DC82B2A256309000E9490 /* SuperNewsLocalFileError.swift */,
 				4B8DC82D2A256524000E9490 /* SuperNewsJSONFileService.swift */,
 				4BA8F5692A5E0D13000CE749 /* SuperNewsMockFileService.swift */,
@@ -837,6 +839,7 @@
 				4B08602429ED7BC600AA32C0 /* EntryPoint */,
 				4BD88CBA29E6BAAF000369DE /* Assets.xcassets */,
 				4BD88CBF29E6BAAF000369DE /* Info.plist */,
+				4B60E6312AAB26C9003202FD /* Localizable.xcstrings */,
 			);
 			path = SuperNewsV2UIKit;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				4BF446F72A0001AF001FA87A /* SuperNewsLocalSettings.swift */,
 				4BF446FB2A000263001FA87A /* SuperNewsUserDefaultsLocalSettings.swift */,
 				4BF446FD2A00033A001FA87A /* SuperNewsLocalSettingsError.swift */,
+				4B8DC8292A2562D4000E9490 /* SuperNewsLocalDataFileService.swift */,
 				4BDDC8542A010D8800278CB7 /* SuperNewsMockLocalSettings.swift */,
 			);
 			path = LocalSettings;
@@ -956,6 +960,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 4BD88CA529E6BAAD000369DE;
 			packageReferences = (
@@ -1006,6 +1011,7 @@
 				4BF6376229FC84E900AC469F /* HealthTopHeadlinesMockData.json in Resources */,
 				4B73F60D29EC731400CD412C /* FranceSourcesMockData.json in Resources */,
 				4B08602329ED503300AA32C0 /* apiKey.plist in Resources */,
+				4B60E6322AAB26C9003202FD /* Localizable.xcstrings in Resources */,
 				4B73F60C29EC731100CD412C /* AllSourcesMockData.json in Resources */,
 				4B8DC8312A25657A000E9490 /* countries.json in Resources */,
 				4B08601D29ED465F00AA32C0 /* EverythingiPhoneFrenchNewsMockData.json in Resources */,
@@ -1191,6 +1197,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4BD88CBD29E6BAAF000369DE /* Base */,
+				4B60E6302AAB264C003202FD /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1240,6 +1247,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1300,6 +1308,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

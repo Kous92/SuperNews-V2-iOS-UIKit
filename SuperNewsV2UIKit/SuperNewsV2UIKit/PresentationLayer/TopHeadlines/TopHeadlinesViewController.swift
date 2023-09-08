@@ -83,7 +83,7 @@ final class TopHeadlinesViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
-        label.setShadowLabel(string: "Aucun article disponible", font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        label.setShadowLabel(string: String(localized: "noArticleAvailable"), font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         label.isHidden = true
         
         return label
@@ -310,7 +310,7 @@ struct HomeViewControllerPreview: PreviewProvider {
                 let navigationController = UINavigationController()
                 let builder = TopHeadlinesModuleBuilder()
                 let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: "Actualités", image: UIImage(systemName: "newspaper"), tag: 0)
+                vc.tabBarItem = UITabBarItem(title: String(localized: "news"), image: UIImage(systemName: "newspaper"), tag: 0)
                 navigationController.pushViewController(vc, animated: false)
                 tabBar.viewControllers = [navigationController]
                 

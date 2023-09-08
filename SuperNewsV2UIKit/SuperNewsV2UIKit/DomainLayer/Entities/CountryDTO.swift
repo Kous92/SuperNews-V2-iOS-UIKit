@@ -21,7 +21,7 @@ struct CountryDTO {
     
     init(with country: Country) {
         self.countryCode = country.countryCode
-        self.countryName = country.countryName
+        self.countryName = country.countryCode.countryName() ?? country.countryName
         self.lat = country.lat
         self.lon = country.lon
     }
