@@ -22,6 +22,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBar = GradientTabBarController()
         
+        
         // C'est d'ici qu'on démarre l'application et donc ici qu'on démarre avec le coordinator.
         print("[SceneDelegate] Initializing the root coordinator: AppCoordinator")
         coordinator = AppCoordinator(with: tabBar)
