@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: Response
-struct ArticleOutput: Decodable {
+struct ArticleOutput: Codable {
     let status: String?
     let totalResults: Int?
     let articles: [Article]?
@@ -17,7 +17,7 @@ struct ArticleOutput: Decodable {
 }
 
 // MARK: - Article
-struct Article: Decodable {
+struct Article: Codable {
     let source: ArticleSource?
     let author: String?
     let title: String?
@@ -29,7 +29,7 @@ struct Article: Decodable {
 }
 
 // MARK: - Source of the article
-struct ArticleSource: Decodable {
+struct ArticleSource: Codable {
     let id: String?
     let name: String?
 }

@@ -66,7 +66,7 @@ final class TopHeadlinesViewModel {
                     self.savedMediaSource = savedSource
                 case .failure(let error):
                     print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
-                    print("[TopHeadlinesViewModel] ERROR: \(error.rawValue)")
+                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
             }
             
             // If it fails, it will use the default one.
@@ -88,7 +88,7 @@ final class TopHeadlinesViewModel {
                     self.savedLocalCountry = userSetting
                 case .failure(let error):
                     print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
-                    print("[TopHeadlinesViewModel] ERROR: \(error.rawValue)")
+                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
             }
             
             // If it fails, it will use the default one.
@@ -125,10 +125,12 @@ final class TopHeadlinesViewModel {
     
     // MARK: - Top headlines
     func fetchTopHeadlines() {
+        /*
         guard fetchedData["local"] != savedLocalCountry.code else {
             print("[TopHeadlinesViewModel] Top headlines local news from country code \(savedLocalCountry.code) are already downloaded.")
             return
         }
+         */
         
         Task {
             fetchedData["local"] = savedLocalCountry.code
@@ -139,10 +141,12 @@ final class TopHeadlinesViewModel {
     }
     
     func fetchTopHeadlinesWithSource() {
+        /*
         guard fetchedData["source"] != savedMediaSource.id else {
             print("[TopHeadlinesViewModel] Top headlines news from \(savedMediaSource.name) are already downloaded.")
             return
         }
+         */
         
         Task {
             fetchedData["source"] = savedMediaSource.id
@@ -153,10 +157,12 @@ final class TopHeadlinesViewModel {
     }
     
     func fetchTopHeadlines(with category: String) {
+        /*
         guard fetchedData[category] != savedLocalCountry.code else {
             print("[TopHeadlinesViewModel] Top headlines \(category) news from country code \(savedLocalCountry.code) are already downloaded.")
             return
         }
+         */
         
         Task {
             fetchedData[category] = savedLocalCountry.code
@@ -169,13 +175,13 @@ final class TopHeadlinesViewModel {
     private func handleResult(with result: Result<[ArticleViewModel], SuperNewsAPIError>) async {
         switch result {
             case .success(let viewModels):
-                print("[TopHeadlinesViewModel] Données récupérées: \(viewModels.count) articles")
+                print("[TopHeadlinesViewModel] Retrieved data: \(viewModels.count) articles")
                 self.articleViewModels = viewModels
                 await parseViewModels()
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
-                print("[TopHeadlinesViewModel] ERROR: " + error.rawValue)
-                await self.sendErrorMessage(with: error.rawValue)
+                print("[TopHeadlinesViewModel] ERROR: " + String(localized: String.LocalizationValue(error.rawValue)))
+                await self.sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
                 self.updateResult.send(false)
         }
     }
