@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "B00D1B63-B2ED-46AA-AF02-3893EE8B3F38",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "language" : "en",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SuperNewsV2UIKit.xcodeproj",
+        "identifier" : "4BA595B329E6D506006B9460",
+        "name" : "SuperNewsV2UIKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SuperNewsV2UIKit.xcodeproj",
+        "identifier" : "4B90748E2AAF967C00E559FF",
+        "name" : "SuperNewsV2UIKitUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

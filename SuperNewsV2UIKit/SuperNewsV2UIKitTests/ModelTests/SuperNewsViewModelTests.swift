@@ -28,9 +28,9 @@ final class SuperNewsViewModelTests: XCTestCase {
         XCTAssertEqual(fakeViewModel1.description, "country")
         XCTAssertEqual(fakeViewModel2.description, "language")
         XCTAssertEqual(fakeViewModel3.description, "reset")
-        XCTAssertEqual(fakeViewModel1.detail, "Pays des news")
-        XCTAssertEqual(fakeViewModel2.detail, "Langue des news")
-        XCTAssertEqual(fakeViewModel3.detail, "Réinitialiser les paramètres")
+        XCTAssertEqual(fakeViewModel1.detail, String(localized: "newsCountry"))
+        XCTAssertEqual(fakeViewModel2.detail, String(localized: "newsLanguage"))
+        XCTAssertEqual(fakeViewModel3.detail, String(localized: "newsReset"))
     }
     
     func testCountrySettingViewModel() {

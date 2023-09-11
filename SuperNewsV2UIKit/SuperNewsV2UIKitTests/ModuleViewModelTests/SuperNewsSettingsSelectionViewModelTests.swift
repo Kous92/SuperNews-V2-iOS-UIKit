@@ -41,7 +41,7 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
         viewModel?.loadCountryLanguageOptions()
         
         wait(for: [expectation1], timeout: 10)
-        XCTAssertEqual(sectionName1, "Langue des news")
+        XCTAssertEqual(sectionName1, String(localized: "newsLanguage"))
     }
     
     func testSettingCountrySectionName() {
@@ -58,7 +58,7 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
         viewModel2?.loadCountryLanguageOptions()
         
         wait(for: [expectation2], timeout: 10)
-        XCTAssertEqual(sectionName2, "Pays des news")
+        XCTAssertEqual(sectionName2, String(localized: "newsCountry"))
     }
     
     func testSettingLanguageOptions() throws {

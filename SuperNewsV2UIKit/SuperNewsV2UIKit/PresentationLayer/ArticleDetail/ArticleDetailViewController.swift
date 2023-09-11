@@ -386,6 +386,14 @@ extension ArticleDetailViewController {
         let item = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.forward.fill"), style: .plain, target: self, action: #selector(onClickShareButton))
         navigationItem.rightBarButtonItem = item
         navigationController?.navigationBar.tintColor = .white
+        
+        // For UI testing
+        print(navigationController?.navigationBar.items)
+        print(navigationItem.leftBarButtonItem)
+        print(navigationItem.backBarButtonItem)
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "shareButton"
+        navigationItem.backBarButtonItem?.accessibilityIdentifier = "backButton"
+        
     }
     
     private func setViewBackground() {
