@@ -34,6 +34,7 @@ final class SourceSelectionViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .center
         label.isHidden = true
+        label.accessibilityIdentifier = "noResultLabel"
         
         return label
     }()
@@ -63,6 +64,8 @@ final class SourceSelectionViewController: UIViewController {
         searchBar.searchTextField.textColor = .white
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
+        searchBar.accessibilityIdentifier = "searchBar"
+        
         return searchBar
     }()
     
@@ -78,6 +81,7 @@ final class SourceSelectionViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
+        collectionView.accessibilityIdentifier = "collectionView"
         
         return collectionView
     }()
@@ -91,6 +95,7 @@ final class SourceSelectionViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.isHidden = true
         tableView.backgroundColor = .clear
+        tableView.accessibilityIdentifier = "tableView"
         
         return tableView
     }()

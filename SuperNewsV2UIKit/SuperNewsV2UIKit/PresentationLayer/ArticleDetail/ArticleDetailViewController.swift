@@ -31,6 +31,8 @@ final class ArticleDetailViewController: UIViewController {
         view.showsVerticalScrollIndicator = true
         view.showsVerticalScrollIndicator = false
         view.isDirectionalLockEnabled = true
+        view.accessibilityIdentifier = "scrollView"
+        
         return view
     }()
     
@@ -208,6 +210,8 @@ final class ArticleDetailViewController: UIViewController {
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
         button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.buttonTitleFontSize, weight: .regular)
+        button.accessibilityIdentifier = "websiteButton"
+        
         return button
     }()
     
@@ -388,12 +392,7 @@ extension ArticleDetailViewController {
         navigationController?.navigationBar.tintColor = .white
         
         // For UI testing
-        print(navigationController?.navigationBar.items)
-        print(navigationItem.leftBarButtonItem)
-        print(navigationItem.backBarButtonItem)
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "shareButton"
-        navigationItem.backBarButtonItem?.accessibilityIdentifier = "backButton"
-        
     }
     
     private func setViewBackground() {
