@@ -1534,6 +1534,7 @@
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Afin de vous positionner sur la carte, autorisez l'accès au service de localisation.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1565,6 +1566,7 @@
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Afin de vous positionner sur la carte, autorisez l'accès au service de localisation.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
