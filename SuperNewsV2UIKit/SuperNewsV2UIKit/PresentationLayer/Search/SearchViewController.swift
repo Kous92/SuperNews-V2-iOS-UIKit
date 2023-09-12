@@ -44,6 +44,7 @@ final class SearchViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.isHidden = true
         tableView.backgroundColor = .clear
+        tableView.accessibilityIdentifier = "tableView" // UI testing
         
         return tableView
     }()
@@ -57,6 +58,8 @@ final class SearchViewController: UIViewController {
         searchBar.searchTextField.textColor = .white
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
+        searchBar.accessibilityIdentifier = "searchBar"
+        
         return searchBar
     }()
     
@@ -80,6 +83,7 @@ final class SearchViewController: UIViewController {
         label.textAlignment = .center
         label.setShadowLabel(string: String(localized: "noArticleAvailable"), font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         label.isHidden = true
+        label.accessibilityIdentifier = "noResultLabel"
         
         return label
     }()

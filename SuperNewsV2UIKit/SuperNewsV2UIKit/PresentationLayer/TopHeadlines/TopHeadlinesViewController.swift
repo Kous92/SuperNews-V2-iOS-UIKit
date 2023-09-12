@@ -193,6 +193,9 @@ extension TopHeadlinesViewController {
         navigationItem.rightBarButtonItem = item
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        // For UI testing
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "listButton"
     }
     
     private func setViewBackground() {

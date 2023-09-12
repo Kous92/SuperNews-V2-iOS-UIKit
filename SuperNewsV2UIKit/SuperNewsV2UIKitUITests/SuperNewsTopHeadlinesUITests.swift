@@ -18,7 +18,7 @@ final class SuperNewsTopHeadlinesUITests: XCTestCase {
         XCUIApplication().launch()
     }
     
-    func testTopHeadlines() throws {
+    func testTopHeadlinesWithShareArticle() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         print(app.navigationBars.element)
@@ -56,20 +56,90 @@ final class SuperNewsTopHeadlinesUITests: XCTestCase {
         app.buttons["shareButton"].tap()
     }
     
+    func testTopHeadlinesWithArticleWebsite() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        print(app.navigationBars.element)
+        let tableView = app.tables["tableView"]
+        XCTAssert(tableView.waitForExistence(timeout: 1.0))
+        
+        let tableViewCells = tableView.cells
+        XCTAssertGreaterThan(tableViewCells.count, 0)
+        
+        if tableViewCells.count > 0 {
+            let promise = expectation(description: "Waiting for TableViewCells")
+            
+            for i in 0 ..< tableViewCells.count {
+                // Grab the first cell and verify that it exists and tap it
+                let tableCell = tableViewCells.element(boundBy: i)
+                XCTAssertTrue(tableCell.exists, "Cell \(i) exists")
+         
+                if i == (tableViewCells.count - 1) {
+                    promise.fulfill()
+                }
+            }
+            waitForExpectations(timeout: 3, handler: nil)
+            XCTAssertTrue(true, "Finished validating the table cells")
+         
+        } else {
+            XCTAssert(false, "Was not able to find any table cells")
+        }
+        
+        tableView.swipeUp(velocity: .fast)
+        sleep(1)
+        tableView.swipeDown(velocity: .fast)
+        
+        tableViewCells.element(boundBy: 1).tap()
+        XCTAssert(app.scrollViews["scrollView"].waitForExistence(timeout: 1.0))
+        app.swipeUp()
+        XCTAssert(app.buttons["websiteButton"].waitForExistence(timeout: 1.0))
+        app.buttons["websiteButton"].tap()
+        XCTAssert(app.webViews.firstMatch.waitForExistence(timeout: 1.0))
+    }
+    
     func testCategoryCollectionView() throws {
         let app = XCUIApplication()
         let collectionView = app.collectionViews["categoryCollectionView"]
+        let collectionViewCells = collectionView.cells
+        let cells = 0
 
-        XCTAssert(collectionView.firstMatch.waitForExistence(timeout: 1.0))
-        XCTAssertGreaterThan(collectionView.cells.count, 0)
-        collectionView.swipeLeft()
-        collectionView.cells.firstMatch.tap()
-        sleep(1)
+        if collectionViewCells.count > 0 {
+            let promise = expectation(description: "Waiting for CollectionViewCells")
+            
+            for i in 0 ..< collectionViewCells.count {
+                // Grab the first cell and verify that it exists and tap it
+                let collectionViewCell = collectionViewCells.element(boundBy: i)
+                XCTAssertTrue(collectionViewCell.exists, "Cell \(i) exists")
+         
+                if i == (collectionViewCells.count - 1) {
+                    promise.fulfill()
+                }
+            }
+            waitForExpectations(timeout: 3, handler: nil)
+            XCTAssertTrue(true, "Finished validating the CollectionView cells")
+         
+        } else {
+            XCTAssert(false, "Was not able to find any table cells")
+        }
+        
+        collectionView.cells.element(boundBy: 1).tap()
+        collectionView.cells.element(boundBy: 2).tap()
+        XCTAssert(app.staticTexts["Business"].exists)
+        collectionView.cells.element(boundBy: 3).tap()
+        XCTAssert(app.staticTexts["Entertainment"].exists)
+        collectionView.cells.element(boundBy: 4).tap()
         XCTAssert(app.staticTexts["General"].exists)
-        collectionView.firstMatch.swipeLeft()
-        sleep(1)
+        collectionView.cells.element(boundBy: 1).tap()
+        XCTAssert(app.staticTexts["Health"].exists)
+        collectionView.cells.element(boundBy: 2).tap()
+        XCTAssert(app.staticTexts["Science"].exists)
+        collectionView.cells.element(boundBy: 3).tap()
+        XCTAssert(app.staticTexts["Sports"].exists)
+        collectionView.cells.element(boundBy: 4).tap()
         XCTAssert(app.staticTexts["Technology"].exists)
         collectionView.firstMatch.swipeRight()
-        collectionView.cells.firstMatch.tap()
+        collectionView.firstMatch.swipeRight()
+        collectionView.cells.element(boundBy: 0).tap()
+        collectionView.firstMatch.swipeLeft()
     }
 }
