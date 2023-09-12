@@ -9,10 +9,28 @@
     }
   ],
   "defaultOptions" : {
+    "language" : "en",
+    "locationScenario" : {
+      "identifier" : "San Francisco, CA, USA",
+      "referenceType" : "built-in"
+    },
     "testTimeoutsEnabled" : true
   },
   "testTargets" : [
-
+    {
+      "target" : {
+        "containerPath" : "container:SuperNewsV2UIKit.xcodeproj",
+        "identifier" : "4BA595B329E6D506006B9460",
+        "name" : "SuperNewsV2UIKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SuperNewsV2UIKit.xcodeproj",
+        "identifier" : "4B90748E2AAF967C00E559FF",
+        "name" : "SuperNewsV2UIKitUITests"
+      }
+    }
   ],
   "version" : 1
 }

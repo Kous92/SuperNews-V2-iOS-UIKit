@@ -46,6 +46,7 @@ final class TopHeadlinesViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.isHidden = true
+        collectionView.accessibilityIdentifier = "categoryCollectionView"
         
         return collectionView
     }()
@@ -61,6 +62,7 @@ final class TopHeadlinesViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.isHidden = true
         tableView.backgroundColor = .clear
+        tableView.accessibilityIdentifier = "tableView"
         
         return tableView
     }()
@@ -191,6 +193,9 @@ extension TopHeadlinesViewController {
         navigationItem.rightBarButtonItem = item
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        // For UI testing
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "listButton"
     }
     
     private func setViewBackground() {

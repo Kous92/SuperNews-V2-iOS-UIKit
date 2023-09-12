@@ -83,6 +83,7 @@ final class CountryAnnotationView: MKAnnotationView {
         self.layer.cornerRadius = 35
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
+        self.annotationView.accessibilityIdentifier = "annotation\(viewModel?.countryCode ?? "??")"
         
         setViewBackground()
         buildViewHierarchy()

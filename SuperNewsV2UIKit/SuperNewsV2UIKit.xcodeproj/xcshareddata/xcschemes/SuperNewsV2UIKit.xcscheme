@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1500"
-   version = "1.7">
+   version = "2.1">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -20,6 +20,16 @@
                ReferencedContainer = "container:SuperNewsV2UIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <TestPlanReference
+               reference = "container:SuperNewsV2UIKit/SuperNewsFullTests.xctestplan">
+            </TestPlanReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,7 +39,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:SuperNewsV2UIKit.xctestplan"
+            reference = "container:SuperNewsV2UIKit/SuperNewsFullTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -50,7 +60,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4BD88CCD29E6BAAF000369DE"
+               BlueprintIdentifier = "4B90748E2AAF967C00E559FF"
                BuildableName = "SuperNewsV2UIKitUITests.xctest"
                BlueprintName = "SuperNewsV2UIKitUITests"
                ReferencedContainer = "container:SuperNewsV2UIKit.xcodeproj">

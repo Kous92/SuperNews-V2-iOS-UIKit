@@ -8,7 +8,7 @@
 import XCTest
 
 final class SuperNewsV2UIKitUITests: XCTestCase {
-
+	
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -16,20 +16,28 @@ final class SuperNewsV2UIKitUITests: XCTestCase {
         continueAfterFailure = false
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        XCUIApplication().launch()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
+    
+    func testTabBars() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        XCTAssertEqual(app.tabBars.buttons.count, 4)
+        XCTAssert(app.tabBars.buttons["Top headlines"].exists, "Top headlines TabBar button does not exist")
+        XCTAssert(app.tabBars.buttons["Search"].exists, "Search TabBar button does not exist")
+        XCTAssert(app.tabBars.buttons["World map"].exists, "World map TabBar button does not exist")
+        XCTAssert(app.tabBars.buttons["Settings"].exists, "Settings TabBar button does not exist")
+        
+        app.tabBars.buttons["Search"].tap()
+        sleep(1)
+        app.tabBars.buttons["World map"].tap()
+        sleep(1)
+        app.tabBars.buttons["Settings"].tap()
+        sleep(1)
+        app.tabBars.buttons["Top headlines"].tap()
     }
-
+    
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
