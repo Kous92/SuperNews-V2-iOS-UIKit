@@ -78,8 +78,8 @@ final class MapViewModel {
                     self.updateResult.send(true)
                 case .failure(let error):
                     print("[MapViewModel] Loading failed.")
-                    print("[MapViewModel] ERROR: \(error.rawValue)")
-                    await self.sendErrorMessage(with: error.rawValue)
+                    print("[MapViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
+                    await self.sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
             }
         }
     }
@@ -127,9 +127,9 @@ final class MapViewModel {
             
             if distance < closestDistance {
                 closestDistance = distance
-                suggestedCountry = country.countryName
+                suggestedCountry = country.countryCode.countryName() ?? "??"
                 suggestedCoordinates = coordinates
-                print("[MapViewModel] Closest country from \(locatedCountryName): \(country.countryName)")
+                print("[MapViewModel] Closest country from \(locatedCountryName): \(country.countryCode.countryName() ?? "??")")
             }
         }
         

@@ -103,7 +103,7 @@ final class SettingsSelectionViewModel {
     }
     
     private func updateViewModelsWithSavedSetting() async {
-        if let index = cellViewModels.firstIndex(where: { $0.name == savedCountryLanguageSetting.name }) {
+        if let index = cellViewModels.firstIndex(where: { $0.code == savedCountryLanguageSetting.code }) {
             cellViewModels[index].setIsSaved(saved: true)
             actualSelectedIndex = index
         }
