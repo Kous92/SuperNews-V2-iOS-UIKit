@@ -39,6 +39,7 @@ final class MapViewController: UIViewController {
         mapView.showsUserLocation = true
         mapView.register(CountryAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryAnnotation")
         mapView.register(CountryClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: "countryCluster")
+        mapView.accessibilityIdentifier = "map"
         
         return mapView
     }()
@@ -52,9 +53,10 @@ final class MapViewController: UIViewController {
         searchBar.showsCancelButton = false
         searchBar.delegate = self
         searchBar.searchTextField.textColor = traitCollection.userInterfaceStyle == .light ? .black :.white
-        // searchBar.searchTextField.textColor = .cyan
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .label
+        searchBar.accessibilityIdentifier = "searchBar"
+        
         return searchBar
     }()
     
@@ -65,6 +67,8 @@ final class MapViewController: UIViewController {
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 1
         view.isHidden = true
+        view.accessibilityIdentifier = "autoCompletion"
+        
         return view
     }()
     
@@ -76,6 +80,8 @@ final class MapViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CountryAutoCompletionTableViewCell.self, forCellReuseIdentifier: "autoCompletionCell")
+        tableView.accessibilityIdentifier = "tableView"
+        
         return tableView
     }()
     
@@ -89,6 +95,8 @@ final class MapViewController: UIViewController {
         button.setImage(UIImage(systemName: "location.fill"), for: .normal)
         button.isEnabled = false
         button.isHidden = true
+        button.accessibilityIdentifier = "locationButton"
+        
         return button
     }()
     
@@ -99,6 +107,7 @@ final class MapViewController: UIViewController {
         button.layer.cornerRadius = Constants.MapView.cornerRadius
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
+        button.accessibilityIdentifier = "zoomButton"
 
         return button
     }()

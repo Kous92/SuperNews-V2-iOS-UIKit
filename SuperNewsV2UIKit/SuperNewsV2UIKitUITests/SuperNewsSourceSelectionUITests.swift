@@ -56,7 +56,6 @@ final class SuperNewsSourceSelectionUITests: XCTestCase {
         let app = XCUIApplication()
         app.buttons["listButton"].tap()
         
-        let collectionView = app.collectionViews["collectionView"]
         let searchBar = app.otherElements["searchBar"]
         XCTAssert(searchBar.waitForExistence(timeout: 1.0), "Search bar does not exist.")
         

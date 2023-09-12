@@ -37,6 +37,7 @@ final class SettingsSelectionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
+        tableView.accessibilityIdentifier = "settingsChoiceTable"
         
         return tableView
     }()

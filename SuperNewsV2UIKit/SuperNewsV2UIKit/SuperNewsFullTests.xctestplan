@@ -10,6 +10,10 @@
   ],
   "defaultOptions" : {
     "language" : "en",
+    "locationScenario" : {
+      "identifier" : "San Francisco, CA, USA",
+      "referenceType" : "built-in"
+    },
     "testTimeoutsEnabled" : true
   },
   "testTargets" : [

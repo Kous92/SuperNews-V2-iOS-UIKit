@@ -36,6 +36,7 @@ final class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
+        tableView.accessibilityIdentifier = "tableView"
         
         return tableView
     }()

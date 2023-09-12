@@ -101,7 +101,6 @@ final class SuperNewsTopHeadlinesUITests: XCTestCase {
         let app = XCUIApplication()
         let collectionView = app.collectionViews["categoryCollectionView"]
         let collectionViewCells = collectionView.cells
-        let cells = 0
 
         if collectionViewCells.count > 0 {
             let promise = expectation(description: "Waiting for CollectionViewCells")
