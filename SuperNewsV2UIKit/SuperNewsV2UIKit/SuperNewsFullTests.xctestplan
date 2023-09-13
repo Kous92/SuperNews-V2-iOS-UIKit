@@ -9,6 +9,7 @@
     }
   ],
   "defaultOptions" : {
+<<<<<<< HEAD
     "language" : "en",
     "locationScenario" : {
       "identifier" : "San Francisco, CA, USA",
@@ -31,6 +32,12 @@
         "name" : "SuperNewsV2UIKitUITests"
       }
     }
+=======
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+
+>>>>>>> 34b4367 (Ajout base documentation)
   ],
   "version" : 1
 }
