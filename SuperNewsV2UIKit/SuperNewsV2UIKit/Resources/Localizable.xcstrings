@@ -971,18 +971,21 @@
       }
     },
     "noTitle" : {
+
+    },
+    "NSLocationWhenInUseUsageDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No title available"
+            "value" : "In order to use the world map with best experience and suggestion, allow the app the access of location service to place you on the map and suggest you the country to center on the map."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Titre indisponible"
+            "value" : "Afin d'utiliser la carte du monde avec la meilleure expérience et suggestion, autorisez l'accès au service de localisation pour vous placer sur la carte et vous suggérer le pays à centrer sur la carte."
           }
         }
       }
