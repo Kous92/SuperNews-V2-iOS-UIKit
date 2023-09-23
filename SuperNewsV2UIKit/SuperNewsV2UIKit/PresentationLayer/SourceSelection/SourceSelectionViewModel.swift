@@ -173,16 +173,25 @@ extension SourceSelectionViewModel {
         filteredSectionViewModels.removeAll()
         sectionViewModels.forEach { sectionViewModel in
             let filteredSources = sectionViewModel.sourceCellViewModels.filter { vm in
-                print("Filter: \(vm.name.lowercased())")
+                print("Filter: \(vm.name.lowercased()), searchQuery: \(searchQuery.lowercased())")
                 
-                return vm.name.lowercased().contains(searchQuery.lowercased())
+                // Not working with vm.name.lowercased().replacingOccurrences(of: "\\", with: "") to find sources with "'" due to backslash encoding on retrieved data.
+                let name = String(NSString(string: vm.name.lowercased()))
+                
+                // Also, with UI, if we search a name with "'", it will use an other kind of apostrophe "’" leading to search confusions.
+                let search = searchQuery.lowercased().replacingOccurrences(of: "’", with: "'")
+                
+                return name.contains(search)
             }
-            
             
             print("Name: \(sectionViewModel.sectionName)")
             print("Cells count before filtering: \(sectionViewModel.sourceCellViewModels.count)")
             print("Cells: \(filteredSources)")
-            filteredSectionViewModels.append(SourceSectionViewModel(sectionName: sectionViewModel.sectionName, sourceCellViewModels: filteredSources))
+            
+            // Add the section only if it contains at least one source after filtering. It will avoid crash when updating the TableView
+            if filteredSources.count > 0 {
+                filteredSectionViewModels.append(SourceSectionViewModel(sectionName: sectionViewModel.sectionName, sourceCellViewModels: filteredSources))
+            }
         }
         
         // To avoid crash if not any cell was found after filtering.

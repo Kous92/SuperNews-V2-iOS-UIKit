@@ -25,6 +25,7 @@
 		4B0D83472AB0733700C5AB8A /* SuperNewsSourceSelectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0D83462AB0733700C5AB8A /* SuperNewsSourceSelectionUITests.swift */; };
 		4B0D834A2AB0819F00C5AB8A /* SuperNewsWorldMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0D83492AB0819F00C5AB8A /* SuperNewsWorldMapUITests.swift */; };
 		4B0D834C2AB0C6A200C5AB8A /* SuperNewsSettingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0D834B2AB0C6A100C5AB8A /* SuperNewsSettingsUITests.swift */; };
+		4B15646D2AB795C50013D77B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4B15646C2AB795C50013D77B /* InfoPlist.xcstrings */; };
 		4B1615B52AAE41B70098EA93 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1615B42AAE41B70098EA93 /* MemoryCache.swift */; };
 		4B23DE3B2A1D099A0029B5D6 /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23DE3A2A1D099A0029B5D6 /* MapUseCase.swift */; };
 		4B23DE3E2A1D0AEE0029B5D6 /* SuperNewsLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23DE3D2A1D0AEE0029B5D6 /* SuperNewsLocationService.swift */; };
@@ -231,6 +232,7 @@
 		4B0D83482AB0803E00C5AB8A /* Paris.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Paris.gpx; sourceTree = "<group>"; };
 		4B0D83492AB0819F00C5AB8A /* SuperNewsWorldMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsWorldMapUITests.swift; sourceTree = "<group>"; };
 		4B0D834B2AB0C6A100C5AB8A /* SuperNewsSettingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsSettingsUITests.swift; sourceTree = "<group>"; };
+		4B15646C2AB795C50013D77B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4B1615B42AAE41B70098EA93 /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		4B23DE3A2A1D099A0029B5D6 /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
 		4B23DE3D2A1D0AEE0029B5D6 /* SuperNewsLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsLocationService.swift; sourceTree = "<group>"; };
@@ -473,6 +475,19 @@
 				4B0B08062AA92E2700403FD6 /* SuperNewsSettingsSelectionViewModelTests.swift */,
 			);
 			path = ModuleViewModelTests;
+			sourceTree = "<group>";
+		};
+		4B15646B2AB795270013D77B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4BD88CBF29E6BAAF000369DE /* Info.plist */,
+				4B0D83482AB0803E00C5AB8A /* Paris.gpx */,
+				4B90749B2AAFA14C00E559FF /* SuperNewsFullTests.xctestplan */,
+				4B60E6312AAB26C9003202FD /* Localizable.xcstrings */,
+				4BD88CBA29E6BAAF000369DE /* Assets.xcassets */,
+				4B15646C2AB795C50013D77B /* InfoPlist.xcstrings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		4B23DE3C2A1D0AC60029B5D6 /* GPS */ = {
@@ -902,11 +917,7 @@
 				4B306F6129F68D09009AA92D /* DomainLayer */,
 				4B306F6229F68D3E009AA92D /* PresentationLayer */,
 				4B08602429ED7BC600AA32C0 /* EntryPoint */,
-				4BD88CBA29E6BAAF000369DE /* Assets.xcassets */,
-				4BD88CBF29E6BAAF000369DE /* Info.plist */,
-				4B60E6312AAB26C9003202FD /* Localizable.xcstrings */,
-				4B90749B2AAFA14C00E559FF /* SuperNewsFullTests.xctestplan */,
-				4B0D83482AB0803E00C5AB8A /* Paris.gpx */,
+				4B15646B2AB795270013D77B /* Resources */,
 			);
 			path = SuperNewsV2UIKit;
 			sourceTree = "<group>";
@@ -1103,6 +1114,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B15646D2AB795C50013D77B /* InfoPlist.xcstrings in Resources */,
 				4BF6375E29FC84DE00AC469F /* GeneralTopHeadlinesMockData.json in Resources */,
 				4B5220CF2A843F3900F86569 /* languages.json in Resources */,
 				4BF6376229FC84E900AC469F /* HealthTopHeadlinesMockData.json in Resources */,
@@ -1530,12 +1542,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Afin de vous positionner sur la carte, autorisez l'accès au service de localisation.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = NSLocationWhenInUseUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1562,12 +1574,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Afin de vous positionner sur la carte, autorisez l'accès au service de localisation.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = NSLocationWhenInUseUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

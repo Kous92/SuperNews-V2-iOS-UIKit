@@ -74,7 +74,7 @@ final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
     
     func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
         do {
-            let placemarks = try await geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.init(identifier: "fr_FR"))
+            let placemarks = try await geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.current)
             
             guard let place = placemarks.first, let countryName = place.country else {
                 return .failure(.reverseGeocodingFailed)

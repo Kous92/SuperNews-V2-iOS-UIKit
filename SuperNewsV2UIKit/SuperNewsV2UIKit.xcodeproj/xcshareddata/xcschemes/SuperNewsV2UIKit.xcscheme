@@ -27,7 +27,7 @@
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
             <TestPlanReference
-               reference = "container:SuperNewsV2UIKit/SuperNewsFullTests.xctestplan">
+               reference = "container:SuperNewsV2UIKit/Resources/SuperNewsFullTests.xctestplan">
             </TestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -39,7 +39,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:SuperNewsV2UIKit/SuperNewsFullTests.xctestplan"
+            reference = "container:SuperNewsV2UIKit/Resources/SuperNewsFullTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

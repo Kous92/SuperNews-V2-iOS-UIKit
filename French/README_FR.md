@@ -10,8 +10,8 @@
 - [Important: avant d'essayer l'appli iOS](#important)
 - [Fonctionnalités et captures d'écrans](#features)
     + [Actualités](#topHeadlines)
-    + [Recherche de news](#newsSearch)
     + [Sélection de source pour les actualités](#sourceSelection)
+    + [Recherche de news](#newsSearch)
     + [Carte des news](#map)
     + [Vue détaillée de l'article](#articleDetail)
     + [Paramètres utilisateur](#settings)
@@ -335,23 +335,58 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
 
 Voici les différentes fonctionnalités que je propose dans l'application **SuperNews**:
 - Actualités
-- Recherche de news
 - Sélection de source pour les actualités
+- Recherche de news
 - Carte des news
 - Vue détaillée de l'article
 - Paramètres utilisateur
 
 ### <a name="topHeadlines"></a>Actualités
 
+En tapant sur **Actualités** dans la barre de navigation du bas, l'interface des news apparaît comme ceci avec les news locales téléchargées et affichées avec leurs images (par défaut ceux de la France, le pays change en fonction du paramètre choisi).
+
+En tapant sur une actualité de la liste, une vue montrant les détails de l'article apparaît, [plus de détails ici](#articleDetail).
+
+En ayant bien exploité en profondeur l'API REST NewsAPI, voici une nouveauté: une vue défilante horizontale (`CollectionView`) va ici représenter les différentes catégories d'actualités:
+- Les actualités locales en fonction du pays choisi dans les paramètres(France par défaut).
+- Les actualités d'un média en particulier (votre favori). Vous pouvez le définir en tapant sur le [bouton en haut à gauche de l'écran pour choisir votre média favori](#sourceSelection).
+- Business
+- Divertissement
+- Général
+- Santé
+- Science
+- Sports
+- Technologie
+
+Ces 7 catégories d'actualités dépendent du pays choisi dans les paramètres, comme pour les actualités locales.
+
 ![TopHeadlinesGIF](TopHeadlinesFrench.gif)
-
-### <a name="newsSearch"></a>Recherche de news
-
-![SearchGIF](SearchNewsFrench.gif)
 
 ### <a name="sourceSelection"></a>Sélection de source pour les actualités
 
+Dans cet écran, vous avez la possibilité de choisir une source de news en favori parmi celles disponibles. Les sources sont téléchargées la première fois puis affichées dans une liste.
+
+La vue défilante horizontale fait office de filtre pour trier la liste des sources selon 4 options:
+- Toutes les sources: par défaut. La liste des sources téléchargées telles quelles.
+- Par langue: Les sources sont triées dans chaque section représentant une langue, ici 14.
+- Par catégorie: Toutes langues et pays confondu, les sources sont triées dans chaque section de la liste: Business, Divertissement, Général, Santé; Science, Sports, Technologie.
+- Par pays: Les sources sont triées dans chaque section représentant une pays, ici 54.
+
+Pour plus d'ergonomie, vous avez la possibilité avec la barre de recherche de rechercher une source parmi celles disponibles.
+
+Tapez sur une source, et vous serez redirigé vers l'écran des actualités. La source choisie est sauvegardée et lorsque vous séléctionnerez la 2ème cellule de la liste horizontale, vous aurez alors les actualités de la source sélectionnée.
+
 ![SourceSelectionGIF](SourceSelectionFrench.gif)
+
+### <a name="newsSearch"></a>Recherche de news
+
+En tapant sur **Recherche** dans la barre de navigation du bas, l'interface des news apparaît comme ceci avec les news locales téléchargées et affichées avec leurs images (par défaut ceux de la France, le pays change en fonction du paramètre choisi).
+
+Pour rechercher le contenu, il suffit tout simplement de toucher la barre de recherche puis de saisir le contenu recherché. La recherche est réactive, chaque modification distincte dans la barre de recherche va automatiquement déclencher un appel HTTP de l'API REST et mettre à jour la liste s'il y a du contenu.
+
+Par défaut la langue des news est en français. Lorsque vous avez séléctionné une news, une vue défilante (`ScrollView`) apparaît pour y voir les détails de l'article. Le bouton en bas de la vue vous permet de consulter le site de la source de l'article afin de lire l'article dans son intégralité.<br>
+
+![SearchGIF](SearchNewsFrench.gif)
 
 ### <a name="map"></a>Carte des news
 
@@ -360,12 +395,15 @@ Avec les possibilités que donne **NewsAPI**, il est donc possible de récupére
 Avec la localisation GPS, vous avez la possibilité de centrer la carte sur le pays le plus proche de votre position actuelle (par rapport à son emplacement sur la carte).
 
 En sélectionnant **Oui**, la carte sera centrée sur le pays suggéré. Si vous êtes localisé dans l'un des 54 pays disponibles, la carte sera centrée dans le même pays.
+
 ![MapCenteringSuggestionYes](MapCenteringSuggestionYesFrench.gif)
 
 Si vous êtes localisé dans un pays qui ne fait pas parti des 54 pays, la carte sera centrée dans le pays suggéré le plus proche, le calcul se faisant avec les distances **<u>à vol d'oiseau</u>** entre la position actuelle et le marqueur le plus proche.
+
 ![MapCenteringSuggestionCountryUnavailable](MapCenteringSuggestionCountryUnavailable.gif)
 
-En sélectionnant **No**, la carte sera centrée sur votre position. 
+En sélectionnant **No**, la carte sera centrée sur votre position.
+
 ![MapCenteringSuggestionNo](MapCenteringSuggestionNoFrench.gif)
 
 **Concernant les marqueurs, plusieurs options possibles:**
@@ -383,12 +421,56 @@ En tapant sur le marqueur du pays représenté de la carte, un écran affichant 
 
 ### <a name="articleDetail"></a>Vue détaillée de l'article
 
+Lorsque vous avez séléctionné une actualité, une vue défilante (`ScrollView`) apparaît pour y voir les détails de l'article. Le bouton en bas de la vue vous permet de consulter le site de la source de l'article afin de lire l'article dans son intégralité. Le bouton en haut à gauche de la vue vous permet de partager le lien vers le site de l'article en question (par message, vos réseaux sociaux, AirDrop, ...).
+
 ![ArticleDetailGIF](ArticleDetailFrench.gif)
 
 ### <a name="settings"></a>Paramètres utilisateur
 
+Pour les paramètres, vous pouvez définir votre pays favori des news en sélectionnant **Pays des news** puis le pays de votre choix parmi les 54 disponibles (par exemple les États-Unis). Une fois sélectionné, allez dans **Actualités** et vous verrez les news locales des États-Unis.<br>
+
 ![NewsCountrySettingsFrench](NewsCountrySettingsFrench.gif)
+
+Pour la langue, même chose depuis les paramètres, en sélectionnant "Langue des news" puis la langue de votre choix parmi les 14 langues disponibles (exemple: Anglais). Avec la langue sélectionnée, allez dans **Actualités** et vous verrez dans la barre de recherche la langue sélectionnée (ici: **Anglais** par exemple) et en recherchant un contenu dans la langue choisie, les news s'afficheront s'il y en a de disponibles.
 
 ![NewsLanguageSettings](NewsLanguageSettingsFrench.gif)
 
+La dernière option permet de réinitialiser les paramètres par défaut pour le pays et la langue des news.
+
 ![NewsResetSettings](NewsResetSettingsFrench.gif)
+
+## <a name="testing"></a>Tests unitaires et UI
+
+Dans tout développement d'applications iOS, comme sur d'autres plateformes, les tests unitaires et UI (User Interface, traduisez par interface utilisateur) sont essentiels pour vérifier le bon fonctionnement de l'application avant les alpha et bêta tests par des utilisateurs et sa mise en production sur l'App Store.
+
+En iOS natif, on utilise le framework **XCTest**. Avec l'architecture que je propose aujourd'hui, une Clean Architecture avec MVVM-C, chaque composant est indépendant afin d'être testé plus facilement, à condition bien sûr de connaître les bonnes techniques pour tester (abstractions, mocks, stubs, spy, ...). Même avec une architecture appropriée, la principale difficulté est de savoir quoi tester et de quelle façon le tester.
+
+Certaines parties du code de l'application restent tout de même plus difficiles à tester comme les `ViewController` par exemple.
+
+### Tests unitaires (White box)
+
+Les tests unitaires sont les tests en boîte blanche **(White box)** où on a une visibilité sur le code, afin de tester les fonctionnalités de l'application. Les tests unitaires sont des tests courts et rapides à exécuter. C'est aussi là qu'on peut tester les différentes couches de l'architecture du projet en injectant des mocks par exemple. Je propose en tout **94 tests unitaires indépendants**.
+
+Je ne connais pas encore toutes les techniques pour faire de meilleurs tests unitaires, mais une fois cela assimilé, la couverture du code par les tests augmentera de manière significative.
+
+Ces tests unitaires couvrent actuellement **39,9%** du code de l'application.
+
+![Couverture tests unitaires](UnitTestsCodeCoverage.png)
+
+### Tests UI automatisés (Black box)
+
+Les tests UI sont les tests en boîte noire **(Black box)** où on n'a pas de visibilité sur le code, mais une visibilité sur l'interface visuelle. Pour cela, **XCTest** utilise `XCUIApplication` pour permettre de simuler les interactions d'une application de façon automatique, et de vérifier l'existence des élements attendus dans l'interface. L'architecture de l'application importe peu dans les tests UI, l'essentiel étant de tester comme un utilisateur lambda, en ciblant donc les composants **UI** de l'application. Par rapport au tests unitaires, la couverture du code est donc plus élevée, mais en contrepartie de tests qui peuvent être longs à exécuter.
+
+C'est également cette partie-là que dans un projet en entreprise qu'une équipe de testeurs, qu'on appelle aussi **QA (Quality Assurance)** sont impliqués dans la mise en place des tests automatisés des applications avec des frameworks ou outils externes à **Xcode**.
+
+Côté développeur iOS avec **Xcode**, les tests UI s'effectuent de la même manière que des tests unitaires.
+
+Ces tests UI couvrent actuellement **74%** du code de l'application.
+
+![Couverture tests UI](UITestsCodeCoverage.png)
+
+### Au niveau global pour les tests
+
+En exécutant les 114 tests unitaires et UI, la couverture actuelle du code est de **79%**.
+
+![Couverture tests unitaires et UI](UnitAndUITestsCodeCoverage.png)

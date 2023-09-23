@@ -12,7 +12,7 @@ import SwiftUI
 
 /// 3 useful formats to see how it renders on different iOS/iPadOS devices. Make sure your Xcode version have the devices with the corresponding name in your simulators list
 let deviceNames: [String] = [
-    "iPhone 14 Pro",
+    "iPhone 15 Pro",
     "iPhone SE (3rd generation)",
     "iPad Pro (11-inch) (4th generation)"
 ]

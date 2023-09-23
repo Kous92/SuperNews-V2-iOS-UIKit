@@ -11,8 +11,8 @@ import Alamofire
 final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     private var apiKey = ""
     private var cacheKey = ""
-    private let articleCache = FileCache<[Article]>(fileName: "article_cache_data", expirationInterval: 5 * 60)
-    private let mediaSourceCache = FileCache<[MediaSource]>(fileName: "media_source_cache_data", expirationInterval: 5 * 60) // 5 minutes before expiration
+    private let articleCache = FileCache<[Article]>(fileName: "article_cache_data", expirationInterval: 21600) // 6 hours before expiration
+    private let mediaSourceCache = FileCache<[MediaSource]>(fileName: "media_source_cache_data", expirationInterval: 86400) // 1 day before expiration
     
     fileprivate func getApiKey() -> String? {
         guard let path = Bundle.main.path(forResource: "apiKey", ofType: "plist") else {

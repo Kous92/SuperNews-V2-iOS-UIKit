@@ -971,7 +971,14 @@
       }
     },
     "noTitle" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "NSLocationWhenInUseUsageDescription" : {
       "extractionState" : "manual",
