@@ -8,7 +8,7 @@
 
 Pour consulter la documentation complète du projet (guide d'utilisation, solutions techniques, architecture, tests, ...) en français, **[cliquez ici](README_FR.md)**.
 
-Je suis particulièrement intéressé pour des revues de code **(code reviews)** afin de mettre en place de potentielles améliorations, mais également monter en compétences sur des notions et techniques avancées. Si vous êtes confirmé/sénior/expert en iOS, n'hésitez pas à me faire part de vos retours et à me proposer des astuces, solutions pour toute remarque.
+Je suis particulièrement intéressé pour des revues de code **(code reviews)** afin de mettre en place de potentielles améliorations, mais également monter en compétences sur des notions et techniques avancées. Si vous êtes **confirmé/sénior/expert en iOS**, n'hésitez pas à me faire part de vos retours et à me proposer des astuces, solutions pour toute remarque.
 
 L'application est disponible à l'essai via **TestFlight** en **[cliquant ici](https://testflight.apple.com/join/SKj6fn5k)**. Un iPhone ou un iPad sous iOS/iPadOS 15.0 ou plus est requis.
 
