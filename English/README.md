@@ -1,117 +1,117 @@
-# SuperNews iOS V2 UIKit (Français)
+# SuperNews iOS V2 UIKit (English)
 
-## Plan de navigation
-- [Un peu d'histoire](#story)
-- [Stack technique et architecture](#stack)
-    + [Stack technique](#technology)
+## Navigation plan
+- [A brief history](#story)
+- [Technical stack and architecture](#stack)
+    + [Technical stack](#technology)
     + [Architecture](#architecture)
     + [Design patterns](#patterns)
-    + [Récaptiulatif d'architecture](#recap)
-- [Important: avant d'essayer l'appli iOS](#important)
-- [Fonctionnalités et captures d'écrans](#features)
-    + [Actualités](#topHeadlines)
-    + [Sélection de source pour les actualités](#sourceSelection)
-    + [Recherche de news](#newsSearch)
-    + [Carte des news](#map)
-    + [Vue détaillée de l'article](#articleDetail)
-    + [Paramètres utilisateur](#settings)
-- [Tests unitaires et UI](#testing)
+    + [Architecture recap](#recap)
+- [Important: before trying the iOS app](#important)
+- [Features and screenshots](#features)
+    + [Top headlines](#topHeadlines)
+    + [Source selection for news](#sourceSelection)
+    + [News search](#newsSearch)
+    + [News map](#map)
+    + [Detailed article view](#articleDetail)
+    + [User settings](#settings)
+- [Unit and UI tests](#testing)
 
-## <a name="story"></a>Un peu d'histoire
+## <a name="story"></a>A brief history
 
-Pour ce projet personnel qu'est **SuperNews**, tout commence en **2020**. 
+For this personal project which is **SuperNews**, everything starts in **2020**. 
 
-J'étais en stage de fin d'études au sein de Capgemini, à Paris, plus précisément à Issy-les-Moulineaux. Mon objectif là-bas était de pouvoir pratiquer dans le dévéloppement iOS natif, un métier et une technologie que j'ai énormément apprécié, étant aussi un passionné de l'écosystème Apple depuis longtemps.
+I was doing my end-of-study internship with Capgemini, in Paris, more precisely in Issy-les-Moulineaux. My goal there was to be able to practice into the native iOS development, ua job and a technology I've enjoyed immensely, being also a long-time Apple ecosystem enthusiast.
 
-En interne, au sein de la Mobile Factory de la Business Unit DCX (Digital Customer eXperience) Paris, lors de mon upskilling iOS, l'un des leads iOS internes m'a proposé un exercice technique (sous forme de test technique). Et le test technique était le suivant:
-- Développer une application qui exploite l'API REST NewsAPI en affichant les articles dans une `TableView`. Au clic sur un article, l’article est affiché (transition `push`) dans un nouvel écran. Ce nouvel écran affiche les détails de l'article.
+Internally, within the Paris DCX (Digital Customer eXperience) Mobile Factory Business Unit, during with iOS upskilling, one of the internal iOS leads suggested a technical exercise (as a technical test). And the technical test was the following:
+- Develop an app that uses the **NewsAPI** REST API to display the articles in a `TableView`. On tap on an article, the article is displayed (`push` transition) in a new screen. This new screen displays the article details.
 
-Le but est donc de montrer ce qu'on a appris pour exploiter une API mais surtout de pouvoir le faire avec différentes architectures, du **MVC** classique, au **MVVM** jusqu'à la **Clean Architecture** (la variante **Clean Swift**). À l'époque, je n'avais réalisé ce test qu'en **MVC**.
+The goal is to show what we learned to use an API but above all to do so with different architectures, from classic **MVC**, to **MVVM** up to the **Clean Architecture** (**Clean Swift** variant). At the time, I had only carried out this test in **MVC**.
 
-Pour voir le test technique en détail, avec mes réalisations que j'ai refait en février 2023, [cliquez ici](https://github.com/Kous92/Test-technique-iOS-2020-Capgemini-Mobile-Factory-DCX-Paris).
+To see this technical test in detail, with my realizations that I redid in February 2023, [click here](https://github.com/Kous92/Test-technique-iOS-2020-Capgemini-Mobile-Factory-DCX-Paris).
 
-**Juillet 2020** arrive, en plein confinement lié à la crise sanitaire mondiale du **COVID** que nous connaissons tous, mon stage s'arrête, et le CDI m'a été refusé (faute de projets clients mais aussi de mon niveau technique insuffisant). J'investis dans un Mac mini pour pouvoir continuer ma progression en iOS natif malgré le moral au plus bas.
+**July** comes, in the lockdown of the worldwide **COVID** health crisis that we know, my internship stops here, and I was refused a permanent contract (due to a lack of customer projects and my insufficient technical level). I'm investing in a Mac mini so that I can continue my progress in native iOS despite the morale at his lowest level.
 
-Au fil des mois, je passe des entretiens, quasiment tout le temps avec des ESN, et là, au vu de mon parcours, il y a une question qu'on me pose assez fréquemment: **Avez-vous réalisé des projets personnels ?**
+Over the monthes, I'm doing job interviews, almost everytime with IT consulting companies, and here, given my background, is a question I'm asked quite frequently: **Do you have made any personal projects ?**
 
-Et c'est là que ça m'a fait réfléchir à une idée, car là, il fallait vraiment tout mettre en œuvre pour montrer du concret, un projet complet, avec des fonctionnalités sortant du lot, car oui, une simple interface de type **TODO list** où juste un `TableView` récupérant des données d'une **API REST**, ça ne fera pas son effet. Il faut aller plus loin. Mais avant d'aller plus loin, le challenge ici, c'est d'avoir les ressources serveur pour faire un projet concret, donc une API REST. En général, ce n'est pas donné quand on n'a pas de moyens financiers conséquents, on se retrouve donc limité pour proposer des fonctionnalités.
+And that's when it got me thinking about an idea, because there, you really had to pull out all the stops to show something concrete, a complete project, with outstanding features, because yes, a basic **TODO list** interface or only a `TableView` who downloads data from a **REST API**, it won't make the job. You have to go further. But before going further, the challenge here, is to have the server resources to make a concrete project, therefore a **REST API**. In general, it's not cheap when you don't have the financial means, so you're limited in the features you can offer.
 
-On est en **mars 2021**, c'est alors que je me remémore ce que j'avais réalisé lors de mon stage de fin d'études chez Capgemini, mon test technique. Ayant gardé le sujet et mon code, j'en ai donc profité pour aller consulter en profondeur la [documentation de NewsAPI](https://newsapi.org). En consultant les différentes features possibles, j'ai donc matérialisé ma première appli avec les features suivantes:
-- Actualités du pays favori
-- Recherche de news (dans différentes langues possibles)
-- Carte des news, ma fonctionnalité signature qui sort du lot, en sélectionnant un pays via son marqueur, de consulter les actualités locales du pays en question.
-- Paramètres utilisateur: définir la langue de recherche d'actualités et le pays pour les actualités en favori.
+We are in **March 2021**, it was then that I remembered what I have done during my end-of-study internship at Capgemini, my technical test. Having kept the subject and my code, so I took the opportunity to consult [NewsAPI documentation](https://newsapi.org) in depth. By consulting the different possible features, I have build my first app with the following features:
+- Top headlines of favorite country.
+- News search (in different languages)
+- News map, my outstanding signature feature, by selecting a country from his marker, to consult the local top headlines of the related country.
+- User settings: set the news search language and the country for the favorite top headlines.
 
-Au niveau technique, j'ai d'abord commencé avec la stack suivante:
-- **Xcode 12**, **Swift 5.4**, **UIKit** avec **Storyboard**, l'architecture **MVC** (par défaut sur **UIKit**), **MapKit**, **CoreLocation**, **Alamofire** et **Kingfisher** comme frameworks tiers installés avec **CocoaPods**. Niveau **tests unitaires** et **UI**, c'est un début.
+On the technical side, I started with the following stack:
+- **Xcode 12**, **Swift 5.4**, **UIKit** with **Storyboard**, **MVC** architecture (**UIKit** default one), **MapKit**, **CoreLocation**, **Alamofire** and **Kingfisher** as 3rd party installed framework with **CocoaPods**. For **unit and UI tests**, it's a beginning.
 
-Cette première version m'a pris 2-3 mois pour la réaliser, que j'ai ensuite publié sur **GitHub**. [Cette ancienne version est consultable ici](https://github.com/Kous92/SuperNews-iOS-Swift5/tree/mvc).
+This first version took me 2-3 months to complete, which I then published on **GitHub**. [This old version is consultable here](https://github.com/Kous92/SuperNews-iOS-Swift5/tree/mvc).
 
-Bien que j'ai tout fait pour mettre en avant cette réalisation, techniquement, ça ne suffit pas. Il m'aura fallu le comprendre lors des rares tests techniques et reviews que j'ai pu avoir.
+Although I've done my utmost to promote this achievement, technically, it's not enough. I had to figure it out during the few (rare) technical tests and reviews I was able to have.
 
-**Octobre 2021**, je lance donc la phase de migration vers l'architecture **MVVM**, ça m'avait pris beaucoup de temps pour enfin comprendre comment implémenter cette architecture avec **UIKit**, je m'étais beaucoup perdu avec tout ce qu'il y avait sur Internet. J'ai retravaillé l'interface utilisateur, j'ai commencé à séparer la logique métier de la vue, et mis en place l'utilisation de **Combine** pour le **data binding** entre la vue et la vue modèle (même si **RxSwift** est au top pour **UIKit** en architecture **MVVM**).
+**October 2021**, I lauch the migration phase to **MVVM** architecture, It took me a lot of time to finally understand how to implement this architecture with **UIKit**, I was very lost with all of that things on the Internet. I've redesigned the user interface, I have started to isolate the business logic from the view, and implemented the use of **Combine** for the **data binding** between the **view** and the **ViewModel** (even if **RxSwift** is great for **UIKit** with **MVVM** architecture).
 
-Avec ces améliorations, j'ai senti un net progrès que ce soit pour la logique, la maintenabilité et les tests unitaires (meilleure couverture du code). Mais au fil du temps, j'ai senti que je pouvais faire encore mieux.
-Je publie donc cette nouvelle version sur GitHub en décembre 2021, [que vous pouvez consulter ici](https://github.com/Kous92/SuperNews-iOS-Swift5/tree/main).
+With these improvements, I felt a clear improvement in terms of logic, maintainability and unit tests (better code coverage). But over the time, I felt that I must do even better (on the one hand, because the job market is more and more technically demanding).
+I published this new version on **GitHub** in december 2021, [that you can consult here](https://github.com/Kous92/SuperNews-iOS-Swift5/tree/main).
 
-La stack technique était alors la suivante:
-- **Xcode 13**, **Swift 5.5**, **UIKit** avec **Storyboard**, l'architecture **MVVM**, **Combine**, **MapKit**, **CoreLocation**, **Alamofire** et **Kingfisher** comme frameworks tiers installés avec **CocoaPods**, **XCTest** pour les **tests unitaires** et **UI**.
+The technical stack was the following:
+- **Xcode 13**, **Swift 5.5**, **UIKit** with **Storyboard**, **MVVM** architecture, **Combine**, **MapKit**, **CoreLocation**, **Alamofire** and **Kingfisher** as 3rd party installed framework with  **CocoaPods**, **XCTest** for **Unit and UI tests**.
 
-Cette version du projet était pour moi **"mon fidèle allié"** que je présentais à chaque entretien pour montrer mes compétences car c'est un challenge en tant que junior de décrocher un poste de développeur iOS, chose très difficile en raison du contexte économique et des exigences des clients finaux (ESN, cabinets de recrutement).
+This project version was for me, **"my loyal ally"** which I presented at every job interview to demonstrate my skills because it's a challenge as a junior to get a job as an iOS developer, very difficult due to actual economic context en raison du contexte économique and customers requirements (IT consulting companies, recruitment offices).
 
-**2022**, je parviens à travailler chez **Netgem** et **Withings**, pour une période de 3 mois chacune. Ensuite, fin **2022** et début **2023**, je m'engageais dans une **"néo-société de conseil"** pour un recrutement sur profil, donc avec une date de démarrage dès qu'une mission client est gagnée. C'est là que je me suis sensibilisé plus que jamais aux architectures avancées, aux principes du Software Craftsmanship (**KISS**, **DRY**, **YAGNI**, **SOLID**,...), de commencer sur **SwiftUI**, ...
+**2022**, I manage to work at **Netgem** and **Withings**, for a 3 month period each. Then, at the end of **2022** and beginning of **2023**, I was committing myself to **"neo IT consulting company"** for recruitement on profile, so with a beggining as soon as a customer mission is won. That's when I became more aware than ever of advanced architectures (**MVP**, **VIPER**, **Clean Swift**, ...), of Software Craftsmanship principles (**KISS**, **DRY**, **YAGNI**, **SOLID**,...), to begin with **SwiftUI**, ...
 
-La situation au niveau du marché devenait très compliquée (mon engagement avec l'entreprise prend fin), et avec tout ce que j'ai appris, je me suis lancé comme défi, en **avril 2023** de refaire de zéro cette appli mais en nettement plus améliorée: architecture plus avancée, application des principes du Software Craftsmanship (**KISS**, **DRY**, **YAGNI**, **SOLID**, **design patterns**, ...), mais aussi avec de nouvelles fonctionnalités. Malgré un moral en berne (une nouvelle fois) et une pause, les objectifs de cette nouvelle version sont les suivants:
+The market situation was becoming very complicated (my commitment to the company ends here), and with all that I learned, I set myself a challenge, in **april 2023** to remake this app from scratch, but much more improvede: more advanced architecture, application of Software Craftsmanship principles (**KISS**, **DRY**, **YAGNI**, **SOLID**, **design patterns**, ...), but also with new features. Despite low morale (once again) and a break, the goals of this new version was the following:
 - De pouvoir pleinement bénéficier de conseils de développeurs expérimentés/experts lors de code reviews pour améliorer mon code, rendre mon app plus performante, faire de meilleurs tests unitaires, ...
-- D'être en condition réelle lors d'une mise en production, d'abord sur **TestFlight** et peut être sur l'**App Store** s'il n'y a pas de contraintes au niveau API.
+- To be in real condition when putting the app in production, first on **TestFlight** and maybe on the **App Store** if there is not too much constraints from the API.
 - D'être confronté à davantage de situations techniques que je pourrais rencontrer en milieu professionnel (migration de frameworks, optimisations UI/UX, multithreading, mise en production,...).
-- De faire la même version de cette appli iOS en **SwiftUI**.
-- De me sentir de plus en plus en confiance, pour être prêt à rechercher de nouveau une entreprise et retrouver un poste de développeur iOS, en étant mieux armé (des tests techniques jusqu'à la validation de la période d'essai).
+- To do this same version of this iOS app in **SwiftUI**.
+- To feel more and more confident, to be ready to look for a company again and find again a job as an iOS developer, by being better armed (from technical tests until validation of the trial period).
 
-Là, nous sommes en **Septembre 2023**, et je vous présente donc ma nouvelle version de **SuperNews**, que je publie donc pour la première fois sur **TestFlight** via **App Store Connect**.
+Here, we are in **September 2023**, and I show you my new version of **SuperNews**, that I publish for the first time on **TestFlight** through **App Store Connect**.
 
-Moralité, lorsque le marché est tendu et qu'il faut montrer du concret aux recruteurs, clients, leads **iOS** et chefs de projets, les projets personnels sont un bon moyen de montrer ses compétences dans un projet même si ce projet ne sera pas aussi complet qu'un projet réel en entreprise du fait que nos ressources techniques soit limitées. Un projet personnel riche et complet raconte donc aussi une histoire derrière cette réalisation.
+Moral: when the market is tight and you need to show recruiters, clients, **iOS leads** and project managers something concrete, personals projects are a good way to show his skills on a project even if this project won't be as complete ad a real project in company the fact that our technical resources are limited. A rich and complete personal project also tells the story behind this achievement
 
-L'idéal est que cette réalisation puisse arriver sur l'**App Store**, mais déjà le mettre sur **TestFlight** est un grand pas, car ce n'est pas tout le monde qui peut d'entrée investir 99€/an pour l'**Apple Developer Program** pour avoir accès à ces ressources.
+Ideally, is that this realization will be available on the **App Store**, but putting in to **TestFlight** is a big step, because not everyone can invest upfront 99$/year for the **Apple Developer Program** to have access to these resources.
 
-Dans les parties suivantes, vous aurez un descriptif complet du projet, au niveau technique, fonctionnalités, tests, mise en production, ...
+On the next parts, you will have a full project description, at technical level, features and tests.
 
-## <a name="stack"></a>Stack technique et architecture
+## <a name="stack"></a>Technical stack and architecture
 
-Dans cette partie, je vous décris en détail la solution technique mise en place dans ce projet.
-### <a name="technology"></a>Stack technique
+In this section, I describe in detail the technical solution implemented in this project.
+### <a name="technology"></a>Technical stack
 
-Concernant la stack technique, c'est-à-dire l'ensemble des frameworks, technologies et outils utilisés, voici ce que je propose.
+Regarding technical stack, meaning the set of frameworks, technologies and tools that are used, here's what I propose below.
 
-**Technologie:** 
+**Technology:**
 
-L'environnement technologique utilisé est **100% natif iOS**, c'est à dire avec les **<u>technologies officielles d'Apple</u>**:
-- **Xcode**: IDE officiel pour le développement d'applications iOS natives. D'abord avec **Xcode 14** puis **Xcode 15 (d'abord en version bêta)**.
-- **Swift**: Le langage de programmation officiel d'Apple, utilisé pour tous les composants de l'appli iOS. **Version utilisée: 5.9**.
+The technical environment is **100% native iOS**, meaning with **<u>Apple's official technologies</u>**:
+- **Xcode**: Official IDE for native iOS apps development. First with **Xcode 14** then **Xcode 15**.
+- **Swift**: Apple's official programming language, used for every iOS app components. **Used version: 5.9**.
 
-**Outils:**
+**Tools:**
 
-Voici les différents outils que j'utilise dans ce projet, qu'il soit int
-- **Swift Package Manager**: Outil officiel d'Apple, il s'agit d'un gestionnaire de packages directement intégré à **Swift** et **Xcode**, très pratique pour installer et à mettre à jour des frameworks tiers comme **Alamofire**, **Kingfisher**, **RxSwift**...
-- **GitHub**: Le gestionnaire de version et de code décentralisé par l'outil **Git** en ligne. C'est ici que tout l'historique du code et des fichiers y est présent du début jusqu'à maintenant.
-- **Postman**: Outil permettant de tester les **API REST (web service)** avec les différentes requêtes **HTTP** qu'une **API** peut proposer.
-- **App Store Connect**: Plateforme officielle d'Apple pour la gestion de la mise en production des applis **iOS** et autres plateformes d'Apple. C'est par cette plateforme qu'on peut publier sur **TestFlight** et l'**App Store** les applications. C'est par le biais d'**Xcode** que les applis sont archivées et mises en ligne sur **App Store Connect**.
-- **TestFlight**: Plateforme permettant de tester facilement des applis des plateformes Apple en version bêta permettant aux développeurs d'avoir de précieuses évaluations des utilisateurs testeurs avant la publication sur l'**App Store**.
+There is the different tools that I use in this project:
+- **Swift Package Manager**: Apple's official tool, a package manager directly integrated with **Swift** and **Xcode**, very useful to install and update 3rd party frameworks like **Alamofire**, **Kingfisher**, **RxSwift**...
+- **GitHub**: An online code hosting platform for version control and collaboration with **Git**. It's here where all of the code and file history from the beginning to now.
+- **Postman**: Tool to test the **REST APIs (web services)** with the different **HTTP** request than an **API** can propose.
+- **App Store Connect**: Apple's official plateform for the management of the release of **iOS** and other Apple platform apps. This platform allows to publish apps on **TestFlight** and the **App Store**. It's through **Xcode** that the apps are archived and uploaded on **App Store Connect**.
+- **TestFlight**: Plateform to test easily Apple platform beta version apps providing developers with valuable feedback from testers before publication on the **App Store**.
 
 **Frameworks:**
-- **UIKit**: Le framework **UI** historique d'Apple pour créer des interfaces d'applications **iOS** natives. Ce framework, permet de manière impérative de construire des vues (notamment des vues complexes avec des interactions avancées), par le biais d'instructions étape par étape pour définir une tâche particulière. **UIKit** fonctionne par le biais de contraintes pour positionner les vues (**Auto Layout**). Parmi les 3 possibilités de faire des vues (programmatique, XIB ou Storyboard), j'ai choisi de le faire de manière programmatique, donc par code.
-- **SwiftUI**: Le framework **UI** nouvelle génération d'Apple lancé en 2019, qui permet de manière déclarative de construire des vues et de les prévisualiser en direct, par le biais d'objets où on décrit directement les propriétes (couleur, positionnement, taille, forme, ...). Ici, je l'utilise pour la partie prévisualisation en direct de mes vues réalisées en **UIKit** (notamment les `ViewController`).
-- **Swift Concurrency**: Intégré au langage **Swift** depuis la version **5.5**, framework permettant les gestion des tâches asynchrones et du multithreading avec une syntaxe plus légère et plus facile à lire (`async`, `await`, `actor`, `Task`, `@MainActor`)
-- **MapKit**: Framework **UI** d'Apple permettant d'utiliser la carte interactive d'iOS de façon personnalisée (vues, interactions,...).
-- **Core Location**: Framework d'Apple pour l'utilisation des services de localisation GPS.
-- **Combine**: Framework d'Apple pour la programmation réactive (l'équivalent de **RxSwift**), c'est à dire avec des flux asynchrones de données. Le but étant à une entité de s'abonner à un flux émetteur de données et de réagir à tout événement pour exécuter des actions. Ici utilisé pour le `data binding` de l'architecture **MVVM**.
-- **XCTest**: Framework d'Apple pour les tests unitaires et les tests UI.
-- **SnapKit**: Framework tiers pour gérer plus facilement les contraintes (**Auto Layout**) de vues. Note: avec **SnapKit**, les vues avec **UIKit** sont exclusivement réalisés par code.
-- **Kingfisher**: Framework tiers pour télécharger depuis Internet et mettre en cache des images de manière asynchrone.
-- **Alamofire**: Framework tiers pour utiliser de manière plus élégante les requêtes réseau.
-- **AsyncLocationKit**: Framework pour exploiter `CoreLocation` avec la logique de **Swift Concurrency** (`async/await`) au lieu des `delegate` ou des **completion handlers** (closure: bloc de code qui est utilisé pour gérer l'état de complétion d'une tâche).
+- **UIKit**: Apple's historical **UI** framework to create native **iOS** application interfaces. This framework allows to build views in an imperative way (especially complex views with advanced animations), through step by step instruction to define a specific task. **UIKit** works through constaints (**Auto Layout**) to position views on screen. There are 3 ways to create views (programmatically, XIB or Storyboard), I choose to do it programmatically.
+- **SwiftUI**: Apple's new generation **UI** framework released in 2019, which allows by a declarative way to build and live preview the views, through objects where we describe directly the properties (couleur, positionnement, taille, forme, ...). Here, I use it for live preview part for my views that I have realized with **UIKit** (especially the `ViewController`).
+- **Swift Concurrency**: Integrated in **Swift** language since version **5.5**, framework that allows asynchronous tasks management and multithreading with a lighter and easier to read syntax (`async`, `await`, `actor`, `Task`, `@MainActor`)
+- **MapKit**: Apple's **UI** allowing to use the iOS interactive map in a custom way (view, interactions,...).
+- **Core Location**: Apple's framework for GPS location services.
+- **Combine**: Apple's framework for reactive programming (equivalent of **RxSwift**), meaning with asynchronous data flows. The goal is to allow an entity to subscribe to a data stream and react at every event to execute actions. Used here for `data binding` of **MVVM** architecture.
+- **XCTest**: Apple's framework for unit and UI tests.
+- **SnapKit**: 3rd party framework tiers to for easier management of view constraints (**Auto Layout**). Note: with **SnapKit**, **UIKit** views are only made by code.
+- **Kingfisher**: 3rd party framework to download from Internet and cache images in an asynchronous way.
+- **Alamofire**: 3rd party framework to use in more elegant way the network requests.
+- **AsyncLocationKit**: 3rd party framework to use `CoreLocation` with **Swift Concurrency** (`async/await`) logig instead of `delegate` or **completion handlers**.
 
-Mon application supporte également le **multi-langues**, actuellement en français et en anglais, et j'utilise la nouveauté d'Xcode 15 qu'est le `String catalog` (format `.xcstrings`), qui est bien plus facile à utiliser et à configurer que l'ancienne façon.
+My application supports also **localization**, currently in french and english, and I use the new Xcode 15 feature which is **String catalog** (`.xcstrings` format), which is easier to set and use than the older way.
 
 ### <a name="architecture"></a>Architecture
 
@@ -119,7 +119,7 @@ Pour cette nouvelle version de SuperNews, l'architecture a été retravaillé en
 
 Je vais décrire ci-dessous l'architecture (**Clean Architecture avec MVVM-C**) et les patterns utilisés dans ce projet.
 
-### La Clean Architecture
+### The Clean Architecture
 
 La **Clean Architecture**, par Robert C. MARTIN (alias Uncle Bob), est un principe d'architecture permettant d'organiser et de séparer en couches les responsabilités. Ce principe est indépendant de toute technolgie, plateforme et aussi de toute architecture, en effet, on peut utiliser des architectures comme **MVVM**, **MVP**, **VIP**, **VIPER**,... et les imbriquer dans une **Clean Architecture** en appliquant le principes des couches.
 
@@ -146,7 +146,7 @@ La **Clean Architecture** va donc faciliter la maintenance et la testabilité du
 
 Si j'ai correctement appliqué les principes de la **Clean Architecture**, la migration de mes composants peut en théorie se faire plus facilement, comme par exemple si je voudrais passer de **UIKit** vers **SwiftUI** (à condition que les vues soient adaptées aux composants d'architecture, étant donné que les vues **SwiftUI** sont des vues de type valeur et non de type référence avec les vues **UIKit**).
 
-### L'architecture MVVM (la couche présentation de la Clean Architecture)
+### MVVM architecture (Clean Architecture's presentation layer)
 
 L'architecture **MVVM** (**Model View ViewModel**) est un design pattern qui permet de séparer la logique métier et les interactions de l'interface utilisateur (UI). Cette architecture se compose en 3 éléments:
 - Le **modèle (Model)** représente les différents modèles de données de l'application.
@@ -160,7 +160,7 @@ Le `data binding` est un lien entre la vue et la vue modèle, où la vue par le 
 - Callbacks (closures)
 - Programmation réactive fonctionnelle (**RxSwift**, **Combine**), la solution que j'ai retenue ici dans ce projet, avec **Combine**.
 
-![Diagramme MVVM](MVVMdiagramFrench.png)<br>
+![MVVMDiagram](MVVMdiagramEnglish.png)<br>
 
 - Principaux avantages:
     + Architecture adaptée pour séparer la vue de la logique métier par le biais de ViewModel
@@ -175,7 +175,7 @@ Le `data binding` est un lien entre la vue et la vue modèle, où la vue par le 
     + Inadaptée pour des projets de très grande taille (surtout si la logique métier est massive), il sera préférable de passer à l'architecture **VIPER** ou à la Clean Architecture (**VIP (Clean Swift)**, **MVVM**, ...). **MVVM** est donc intégrable dans une **Clean Architecture**, ce qui est le cas ici dans ce projet.
     + Maîtrise compliquée pour les débutants avec **UIKit**, mais plus simple avec **SwiftUI** (étant l'architecture "par défaut").
 
-### La variante MVVM-C avec le Coordinator
+### The MVVM-C variant with Coordinator
 
 Étant donné qu'avoir un code bien découplé et qui respecte au mieux le premier principe du **SOLID** étant le principe de responsabilité unique, l'architecture **MVVM** doit être modifiée étant donné qu'elle ne respecte pas ce principe. Pour cela, en plus d'isoler la logique métier dans la couche domaine, la navigation sera elle isolée dans une entité dédiée qu'est le `Coordinator`. **MVVM** + `Coordinator` = **MVVM-C**.
 
@@ -200,7 +200,7 @@ Dans ce projet, on s'assure déjà en premier lieu que chaque `ViewController` e
 
 Pour chaque interaction d'une vue à une autre, c'est le `ViewModel` associé au `ViewController` qui aura une référence faible (`weak`) vers le `Coordinator` par le biais d'une abstraction sous forme de `delegate`, la référence forte étant indirectement du `Coordinator` vers le `ViewController` (qui lui-même a une référence vers le `ViewModel`).
 
-### <a name="patterns">Designs patterns utilisés
+### <a name="patterns">Used designs patterns
 
 Pour mettre en place la **Clean Architecture** et les différents principes de **Clean Code** et du **SOLID**, voici donc les différents design patterns utilisés:
 - **Délégation (`delegate`)**: Le pattern qui permet à une classe de déléguer certaines de ses responsabilités à une autre classe. Elle facilite donc la communication entre classes et délivre des messages d'un objet à un autre lorsqu'un événement spécifique se déclenche. Utilisée avec le `Coordinator` (pour communiquer avec le `ViewModel`), les vues **UIKit** comme `TableView`, `CollectionView`, `MKMapView`, `SearchBar`, ...
@@ -260,22 +260,22 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
 - **Use case:** Le pattern qui gère la logique métier (qui va ordonner les actions à exécuter comme récupérer des données), tout en étant indépendant de tout framework. L'intermédiaire ici entre le `ViewModel` et le `Repository`. Les entités utilisés sont des **DTO**, dans la couche domaine de la **Clean Architecture** (**Use case + Entités**).
 - **Repository:** Le pattern faisant office d'abstraction des couches externes de données (réseau, GPS, Bluetooth, base de données, fichiers,...). Il s'agit donc d'un point d'entrée et de sortie de données faisant ainsi l'intermédiaire entre la couche domaine et la couche de données. C'est le `Repository` qui connaît le service qui est utilisé pour récupérer et envoyer des données, mais également les entités liées à la couche de données. Il convertit également les données récupérées en **DTO** et inversement lors d'une requête.
 
-### <a name="recap"></a>Récapitulatif d'architecture
+### <a name="recap"></a>Architecture recap
 
 Au niveau de l'architecture, je vous décris par le biais de diagrammes comment s'est construite l'architecture de mon appli iOS.
 
 **La logique de navigation par le biais des `Coordinator` ci-dessous:**
 
-![Diagramme des coordinators](SuperNewsCoordinatorDiagramFR.png)
+![Coordinators diagram](SuperNewsCoordinatorDiagram.png)
 
 Par le biais de cette logique, voici donc comment se construit un module constituant les différentes couches de la **Clean Architecture** ci-dessous:
 
-![Diagramme d'architecture globale](GlobalArchitectureDiagramFrench.png)
+![Global architecture diagram](GlobalArchitectureDiagramEnglish.png)
 
 Voici donc comment se consitue un module, initialement créé par un `Builder`, où les injections de dépendances s'effectuent entre couches et renvoyant le `ViewController` instancié par le `Coordinator`:
 
-![Diagramme d'architecture du module](ArchitectureModuleDiagramFrench.png)
-## <a name="important"></a>IMPORTANT: À LIRE AVANT D'ESSAYER L'APPLI iOS
+![Architecture module diagram](ArchitectureModuleDiagramEnglish.png)
+## <a name="important"></a>IMPORTANT: BEFORE TRYING THE iOS APP
 
 Si vous souhaitez faire tester l'application directement via **TestFlight**, [cliquez ici depuis votre iPhone/iPad](https://testflight.apple.com/join/SKj6fn5k).
 
@@ -286,7 +286,7 @@ L'appli exploite l'API REST de **NewsAPI**, une clé d'API est donc requise. Pou
 
 **Pour des raisons de sécurité, le fichier ApiKey.plist n'est pas présent dans le repo GitHub**.<br>
 
-Une fois la clé récupérée, créez un fichier **ApiKey.plist**, en le plaçant dans le même emplacement du dossier DataLayer du projet **Xcode**, où se situent les fichiers storyboard. Créez alors une propriété de type **String** avec `apiKey` en tant que clé, et la clé d'API que vous avez récupérée en tant que valeur. Prenez exemple comme ci-dessous:
+Une fois la clé récupérée, créez un fichier **ApiKey.plist**, en le plaçant dans le même emplacement du dossier `DataLayer` du projet **Xcode**. Créez alors une propriété de type **String** avec `apiKey` en tant que clé, et la clé d'API que vous avez récupérée en tant que valeur. Prenez exemple comme ci-dessous:
 ![NewsAPI.plist](NewsApiKeyPlist.png)<br>
 
 Ou bien dans dans ce même fichier en y ajoutant le code sous format XML et en y mettant sa clé d'API entre les balises `</string>`:
@@ -296,7 +296,7 @@ Ou bien dans dans ce même fichier en y ajoutant le code sous format XML et en y
 <plist version="1.0">
 <dict>
 	<key>apiKey</key>
-	<string>VOTRE CLÉ D'API</string>
+	<string>YOUR API KEY</string>
 </dict>
 </plist>
 ```
@@ -331,7 +331,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
 }
 ```
 
-## <a name="features"></a>Fonctionnalités et captures d'écran
+## <a name="features"></a>Features and screenshots
 
 Voici les différentes fonctionnalités que je propose dans l'application **SuperNews**:
 - Actualités
@@ -341,14 +341,14 @@ Voici les différentes fonctionnalités que je propose dans l'application **Supe
 - Vue détaillée de l'article
 - Paramètres utilisateur
 
-### <a name="topHeadlines"></a>Actualités
+### <a name="topHeadlines"></a>Top headlines
 
 En tapant sur **Actualités** dans la barre de navigation du bas, l'interface des news apparaît comme ceci avec les news locales téléchargées et affichées avec leurs images (par défaut ceux de la France, le pays change en fonction du paramètre choisi).
 
 En tapant sur une actualité de la liste, une vue montrant les détails de l'article apparaît, [plus de détails ici](#articleDetail).
 
-En ayant bien exploité en profondeur l'API REST NewsAPI, voici une nouveauté: une vue défilante horizontale (`CollectionView`) va ici représenter les différentes catégories d'actualités:
-- Les actualités locales en fonction du pays choisi dans les paramètres(France par défaut).
+En ayant bien exploité en profondeur l'API REST **NewsAPI**, voici une nouveauté: une vue défilante horizontale (`CollectionView`) va ici représenter les différentes catégories d'actualités:
+- Les actualités locales en fonction du pays choisi dans les paramètres (France par défaut).
 - Les actualités d'un média en particulier (votre favori). Vous pouvez le définir en tapant sur le [bouton en haut à gauche de l'écran pour choisir votre média favori](#sourceSelection).
 - Business
 - Divertissement
@@ -362,7 +362,7 @@ Ces 7 catégories d'actualités dépendent du pays choisi dans les paramètres, 
 
 ![TopHeadlinesGIF](TopHeadlinesFrench.gif)
 
-### <a name="sourceSelection"></a>Sélection de source pour les actualités
+### <a name="sourceSelection"></a>Source selection for news
 
 Dans cet écran, vous avez la possibilité de choisir une source de news en favori parmi celles disponibles. Les sources sont téléchargées la première fois puis affichées dans une liste.
 
@@ -378,7 +378,7 @@ Tapez sur une source, et vous serez redirigé vers l'écran des actualités. La 
 
 ![SourceSelectionGIF](SourceSelectionFrench.gif)
 
-### <a name="newsSearch"></a>Recherche de news
+### <a name="newsSearch"></a>News search
 
 En tapant sur **Recherche** dans la barre de navigation du bas, l'interface des news apparaît comme ceci avec les news locales téléchargées et affichées avec leurs images (par défaut ceux de la France, le pays change en fonction du paramètre choisi).
 
@@ -388,7 +388,7 @@ Par défaut la langue des news est en français. Lorsque vous avez séléctionn�
 
 ![SearchGIF](SearchNewsFrench.gif)
 
-### <a name="map"></a>Carte des news
+### <a name="map"></a>News map
 
 Avec les possibilités que donne **NewsAPI**, il est donc possible de récupérer les news en tendance de 54 pays différents dans le monde entier. Je propose donc ici une option de carte interactive où des marqueurs personnalisés apparaîssent sur la carte représentant les pays en question.
 
@@ -419,13 +419,13 @@ En tapant sur le marqueur du pays représenté de la carte, un écran affichant 
 
 ![MapCountrySearchAndNews](MapCountrySearchAndNewsFrench.gif)
 
-### <a name="articleDetail"></a>Vue détaillée de l'article
+### <a name="articleDetail"></a>Detailed article view
 
 Lorsque vous avez séléctionné une actualité, une vue défilante (`ScrollView`) apparaît pour y voir les détails de l'article. Le bouton en bas de la vue vous permet de consulter le site de la source de l'article afin de lire l'article dans son intégralité. Le bouton en haut à gauche de la vue vous permet de partager le lien vers le site de l'article en question (par message, vos réseaux sociaux, AirDrop, ...).
 
 ![ArticleDetailGIF](ArticleDetailFrench.gif)
 
-### <a name="settings"></a>Paramètres utilisateur
+### <a name="settings"></a>User settings
 
 Pour les paramètres, vous pouvez définir votre pays favori des news en sélectionnant **Pays des news** puis le pays de votre choix parmi les 54 disponibles (par exemple les États-Unis). Une fois sélectionné, allez dans **Actualités** et vous verrez les news locales des États-Unis.<br>
 
@@ -439,7 +439,7 @@ La dernière option permet de réinitialiser les paramètres par défaut pour le
 
 ![NewsResetSettings](NewsResetSettingsFrench.gif)
 
-## <a name="testing"></a>Tests unitaires et UI
+## <a name="testing"></a>Unit and UI tests
 
 Dans tout développement d'applications iOS, comme sur d'autres plateformes, les tests unitaires et UI (User Interface, traduisez par interface utilisateur) sont essentiels pour vérifier le bon fonctionnement de l'application avant les alpha et bêta tests par des utilisateurs et sa mise en production sur l'App Store.
 
@@ -447,17 +447,17 @@ En iOS natif, on utilise le framework **XCTest**. Avec l'architecture que je pro
 
 Certaines parties du code de l'application restent tout de même plus difficiles à tester comme les `ViewController` par exemple.
 
-### Tests unitaires (White box)
+### Unit tests (White box)
 
 Les tests unitaires sont les tests en boîte blanche **(White box)** où on a une visibilité sur le code, afin de tester les fonctionnalités de l'application. Les tests unitaires sont des tests courts et rapides à exécuter. C'est aussi là qu'on peut tester les différentes couches de l'architecture du projet en injectant des mocks par exemple. Je propose en tout **94 tests unitaires indépendants**.
 
 Je ne connais pas encore toutes les techniques pour faire de meilleurs tests unitaires, mais une fois cela assimilé, la couverture du code par les tests augmentera de manière significative.
 
-Ces tests unitaires couvrent actuellement **39,9%** du code de l'application.
+These UI tests currently cover **39,9%** of the application code.
 
 ![Couverture tests unitaires](UnitTestsCodeCoverage.png)
 
-### Tests UI automatisés (Black box)
+### UI automated tests (Black box)
 
 Les tests UI sont les tests en boîte noire **(Black box)** où on n'a pas de visibilité sur le code, mais une visibilité sur l'interface visuelle. Pour cela, **XCTest** utilise `XCUIApplication` pour permettre de simuler les interactions d'une application de façon automatique, et de vérifier l'existence des élements attendus dans l'interface. L'architecture de l'application importe peu dans les tests UI, l'essentiel étant de tester comme un utilisateur lambda, en ciblant donc les composants **UI** de l'application. Par rapport au tests unitaires, la couverture du code est donc plus élevée, mais en contrepartie de tests qui peuvent être longs à exécuter.
 
@@ -465,12 +465,12 @@ C'est également cette partie-là que dans un projet en entreprise qu'une équip
 
 Côté développeur iOS avec **Xcode**, les tests UI s'effectuent de la même manière que des tests unitaires.
 
-Ces tests UI couvrent actuellement **74%** du code de l'application.
+These UI tests currently cover **74%** of the application code.
 
-![Couverture tests UI](UITestsCodeCoverage.png)
+![UITestsCodeCoverage](UITestsCodeCoverage.png)
 
-### Au niveau global pour les tests
+### Overall for tests
 
-En exécutant les 114 tests unitaires et UI, la couverture actuelle du code est de **79%**.
+By running the 114 unit and UI tests, current code coverage is **79%**.
 
-![Couverture tests unitaires et UI](UnitAndUITestsCodeCoverage.png)
+![UnitAndUITestsCodeCoverage](UnitAndUITestsCodeCoverage.png)
