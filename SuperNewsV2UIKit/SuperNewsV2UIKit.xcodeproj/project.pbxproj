@@ -1547,7 +1547,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = NSLocationWhenInUseUsageDescription;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = NSLocationAlwaysAndWhenInUseUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1579,7 +1579,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = NSLocationWhenInUseUsageDescription;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = NSLocationAlwaysAndWhenInUseUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

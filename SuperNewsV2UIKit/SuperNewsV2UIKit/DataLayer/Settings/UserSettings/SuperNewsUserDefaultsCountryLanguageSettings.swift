@@ -64,10 +64,13 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
         do {
             // Create JSON Encoder
             let encoder = JSONEncoder()
-
+            let locale = Locale.current
+            let languageCode = locale.languageCode == "fr" ? "fr" : "en"
+            let countryCode = locale.languageCode == "fr" ? "fr" : "us"
+            
             // Encode saved source
-            let languageData = try encoder.encode(CountryLanguageSetting(name: "Français", code: "fr", flagCode: "fr"))
-            let countryData = try encoder.encode(CountryLanguageSetting(name: "France", code: "fr", flagCode: "fr"))
+            let languageData = try encoder.encode(CountryLanguageSetting(name: languageCode.languageName() ?? languageCode, code: languageCode, flagCode: languageCode))
+            let countryData = try encoder.encode(CountryLanguageSetting(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode))
 
             // Write/Set Data
             UserDefaults.standard.set(languageData, forKey: "language")

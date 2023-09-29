@@ -402,7 +402,7 @@ Si vous êtes localisé dans un pays qui ne fait pas parti des 54 pays, la carte
 
 ![MapCenteringSuggestionCountryUnavailable](MapCenteringSuggestionCountryUnavailable.gif)
 
-En sélectionnant **No**, la carte sera centrée sur votre position.
+En sélectionnant **Non**, la carte sera centrée sur votre position.
 
 ![MapCenteringSuggestionNo](MapCenteringSuggestionNoFrench.gif)
 

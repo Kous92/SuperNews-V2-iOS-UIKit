@@ -22,8 +22,11 @@ final class TopHeadlinesViewModel {
     
     // Settings
     private var savedMediaSource = SavedSourceDTO(id: "le-monde", name: "Le Monde")
-    private var savedLocalCountry = CountryLanguageSettingDTO(name: "fr".countryName() ?? "France", code: "fr", flagCode: "fr")
-    private var previousSavedCountryCode = "fr"
+    private var savedLocalCountry = {
+        let countryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
+        return CountryLanguageSettingDTO(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode)
+    }()
+    private var previousSavedCountryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
     private var userSettingloadingCount = 0
     
     // MARK: - Bindings

@@ -35,10 +35,14 @@ final class SettingsSelectionViewModel {
         self.settingSection = settingSection
         self.useCase = useCase
         
+        let locale = Locale.current
+        let languageCode = locale.languageCode == "fr" ? "fr" : "en"
+        let countryCode = locale.languageCode == "fr" ? "fr" : "us"
+        
         if settingSection.description == "country" {
-            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "France", code: "fr", flagCode: "fr")
+            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode)
         } else {
-            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: "French", code: "fr", flagCode: "fr")
+            savedCountryLanguageSetting = CountryLanguageSettingDTO(name: languageCode.languageName() ?? languageCode, code: languageCode, flagCode: languageCode)
         }
     }
     

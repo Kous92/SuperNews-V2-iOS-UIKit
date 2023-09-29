@@ -21,7 +21,7 @@
 
 For this personal project which is **SuperNews**, everything starts in **2020**. 
 
-I was doing my end-of-study internship with Capgemini, in Paris, more precisely in Issy-les-Moulineaux. My goal there was to be able to practice into the native iOS development, ua job and a technology I've enjoyed immensely, being also a long-time Apple ecosystem enthusiast.
+I was doing my end-of-study internship with Capgemini, in Paris, more precisely in Issy-les-Moulineaux. My goal there was to be able to practice into the native iOS development, a job and a technology I've enjoyed immensely, being also a long-time Apple ecosystem enthusiast.
 
 Internally, within the Paris DCX (Digital Customer eXperience) Mobile Factory Business Unit, during with iOS upskilling, one of the internal iOS leads suggested a technical exercise (as a technical test). And the technical test was the following:
 - Develop an app that uses the **NewsAPI** REST API to display the articles in a `TableView`. On tap on an article, the article is displayed (`push` transition) in a new screen. This new screen displays the article details.
@@ -57,14 +57,14 @@ I published this new version on **GitHub** in december 2021, [that you can consu
 The technical stack was the following:
 - **Xcode 13**, **Swift 5.5**, **UIKit** with **Storyboard**, **MVVM** architecture, **Combine**, **MapKit**, **CoreLocation**, **Alamofire** and **Kingfisher** as 3rd party installed framework with  **CocoaPods**, **XCTest** for **Unit and UI tests**.
 
-This project version was for me, **"my loyal ally"** which I presented at every job interview to demonstrate my skills because it's a challenge as a junior to get a job as an iOS developer, very difficult due to actual economic context en raison du contexte économique and customers requirements (IT consulting companies, recruitment offices).
+This project version was for me, **"my loyal ally"** which I presented at every job interview to demonstrate my skills because it's a challenge as a junior to get a job as an iOS developer, very difficult due to actual economic context and customers requirements (IT consulting companies, recruitment offices).
 
 **2022**, I manage to work at **Netgem** and **Withings**, for a 3 month period each. Then, at the end of **2022** and beginning of **2023**, I was committing myself to **"neo IT consulting company"** for recruitement on profile, so with a beggining as soon as a customer mission is won. That's when I became more aware than ever of advanced architectures (**MVP**, **VIPER**, **Clean Swift**, ...), of Software Craftsmanship principles (**KISS**, **DRY**, **YAGNI**, **SOLID**,...), to begin with **SwiftUI**, ...
 
 The market situation was becoming very complicated (my commitment to the company ends here), and with all that I learned, I set myself a challenge, in **april 2023** to remake this app from scratch, but much more improvede: more advanced architecture, application of Software Craftsmanship principles (**KISS**, **DRY**, **YAGNI**, **SOLID**, **design patterns**, ...), but also with new features. Despite low morale (once again) and a break, the goals of this new version was the following:
-- De pouvoir pleinement bénéficier de conseils de développeurs expérimentés/experts lors de code reviews pour améliorer mon code, rendre mon app plus performante, faire de meilleurs tests unitaires, ...
-- To be in real condition when putting the app in production, first on **TestFlight** and maybe on the **App Store** if there is not too much constraints from the API.
-- D'être confronté à davantage de situations techniques que je pourrais rencontrer en milieu professionnel (migration de frameworks, optimisations UI/UX, multithreading, mise en production,...).
+- To be able to fully benefit advices from experienced/expert developers during code reviews to improve my code, making my app more performant, making better unit tests, ...
+- To be in real condition when putting the app in production, first on **TestFlight** and maybe on the **App Store** if there is not too much constraints from the API, or anything else.
+- To be confronted with more technical situations that I might encounter in a professional environment (framework migration, UI/UX optimizations, multithreading, production startup, ...).
 - To do this same version of this iOS app in **SwiftUI**.
 - To feel more and more confident, to be ready to look for a company again and find again a job as an iOS developer, by being better armed (from technical tests until validation of the trial period).
 
@@ -109,36 +109,36 @@ There is the different tools that I use in this project:
 - **SnapKit**: 3rd party framework tiers to for easier management of view constraints (**Auto Layout**). Note: with **SnapKit**, **UIKit** views are only made by code.
 - **Kingfisher**: 3rd party framework to download from Internet and cache images in an asynchronous way.
 - **Alamofire**: 3rd party framework to use in more elegant way the network requests.
-- **AsyncLocationKit**: 3rd party framework to use `CoreLocation` with **Swift Concurrency** (`async/await`) logig instead of `delegate` or **completion handlers**.
+- **AsyncLocationKit**: 3rd party framework to use `CoreLocation` with **Swift Concurrency** (`async/await`) logic instead of `delegate` or **completion handlers**.
 
 My application supports also **localization**, currently in french and english, and I use the new Xcode 15 feature which is **String catalog** (`.xcstrings` format), which is easier to set and use than the older way.
 
 ### <a name="architecture"></a>Architecture
 
-Pour cette nouvelle version de SuperNews, l'architecture a été retravaillé en repartant sur la version **MVVM**, mais cette fois-ci en y mettant en place des principes du **Software Craftsmanship** (design patterns, principes de **Clean Code**, principes **SOLID**, ...). Cette base de **MVVM** est désormais imbriquée dans une **Clean Architecture**. Aussi pour la navigation, le pattern du `Coordinator` est utilisé, ce qui donne ainsi la variante **MVVM-C**.
+For this new version of **SuperNews**, the architecture has been reworked, starting with the **MVVM** version, but this time with a new set of **Software Craftsmanship** principles (design patterns, **Clean Code**, **SOLID**, ...). This base of **MVVM** is now nested in a **Clean Architecture**. Also for the navigation part, `Coordinator` is used, giving the **MVVM-C** variant.
 
-Je vais décrire ci-dessous l'architecture (**Clean Architecture avec MVVM-C**) et les patterns utilisés dans ce projet.
+I will describe below the architecture (**Clean Architecture with MVVM-C**) and the patterns that are used into this project.
 
 ### The Clean Architecture
 
-La **Clean Architecture**, par Robert C. MARTIN (alias Uncle Bob), est un principe d'architecture permettant d'organiser et de séparer en couches les responsabilités. Ce principe est indépendant de toute technolgie, plateforme et aussi de toute architecture, en effet, on peut utiliser des architectures comme **MVVM**, **MVP**, **VIP**, **VIPER**,... et les imbriquer dans une **Clean Architecture** en appliquant le principes des couches.
+The **Clean Architecture**, by Robert C. MARTIN (aka Uncle Bob), is an architecture principle allowing to organize and separate responsibilities in layers. This principle is independent of any technology, platform and also any architecture, indeed, we can use architectures like **MVVM**, **MVP**, **VIP**, **VIPER**,... and nest them in a **Clean Architecture** by applying the layer principles.
 
-4 couches sont représentées dans le schéma ci-dessous par des cercles concentriques allant de l'extérieur vers l'intérieur, chacune ayant sa responsabilité:
-- **Externe (UI ou base de données)**: La partie visuelle de l'application ou une base de données, en fonction de la plateforme et de l'application.
-- **Présentation**: La partie qui reçoit les intéractions de l'utilisateur pour exécuter un use case précis (avec ou non des données en entrée) et aussi qui permet de mettre en place des données en sortie afin de notifier la couche externe de se mettre à jour avec ces nouvelles données.
-- **Use case (cas d'utilisation)**: logique métier spécifique à un cas d'utilisation (appel réseau API REST, récupération de données d'une base de données pour une appli visuelle, synchronisation avec un service, ...)
-- **Entités**: modèles de données définissant une logique bien précise. On appelle aussi cette couche, domaine.
+The 4 layers are represented in the diagram below by concentric circles running from outside to inside, each one having its responsibility:
+- **External (UI or database)**: Visual part of the application or database, depending of the platform and the application.
+- **Presentation**: The part which receives the user inputs to execute a specific use case (with or without input data) and also allowing to and also to set up output data in order to notify external layer to update itself with these new data.
+- **Use case**: Specific business logicto a use case (REST API network call, fetching date from a database for a UI app, synchronization with a service, ...)
+- **Entities**: Data models representing a specific logic. We call also this layer, domain.
 
-Note: en fonction des plateformes et des implémentations, les couches **use case et entités** peuvent ne faire plus qu'une pour la **couche domaine**.
+Note: depending on platforms and implementations, **use case and entities** may become one for the **domain layer**.
 
-![Diagramme Clean Architecture](CleanArchitectureDiagram.jpg)<br>
+![Clean Architecture Diagram](CleanArchitectureDiagram.jpg)<br>
 
-Grâce à cette organisation en couches, la **Clean Architecture** assure l'indépendance, garantissant un code flexible étant:
-- **Indépendant des frameworks**: les frameworks et librairies tierces doivent être pensés comme des outils, et non des cadres contraignants.
-- **Testable indépendamment**: les tests doivent pouvoir être réalisés sans dépendances entre les parties, et sans dépendances à des éléments externes (API, base de données, …).
-- **Indépendante de l’interface utilisateur**: l’interface utilisateur doit pouvoir évoluer facilement.
-- **Indépendante de la base de données.**
-- **Indépendante de tout service ou système externe**: en résumé, le code doit être indépendant des tierces parties dont il n’assure pas le contrôle.
+Thanks of this layer organization, the **Clean Architecture** ensures independence, guaranteeing a flexible code being:
+- **Independent of frameworks**: frameworks and 3rd party librairies must be thought as tools, not restrictive frameworks.
+- **Independently testable**: tests must be able to be performed without dependencies between parts, and without any dependency to external elements (API, databases, …).
+- **Independent of UI**: the UI must be easy to modify.
+- **Independent of database**
+- **Independent of any service or external system**: In short, the code must be independent of third parties over whom it has no control.
 
 Concernant la relation entre couches, seule une couche extérieure (supérieure) peut dépendre d'une couche intérieure (inférieure), et non l'inverse. De plus chaque couche étant indépendante, la dépendance se fait par le biais d'abstraction, et non de concret. Le dernier principe du **SOLID** s'applique alors, étant l'**inversion de dépendances (D: Depency Inversion)**. Cette architecture permet de s’assurer que les changements apportés sur les couches supérieures n’aient aucun impact sur les couches inférieures, et donc de maintenir une application stable aussi bien au cours de mises à jour de ressources externes, que de tests ou d’évolutions (changement de frameworks, de base de données, etc.).
 
@@ -216,7 +216,7 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         self.testMode = testMode
         let topHeadlinesViewController = TopHeadlinesViewController()
         
-        // Injections de dépendances
+        // Dependency injections
         let dataRepository = getRepository(testMode: testMode)
         let settingsRepository = getSettingsRepository(testMode: testMode)
         let userSettingsRepository = getUserSettingsRepository(testMode: testMode)
@@ -224,7 +224,7 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         let topHeadlinesViewModel = TopHeadlinesViewModel(useCase: useCase)
         topHeadlinesViewModel.coordinator = coordinator as? TopHeadlinesViewControllerDelegate
         
-        // Injection du ViewModel
+        // ViewModel injection
         topHeadlinesViewController.viewModel = topHeadlinesViewModel
         
         return topHeadlinesViewController
@@ -255,7 +255,7 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
     }
 }
 ```
-- **Coordinator**: Le pattern qui gère la navigation entre les écrans.
+- **Coordinator**: The pattern which managing the navigation between screens.
 - **DTO (Data Transfer Object)**: Le pattern qui permet de transférer des données de manière plus contrôlée de la couche des services (réseau, GPS, base de données,...) vers la couche présentation et vice-versa, ici par le biais du **Repository**. C'est un objet simple contenant les attributs, un accesseur (`getter`), un mutateur (`setter`) et un initialiseur provenant des entités liés au service utilisé. Inversement, une entité peut être créée par le biais d'un DTO (comme objet de requête par exemple).
 - **Use case:** Le pattern qui gère la logique métier (qui va ordonner les actions à exécuter comme récupérer des données), tout en étant indépendant de tout framework. L'intermédiaire ici entre le `ViewModel` et le `Repository`. Les entités utilisés sont des **DTO**, dans la couche domaine de la **Clean Architecture** (**Use case + Entités**).
 - **Repository:** Le pattern faisant office d'abstraction des couches externes de données (réseau, GPS, Bluetooth, base de données, fichiers,...). Il s'agit donc d'un point d'entrée et de sortie de données faisant ainsi l'intermédiaire entre la couche domaine et la couche de données. C'est le `Repository` qui connaît le service qui est utilisé pour récupérer et envoyer des données, mais également les entités liées à la couche de données. Il convertit également les données récupérées en **DTO** et inversement lors d'une requête.
@@ -449,21 +449,24 @@ Certaines parties du code de l'application restent tout de même plus difficiles
 
 ### Unit tests (White box)
 
-Les tests unitaires sont les tests en boîte blanche **(White box)** où on a une visibilité sur le code, afin de tester les fonctionnalités de l'application. Les tests unitaires sont des tests courts et rapides à exécuter. C'est aussi là qu'on peut tester les différentes couches de l'architecture du projet en injectant des mocks par exemple. Je propose en tout **94 tests unitaires indépendants**.
+Unit tests are **White box** tests where we have visibility on the code, in order to test app features. Unit tests are short and quick tests to run. 
+It's also where we can test the different architecture layers by injecting mocks for example. I propose here **94 independent unit tests**.
 
-Je ne connais pas encore toutes les techniques pour faire de meilleurs tests unitaires, mais une fois cela assimilé, la couverture du code par les tests augmentera de manière significative.
+I don't know all the techniques yet to do better unit tests pour faire de meilleurs tests unitaires, but once I've got the hang of it, code coverage by tests will increase significantly.
 
 These UI tests currently cover **39,9%** of the application code.
 
-![Couverture tests unitaires](UnitTestsCodeCoverage.png)
+![Unit tests coverage](UnitTestsCodeCoverage.png)
 
 ### UI automated tests (Black box)
 
-Les tests UI sont les tests en boîte noire **(Black box)** où on n'a pas de visibilité sur le code, mais une visibilité sur l'interface visuelle. Pour cela, **XCTest** utilise `XCUIApplication` pour permettre de simuler les interactions d'une application de façon automatique, et de vérifier l'existence des élements attendus dans l'interface. L'architecture de l'application importe peu dans les tests UI, l'essentiel étant de tester comme un utilisateur lambda, en ciblant donc les composants **UI** de l'application. Par rapport au tests unitaires, la couverture du code est donc plus élevée, mais en contrepartie de tests qui peuvent être longs à exécuter.
+The UI tests are the **black box** tests where we don't have any visibility on the code, but a visibility on the visual interface. For that, **XCTest** uses `XCUIApplication` to allow to simulate interaction of an application in an automatic way, and to check the expected elements exsitence in the interface. 
 
-C'est également cette partie-là que dans un projet en entreprise qu'une équipe de testeurs, qu'on appelle aussi **QA (Quality Assurance)** sont impliqués dans la mise en place des tests automatisés des applications avec des frameworks ou outils externes à **Xcode**.
+The app architecture does not matter in UI tests, the most important thing is to test like a lambda user, by targeting the app **UI** components. Compared to unit tests, code coverage is higher, but in return for tests that can take a long time to run.
 
-Côté développeur iOS avec **Xcode**, les tests UI s'effectuent de la même manière que des tests unitaires.
+This is also the part of a corporate project that a team of testers is responsible for, that we call also **QA (Quality Assurance)**, who are involved in setting up automated application tests with external frameworks or tools.
+
+From iOS developer side with **Xcode**, UI tests are performed in the same way as unit tests.
 
 These UI tests currently cover **74%** of the application code.
 
