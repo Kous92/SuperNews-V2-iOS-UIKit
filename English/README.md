@@ -140,74 +140,74 @@ Thanks of this layer organization, the **Clean Architecture** ensures independen
 - **Independent of database**
 - **Independent of any service or external system**: In short, the code must be independent of third parties over whom it has no control.
 
-Concernant la relation entre couches, seule une couche extérieure (supérieure) peut dépendre d'une couche intérieure (inférieure), et non l'inverse. De plus chaque couche étant indépendante, la dépendance se fait par le biais d'abstraction, et non de concret. Le dernier principe du **SOLID** s'applique alors, étant l'**inversion de dépendances (D: Depency Inversion)**. Cette architecture permet de s’assurer que les changements apportés sur les couches supérieures n’aient aucun impact sur les couches inférieures, et donc de maintenir une application stable aussi bien au cours de mises à jour de ressources externes, que de tests ou d’évolutions (changement de frameworks, de base de données, etc.).
 
-La **Clean Architecture** va donc faciliter la maintenance et la testabilité du code (adaptée pour la mise en place du **TDD: Test Driven Development**).
+Regarding the relationship between layers, only an external layer can depend of an internal layer, and not the other way around. In addition, each layer is independent, dependency is achieved through abstraction, and not from concrete. The last principle of **SOLID** then applies, **D: Depency Inversion**. This architecture allows to ensure that changes made on the external layers don't have any impact on the internal layers, and thus maintain a stable application during external resources updates, as well as during tests and upgrades (migration of frameworks, databases, ...).
 
-Si j'ai correctement appliqué les principes de la **Clean Architecture**, la migration de mes composants peut en théorie se faire plus facilement, comme par exemple si je voudrais passer de **UIKit** vers **SwiftUI** (à condition que les vues soient adaptées aux composants d'architecture, étant donné que les vues **SwiftUI** sont des vues de type valeur et non de type référence avec les vues **UIKit**).
+The **Clean Architecture** will facilitate code maintenance and testability (suitable for the implementation of **TDD: Test Driven Development**).
+
+If I've applied the principles of **Clean Architecture** correctly, the migration of my component can be done easier in theory, like as example if I want to switch from **UIKit** to **SwiftUI** (provided that the views are adapted to the architecture components, regarding that **SwiftUI** views are value type views and not reference type with **UIKit** views).
 
 ### MVVM architecture (Clean Architecture's presentation layer)
 
-L'architecture **MVVM** (**Model View ViewModel**) est un design pattern qui permet de séparer la logique métier et les interactions de l'interface utilisateur (UI). Cette architecture se compose en 3 éléments:
-- Le **modèle (Model)** représente les différents modèles de données de l'application.
-- La **vue (View)** représente l'UI (interface graphique) et les interactions utilisateurs (appui sur un bouton, saisie de texte, ...).
-- La **vue modèle (View Model)** est l'intermédiaire entre la vue et le modèle. Ses responsabilités sont de réagir aux actions de l'utilisateur, de gérer la logique métier (ici, récupérer les données du modèle), de formater les données récupérées et mettre à jour la vue en disposant d'attributs que la vue affichera par le biais du data binding (liaison de données).
+**MVVM** architecture (**Model View ViewModel**) is a design pattern which allow to separate business logic and inputs of the **UI**. This architecture is made up of 3 elements:
+- The **Model** represents the different data models of the application.
+- The **View** represents the **UI** and the user inputs (tap on a button, text input, ...).
+- The **View Model** is the intermediary between the view and the model. Its responsibilities are to react to the user's actions, to manage business logic (here, retrieve data from the model), and format retrieved data and update the view with attributes that the view will display through `data binding`.
 
-En **MVVM**, la vue ayant une référence avec la vue modèle, **<u>mais pas l'inverse</u>** (chose qui s'applique avec l'architecture **MVP**), la vue va donc s'abonner à des événements qu'émet la vue modèle.
+In **MVVM**, the view have a reference with the view model, **<u>but not the other way around</u>** (which applies to **MVP** architecture), the view will subscribe to events sent by the view model.
 
-Le `data binding` est un lien entre la vue et la vue modèle, où la vue par le biais des interactions avec l'utilisateur va envoyer un signal à la vue modèle afin d'effectuer une logique métier spécifique. Ce signal va donc permettre la mise à jour des données du modèle et ainsi permettre l'actualisation automatique de la vue. Le `data binding` en iOS peut se faire par:
-- Délégation (déconseillée, plus appropriée pour l'architecture **MVP**, **VIPER**, **Clean Swift (VIP)**)
+`Data binding` is a link between the view and the view model, where the view through user interactions will send a signal to the view model to run a specific business logic. This signal will allow the update of the data of the model data and thus allow automatic refresh of the view. `Data binding` in iOS can be done with:
+- Delegation (not recommended, more suitable for **MVP**, **VIPER**, **Clean Swift (VIP)** architectures)
 - Callbacks (closures)
-- Programmation réactive fonctionnelle (**RxSwift**, **Combine**), la solution que j'ai retenue ici dans ce projet, avec **Combine**.
+- Functional Reactive Programming (**RxSwift**, **Combine**), the solution I've chosen for this project, with **Combine**..
 
 ![MVVMDiagram](MVVMdiagramEnglish.png)<br>
 
-- Principaux avantages:
-    + Architecture adaptée pour séparer la vue de la logique métier par le biais de ViewModel
-    + `ViewController` allégés.
-    + Tests facilités de la logique métier (Couverture du code par les tests renforcée)
-    + Adaptée avec **SwiftUI**, **MVVM** est même l'architecture de base.
-    + Adaptée pour la programmation réactive (**RxSwift**, **Combine**)
-
-- Inconvénients:
-    + Les `ViewModel` deviennent massifs si la séparation des éléments ne sont pas maîtrisés, il est donc difficile de correctement découper ses structures, classes et méthodes afin de respecter le premier principe du **SOLID** étant le principe de responsabilité unique (**SRP: Single Responsibility Principle**). La variante **MVVM-C** qui utilise un `Coordinator` s'avère utile pour alléger les vues et gérer la navigation entre vues.
-    + Potentiellement complexe pour des projets de très petite taille.
-    + Inadaptée pour des projets de très grande taille (surtout si la logique métier est massive), il sera préférable de passer à l'architecture **VIPER** ou à la Clean Architecture (**VIP (Clean Swift)**, **MVVM**, ...). **MVVM** est donc intégrable dans une **Clean Architecture**, ce qui est le cas ici dans ce projet.
-    + Maîtrise compliquée pour les débutants avec **UIKit**, mais plus simple avec **SwiftUI** (étant l'architecture "par défaut").
+- Main pros:
+    + Suitable architecture to separate the view from business logic through a `ViewModel`.
+    + `ViewController` lightened.
+    + Business logic tests easier to do (Code coverage increased).
+    + Suitable with **SwiftUI**, **MVVM** is even the default architecture.
+    + Suitable with reactive programming (**RxSwift**, **Combine**).
+- Cons:
+    + `ViewModel` can be massive if the separation of the elements is not mastered, so it's hard to cut correctly structures, classes and methods in order to respect the 1st principle of **SOLID** being the **SRP: Single Responsibility Principle**. **MVVM-C** alternative with uses a `Coordinator` is useful to lighten the views and manage the navigation between views.
+    + May be complex for very small projects.
+    + Unsuitable for very large and complex projects, it will be better to switch to **VIPER** or **Clean Architecture (VIP, MVVM, Clean Swift, ...)**. **MVVM** can be integrated inside a **Clean Architecture**, which is the case in this project.
+    + Complex mastery for beginners (especially with **UIKit**), mais plus simple avec **SwiftUI** (étant l'architecture "par défaut").
 
 ### The MVVM-C variant with Coordinator
 
-Étant donné qu'avoir un code bien découplé et qui respecte au mieux le premier principe du **SOLID** étant le principe de responsabilité unique, l'architecture **MVVM** doit être modifiée étant donné qu'elle ne respecte pas ce principe. Pour cela, en plus d'isoler la logique métier dans la couche domaine, la navigation sera elle isolée dans une entité dédiée qu'est le `Coordinator`. **MVVM** + `Coordinator` = **MVVM-C**.
+Given that having well-decoupled code that respects the first principle of **SOLID (Single Responsibility Principle)** as closely as possible, **MVVM** architecture must be modified given that it does not respect this principle. For that, in addition to isolate the business logic in the domain layer, navigation will be isolated in a dedicated entity called the `Coordinator`. **MVVM** + `Coordinator` = **MVVM-C**.
 
-Le `Coordinator` est un pattern qui organise la logique de flux de navigation entre les différents écrans (ViewController) et qui isole la logique de navigation de l'interface utilisateur.
+The `Coordinator` is a pattern which organizes navigation flow logic between different screens (`ViewController`) and which isolates navigation logic from user interface.
 
-L'objectif principal du `Coordinator` est de rendre le code plus modulaire et plus facilement testable en réduisant la dépendance entre les différents composants de l'application. Il permet également de réduire la complexité de l'architecture de l'application en divisant les responsabilités de chaque composant.
+The main aim of the `Coordinator` is to make code more modular and easier to test by reducing dependency between the different application components. It allows also to reduce the architecture complexity of the application by dividing the responsibilities of each component.
 
-Le `Coordinator` se met en place avec une classe contenant des méthodes pour afficher le premier écran (depuis `AppDelegate` ou `SceneDelegate`), naviguer d'un écran à un autre, et des attributs pour gérer les références entre les différents coordinators (étant des sous-flux). Le principe de communication entre la vue et le `Coordinator` se fait idéalement avec la délégation (`delegate`) afin de bien respecter le 4ème et 5ème principe du **SOLID**, qui va permettre par exemple de faire passer des données à une précédente vue mais aussi pour faciliter la testabilité et la maintenance du fait que la vue est découplée du `Coordinator`.
+The `Coordinator` is set up with a class containing methods for displaying the first screen (from `AppDelegate` or `SceneDelegate`), navigate from a screen to an other, and attributes to manages references between different coordinators (as sub-flows). The communication principle between the view and the `Coordinator` is ideally implemented with the `delegate` in order to respect well the 4th and 5th **SOLID** principles, which will allow for example to pass data from a previous view, but also to facilitate testability and maintenance, since the view is decoupled from the `Coordinator`.
 
-Le `Coordinator` est donc l'une des possibles options pour gérer le flux de navigation et donc d'isoler la logique de navigation entre les vues. Il y en a d'autres comme le routeur (`Router`), et l'architecture **VIPER** en est un exemple qui implémente cette façon de naviguer.
+The `Coordinator` is one of the possible option to manage the navigation flow and therefore isolate the navigation logic between the views. There is others like `Router`, and **VIPER** architecture is an example which implements this this way of navigation.
 
-On en retiendra que le `Coordinator` est un pattern de flux:
-- Qui gère la navigation dans des flux et sous-flux, en allégeant la vue de cette responsabilité.
-- Qui permet le découplage des différents écrans afin de faire une navigation sur mesure que ce soit lors des interactions sur chaque écran, ou bien lors de l'ouverture de l'application avec des deeplinks (liens profonds).
-- Qui facilite la testabilité des composants de l'application, chaque flux de navigation pouvant être testé indépendamment, par exemple pour vérifier que les instances sont bien retournées ou bien détruites depuis des tests unitaires.
+We will remember that the `Coordinator` is a flow pattern:
+- Manages navigation through streams and sub-streams, relieving the viewer of this responsibility.
+- Decouples the different screens for custom navigation, whether during interactions on each screen, or when opening the application with deeplinks.
+- Facilitates the testability of application components, as each navigation flow can be tested independently, for example to check that instances are returned or destroyed from unit tests.
 
-Mais aussi un pattern difficile à apprendre, à comprendre et à appliquer par soi-même. C'est un pattern qui m'a donné énormément de fil à retordre. Il faut faire très attention à la gestion des références pouvant facilement causer des rétentions de cycles résultant de fuites mémoire (`memory leak`).
+But also a pattern which is difficult to learn, to understand and to apply by yourself. It's a pattern that gave me a lot of trouble. You must to be careful when managing references, which can easily cause retention cycles resulting in `memory leaks`.
 
-Dans ce projet, on s'assure déjà en premier lieu que chaque `ViewController` est indépendant des autres:
-- Un initialiseur est mis en place, c'est le `Coordinator` qui gère l'instanciation des `ViewController` avec la méthode `start()` dédiée.
-- Pas d'interaction de navigation (`push`, `present`, `segue`, ...). C'est au `Coordinator` de gérer la navigation.
+In this project, we first make sure that each `ViewController` is independent of the others:
+- An initializer is set up, it's the `Coordinator` which manages the `ViewController` instantiation with the dedicated `start()` method.
+- No navigation interaction (`push`, `present`, `segue`, ...). It's up to the `Coordinator` to manage the navigation.
 
-Pour chaque interaction d'une vue à une autre, c'est le `ViewModel` associé au `ViewController` qui aura une référence faible (`weak`) vers le `Coordinator` par le biais d'une abstraction sous forme de `delegate`, la référence forte étant indirectement du `Coordinator` vers le `ViewController` (qui lui-même a une référence vers le `ViewModel`).
+For each interaction between views, it's the associated `ViewModel` of the `ViewController` which will have a  `weak` reference to the `Coordinator` par through an abstraction with a `delegate`, the strong reference being indirectly from the `Coordinator` to the `ViewController` (which itself have a reference to the `ViewModel`).
 
 ### <a name="patterns">Used designs patterns
 
-Pour mettre en place la **Clean Architecture** et les différents principes de **Clean Code** et du **SOLID**, voici donc les différents design patterns utilisés:
-- **Délégation (`delegate`)**: Le pattern qui permet à une classe de déléguer certaines de ses responsabilités à une autre classe. Elle facilite donc la communication entre classes et délivre des messages d'un objet à un autre lorsqu'un événement spécifique se déclenche. Utilisée avec le `Coordinator` (pour communiquer avec le `ViewModel`), les vues **UIKit** comme `TableView`, `CollectionView`, `MKMapView`, `SearchBar`, ...
-- **Injection de dépendances**: Le pattern où un objet reçoit d'autres objets dont il dépend de manière dynamique afin d'éviter une dépendance directe entre deux classes. L'injection de dépendances permet de réduire le couplage, d'avoir un code réutilisable, testable et maintenable. Ici, l'injection de dépendances s'effectue par initialiseur en fournissant l'(les) instance(s) que l'objet a besoin.
-- **Monteur (`Builder`)**: Pattern permettant d'initialiser des objets complexes étape par étape. Il permet de produire différentes variations ou représentations d’un objet en utilisant le même code de construction. Ici dans notre cas, il sera utilisé pour créer le module associé à l'écran en cours, c'est à dire instancier un `ViewController` avec les dépendances qu'il a besoin par le biais d'injections de dépendances (On peut aussi l'adapter pour les tests unitaires). Un module complet en couches selon la **Clean Architecture** se compose comme ceci:
+To set up the **Clean Architecture** and the different **Clean Code** and **SOLID** principles, here are the used different design patterns:
+- **Delegation**: Pattern allowing a class to delegate some of it's responsibilities to an other class. It makes easier the communication between classes and emits messages from an object to an other when a specific event is triggered. Used with `Coordinator` (to communicate with the `ViewModel`), **UIKit** views like `TableView`, `CollectionView`, `MKMapView`, `SearchBar`, ...
+- **Dependency injection**: Pattern where an object receives other objects Le pattern où un objet reçoit d'autres objets which it depends in a dynamic way in order to avoir a direct dependency between two classes. Dependency injection allows to reduce coupling, having a reusable, testable and maintainable code. Here, dependency injection is performed with an initializer by providing the instance(s) that object needs.
+- **`Builder`**: Pattern allowing to initialize complex objects step by step. It allows you to produce different variations or representations of an object using the same construction code. Here in our case, it will be used to create the associated module of the current screen, meaning instantiate a `ViewController` with the dependencies it needs through dependency injections (It can also be adapted for unit tests). A complete layered module based on **Clean Architecture** is built like that:
     + `ViewController` -> `ViewModel` -> `UseCase` -> `Repository` -> `Service`
-    + Exemple ci-dessous:
+    + Example below:
 ```swift
 final class TopHeadlinesModuleBuilder: ModuleBuilder {
     private var testMode = false
@@ -256,23 +256,23 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
 }
 ```
 - **Coordinator**: The pattern which managing the navigation between screens.
-- **DTO (Data Transfer Object)**: Le pattern qui permet de transférer des données de manière plus contrôlée de la couche des services (réseau, GPS, base de données,...) vers la couche présentation et vice-versa, ici par le biais du **Repository**. C'est un objet simple contenant les attributs, un accesseur (`getter`), un mutateur (`setter`) et un initialiseur provenant des entités liés au service utilisé. Inversement, une entité peut être créée par le biais d'un DTO (comme objet de requête par exemple).
-- **Use case:** Le pattern qui gère la logique métier (qui va ordonner les actions à exécuter comme récupérer des données), tout en étant indépendant de tout framework. L'intermédiaire ici entre le `ViewModel` et le `Repository`. Les entités utilisés sont des **DTO**, dans la couche domaine de la **Clean Architecture** (**Use case + Entités**).
-- **Repository:** Le pattern faisant office d'abstraction des couches externes de données (réseau, GPS, Bluetooth, base de données, fichiers,...). Il s'agit donc d'un point d'entrée et de sortie de données faisant ainsi l'intermédiaire entre la couche domaine et la couche de données. C'est le `Repository` qui connaît le service qui est utilisé pour récupérer et envoyer des données, mais également les entités liées à la couche de données. Il convertit également les données récupérées en **DTO** et inversement lors d'une requête.
+- **DTO (Data Transfer Object)**: The pattern that enables data to be transferred in a more controlled way from the service layer (network, GPS, database, etc.) to the presentation layer and vice versa, in this case via the **Repository**. This is a simple object containing attributes, a `getter`, a `setter` and an initializer from the entities linked to the used service. Conversely, an entity can be created via a DTO (as a query object, for example).
+- **Use case:** Pattern which manages business logic (which will order the actions to be performed, such as retrieving data), while remaining independent of any framework. The intermediary here between the `ViewModel` and the `Repository`. In the domain layer of **Clean Architecture** (**Use case + Entities**), entities are **DTO**.
+- **Repository:** The pattern acting as an abstraction of external data layers (network, GPS, Bluetooth, databases, files,...). It is therefore a data input and output point, acting as an intermediary between the domain layer and the data layer. The `Repository` knows which service is used to retrieve and send data, but also the entities linked to the data layer. It also converts retrieved data into **DTO** and vice versa during a request.
 
 ### <a name="recap"></a>Architecture recap
 
-Au niveau de l'architecture, je vous décris par le biais de diagrammes comment s'est construite l'architecture de mon appli iOS.
+For the architecture, I will describe you through diagrams how the architecture of my iOS app is built.
 
-**La logique de navigation par le biais des `Coordinator` ci-dessous:**
+**Navigation logic through `Coordinator` below:**
 
 ![Coordinators diagram](SuperNewsCoordinatorDiagram.png)
 
-Par le biais de cette logique, voici donc comment se construit un module constituant les différentes couches de la **Clean Architecture** ci-dessous:
+From this logic, here is how a module is built up to form the different layers of **Clean Architecture**:
 
 ![Global architecture diagram](GlobalArchitectureDiagramEnglish.png)
 
-Voici donc comment se consitue un module, initialement créé par un `Builder`, où les injections de dépendances s'effectuent entre couches et renvoyant le `ViewController` instancié par le `Coordinator`:
+Here is how a module is built, initially created by a `Builder`, where dependency injections take place between layers and returning the instantiated `ViewController` from the `Coordinator`:
 
 ![Architecture module diagram](ArchitectureModuleDiagramEnglish.png)
 ## <a name="important"></a>IMPORTANT: BEFORE TRYING THE iOS APP
