@@ -277,19 +277,19 @@ Here is how a module is built, initially created by a `Builder`, where dependenc
 ![Architecture module diagram](ArchitectureModuleDiagramEnglish.png)
 ## <a name="important"></a>IMPORTANT: BEFORE TRYING THE iOS APP
 
-Si vous souhaitez faire tester l'application directement via **TestFlight**, [cliquez ici depuis votre iPhone/iPad](https://testflight.apple.com/join/SKj6fn5k).
+If you want to test the application directly via **TestFlight**, [please click here from your iPhone/iPad](https://testflight.apple.com/join/SKj6fn5k).
 
-Si vous souhaitez faire exécuter l'application par le biais d'Xcode en faisant un build du projet, lisez cette partie ci-dessous.
+If you want to run the app through Xcode with a build of the project, please read this part below.
 
-L'appli exploite l'API REST de **NewsAPI**, une clé d'API est donc requise. Pour cela, obtenez votre clé sur le site de [NewsAPI](https://newsapi.org/), dans la rubrique **Account** du compte que vous avez créé:<br>
-![Page clé NewsAPI](NewsAPIKey.png)<br>
+The app uses **NewsAPI**'s **REST API**, an API key is required. To do this, get your key from the [NewsAPI website](https://newsapi.org/), in the **Account** section of the account you have created:<br>
+![NewsAPI key page](NewsAPIKey.png)<br>
 
-**Pour des raisons de sécurité, le fichier ApiKey.plist n'est pas présent dans le repo GitHub**.<br>
+**For security reasons, the apiKey.plist file is not available in the GitHub repo.**.<br>
 
-Une fois la clé récupérée, créez un fichier **ApiKey.plist**, en le plaçant dans le même emplacement du dossier `DataLayer` du projet **Xcode**. Créez alors une propriété de type **String** avec `apiKey` en tant que clé, et la clé d'API que vous avez récupérée en tant que valeur. Prenez exemple comme ci-dessous:
-![NewsAPI.plist](NewsApiKeyPlist.png)<br>
+Once the key has been retrieved, create a **apiKey.plist** file, placing it in the same location in the `DataLayer` folder of the **Xcode** project. Then create a **String** type property with `apiKey` as key, and the API key that you retrieved as value. Take example below:
+![NewsAPI plist](NewsApiKeyPlist.png)<br>
 
-Ou bien dans dans ce même fichier en y ajoutant le code sous format XML et en y mettant sa clé d'API entre les balises `</string>`:
+Or in the same file, by adding the code in XML format and inserting the API key between the `</string>` markups:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -301,7 +301,7 @@ Ou bien dans dans ce même fichier en y ajoutant le code sous format XML et en y
 </plist>
 ```
 
-La clé sera ensuite récupérée par la fonction privée ci-dessous de la classe `NewsAPIService`, en lisant le contenu du fichier **plist** créé au préalable et initialisé depuis le constructeur de `SuperNewsNetworkAPIService`.
+The key will then be retrieved by the private function below from the `NewsAPIService` class, by reading the contents of the **plist** file created beforehand and initialized from the `SuperNewsNetworkAPIService` constructor.
 ```swift
 final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     private var apiKey: String = ""
@@ -333,109 +333,112 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
 
 ## <a name="features"></a>Features and screenshots
 
-Voici les différentes fonctionnalités que je propose dans l'application **SuperNews**:
-- Actualités
-- Sélection de source pour les actualités
-- Recherche de news
-- Carte des news
-- Vue détaillée de l'article
-- Paramètres utilisateur
+There is the different features that I propose in the **SuperNews** application:
+- Top headlines
+- Source selection for news
+- News search
+- News map
+- Detailed article view
+- User settings
 
 ### <a name="topHeadlines"></a>Top headlines
 
 En tapant sur **Actualités** dans la barre de navigation du bas, l'interface des news apparaît comme ceci avec les news locales téléchargées et affichées avec leurs images (par défaut ceux de la France, le pays change en fonction du paramètre choisi).
+By tapping on **Top headlines** in the bottom navigation bar, the news interface appears like this, with local news downloaded and displayed with their images (by default those for France or United States, the country changes according to the setting chosen).
 
-En tapant sur une actualité de la liste, une vue montrant les détails de l'article apparaît, [plus de détails ici](#articleDetail).
+By tapping on a news item in the list, a view showing details of the article appears, [more details here](#articleDetail).
 
-En ayant bien exploité en profondeur l'API REST **NewsAPI**, voici une nouveauté: une vue défilante horizontale (`CollectionView`) va ici représenter les différentes catégories d'actualités:
-- Les actualités locales en fonction du pays choisi dans les paramètres (France par défaut).
-- Les actualités d'un média en particulier (votre favori). Vous pouvez le définir en tapant sur le [bouton en haut à gauche de l'écran pour choisir votre média favori](#sourceSelection).
+By using the most of the **NewsAPI**'s REST API, here's a new feature: a horizontal scrolling view (`CollectionView`) will represent the different categories of news:
+- Local news according to the country selected in the settings (France or United States by default).
+-News from a particular media (your favorite).You can set it by tapping the [button at top left of screen to choose your favorite media](#sourceSelection).
 - Business
-- Divertissement
-- Général
-- Santé
+- Entertainment
+- General
+- Health
 - Science
 - Sports
-- Technologie
+- Technology
 
-Ces 7 catégories d'actualités dépendent du pays choisi dans les paramètres, comme pour les actualités locales.
+These 7 news categories depend on the country selected in the settings, as for local news.
 
 ![TopHeadlinesGIF](TopHeadlinesFrench.gif)
 
 ### <a name="sourceSelection"></a>Source selection for news
 
-Dans cet écran, vous avez la possibilité de choisir une source de news en favori parmi celles disponibles. Les sources sont téléchargées la première fois puis affichées dans une liste.
+In this screen, you can choose a favorite news source from among those available. Sources are downloaded the first time and then displayed in a list.
 
-La vue défilante horizontale fait office de filtre pour trier la liste des sources selon 4 options:
-- Toutes les sources: par défaut. La liste des sources téléchargées telles quelles.
-- Par langue: Les sources sont triées dans chaque section représentant une langue, ici 14.
-- Par catégorie: Toutes langues et pays confondu, les sources sont triées dans chaque section de la liste: Business, Divertissement, Général, Santé; Science, Sports, Technologie.
-- Par pays: Les sources sont triées dans chaque section représentant une pays, ici 54.
+The horizontal scrolling view acts as a filter to sort the list of sources according to 4 options:
+- All sources: by default. The list of downloaded sources as is.
+- By language: The sources are sorted in each section representing a language, here 14.
+- By category: For all languages and countries, sources are sorted in each section of the list: Business, Entertainment, General, Health, Science, Sports, Technology.
+- By country: Sources are sorted in each section representing a country, here 54.
 
-Pour plus d'ergonomie, vous avez la possibilité avec la barre de recherche de rechercher une source parmi celles disponibles.
+For greater ease of use, you can use the search bar to find a source among those available.
 
-Tapez sur une source, et vous serez redirigé vers l'écran des actualités. La source choisie est sauvegardée et lorsque vous séléctionnerez la 2ème cellule de la liste horizontale, vous aurez alors les actualités de la source sélectionnée.
+Tap on a source, and you'll be redirected to the top headlines screen. The chosen source is saved, and when you select the 2nd cell in the horizontal list, you'll get the news from the selected source.
 
 ![SourceSelectionGIF](SourceSelectionFrench.gif)
 
 ### <a name="newsSearch"></a>News search
 
-En tapant sur **Recherche** dans la barre de navigation du bas, l'interface des news apparaît comme ceci avec les news locales téléchargées et affichées avec leurs images (par défaut ceux de la France, le pays change en fonction du paramètre choisi).
+By tapping on **Search** in the bottom navigation bar, the news interface appears like this.
 
-Pour rechercher le contenu, il suffit tout simplement de toucher la barre de recherche puis de saisir le contenu recherché. La recherche est réactive, chaque modification distincte dans la barre de recherche va automatiquement déclencher un appel HTTP de l'API REST et mettre à jour la liste s'il y a du contenu.
+To search for content, simply touch the search bar and enter the desired content. The search is reactive: each distinct change in the search bar will automatically trigger an HTTP call to the REST API, updating the list if there is content.
 
-Par défaut la langue des news est en français. Lorsque vous avez séléctionné une news, une vue défilante (`ScrollView`) apparaît pour y voir les détails de l'article. Le bouton en bas de la vue vous permet de consulter le site de la source de l'article afin de lire l'article dans son intégralité.<br>
+The default news language is French or English. Once you've selected a news item, a `ScrollView` appears, displaying the details of the article. The button at the bottom of the view allows you to go to the news source site to read the article in full.<br>
 
 ![SearchGIF](SearchNewsFrench.gif)
 
 ### <a name="map"></a>News map
 
-Avec les possibilités que donne **NewsAPI**, il est donc possible de récupérer les news en tendance de 54 pays différents dans le monde entier. Je propose donc ici une option de carte interactive où des marqueurs personnalisés apparaîssent sur la carte représentant les pays en question.
+With the possibilities offered by **NewsAPI**, it is therefore possible to retrieve the top headlines from 54 different countries worldwide. Here, I propose an interactive map option, with custom markers appearing on the map representing the countries in question.
 
-Avec la localisation GPS, vous avez la possibilité de centrer la carte sur le pays le plus proche de votre position actuelle (par rapport à son emplacement sur la carte).
+With GPS localization, you can center the map on the country closest to your current position (relative to its location on the map).
 
-En sélectionnant **Oui**, la carte sera centrée sur le pays suggéré. Si vous êtes localisé dans l'un des 54 pays disponibles, la carte sera centrée dans le même pays.
+By selecting **Yes**, the map will be centered on the suggested country. If you are located in one of the 54 countries available, the map will be centered in the same country.
 
 ![MapCenteringSuggestionYes](MapCenteringSuggestionYesFrench.gif)
 
-Si vous êtes localisé dans un pays qui ne fait pas parti des 54 pays, la carte sera centrée dans le pays suggéré le plus proche, le calcul se faisant avec les distances **<u>à vol d'oiseau</u>** entre la position actuelle et le marqueur le plus proche.
+If you are located in a country that is not one of the 54 countries, the map will be centered on the nearest suggested country, calculated using the **<u>as the crow flies</u>** distances between the current position and the nearest marker.
 
 ![MapCenteringSuggestionCountryUnavailable](MapCenteringSuggestionCountryUnavailable.gif)
 
-En sélectionnant **No**, la carte sera centrée sur votre position.
+By selecting **No**, the map will be centered on your position.
 
 ![MapCenteringSuggestionNo](MapCenteringSuggestionNoFrench.gif)
 
-**Concernant les marqueurs, plusieurs options possibles:**
-- Avec l'ajout du **clustering**, si vous réduisez le zoom vers une altitude élevée, les marqueurs se regrouperont en un marqueur affichant le nombre de pays dans ce groupe (cluster). Tapez sur ce marqueur pour zoomer sur le groupe et faire apparaître les marqueurs en question.
-- Le bouton en bas à gauche vous permet d'avoir un zoom global de la carte à une altitude de 15 000 km.
-- Si vous avez autorisé le service de localisation, vous aurez un bouton en bas à droite de l'écran (au-dessus du `TabBar` en bas de l'écran) qui vous permettra de centrer la carte sur votre position actuelle, à une altitude de 10 km.
+**Several options are available for markers:**
+- With the **clustering** addition, if you zoom out to a higher altitude, the markers will group together into a marker displaying the number of countries in that cluster. Tap on this marker to zoom in on the cluster and reveal the markers in question.
+- The button at bottom left allows you to zoom in on the map at an altitude of 15,000 km.
+- If you have enabled the localization service, you will see a button in the bottom right-hand corner of the screen (above the `TabBar` at the bottom of the screen) which allows you to center the map on your current position, at an altitude of 10 km.
 
 ![MapAnnotations](MapAnnotationsFrench.gif)
 
-La barre de recherche en haut vous permettra de center la carte sur les pays à leurs positions respectives. En la touchant, une liste d'autocomplétion apparaît et change par un filtrage en fonction de la saisie. Par exemple, si je veux centrer la carte sur le Japon, je valide ma recherche soit en saississant le nom du pays, soit en sélectionnant sa cellule de la liste d'autocomplétion, et cela va donc centrer la carte sur le pays et le marqueur en question.<br>
+The search bar at the top allows you to center the map on the countries at their respective positions. By touching it, an autocompletion list appears and changes according to the input. For example, if I want to center the map on Japan, I validate my search either by entering the name of the country, or by selecting its cell from the autocompletion list, and this will then center the map on the country and marker in question.<br>
 
-En tapant sur le marqueur du pays représenté de la carte, un écran affichant les news locales du pays apparaîtra. La fonctionnalité est similaire à celle des actualités.<br>
+By tapping on the country marker shown on the map, a screen displaying the country's local news will appear. The functionality is similar to that of the top headlines.<br>
 
 ![MapCountrySearchAndNews](MapCountrySearchAndNewsFrench.gif)
 
 ### <a name="articleDetail"></a>Detailed article view
 
-Lorsque vous avez séléctionné une actualité, une vue défilante (`ScrollView`) apparaît pour y voir les détails de l'article. Le bouton en bas de la vue vous permet de consulter le site de la source de l'article afin de lire l'article dans son intégralité. Le bouton en haut à gauche de la vue vous permet de partager le lien vers le site de l'article en question (par message, vos réseaux sociaux, AirDrop, ...).
+When you have selected a news article, a `ScrollView` will appear to display the article details. The button at the bottom of the view allows you to visit the source website of the article to read the full article. The button at the top left of the view allows you to share the link to the article's website (via message, your social networks, AirDrop, etc.).
 
 ![ArticleDetailGIF](ArticleDetailFrench.gif)
 
 ### <a name="settings"></a>User settings
 
-Pour les paramètres, vous pouvez définir votre pays favori des news en sélectionnant **Pays des news** puis le pays de votre choix parmi les 54 disponibles (par exemple les États-Unis). Une fois sélectionné, allez dans **Actualités** et vous verrez les news locales des États-Unis.<br>
+For the settings, you can set your favorite news country by selecting **News country** and then selecting the country of your choice from the 54 available options (for example, the United States). Once selected, go to **Top headlines**, and you will see the local news from the United States.<br>
 
 ![NewsCountrySettingsFrench](NewsCountrySettingsFrench.gif)
 
 Pour la langue, même chose depuis les paramètres, en sélectionnant "Langue des news" puis la langue de votre choix parmi les 14 langues disponibles (exemple: Anglais). Avec la langue sélectionnée, allez dans **Actualités** et vous verrez dans la barre de recherche la langue sélectionnée (ici: **Anglais** par exemple) et en recherchant un contenu dans la langue choisie, les news s'afficheront s'il y en a de disponibles.
 
+For the language, you can do the same from the settings by selecting **News language** and then selecting the language of your choice from the 14 available languages (for example, English). With the selected language, go to **Top headlines**, and you will see in the search bar the chosen language (here: English, for example). When you search for content in the selected language, the news will be displayed if there are any available.
+
 ![NewsLanguageSettings](NewsLanguageSettingsFrench.gif)
 
-La dernière option permet de réinitialiser les paramètres par défaut pour le pays et la langue des news.
+The last option allows you to reset the settings to the default country and language for the news.
 
 ![NewsResetSettings](NewsResetSettingsFrench.gif)
 
