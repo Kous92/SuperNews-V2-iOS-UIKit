@@ -441,11 +441,11 @@ La dernière option permet de réinitialiser les paramètres par défaut pour le
 
 ## <a name="testing"></a>Unit and UI tests
 
-Dans tout développement d'applications iOS, comme sur d'autres plateformes, les tests unitaires et UI (User Interface, traduisez par interface utilisateur) sont essentiels pour vérifier le bon fonctionnement de l'application avant les alpha et bêta tests par des utilisateurs et sa mise en production sur l'App Store.
+On any iOS application development, like on other platforms, unit and UI tests are essential for checking that the application is working properly before alpha and beta tests from users and his release on the App Store.
 
-En iOS natif, on utilise le framework **XCTest**. Avec l'architecture que je propose aujourd'hui, une Clean Architecture avec MVVM-C, chaque composant est indépendant afin d'être testé plus facilement, à condition bien sûr de connaître les bonnes techniques pour tester (abstractions, mocks, stubs, spy, ...). Même avec une architecture appropriée, la principale difficulté est de savoir quoi tester et de quelle façon le tester.
+In native iOS, we use **XCTest** framework. With the architecture I propose today, a Clean Architecture with MVVM-C, each component is independant in order for easier testing, provided, of course, that you know the right techniques for testing (abstractions, mocks, stubs, spies, ...). Even with the appropriate architecture, the main difficulty is knowing what to test and how to test it.
 
-Certaines parties du code de l'application restent tout de même plus difficiles à tester comme les `ViewController` par exemple.
+However, some parts of the application's code remain more difficult to test like `ViewController` as exaemple.
 
 ### Unit tests (White box)
 
