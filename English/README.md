@@ -360,7 +360,7 @@ By using the most of the **NewsAPI**'s REST API, here's a new feature: a horizon
 
 These 7 news categories depend on the country selected in the settings, as for local news.
 
-![TopHeadlinesGIF](TopHeadlinesFrench.gif)
+![TopHeadlinesGIF](TopHeadlinesEnglish.gif)
 
 ### <a name="sourceSelection"></a>Source selection for news
 
@@ -376,7 +376,7 @@ For greater ease of use, you can use the search bar to find a source among those
 
 Tap on a source, and you'll be redirected to the top headlines screen. The chosen source is saved, and when you select the 2nd cell in the horizontal list, you'll get the news from the selected source.
 
-![SourceSelectionGIF](SourceSelectionFrench.gif)
+![SourceSelectionGIF](SourceSelectionEnglish.gif)
 
 ### <a name="newsSearch"></a>News search
 
@@ -386,7 +386,7 @@ To search for content, simply touch the search bar and enter the desired content
 
 The default news language is French or English. Once you've selected a news item, a `ScrollView` appears, displaying the details of the article. The button at the bottom of the view allows you to go to the news source site to read the article in full.<br>
 
-![SearchGIF](SearchNewsFrench.gif)
+![SearchGIF](SearchNewsEnglish.gif)
 
 ### <a name="map"></a>News map
 
@@ -396,50 +396,48 @@ With GPS localization, you can center the map on the country closest to your cur
 
 By selecting **Yes**, the map will be centered on the suggested country. If you are located in one of the 54 countries available, the map will be centered in the same country.
 
-![MapCenteringSuggestionYes](MapCenteringSuggestionYesFrench.gif)
+![MapCenteringSuggestionYes](MapCenteringSuggestionYesEnglish.gif)
 
 If you are located in a country that is not one of the 54 countries, the map will be centered on the nearest suggested country, calculated using the **<u>as the crow flies</u>** distances between the current position and the nearest marker.
 
-![MapCenteringSuggestionCountryUnavailable](MapCenteringSuggestionCountryUnavailable.gif)
+![MapCenteringSuggestionCountryUnavailable](MapCenteringSuggestionCountryUnavailableEnglish.gif)
 
 By selecting **No**, the map will be centered on your position.
 
-![MapCenteringSuggestionNo](MapCenteringSuggestionNoFrench.gif)
+![MapCenteringSuggestionNo](MapCenteringSuggestionNoEnglish.gif)
 
 **Several options are available for markers:**
 - With the **clustering** addition, if you zoom out to a higher altitude, the markers will group together into a marker displaying the number of countries in that cluster. Tap on this marker to zoom in on the cluster and reveal the markers in question.
 - The button at bottom left allows you to zoom in on the map at an altitude of 15,000 km.
 - If you have enabled the localization service, you will see a button in the bottom right-hand corner of the screen (above the `TabBar` at the bottom of the screen) which allows you to center the map on your current position, at an altitude of 10 km.
 
-![MapAnnotations](MapAnnotationsFrench.gif)
+![MapAnnotations](MapAnnotationsEnglish.gif)
 
 The search bar at the top allows you to center the map on the countries at their respective positions. By touching it, an autocompletion list appears and changes according to the input. For example, if I want to center the map on Japan, I validate my search either by entering the name of the country, or by selecting its cell from the autocompletion list, and this will then center the map on the country and marker in question.<br>
 
 By tapping on the country marker shown on the map, a screen displaying the country's local news will appear. The functionality is similar to that of the top headlines.<br>
 
-![MapCountrySearchAndNews](MapCountrySearchAndNewsFrench.gif)
+![MapCountrySearchAndNews](MapCountrySearchAndNewsEnglish.gif)
 
 ### <a name="articleDetail"></a>Detailed article view
 
 When you have selected a news article, a `ScrollView` will appear to display the article details. The button at the bottom of the view allows you to visit the source website of the article to read the full article. The button at the top left of the view allows you to share the link to the article's website (via message, your social networks, AirDrop, etc.).
 
-![ArticleDetailGIF](ArticleDetailFrench.gif)
+![ArticleDetailGIF](ArticleDetailEnglish.gif)
 
 ### <a name="settings"></a>User settings
 
-For the settings, you can set your favorite news country by selecting **News country** and then selecting the country of your choice from the 54 available options (for example, the United States). Once selected, go to **Top headlines**, and you will see the local news from the United States.<br>
+For the settings, you can set your favorite news country by selecting **News country** and then selecting the country of your choice from the 54 available options (for example, the United Arab Emirates). Once selected, go to **Top headlines**, and you will see the local news from the United Arab Emirates.<br>
 
-![NewsCountrySettingsFrench](NewsCountrySettingsFrench.gif)
+![NewsCountrySettingsFrench](NewsCountrySettingsEnglish.gif)
 
-Pour la langue, même chose depuis les paramètres, en sélectionnant "Langue des news" puis la langue de votre choix parmi les 14 langues disponibles (exemple: Anglais). Avec la langue sélectionnée, allez dans **Actualités** et vous verrez dans la barre de recherche la langue sélectionnée (ici: **Anglais** par exemple) et en recherchant un contenu dans la langue choisie, les news s'afficheront s'il y en a de disponibles.
+For the language, you can do the same from the settings by selecting **News language** and then selecting the language of your choice from the 14 available languages (for example, Arabic). With the selected language, go to **Top headlines**, and you will see in the search bar the chosen language (here: Arabic, for example). When you search for content in the selected language, the news will be displayed if there are any available.
 
-For the language, you can do the same from the settings by selecting **News language** and then selecting the language of your choice from the 14 available languages (for example, English). With the selected language, go to **Top headlines**, and you will see in the search bar the chosen language (here: English, for example). When you search for content in the selected language, the news will be displayed if there are any available.
-
-![NewsLanguageSettings](NewsLanguageSettingsFrench.gif)
+![NewsLanguageSettings](NewsLanguageSettingsEnglish.gif)
 
 The last option allows you to reset the settings to the default country and language for the news.
 
-![NewsResetSettings](NewsResetSettingsFrench.gif)
+![NewsResetSettings](NewsResetSettingsEnglish.gif)
 
 ## <a name="testing"></a>Unit and UI tests
 
@@ -473,7 +471,6 @@ From iOS developer side with **Xcode**, UI tests are performed in the same way a
 These UI tests currently cover **74%** of the application code.
 
 ![UITestsCodeCoverage](UITestsCodeCoverage.png)
-
 ### Overall for tests
 
 By running the 114 unit and UI tests, current code coverage is **79%**.
