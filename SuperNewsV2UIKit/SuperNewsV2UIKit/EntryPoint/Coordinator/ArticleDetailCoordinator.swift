@@ -38,7 +38,7 @@ final class ArticleDetailCoordinator: ParentCoordinator {
     }
     
     @discardableResult func start() -> UIViewController {
-        print("[ArticleDetailCoordinator] Instantiating SourceSelectionViewController.")
+        print("[ArticleDetailCoordinator] Instantiating ArticleDetailViewController.")
         // The module is properly set with all necessary dependency injections (ViewModel, UseCase, Repository and Coordinator)
         let articleDetailViewController = builder.buildModule(testMode: self.testMode, coordinator: self)
         
@@ -53,7 +53,6 @@ extension ArticleDetailCoordinator: ArticleDetailViewControllerDelegate {
     func backToPreviousScreen() {
         // Removing child coordinator reference
         parentCoordinator?.removeChildCoordinator(childCoordinator: self)
-        navigationController.popViewController(animated: true)
         print(navigationController.viewControllers)
     }
     
