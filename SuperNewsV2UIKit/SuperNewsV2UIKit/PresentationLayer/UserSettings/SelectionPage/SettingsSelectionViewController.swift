@@ -42,6 +42,19 @@ final class SettingsSelectionViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.backgroundImage = UIImage()
+        searchBar.showsCancelButton = false
+        searchBar.delegate = self
+        searchBar.searchTextField.textColor = .white
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
+        searchBar.accessibilityIdentifier = "searchBar"
+        
+        return searchBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +63,20 @@ final class SettingsSelectionViewController: UIViewController {
         setConstraints()
         setBindings()
         viewModel?.loadCountryLanguageOptions()
+    }
+    
+    // Will not work before in cycle (viewDidLoad,...)
+    override func viewWillAppear(_ animated: Bool) {
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: String(localized: "search"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        searchBar.searchTextField.leftView?.tintColor = .lightGray
+    }
+    
+    // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
+    override func viewWillDisappear(_ animated: Bool) {
+        // We make sure to avoid any memory leak by destroying correctly the coordinator instance. Popping ViewController is already done with NavigationController, no need to add extra instruction.
+        if isMovingFromParent {
+            viewModel?.backToPreviousScreen()
+        }
     }
     
     init() {
@@ -61,12 +88,18 @@ final class SettingsSelectionViewController: UIViewController {
     }
     
     private func buildViewHierarchy() {
+        view.addSubview(searchBar)
         view.addSubview(tableView)
     }
     
     private func setConstraints() {
-        tableView.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
         }
@@ -103,7 +136,7 @@ extension SettingsSelectionViewController {
     }
     
     private func updateTableView() {
-        print("Update TableView")
+        print("[SettingsSelectionViewController] Update TableView")
         tableView.reloadData()
     }
 }
@@ -138,6 +171,7 @@ extension SettingsSelectionViewController: UITableViewDataSource {
 
 extension SettingsSelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("[SettingsSelectionViewController] Selected row \(indexPath.row)")
         // Unselect the row.
         tableView.deselectRow(at: indexPath, animated: false)
         
@@ -161,6 +195,28 @@ extension SettingsSelectionViewController: UITableViewDelegate {
         }
         
         viewModel?.saveSelectedSetting(at: indexPath)
+    }
+}
+
+extension SettingsSelectionViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel?.searchQuery = searchText
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel?.searchQuery = ""
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
     }
 }
 
