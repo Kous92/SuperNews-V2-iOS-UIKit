@@ -108,6 +108,9 @@ final class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel?.loadAndUpdateUserLanguageSettingTitle()
+        
+        // In case of color mode switching (especially for world map)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
     }
     
     private func buildViewHierarchy() {

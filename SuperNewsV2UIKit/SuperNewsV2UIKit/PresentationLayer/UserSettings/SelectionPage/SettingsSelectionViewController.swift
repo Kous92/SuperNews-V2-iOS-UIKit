@@ -49,7 +49,6 @@ final class SettingsSelectionViewController: UIViewController {
         searchBar.delegate = self
         searchBar.searchTextField.textColor = .white
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = String(localized: "cancel")
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
         searchBar.accessibilityIdentifier = "searchBar"
         
         return searchBar
@@ -69,6 +68,9 @@ final class SettingsSelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: String(localized: "search"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         searchBar.searchTextField.leftView?.tintColor = .lightGray
+        
+        // In case of color mode switching (especially for world map)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
     }
     
     // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.

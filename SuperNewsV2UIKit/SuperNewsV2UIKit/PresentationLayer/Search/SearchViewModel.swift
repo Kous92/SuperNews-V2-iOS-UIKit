@@ -73,7 +73,7 @@ final class SearchViewModel {
                     print("[SearchViewModel] ERROR: \(error.rawValue)")
             }
             
-            self.languageSetting.send(savedLocalLanguage.name)
+            self.languageSetting.send(savedLocalLanguage.code.languageName() ?? savedLocalLanguage.name)
         }
     }
     

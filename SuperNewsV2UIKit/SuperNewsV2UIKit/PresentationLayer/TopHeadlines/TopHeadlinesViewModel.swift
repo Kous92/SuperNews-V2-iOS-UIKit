@@ -122,19 +122,12 @@ final class TopHeadlinesViewModel {
     private func updateCountryCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "local" }) {
             // sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews"))Actualités locales (\(savedLocalCountry.name))")
-            sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews")) (\(savedLocalCountry.name))")
+            sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews")) (\(savedLocalCountry.code.countryName() ?? savedLocalCountry.name))")
         }
     }
     
     // MARK: - Top headlines
     func fetchTopHeadlines() {
-        /*
-        guard fetchedData["local"] != savedLocalCountry.code else {
-            print("[TopHeadlinesViewModel] Top headlines local news from country code \(savedLocalCountry.code) are already downloaded.")
-            return
-        }
-         */
-        
         Task {
             fetchedData["local"] = savedLocalCountry.code
             isLoading.send(true)
@@ -144,13 +137,6 @@ final class TopHeadlinesViewModel {
     }
     
     func fetchTopHeadlinesWithSource() {
-        /*
-        guard fetchedData["source"] != savedMediaSource.id else {
-            print("[TopHeadlinesViewModel] Top headlines news from \(savedMediaSource.name) are already downloaded.")
-            return
-        }
-         */
-        
         Task {
             fetchedData["source"] = savedMediaSource.id
             isLoading.send(true)
@@ -160,13 +146,6 @@ final class TopHeadlinesViewModel {
     }
     
     func fetchTopHeadlines(with category: String) {
-        /*
-        guard fetchedData[category] != savedLocalCountry.code else {
-            print("[TopHeadlinesViewModel] Top headlines \(category) news from country code \(savedLocalCountry.code) are already downloaded.")
-            return
-        }
-         */
-        
         Task {
             fetchedData[category] = savedLocalCountry.code
             isLoading.send(true)

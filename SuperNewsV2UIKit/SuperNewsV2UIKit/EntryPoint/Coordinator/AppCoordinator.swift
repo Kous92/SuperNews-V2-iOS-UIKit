@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
-
+import OSLog
 
 /// The main app Coordinator, the root of navigation flow
 final class AppCoordinator: Coordinator {
+    private let logger = Logger(subsystem: "AppCoordinator", category: "Coordinator")
+    
     var childCoordinators = [Coordinator]()
     private let topHeadlinesCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder())
     private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController(), builder: SearchModuleBuilder())
@@ -20,6 +22,7 @@ final class AppCoordinator: Coordinator {
     
     init(with rootViewController: UIViewController = UITabBarController()) {
         print("[AppCoordinator] Initializing main coordinator")
+        logger.info("Initializing main coordinator")
         self.rootViewController = rootViewController
     }
     

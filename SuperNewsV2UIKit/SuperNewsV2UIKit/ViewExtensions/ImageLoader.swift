@@ -19,15 +19,6 @@ extension UIImageView {
         self.image = nil
         let defaultImage = defaultPlaceholderImage()
         
-        /*
-        var urlComponents = url.split(separator: "/", omittingEmptySubsequences: true)
-        
-        // In order to download images if the image URL target uses http scheme instead of https, due to ATS restrictions
-        if urlComponents.count > 0 {
-            urlComponents[0] = "https:/"
-        }
-        */
-        
         // URL(string: urlComponents.joined(separator: "/")
         guard !url.isEmpty, let imageURL = URL(string: url) else {
             self.image = defaultImage
