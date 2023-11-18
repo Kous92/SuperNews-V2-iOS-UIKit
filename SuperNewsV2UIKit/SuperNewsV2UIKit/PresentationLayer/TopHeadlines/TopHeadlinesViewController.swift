@@ -11,9 +11,6 @@ import Combine
 
 final class TopHeadlinesViewController: UIViewController {
     
-    private var dataAPI: SuperNewsDataAPIService?
-    weak var coordinator: TopHeadlinesViewControllerDelegate?
-    
     // MVVM with Reactive Programming
     var viewModel: TopHeadlinesViewModel?
     private var subscriptions = Set<AnyCancellable>()

@@ -11,8 +11,6 @@ import Combine
 
 final class SearchViewController: UIViewController {
     
-    weak var coordinator: SearchViewControllerDelegate?
-    
     // MVVM with Reactive Programming
     var viewModel: SearchViewModel?
     private var subscriptions = Set<AnyCancellable>()
