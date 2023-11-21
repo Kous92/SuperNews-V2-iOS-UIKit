@@ -42,6 +42,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     func configure(with title: String) {
         categoryTitleLabel.text = title
+        categoryTitleLabel.textColor = isSelected ? .white : .darkGray
     }
     
     // For live preview

@@ -105,13 +105,12 @@ final class TopHeadlinesViewController: UIViewController {
         setConstraints()
         setBindings()
         viewModel?.initCategories()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel?.loadAndUpdateSourceCategoryTitle()
         viewModel?.loadAndUpdateUserCountrySettingTitle()
-        viewModel?.checkSavedCountry()
+        // viewModel?.checkSavedCountry()
     }
     
     private func buildViewHierarchy() {
@@ -171,9 +170,9 @@ final class TopHeadlinesViewController: UIViewController {
         
         viewModel?.categoryUpdateResultPublisher
             .receive(on: RunLoop.main)
-            .sink { [weak self] updated in
-                if updated {
-                    self?.updateCollectionView()
+            .sink { [weak self] reload, indexUpdate in
+                if reload {
+                    self?.updateCollectionView(reloadData: reload, updateIndex: indexUpdate)
                 }
             }.store(in: &subscriptions)
     }
@@ -215,9 +214,18 @@ extension TopHeadlinesViewController {
         tableView.isHidden = false
     }
     
-    private func updateCollectionView() {
-        categoryCollectionView.reloadData()
-        // tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+    private func updateCollectionView(reloadData: Bool, updateIndex: Int) {
+        // When view is initialized, the first cell is selected by default. But apply it only once, the first time. Not after every reload data.
+        if reloadData {
+            print("UPDATE CELL AND SELECTION AT \(updateIndex)")
+            categoryCollectionView.reloadData()
+            
+            // This index indicates the item to select. 0 for favorite country, 1 for favorite source
+            if updateIndex == 0 || updateIndex == 1 {
+                categoryCollectionView.selectItem(at: IndexPath(item: updateIndex, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+            }
+        }
+        
         categoryCollectionView.isHidden = false
     }
     
@@ -264,11 +272,6 @@ extension TopHeadlinesViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell,
               let categoryViewModel = viewModel?.getCategoryCellViewModel(at: indexPath) else {
             return UICollectionViewCell()
-        }
-        
-        // When view is initialized, the first cell is selected by default. But apply it only once, the first time. Not after every reload data.
-        if indexPath.item == 0 {
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
         }
         
         cell.configure(with: categoryViewModel.title)

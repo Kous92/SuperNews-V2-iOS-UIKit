@@ -26,15 +26,16 @@ final class TopHeadlinesViewModel {
         let countryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
         return CountryLanguageSettingDTO(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode)
     }()
-    private var previousSavedCountryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
-    private var userSettingloadingCount = 0
+    private var previousSavedCountryCode = ""
+    private var previousSavedSourceID = ""
+    private var isCategoryInitialized = false
     
     // MARK: - Bindings
-    private var categoryUpdateResult = PassthroughSubject<Bool, Never>()
+    private var categoryUpdateResult = PassthroughSubject<(Bool, Int), Never>()
     private var updateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
     
-    var categoryUpdateResultPublisher: AnyPublisher<Bool, Never> {
+    var categoryUpdateResultPublisher: AnyPublisher<(Bool, Int), Never> {
         return categoryUpdateResult.eraseToAnyPublisher()
     }
     
@@ -57,8 +58,6 @@ final class TopHeadlinesViewModel {
     
     func loadAndUpdateSourceCategoryTitle() {
         print("[TopHeadlinesViewModel] Loading saved source if existing...")
-        userSettingloadingCount += 1
-        previousSavedCountryCode = savedLocalCountry.code
         
         Task {
             let result = await useCase.loadSavedSelectedSource()
@@ -75,7 +74,7 @@ final class TopHeadlinesViewModel {
             // If it fails, it will use the default one.
             self.updateSourceCategoryTitle()
             print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
-            self.categoryUpdateResult.send(true)
+            self.checkSavedSource()
         }
     }
     
@@ -97,31 +96,49 @@ final class TopHeadlinesViewModel {
             // If it fails, it will use the default one.
             self.updateCountryCategoryTitle()
             print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
-            self.categoryUpdateResult.send(true)
-            self.fetchTopHeadlines()
+            self.checkSavedCountry()
         }
     }
     
     // Check if the user has set a different country in the setting when using the app
-    func checkSavedCountry() {
-        // Update country top headlines only if country setting has been changed during the use of the app
+    private func checkSavedCountry()  {
+        // Update country top headlines only if country setting has been changed during the use of the app or when it was the first load
         if savedLocalCountry.code != previousSavedCountryCode {
             print("\(savedLocalCountry.code) != \(previousSavedCountryCode)")
             print("[TopHeadlinesViewModel] Top headlines will be updated for new country set: \(savedLocalCountry.name)")
+            self.categoryUpdateResult.send((true, 0))
+            self.previousSavedCountryCode = savedLocalCountry.code
             self.fetchTopHeadlines()
+        }
+    }
+    
+    // Check if the user has set a different source in the setting when using the app
+    func checkSavedSource() {
+        // Update country top headlines only if country setting has been changed during the use of the app
+        if savedMediaSource.id != previousSavedSourceID {
+            print("\(savedMediaSource.id) != \(previousSavedSourceID)")
+            print("[TopHeadlinesViewModel] Top headlines will be updated for new source set: \(savedMediaSource.name)")
+            
+            // No cell selection is it was the first load (-1)
+            self.categoryUpdateResult.send((true, isCategoryInitialized ? 1 : -1))
+            
+            if isCategoryInitialized == true {
+                self.fetchTopHeadlinesWithSource()
+            }
+            
+            self.previousSavedSourceID = savedMediaSource.id
+            self.isCategoryInitialized = true
         }
     }
     
     private func updateSourceCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "source" }) {
-            // sourceCategoryViewModel.setCategoryTitle(with: "Actualité du média \(savedMediaSource.name)")
             sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "mediaNews")) \(savedMediaSource.name)")
         }
     }
     
     private func updateCountryCategoryTitle() {
         if let sourceCategoryViewModel = categoryViewModels.first(where: { $0.categoryId == "local" }) {
-            // sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews"))Actualités locales (\(savedLocalCountry.name))")
             sourceCategoryViewModel.setCategoryTitle(with: "\(String(localized: "localNews")) (\(savedLocalCountry.code.countryName() ?? savedLocalCountry.name))")
         }
     }
