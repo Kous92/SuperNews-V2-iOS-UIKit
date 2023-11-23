@@ -38,6 +38,8 @@ final class SettingsSelectionViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         tableView.accessibilityIdentifier = "settingsChoiceTable"
+        // tableView.isHidden = true
+        tableView.keyboardDismissMode = .onDrag
         
         return tableView
     }()
@@ -52,6 +54,20 @@ final class SettingsSelectionViewController: UIViewController {
         searchBar.accessibilityIdentifier = "searchBar"
         
         return searchBar
+    }()
+    
+    private lazy var noResultLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.setShadowLabel(string: String(localized: "noArticleAvailable"), font: UIFont.systemFont(ofSize: Constants.TopHeadlines.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        label.isHidden = true
+        
+        return label
     }()
     
     override func viewDidLoad() {
@@ -91,6 +107,7 @@ final class SettingsSelectionViewController: UIViewController {
     
     private func buildViewHierarchy() {
         view.addSubview(searchBar)
+        view.addSubview(noResultLabel)
         view.addSubview(tableView)
     }
     
@@ -98,6 +115,11 @@ final class SettingsSelectionViewController: UIViewController {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.horizontalEdges.equalToSuperview()
+        }
+        
+        noResultLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(Constants.TopHeadlines.horizontalMargin)
         }
         
         tableView.snp.makeConstraints { make in
@@ -120,6 +142,8 @@ final class SettingsSelectionViewController: UIViewController {
             .sink { [weak self] updated in
                 if updated {
                     self?.updateTableView()
+                } else {
+                    self?.displayNoResult()
                 }
             }.store(in: &subscriptions)
     }
@@ -138,8 +162,16 @@ extension SettingsSelectionViewController {
     }
     
     private func updateTableView() {
+        noResultLabel.isHidden = true
         print("[SettingsSelectionViewController] Update TableView")
         tableView.reloadData()
+        tableView.isHidden = false
+    }
+    
+    private func displayNoResult() {
+        tableView.isHidden = true
+        noResultLabel.text = "\"\(viewModel?.searchQuery ?? "??")\" \(String(localized: "doesNotExist")) \(String(localized: "pleaseTryOtherSearch"))."
+        noResultLabel.isHidden = false
     }
 }
 
