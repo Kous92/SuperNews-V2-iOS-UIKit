@@ -124,6 +124,9 @@ final class SourceSelectionViewController: UIViewController {
         
         // In case of color mode switching (especially for world map)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
+        
+        // When the screen is loaded, the first category is selected, only once.
+        categoryCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
     }
     
     // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
@@ -271,11 +274,6 @@ extension SourceSelectionViewController: UICollectionViewDataSource {
         }
         
         cell.configure(with: cellViewModel.title)
-        
-        // When view is initialized, the first cell is selected by default
-        if indexPath.item == 0 {
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
-        }
         
         return cell
     }
