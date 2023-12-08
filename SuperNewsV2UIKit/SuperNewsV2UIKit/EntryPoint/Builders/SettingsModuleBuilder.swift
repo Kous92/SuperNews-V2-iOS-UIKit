@@ -17,8 +17,8 @@ final class SettingsModuleBuilder: ModuleBuilder {
         
         // Dependency injection
         let userSettingRepository = getUserSettingRepository(testMode: testMode)
-        let useCase = ResetUserSettingsUseCase(userSettingsRepository: userSettingRepository)
-        let settingsViewModel = SettingsViewModel(useCase: useCase)
+        let resetUserSettingsUseCase = ResetUserSettingsUseCase(userSettingsRepository: userSettingRepository)
+        let settingsViewModel = SettingsViewModel(resetUserSettingsUseCase: resetUserSettingsUseCase)
         settingsViewModel.coordinator = coordinator as? SettingsViewControllerDelegate
         
         // Injecting view model

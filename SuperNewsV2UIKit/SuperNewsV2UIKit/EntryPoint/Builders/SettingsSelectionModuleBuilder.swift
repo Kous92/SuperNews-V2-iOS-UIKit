@@ -18,16 +18,26 @@ final class SettingsSelectionModuleBuilder: ModuleBuilder {
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
+        // Get ViewController instance: view layer
         let settingsSelectionViewController = SettingsSelectionViewController()
         
-        // Dependency injection
+        // Dependency injections for ViewModel, building the presentation, domain and data layers
+        // 1) Get repository instances: data layer
         let userSettingRepository = getUserSettingRepository(testMode: testMode)
         let localFileRepository = getLocalFileRepository(testMode: testMode)
-        let useCase = UserSettingsUseCase(userSettingsRepository: userSettingRepository, localFileRepository: localFileRepository)
-        let settingsSelectionViewModel = SettingsSelectionViewModel(settingSection: settingSection, useCase: useCase)
+        
+        // 2) Get use case instances: domain layer
+        let userSettingsUseCase = UserSettingsUseCase(localFileRepository: localFileRepository)
+        let loadUserSettingsUseCase = LoadUserSettingsUseCase(userSettingsRepository: userSettingRepository)
+        let saveUserSettingsUseCase = SaveUserSettingsUseCase(userSettingsRepository: userSettingRepository)
+        
+        // 3) Get view model instance: presentation layer. Injecting all needed use cases.
+        let settingsSelectionViewModel = SettingsSelectionViewModel(settingSection: settingSection, userSettingsUseCase: userSettingsUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase, saveUserSettingsUseCase: saveUserSettingsUseCase)
+        
+        // 4) Injecting coordinator for presentation layer
         settingsSelectionViewModel.coordinator = coordinator as? SettingsSelectionViewControllerDelegate
         
-        // Injecting view model
+        // 5) Injecting view model to the view
         settingsSelectionViewController.viewModel = settingsSelectionViewModel
         
         return settingsSelectionViewController

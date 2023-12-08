@@ -13,17 +13,25 @@ final class SearchModuleBuilder: ModuleBuilder {
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
+        // Get ViewController instance: view layer
         let searchViewController = SearchViewController()
         
-        // Dependency injection
+        // Dependency injections for ViewModel, building the presentation, domain and data layers
+        // 1) Get repository instances: data layer
         let dataRepository = getRepository(testMode: testMode)
-        let settingsRepository = getSettingsRepository(testMode: testMode)
         let userSettingsRepository = getUserSettingsRepository(testMode: testMode)
-        let useCase = SearchUseCase(dataRepository: dataRepository, sourceSettingsRepository: settingsRepository, userSettingsRepository: userSettingsRepository)
-        let searchViewModel = SearchViewModel(useCase: useCase)
+        
+        // 2) Get use case instances: domain layer
+        let searchUseCase = SearchUseCase(dataRepository: dataRepository)
+        let loadUserSettingsUseCase = LoadUserSettingsUseCase(userSettingsRepository: userSettingsRepository)
+        
+        // 3) Get view model instance: presentation layer. Injecting all needed use cases.
+        let searchViewModel = SearchViewModel(searchUseCase: searchUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase)
+        
+        // 4) Injecting coordinator for presentation layer
         searchViewModel.coordinator = coordinator as? SearchViewControllerDelegate
         
-        // Injecting view model
+        // 5) Injecting view model to the view
         searchViewController.viewModel = searchViewModel
         
         return searchViewController
@@ -33,20 +41,12 @@ final class SearchModuleBuilder: ModuleBuilder {
         return SuperNewsDataRepository(apiService: getDataService(testMode: testMode))
     }
     
-    private func getSettingsRepository(testMode: Bool) -> SuperNewsSourceSettingsRepository {
-        return SuperNewsSourceUserDefaultsRepository(settingsService: getSettingsService(testMode: testMode))
-    }
-    
     private func getUserSettingsRepository(testMode: Bool) -> SuperNewsSettingsRepository {
         return SuperNewsUserSettingsRepository(settingsService: getUserSettingsService(testMode: testMode))
     }
     
     private func getDataService(testMode: Bool) -> SuperNewsDataAPIService {
         return testMode ? SuperNewsMockDataAPIService(forceFetchFailure: false) : SuperNewsNetworkAPIService()
-    }
-    
-    private func getSettingsService(testMode: Bool) -> SuperNewsLocalSettings {
-        return testMode ? SuperNewsMockLocalSettings() : SuperNewsUserDefaultsLocalSettings()
     }
     
     private func getUserSettingsService(testMode: Bool) -> SuperNewsUserSettings {

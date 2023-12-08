@@ -12,7 +12,11 @@ final class SearchViewModel {
     // Delegate
     weak var coordinator: SearchViewControllerDelegate?
     
-    private let useCase: SearchUseCaseProtocol
+    // Use cases
+    private let searchUseCase: SearchUseCaseProtocol
+    private let loadUserSettingsUseCase: LoadUserSettingsUseCase
+    
+    // View models for views
     private var cellViewModels = [NewsCellViewModel]()
     private var articleViewModels = [ArticleViewModel]()
     
@@ -42,8 +46,9 @@ final class SearchViewModel {
         return languageSetting.eraseToAnyPublisher()
     }
     
-    init(useCase: SearchUseCaseProtocol) {
-        self.useCase = useCase
+    init(searchUseCase: SearchUseCaseProtocol, loadUserSettingsUseCase: LoadUserSettingsUseCase) {
+        self.searchUseCase = searchUseCase
+        self.loadUserSettingsUseCase = loadUserSettingsUseCase
         setBindings()
     }
     
@@ -61,7 +66,7 @@ final class SearchViewModel {
         print("[SearchViewModel] Loading saved user language if existing...")
         
         Task {
-            let result = await useCase.loadUserCountryLanguageSetting()
+            let result = await loadUserSettingsUseCase.execute()
             
             // If it fails, it will use the default one.
             switch result {
@@ -86,7 +91,7 @@ final class SearchViewModel {
         
         Task {
             isLoading.send(true)
-            let result = await useCase.execute(searchQuery: searchQuery, language: savedLocalLanguage.code, sortBy: "publishedAt")
+            let result = await searchUseCase.execute(searchQuery: searchQuery, language: savedLocalLanguage.code, sortBy: "publishedAt")
             await handleResult(with: result)
         }
     }

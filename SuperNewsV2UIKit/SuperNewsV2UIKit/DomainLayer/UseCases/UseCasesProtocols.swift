@@ -12,7 +12,7 @@ protocol TopHeadlinesUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
-protocol SearchUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
+protocol SearchUseCaseProtocol {
     func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
@@ -49,9 +49,8 @@ protocol ReverseGeocodingUseCaseProtocol {
 }
 
 // User settings use cases
-protocol UserSettingsUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
+protocol UserSettingsUseCaseProtocol {
     func execute(with option: String) async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError>
-    func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
 }
 
 protocol ResetUserSettingsUseCaseProtocol {
@@ -59,7 +58,7 @@ protocol ResetUserSettingsUseCaseProtocol {
 }
 
 protocol LoadUserSettingsUseCaseProtocol {
-    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
+    func execute() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
 }
 
 protocol SaveUserSettingsUseCaseProtocol {

@@ -19,12 +19,17 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let userSettingsRepository = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
+        let userSettingsRepository1 = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
         let userSettingsRepository2 = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "country"))
         let localFileRepository = SuperNewsJSONFileRepository(localFileService: SuperNewsMockFileService(forceLoadFailure: false))
         
-        viewModel = SettingsSelectionViewModel(settingSection: .newsLanguage, useCase: UserSettingsUseCase(userSettingsRepository: userSettingsRepository, localFileRepository: localFileRepository))
-        viewModel2 = SettingsSelectionViewModel(settingSection: .newsCountry, useCase: UserSettingsUseCase(userSettingsRepository: userSettingsRepository2, localFileRepository: localFileRepository))
+        let userSettingsUseCase = UserSettingsUseCase(localFileRepository: localFileRepository)
+        let loadUserSettingsUseCase1 = LoadUserSettingsUseCase(userSettingsRepository: userSettingsRepository1)
+        let loadUserSettingsUseCase2 = LoadUserSettingsUseCase(userSettingsRepository: userSettingsRepository2)
+        let saveUserSettingsUseCase = SaveUserSettingsUseCase(userSettingsRepository: userSettingsRepository1)
+        
+        viewModel = SettingsSelectionViewModel(settingSection: .newsLanguage, userSettingsUseCase: userSettingsUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase1, saveUserSettingsUseCase: saveUserSettingsUseCase)
+        viewModel2 = SettingsSelectionViewModel(settingSection: .newsCountry, userSettingsUseCase: userSettingsUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase2, saveUserSettingsUseCase: saveUserSettingsUseCase)
     }
     
     func testSettingLanguageSectionName() {

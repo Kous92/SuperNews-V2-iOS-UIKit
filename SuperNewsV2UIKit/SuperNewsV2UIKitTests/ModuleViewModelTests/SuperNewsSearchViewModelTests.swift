@@ -17,9 +17,10 @@ final class SuperNewsSearchViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let dataRepository = SuperNewsDataRepository(apiService: SuperNewsMockDataAPIService(forceFetchFailure: false))
-        let settingsRepository = SuperNewsSourceUserDefaultsRepository(settingsService: SuperNewsMockLocalSettings())
         let userSettingsRepository = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
-        viewModel = SearchViewModel(useCase: SearchUseCase(dataRepository: dataRepository, sourceSettingsRepository: settingsRepository, userSettingsRepository: userSettingsRepository))
+        let searchUseCase = SearchUseCase(dataRepository: dataRepository)
+        let loadUserSettingsUseCase = LoadUserSettingsUseCase(userSettingsRepository: userSettingsRepository)
+        viewModel = SearchViewModel(searchUseCase: searchUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase)
     }
 
     func testSearchNewsWithQuery() {

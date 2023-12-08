@@ -89,7 +89,7 @@ final class TopHeadlinesViewModel {
         print("[TopHeadlinesViewModel] Loading saved user country if existing...")
         
         Task {
-            let result = await loadUserSettingsUseCase.loadUserCountryLanguageSetting()
+            let result = await loadUserSettingsUseCase.execute()
             
             switch result {
                 case .success(let userSetting):

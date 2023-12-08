@@ -15,7 +15,9 @@ final class SuperNewsSettingsViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let userSettingsRepository = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
-        viewModel = SettingsViewModel(useCase: ResetUserSettingsUseCase(userSettingsRepository: userSettingsRepository))
+        let resetUserSettingsUseCase = ResetUserSettingsUseCase(userSettingsRepository: userSettingsRepository)
+        
+        viewModel = SettingsViewModel(resetUserSettingsUseCase: resetUserSettingsUseCase)
     }
     
     func testLoadSettingsSections() {

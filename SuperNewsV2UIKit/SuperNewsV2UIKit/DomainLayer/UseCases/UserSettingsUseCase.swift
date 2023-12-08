@@ -9,11 +9,9 @@ import Foundation
 
 /// This use case loads all available options for settings
 final class UserSettingsUseCase: UserSettingsUseCaseProtocol {
-    private let userSettingsRepository: SuperNewsUserSettingsRepository
     private let localFileRepository: SuperNewsLocalFileRepository
     
-    init(userSettingsRepository: SuperNewsUserSettingsRepository, localFileRepository: SuperNewsLocalFileRepository) {
-        self.userSettingsRepository = userSettingsRepository
+    init(localFileRepository: SuperNewsLocalFileRepository) {
         self.localFileRepository = localFileRepository
     }
     
@@ -23,14 +21,6 @@ final class UserSettingsUseCase: UserSettingsUseCaseProtocol {
         } else {
             return handleResultWithLanguages(with: await localFileRepository.loadLanguages())
         }
-    }
-    
-    func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError> {
-        return await userSettingsRepository.saveUserSetting(userSetting: countryLanguageSetting)
-    }
-    
-    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
-        return await userSettingsRepository.loadUserSetting()
     }
     
     private func handleResultWithCountries(with result: Result<[CountryDTO], SuperNewsLocalFileError>) -> Result<[CountrySettingViewModel], SuperNewsLocalFileError> {

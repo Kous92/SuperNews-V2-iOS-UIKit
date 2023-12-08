@@ -12,7 +12,10 @@ final class SettingsSelectionViewModel {
     weak var coordinator: SettingsSelectionViewControllerDelegate?
     
     private let settingSection: SettingsSection
-    private let useCase: UserSettingsUseCaseProtocol
+    private let userSettingsUseCase: UserSettingsUseCaseProtocol
+    private let loadUserSettingsUseCase: LoadUserSettingsUseCaseProtocol
+    private let saveUserSettingsUseCase: SaveUserSettingsUseCaseProtocol
+    
     private var cellViewModels = [CountrySettingViewModel]()
     private var filteredCellViewModels = [CountrySettingViewModel]()
     private var actualSelectedIndex = 0
@@ -35,9 +38,11 @@ final class SettingsSelectionViewModel {
         return settingOptionResult.eraseToAnyPublisher()
     }
     
-    init(settingSection: SettingsSection, useCase: UserSettingsUseCaseProtocol) {
+    init(settingSection: SettingsSection, userSettingsUseCase: UserSettingsUseCaseProtocol, loadUserSettingsUseCase: LoadUserSettingsUseCaseProtocol, saveUserSettingsUseCase: SaveUserSettingsUseCaseProtocol) {
         self.settingSection = settingSection
-        self.useCase = useCase
+        self.userSettingsUseCase = userSettingsUseCase
+        self.loadUserSettingsUseCase = loadUserSettingsUseCase
+        self.saveUserSettingsUseCase = saveUserSettingsUseCase
         
         let locale = Locale.current
         let languageCode = locale.languageCode == "fr" ? "fr" : "en"
@@ -107,14 +112,14 @@ final class SettingsSelectionViewModel {
     private func loadCountries() {
         Task {
             print("[SettingsSelectionViewModel] Loading countries")
-            await handleResult(with: await useCase.execute(with: settingSection.description))
+            await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
         }
     }
     
     private func loadLanguages() {
         Task {
             print("[SettingsSelectionViewModel] Loading languages")
-            await handleResult(with: await useCase.execute(with: settingSection.description))
+            await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
         }
     }
     
@@ -133,7 +138,7 @@ final class SettingsSelectionViewModel {
     }
     
     private func loadSetting() async {
-        let result = await useCase.loadUserCountryLanguageSetting()
+        let result = await loadUserSettingsUseCase.execute()
         
         switch result {
         case .success(let userSetting):
@@ -200,7 +205,7 @@ final class SettingsSelectionViewModel {
         
         Task {
             await unsetSavedViewModel()
-            let result = await useCase.saveSetting(with: savedSelectedSetting)
+            let result = await saveUserSettingsUseCase.execute(with: savedSelectedSetting)
             
             switch result {
             case .success():

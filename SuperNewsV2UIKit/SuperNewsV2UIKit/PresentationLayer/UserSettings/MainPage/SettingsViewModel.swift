@@ -11,13 +11,13 @@ final class SettingsViewModel {
     weak var coordinator: SettingsViewControllerDelegate?
     
     // For resetting user settings to default settings
-    private let useCase: ResetUserSettingsUseCaseProtocol
+    private let resetUserSettingsUseCase: ResetUserSettingsUseCaseProtocol
     
     // private let useCase: UserSettingsUseCaseProtocol
     private var sectionViewModels = [SettingsSectionViewModel]()
     
-    init(useCase: ResetUserSettingsUseCaseProtocol) {
-        self.useCase = useCase
+    init(resetUserSettingsUseCase: ResetUserSettingsUseCaseProtocol) {
+        self.resetUserSettingsUseCase = resetUserSettingsUseCase
         loadSettingsSections()
     }
     
@@ -61,7 +61,7 @@ extension SettingsViewModel {
     private func resetUserSettings() {
         Task {
             print("[SettingsViewModel] Resetting user settings to default.")
-            let result = await useCase.execute()
+            let result = await resetUserSettingsUseCase.execute()
             
             switch result {
                 case .success():
