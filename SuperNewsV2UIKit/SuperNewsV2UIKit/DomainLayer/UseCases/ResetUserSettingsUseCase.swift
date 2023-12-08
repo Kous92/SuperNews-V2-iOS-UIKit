@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// This use case resets user settings.
 final class ResetUserSettingsUseCase: ResetUserSettingsUseCaseProtocol {
     private let userSettingsRepository: SuperNewsUserSettingsRepository
     

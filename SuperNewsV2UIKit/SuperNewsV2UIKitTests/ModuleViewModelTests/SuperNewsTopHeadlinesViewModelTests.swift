@@ -17,9 +17,14 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let dataRepository = SuperNewsDataRepository(apiService: SuperNewsMockDataAPIService(forceFetchFailure: false))
-        let settingsRepository = SuperNewsSourceUserDefaultsRepository(settingsService: SuperNewsMockLocalSettings())
+        let sourceSettingsRepository = SuperNewsSourceUserDefaultsRepository(settingsService: SuperNewsMockLocalSettings())
         let userSettingsRepository = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
-        viewModel = TopHeadlinesViewModel(useCase: TopHeadlinesUseCase(dataRepository: dataRepository, sourceSettingsRepository: settingsRepository, userSettingsRepository: userSettingsRepository))
+        
+        let topHeadlinesUseCase = TopHeadlinesUseCase(dataRepository: dataRepository)
+        let loadSavedSelectedSourceUseCase = LoadSavedSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
+        let loadUserSettingsUseCase = LoadUserSettingsUseCase(userSettingsRepository: userSettingsRepository)
+        
+        viewModel = TopHeadlinesViewModel(topHeadlinesUseCase: topHeadlinesUseCase, loadSavedSelectedSourceUseCase: loadSavedSelectedSourceUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase)
     }
 
     func testInitNewsCategories() {
@@ -28,9 +33,9 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
         // The binding before executing the loading of data.
         viewModel?.categoryUpdateResultPublisher
             .receive(on: RunLoop.main)
-            .sink { updated in
-                print("Updated: \(updated)")
-                if updated {
+            .sink { reload, indexUpdate in
+                print("Updated: \(reload)")
+                if reload {
                     print("Fulfilled")
                     expectation1.fulfill()
                 }

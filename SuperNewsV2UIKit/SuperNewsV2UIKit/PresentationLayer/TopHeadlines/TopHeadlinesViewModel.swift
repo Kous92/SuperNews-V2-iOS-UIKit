@@ -12,7 +12,12 @@ final class TopHeadlinesViewModel {
     // Delegate
     weak var coordinator: TopHeadlinesViewControllerDelegate?
     
-    private let useCase: TopHeadlinesUseCaseProtocol
+    // Use cases
+    private let topHeadlinesUseCase: TopHeadlinesUseCaseProtocol
+    private let loadSavedSelectedSourceUseCase: LoadSavedSelectedSourceUseCaseProtocol
+    private let loadUserSettingsUseCase: LoadUserSettingsUseCaseProtocol
+    
+    // View models for views
     private var categoryViewModels = [CategoryCellViewModel]()
     private var cellViewModels = [NewsCellViewModel]()
     private var articleViewModels = [ArticleViewModel]()
@@ -47,8 +52,10 @@ final class TopHeadlinesViewModel {
         return isLoading.eraseToAnyPublisher()
     }
     
-    init(useCase: TopHeadlinesUseCaseProtocol) {
-        self.useCase = useCase
+    init(topHeadlinesUseCase: TopHeadlinesUseCaseProtocol, loadSavedSelectedSourceUseCase: LoadSavedSelectedSourceUseCaseProtocol, loadUserSettingsUseCase: LoadUserSettingsUseCaseProtocol) {
+        self.topHeadlinesUseCase = topHeadlinesUseCase
+        self.loadSavedSelectedSourceUseCase = loadSavedSelectedSourceUseCase
+        self.loadUserSettingsUseCase = loadUserSettingsUseCase
     }
     
     // MARK: - Category management
@@ -60,7 +67,7 @@ final class TopHeadlinesViewModel {
         print("[TopHeadlinesViewModel] Loading saved source if existing...")
         
         Task {
-            let result = await useCase.loadSavedSelectedSource()
+            let result = await loadSavedSelectedSourceUseCase.execute()
             
             switch result {
                 case .success(let savedSource):
@@ -82,7 +89,7 @@ final class TopHeadlinesViewModel {
         print("[TopHeadlinesViewModel] Loading saved user country if existing...")
         
         Task {
-            let result = await useCase.loadUserCountryLanguageSetting()
+            let result = await loadUserSettingsUseCase.loadUserCountryLanguageSetting()
             
             switch result {
                 case .success(let userSetting):
@@ -148,7 +155,7 @@ final class TopHeadlinesViewModel {
         Task {
             fetchedData["local"] = savedLocalCountry.code
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .localCountryNews(countryCode: savedLocalCountry.code))
+            let result = await topHeadlinesUseCase.execute(topHeadlinesOption: .localCountryNews(countryCode: savedLocalCountry.code))
             await handleResult(with: result)
         }
     }
@@ -157,7 +164,7 @@ final class TopHeadlinesViewModel {
         Task {
             fetchedData["source"] = savedMediaSource.id
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource.id))
+            let result = await topHeadlinesUseCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource.id))
             await handleResult(with: result)
         }
     }
@@ -166,7 +173,7 @@ final class TopHeadlinesViewModel {
         Task {
             fetchedData[category] = savedLocalCountry.code
             isLoading.send(true)
-            let result = await useCase.execute(topHeadlinesOption: .categoryNews(name: category, countryCode: savedLocalCountry.code))
+            let result = await topHeadlinesUseCase.execute(topHeadlinesOption: .categoryNews(name: category, countryCode: savedLocalCountry.code))
             await handleResult(with: result)
         }
     }

@@ -13,17 +13,27 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
+        // Get ViewController instance: view layer
         let topHeadlinesViewController = TopHeadlinesViewController()
         
-        // Dependency injection
+        // Dependency injections for ViewModel, building the presentation, domain and data layers
+        // 1) Get repository instances: data layer
         let dataRepository = getRepository(testMode: testMode)
-        let settingsRepository = getSettingsRepository(testMode: testMode)
+        let sourceSettingsRepository = getSettingsRepository(testMode: testMode)
         let userSettingsRepository = getUserSettingsRepository(testMode: testMode)
-        let useCase = TopHeadlinesUseCase(dataRepository: dataRepository, sourceSettingsRepository: settingsRepository, userSettingsRepository: userSettingsRepository)
-        let topHeadlinesViewModel = TopHeadlinesViewModel(useCase: useCase)
+        
+        // 2) Get use case instances: domain layer
+        let topHeadlinesUseCase = TopHeadlinesUseCase(dataRepository: dataRepository)
+        let loadSavedSelectedSourceUseCase = LoadSavedSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
+        let loadUserSettingsUseCase = LoadUserSettingsUseCase(userSettingsRepository: userSettingsRepository)
+        
+        // 3) Get view model instance: presentation layer. Injecting all needed use cases.
+        let topHeadlinesViewModel = TopHeadlinesViewModel(topHeadlinesUseCase: topHeadlinesUseCase, loadSavedSelectedSourceUseCase: loadSavedSelectedSourceUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase)
+        
+        // 4) Injecting coordinator for presentation layer
         topHeadlinesViewModel.coordinator = coordinator as? TopHeadlinesViewControllerDelegate
         
-        // Injecting view model
+        // Injecting view model to the view
         topHeadlinesViewController.viewModel = topHeadlinesViewModel
         
         return topHeadlinesViewController

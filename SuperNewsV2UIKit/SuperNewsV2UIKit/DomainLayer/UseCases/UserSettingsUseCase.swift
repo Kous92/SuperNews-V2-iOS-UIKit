@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// This use case loads all available options for settings
 final class UserSettingsUseCase: UserSettingsUseCaseProtocol {
     private let userSettingsRepository: SuperNewsUserSettingsRepository
     private let localFileRepository: SuperNewsLocalFileRepository

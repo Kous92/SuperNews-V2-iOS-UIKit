@@ -30,7 +30,6 @@ final class SearchUseCase: SearchUseCaseProtocol {
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {
         switch result {
             case .success(let articles):
-                // print("DTOs:\n\(articles)")
                 return .success(parseViewModels(with: articles))
             case .failure(let error):
                 return .failure(error)

@@ -8,9 +8,12 @@
 import Foundation
 import CoreLocation
 
-protocol TopHeadlinesUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
+protocol TopHeadlinesUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
-    func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
+}
+
+protocol SearchUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
+    func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
 protocol CountryNewsUseCaseProtocol {
@@ -22,14 +25,33 @@ protocol SourceSelectionUseCaseProtocol {
     func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
 }
 
-protocol SearchUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
-    func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+protocol LoadSavedSelectedSourceUseCaseProtocol {
+    func execute() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
 }
 
+protocol SaveSelectedSourceUseCaseProtocol {
+    func execute(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
+}
+
+// Map use cases
 protocol MapUseCaseProtocol {
     func execute() async -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError>
     func fetchUserLocation() async -> Result<CLLocation, SuperNewsGPSError>
     func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError>
+}
+
+protocol FetchUserLocationUseCaseProtocol {
+    func execute() async -> Result<CLLocation, SuperNewsGPSError>
+}
+
+protocol ReverseGeocodingUseCaseProtocol {
+    func execute(location: CLLocation) async -> Result<String, SuperNewsGPSError>
+}
+
+// User settings use cases
+protocol UserSettingsUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
+    func execute(with option: String) async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError>
+    func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
 }
 
 protocol ResetUserSettingsUseCaseProtocol {
@@ -40,7 +62,6 @@ protocol LoadUserSettingsUseCaseProtocol {
     func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
 }
 
-protocol UserSettingsUseCaseProtocol: LoadUserSettingsUseCaseProtocol {
-    func execute(with option: String) async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError>
-    func saveSetting(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
+protocol SaveUserSettingsUseCaseProtocol {
+    func execute(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
 }

@@ -7,15 +7,12 @@
 
 import Foundation
 
+/// This use case will fetch the top headlines news from the API
 final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
     private let dataRepository: SuperNewsRepository
-    private let sourceSettingsRepository: SuperNewsSourceSettingsRepository
-    private let userSettingsRepository: SuperNewsSettingsRepository
     
-    init(dataRepository: SuperNewsRepository, sourceSettingsRepository: SuperNewsSourceSettingsRepository, userSettingsRepository: SuperNewsSettingsRepository) {
+    init(dataRepository: SuperNewsRepository) {
         self.dataRepository = dataRepository
-        self.sourceSettingsRepository = sourceSettingsRepository
-        self.userSettingsRepository = userSettingsRepository
     }
     
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError> {
@@ -27,15 +24,6 @@ final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
             case .localCountryNews(countryCode: let countryCode):
                 return handleResult(with: await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
         }
-    }
-    
-    func loadSavedSelectedSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError> {
-        return await sourceSettingsRepository.loadSelectedMediaSource()
-    }
-    
-    /// It loads here the country setting for the top headlines.
-    func loadUserCountryLanguageSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
-        return await userSettingsRepository.loadUserSetting()
     }
     
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {

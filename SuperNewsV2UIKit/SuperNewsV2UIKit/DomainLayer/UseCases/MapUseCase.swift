@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+/// This use case loads all countries to the map
 final class MapUseCase: MapUseCaseProtocol {
     private let locationRepository: SuperNewsLocationRepository
     private let localFileRepository: SuperNewsLocalFileRepository
@@ -32,7 +33,6 @@ final class MapUseCase: MapUseCaseProtocol {
     private func handleResult(with result: Result<[CountryDTO], SuperNewsLocalFileError>) -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {
         switch result {
             case .success(let countries):
-                // print("DTOs:\n\(articles)")
                 return .success(parseViewModels(with: countries))
             case .failure(let error):
                 return .failure(error)

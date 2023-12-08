@@ -79,9 +79,10 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
         XCTAssertGreaterThan(viewModel?.numberOfRowsInTableView() ?? 0, 0)
         
         let index = try XCTUnwrap(viewModel?.getActualSelectedIndex())
-        XCTAssertEqual(index, 0)
+        XCTAssertEqual(index, 1)
         
-        let cellViewModel = try XCTUnwrap(viewModel?.getCellViewModel(at: IndexPath(row: 0, section: 0)))
+        
+        let cellViewModel = try XCTUnwrap(viewModel?.getCellViewModel(at: IndexPath(row: 2, section: 0)))
         XCTAssertEqual(cellViewModel.name, String(localized: "french"))
     }
     
