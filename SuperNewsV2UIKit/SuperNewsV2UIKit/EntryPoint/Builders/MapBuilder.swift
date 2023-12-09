@@ -13,17 +13,26 @@ final class MapModuleBuilder: ModuleBuilder {
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
+        // Get ViewController instance: view layer
         let mapViewController = MapViewController()
         
-        // Dependency injection
+        // Dependency injections for ViewModel, building the presentation, domain and data layers
+        // 1) Get repository instances: data layer
         let locationRepository = getLocationRepository(testMode: testMode)
         let localFileRepository = getLocalFileRepository(testMode: testMode)
-        let useCase = MapUseCase(locationRepository: locationRepository, localFileRepository: localFileRepository)
-        let mapViewModel = MapViewModel(useCase: useCase)
         
+        // 2) Get use case instances: domain layer
+        let mapUseCase = MapUseCase(localFileRepository: localFileRepository)
+        let fetchUserLocationUseCase = FetchUserLocationUseCase(locationRepository: locationRepository)
+        let reverseGeocodingUseCase = ReverseGeocodingUseCase(locationRepository: locationRepository)
+        
+        // 3) Get view model instance: presentation layer. Injecting all needed use cases.
+        let mapViewModel = MapViewModel(mapUseCase: mapUseCase, fetchUserLocationUseCase: fetchUserLocationUseCase, reverseGeocodingUseCase: reverseGeocodingUseCase)
+        
+        // 4) Injecting coordinator for presentation layer
         mapViewModel.coordinator = coordinator as? MapViewControllerDelegate
         
-        // Injecting view model
+        // 5) Injecting view model to the view
         mapViewController.viewModel = mapViewModel
         
         return mapViewController

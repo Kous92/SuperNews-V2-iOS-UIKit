@@ -19,7 +19,10 @@ final class SuperNewsMapViewModelTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let locationRepository = SuperNewsGPSRepository(locationService: SuperNewsMockLocationService(forceFetchFailure: false))
         let localFileRepository = SuperNewsJSONFileRepository(localFileService: SuperNewsMockFileService(forceLoadFailure: false))
-        viewModel = MapViewModel(useCase: MapUseCase(locationRepository: locationRepository, localFileRepository: localFileRepository))
+        let mapUseCase = MapUseCase(localFileRepository: localFileRepository)
+        let fetchUserLocationUseCase = FetchUserLocationUseCase(locationRepository: locationRepository)
+        let reverseGeocodingUseCase = ReverseGeocodingUseCase(locationRepository: locationRepository)
+        viewModel = MapViewModel(mapUseCase: mapUseCase, fetchUserLocationUseCase: fetchUserLocationUseCase, reverseGeocodingUseCase: reverseGeocodingUseCase)
         
         viewModel?.loadCountries()
     }

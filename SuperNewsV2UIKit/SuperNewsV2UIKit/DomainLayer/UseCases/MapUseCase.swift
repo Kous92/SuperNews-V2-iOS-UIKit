@@ -10,24 +10,14 @@ import CoreLocation
 
 /// This use case loads all countries to the map
 final class MapUseCase: MapUseCaseProtocol {
-    private let locationRepository: SuperNewsLocationRepository
     private let localFileRepository: SuperNewsLocalFileRepository
     
-    init(locationRepository: SuperNewsLocationRepository, localFileRepository: SuperNewsLocalFileRepository) {
-        self.locationRepository = locationRepository
+    init(localFileRepository: SuperNewsLocalFileRepository) {
         self.localFileRepository = localFileRepository
-    }
-    
-    func fetchUserLocation() async -> Result<CLLocation, SuperNewsGPSError> {
-        return await locationRepository.fetchLocation()
     }
     
     func execute() async -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {
         return handleResult(with: await localFileRepository.loadCountries())
-    }
-    
-    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
-        return await locationRepository.reverseGeocoding(location: location)
     }
     
     private func handleResult(with result: Result<[CountryDTO], SuperNewsLocalFileError>) -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {

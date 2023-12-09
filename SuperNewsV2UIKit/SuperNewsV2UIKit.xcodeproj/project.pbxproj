@@ -134,6 +134,7 @@
 		4B9B22E62B23BEF400C29558 /* ReverseGeocodingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9B22E52B23BEF400C29558 /* ReverseGeocodingUseCase.swift */; };
 		4B9B22E82B23C00500C29558 /* LoadUserSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9B22E72B23C00500C29558 /* LoadUserSettingsUseCase.swift */; };
 		4B9B22EA2B23C01200C29558 /* SaveUserSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9B22E92B23C01200C29558 /* SaveUserSettingsUseCase.swift */; };
+		4B9CE0C22B251EA900FF5A77 /* FetchUserLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CE0C12B251EA900FF5A77 /* FetchUserLocationUseCase.swift */; };
 		4B9E617F2A1AC26300485BE3 /* CountryAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E617E2A1AC26300485BE3 /* CountryAnnotationView.swift */; };
 		4B9E61812A1AD3CD00485BE3 /* CountryAnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E61802A1AD3CD00485BE3 /* CountryAnnotationViewModel.swift */; };
 		4B9E61832A1AD67500485BE3 /* CountryPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E61822A1AD67500485BE3 /* CountryPointAnnotation.swift */; };
@@ -336,6 +337,7 @@
 		4B9B22E52B23BEF400C29558 /* ReverseGeocodingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodingUseCase.swift; sourceTree = "<group>"; };
 		4B9B22E72B23C00500C29558 /* LoadUserSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserSettingsUseCase.swift; sourceTree = "<group>"; };
 		4B9B22E92B23C01200C29558 /* SaveUserSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserSettingsUseCase.swift; sourceTree = "<group>"; };
+		4B9CE0C12B251EA900FF5A77 /* FetchUserLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserLocationUseCase.swift; sourceTree = "<group>"; };
 		4B9E617E2A1AC26300485BE3 /* CountryAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAnnotationView.swift; sourceTree = "<group>"; };
 		4B9E61802A1AD3CD00485BE3 /* CountryAnnotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAnnotationViewModel.swift; sourceTree = "<group>"; };
 		4B9E61822A1AD67500485BE3 /* CountryPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPointAnnotation.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				4B9B22E52B23BEF400C29558 /* ReverseGeocodingUseCase.swift */,
 				4B9B22E72B23C00500C29558 /* LoadUserSettingsUseCase.swift */,
 				4B9B22E92B23C01200C29558 /* SaveUserSettingsUseCase.swift */,
+				4B9CE0C12B251EA900FF5A77 /* FetchUserLocationUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1297,6 +1300,7 @@
 				4B2C92AB2A6154EB00D23196 /* SettingsViewController.swift in Sources */,
 				4B8DC82E2A256524000E9490 /* SuperNewsJSONFileService.swift in Sources */,
 				4B23DE3E2A1D0AEE0029B5D6 /* SuperNewsLocationService.swift in Sources */,
+				4B9CE0C22B251EA900FF5A77 /* FetchUserLocationUseCase.swift in Sources */,
 				4B4467A82A19703900796214 /* MapViewController.swift in Sources */,
 				4B64686129E6F15600F35682 /* SuperNewsAPIError.swift in Sources */,
 				4BD88CB429E6BAAD000369DE /* SceneDelegate.swift in Sources */,

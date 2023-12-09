@@ -36,8 +36,6 @@ protocol SaveSelectedSourceUseCaseProtocol {
 // Map use cases
 protocol MapUseCaseProtocol {
     func execute() async -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError>
-    func fetchUserLocation() async -> Result<CLLocation, SuperNewsGPSError>
-    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError>
 }
 
 protocol FetchUserLocationUseCaseProtocol {

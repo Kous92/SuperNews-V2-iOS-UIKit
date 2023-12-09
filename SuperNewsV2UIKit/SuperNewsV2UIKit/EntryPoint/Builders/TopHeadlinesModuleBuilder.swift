@@ -33,7 +33,7 @@ final class TopHeadlinesModuleBuilder: ModuleBuilder {
         // 4) Injecting coordinator for presentation layer
         topHeadlinesViewModel.coordinator = coordinator as? TopHeadlinesViewControllerDelegate
         
-        // Injecting view model to the view
+        // 5) Injecting view model to the view
         topHeadlinesViewController.viewModel = topHeadlinesViewModel
         
         return topHeadlinesViewController

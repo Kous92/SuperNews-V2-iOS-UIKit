@@ -15,7 +15,11 @@ final class MapViewModel {
     
     // Delegate
     weak var coordinator: MapViewControllerDelegate?
-    private let useCase: MapUseCaseProtocol
+    
+    // Use cases
+    private let mapUseCase: MapUseCaseProtocol
+    private let fetchUserLocationUseCase: FetchUserLocationUseCaseProtocol
+    private let reverseGeocodingUseCase: ReverseGeocodingUseCaseProtocol
     
     // User position on map
     private var userMapPosition = CLLocation()
@@ -40,15 +44,18 @@ final class MapViewModel {
         return countryAnnotations.eraseToAnyPublisher()
     }
     
-    init(useCase: MapUseCaseProtocol) {
-        self.useCase = useCase
+    init(mapUseCase: MapUseCaseProtocol, fetchUserLocationUseCase: FetchUserLocationUseCaseProtocol, reverseGeocodingUseCase: ReverseGeocodingUseCaseProtocol) {
+        self.mapUseCase = mapUseCase
+        self.fetchUserLocationUseCase = fetchUserLocationUseCase
+        self.reverseGeocodingUseCase = reverseGeocodingUseCase
+        
         setBindings()
     }
     
     func getLocation() {
         Task {
             print("[MapViewModel] Getting user location")
-            let result = await useCase.fetchUserLocation()
+            let result = await fetchUserLocationUseCase.execute()
             
             switch result {
                 case .success(let userCoordinates):
@@ -67,7 +74,7 @@ final class MapViewModel {
     func loadCountries() {
         Task {
             print("[MapViewModel] Loading countries")
-            let result = await useCase.execute()
+            let result = await mapUseCase.execute()
             
             switch result {
                 case .success(let annotations):
@@ -85,7 +92,7 @@ final class MapViewModel {
     }
     
     private func positionReverseGeocoding() async {
-        let result = await useCase.reverseGeocoding(location: userMapPosition)
+        let result = await reverseGeocodingUseCase.execute(location: userMapPosition)
         
         switch result {
             case .success(let address):
