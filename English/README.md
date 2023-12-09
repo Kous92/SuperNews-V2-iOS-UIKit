@@ -110,6 +110,7 @@ There is the different tools that I use in this project:
 - **Kingfisher**: 3rd party framework to download from Internet and cache images in an asynchronous way.
 - **Alamofire**: 3rd party framework to use in more elegant way the network requests.
 - **AsyncLocationKit**: 3rd party framework to use `CoreLocation` with **Swift Concurrency** (`async/await`) logic instead of `delegate` or **completion handlers**.
+- **Firebase Crashlytics**: 3rd party Google's from **Firebase** platform, here with **Crashlytics** application to report online every crash from the  **iOS** app. It allows from **Crashlytics** online console to see all reported crashes et diagnosing them to ease the investigations and the debug.
 
 My application supports also **localization**, currently in french and english, and I use the new Xcode 15 feature which is **String catalog** (`.xcstrings` format), which is easier to set and use than the older way.
 

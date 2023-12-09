@@ -110,6 +110,7 @@ Voici les différents outils que j'utilise dans ce projet:
 - **Kingfisher**: Framework tiers pour télécharger depuis Internet et mettre en cache des images de manière asynchrone.
 - **Alamofire**: Framework tiers pour utiliser de manière plus élégante les requêtes réseau.
 - **AsyncLocationKit**: Framework pour exploiter `CoreLocation` avec la logique de **Swift Concurrency** (`async/await`) au lieu des `delegate` ou des **completion handlers** (closure: bloc de code qui est utilisé pour gérer l'état de complétion d'une tâche).
+- **Firebase Crashlytics**: Framework de Google de la plateforme **Firebase**, ici avec l'application **Crashlytics** pour rapporter en ligne sur tous les crashs de l'application **iOS**. Cela permet ainsi via la console en ligne de **Crashlytics** de voir tous les crashs rapportés et d'analyser les crashs pour faciliter les investigations et le débug.
 
 Mon application supporte également le **multi-langues**, actuellement en français et en anglais, et j'utilise la nouveauté d'Xcode 15 qu'est le `String catalog` (format `.xcstrings`), qui est bien plus facile à utiliser et à configurer que l'ancienne façon.
 
