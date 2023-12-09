@@ -121,6 +121,7 @@
 		4B90748A2AAF7EE800E559FF /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9074892AAF7EE800E559FF /* KeysTracker.swift */; };
 		4B9074922AAF967C00E559FF /* SuperNewsV2UIKitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9074912AAF967C00E559FF /* SuperNewsV2UIKitUITests.swift */; };
 		4B90749D2AAFA45000E559FF /* SuperNewsTopHeadlinesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90749C2AAFA45000E559FF /* SuperNewsTopHeadlinesUITests.swift */; };
+		4B90FB332B252F5A0041B296 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B90FB322B252F5A0041B296 /* GoogleService-Info.plist */; };
 		4B95B1782A803B16001437C7 /* SuperNewsSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95B1772A803B16001437C7 /* SuperNewsSettingsRepository.swift */; };
 		4B95B17A2A803CCE001437C7 /* SuperNewsUserSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95B1792A803CCE001437C7 /* SuperNewsUserSettingsRepository.swift */; };
 		4B95B17C2A804070001437C7 /* CountrySettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95B17B2A804070001437C7 /* CountrySettingViewModel.swift */; };
@@ -135,6 +136,8 @@
 		4B9B22E82B23C00500C29558 /* LoadUserSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9B22E72B23C00500C29558 /* LoadUserSettingsUseCase.swift */; };
 		4B9B22EA2B23C01200C29558 /* SaveUserSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9B22E92B23C01200C29558 /* SaveUserSettingsUseCase.swift */; };
 		4B9CE0C22B251EA900FF5A77 /* FetchUserLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CE0C12B251EA900FF5A77 /* FetchUserLocationUseCase.swift */; };
+		4B9CE0C52B25283800FF5A77 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4B9CE0C42B25283800FF5A77 /* FirebaseAnalytics */; };
+		4B9CE0C72B25283800FF5A77 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4B9CE0C62B25283800FF5A77 /* FirebaseCrashlytics */; };
 		4B9E617F2A1AC26300485BE3 /* CountryAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E617E2A1AC26300485BE3 /* CountryAnnotationView.swift */; };
 		4B9E61812A1AD3CD00485BE3 /* CountryAnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E61802A1AD3CD00485BE3 /* CountryAnnotationViewModel.swift */; };
 		4B9E61832A1AD67500485BE3 /* CountryPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E61822A1AD67500485BE3 /* CountryPointAnnotation.swift */; };
@@ -324,6 +327,7 @@
 		4B9074912AAF967C00E559FF /* SuperNewsV2UIKitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsV2UIKitUITests.swift; sourceTree = "<group>"; };
 		4B90749B2AAFA14C00E559FF /* SuperNewsFullTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SuperNewsFullTests.xctestplan; sourceTree = "<group>"; };
 		4B90749C2AAFA45000E559FF /* SuperNewsTopHeadlinesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsTopHeadlinesUITests.swift; sourceTree = "<group>"; };
+		4B90FB322B252F5A0041B296 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B95B1772A803B16001437C7 /* SuperNewsSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsSettingsRepository.swift; sourceTree = "<group>"; };
 		4B95B1792A803CCE001437C7 /* SuperNewsUserSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsUserSettingsRepository.swift; sourceTree = "<group>"; };
 		4B95B17B2A804070001437C7 /* CountrySettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySettingViewModel.swift; sourceTree = "<group>"; };
@@ -424,6 +428,8 @@
 				4B64685B29E6EDF700F35682 /* SnapKit in Frameworks */,
 				4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */,
 				4B64685829E6ED7200F35682 /* Alamofire in Frameworks */,
+				4B9CE0C72B25283800FF5A77 /* FirebaseCrashlytics in Frameworks */,
+				4B9CE0C52B25283800FF5A77 /* FirebaseAnalytics in Frameworks */,
 				4B5836802A1E6B7F005DCF6A /* AsyncLocationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +497,7 @@
 		4B15646B2AB795270013D77B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B90FB322B252F5A0041B296 /* GoogleService-Info.plist */,
 				4B0D83482AB0803E00C5AB8A /* Paris.gpx */,
 				4B90749B2AAFA14C00E559FF /* SuperNewsFullTests.xctestplan */,
 				4B60E6312AAB26C9003202FD /* Localizable.xcstrings */,
@@ -1030,6 +1037,7 @@
 				4BD88CAA29E6BAAD000369DE /* Sources */,
 				4BD88CAB29E6BAAD000369DE /* Frameworks */,
 				4BD88CAC29E6BAAD000369DE /* Resources */,
+				4B9CE0CA2B25295200FF5A77 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1041,6 +1049,8 @@
 				4B64685729E6ED7200F35682 /* Alamofire */,
 				4B64685A29E6EDF700F35682 /* SnapKit */,
 				4B58367F2A1E6B7F005DCF6A /* AsyncLocationKit */,
+				4B9CE0C42B25283800FF5A77 /* FirebaseAnalytics */,
+				4B9CE0C62B25283800FF5A77 /* FirebaseCrashlytics */,
 			);
 			productName = SuperNewsV2UIKit;
 			productReference = 4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */;
@@ -1084,6 +1094,7 @@
 				4B64685629E6ED7200F35682 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4B58367E2A1E6B7F005DCF6A /* XCRemoteSwiftPackageReference "AsyncLocationKit" */,
+				4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 4BD88CAF29E6BAAD000369DE /* Products */;
 			projectDirPath = "";
@@ -1149,6 +1160,7 @@
 				4B73F60E29EC731600CD412C /* TechnologySourcesMockData.json in Resources */,
 				4BF6376029FC84E300AC469F /* EntertainmentTopHeadlinesMockData.json in Resources */,
 				4B73F61729ECAA2900CD412C /* SportsTopHeadlinesMockData.json in Resources */,
+				4B90FB332B252F5A0041B296 /* GoogleService-Info.plist in Resources */,
 				4BD88CBB29E6BAAF000369DE /* Assets.xcassets in Resources */,
 				4BF6376329FC84EC00AC469F /* BusinessTopHeadlinesMockData.json in Resources */,
 				4B73F61829ECAA2C00CD412C /* FrenchTopHeadlinesMockData.json in Resources */,
@@ -1156,6 +1168,33 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4B9CE0CA2B25295200FF5A77 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script processes the project's dSYM files and uploads the files to Crashlytics.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4B90748B2AAF967C00E559FF /* Sources */ = {
@@ -1564,7 +1603,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
@@ -1597,7 +1637,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
@@ -1698,6 +1738,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1720,6 +1768,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		4B9CE0C42B25283800FF5A77 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4B9CE0C62B25283800FF5A77 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
