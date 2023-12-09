@@ -7,22 +7,16 @@
 
 import Foundation
 
+/// This use case loads all available sources from the API
 final class SourceSelectionUseCase: SourceSelectionUseCaseProtocol {
-    
     private let dataRepository: SuperNewsRepository
-    private let settingsRepository: SuperNewsSourceSettingsRepository
     
-    init(dataRepository: SuperNewsRepository, settingsRepository: SuperNewsSourceSettingsRepository) {
+    init(dataRepository: SuperNewsRepository) {
         self.dataRepository = dataRepository
-        self.settingsRepository = settingsRepository
     }
     
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError> {
         return handleResult(with: await dataRepository.fetchAllNewsSources())
-    }
-    
-    func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError> {
-        return await settingsRepository.saveSelectedMediaSource(source: savedSource)
     }
     
     private func handleResult(with result: Result<[SourceDTO], SuperNewsAPIError>) -> Result<[SourceCellViewModel], SuperNewsAPIError> {

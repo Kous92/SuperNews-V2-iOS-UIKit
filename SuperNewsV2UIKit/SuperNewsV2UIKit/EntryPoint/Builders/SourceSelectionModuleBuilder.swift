@@ -13,16 +13,25 @@ final class SourceSelectionModuleBuilder: ModuleBuilder {
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {
         self.testMode = testMode
+        // Get ViewController instance: view layer
         let sourceSelectionViewController = SourceSelectionViewController()
         
-        // Dependency injection
+        // Dependency injections for ViewModel, building the presentation, domain and data layers
+        // 1) Get repository instances: data layer
         let dataRepository = getRepository(testMode: testMode)
-        let settingsRepository = getSettingsRepository(testMode: testMode)
-        let useCase = SourceSelectionUseCase(dataRepository: dataRepository, settingsRepository: settingsRepository)
-        let sourceSelectionViewModel = SourceSelectionViewModel(useCase: useCase)
+        let sourceSettingsRepository = getSettingsRepository(testMode: testMode)
+        
+        // 2) Get use case instances: domain layer
+        let sourceSelectionUseCase = SourceSelectionUseCase(dataRepository: dataRepository)
+        let saveSelectedSourceUseCase = SaveSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
+        
+        // 3) Get view model instance: presentation layer. Injecting all needed use cases.
+        let sourceSelectionViewModel = SourceSelectionViewModel(sourceSelectionUseCase: sourceSelectionUseCase, saveSelectedSourceUseCase: saveSelectedSourceUseCase)
+        
+        // 4) Injecting coordinator for presentation layer
         sourceSelectionViewModel.coordinator = coordinator as? SourceSelectionViewControllerDelegate
         
-        // Injecting view model
+        // 5) Injecting view model to the view
         sourceSelectionViewController.viewModel = sourceSelectionViewModel
         
         return sourceSelectionViewController

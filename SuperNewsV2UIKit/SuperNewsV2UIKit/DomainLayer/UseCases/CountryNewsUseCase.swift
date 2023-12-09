@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// This use case will fetch the top headlines news of a specific country from the API
 final class CountryNewsUseCase: CountryNewsUseCaseProtocol {
     private let dataRepository: SuperNewsRepository
     

@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+// News fetch use cases
 protocol TopHeadlinesUseCaseProtocol {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
@@ -20,9 +21,9 @@ protocol CountryNewsUseCaseProtocol {
     func execute(countryCode: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
+// Source selection use cases
 protocol SourceSelectionUseCaseProtocol {
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
-    func saveSelectedSource(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
 }
 
 protocol LoadSavedSelectedSourceUseCaseProtocol {

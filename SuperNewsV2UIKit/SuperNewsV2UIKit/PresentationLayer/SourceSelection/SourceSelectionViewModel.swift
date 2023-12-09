@@ -11,8 +11,10 @@ import Combine
 final class SourceSelectionViewModel {
     weak var coordinator: SourceSelectionViewControllerDelegate?
     
+    private let sourceSelectionUseCase: SourceSelectionUseCaseProtocol
+    private let saveSelectedSourceUseCase: SaveSelectedSourceUseCaseProtocol
+    
     private let categoryViewModels = CategoryCellViewModel.getSourceCategories()
-    private let useCase: SourceSelectionUseCaseProtocol
     private var cellViewModels = [SourceCellViewModel]()
     private var sectionViewModels = [SourceSectionViewModel]()
     private(set) var filteredSectionViewModels = [SourceSectionViewModel]()
@@ -36,8 +38,9 @@ final class SourceSelectionViewModel {
         return isLoading.eraseToAnyPublisher()
     }
     
-    init(useCase: SourceSelectionUseCaseProtocol) {
-        self.useCase = useCase
+    init(sourceSelectionUseCase: SourceSelectionUseCaseProtocol, saveSelectedSourceUseCase: SaveSelectedSourceUseCaseProtocol) {
+        self.sourceSelectionUseCase = sourceSelectionUseCase
+        self.saveSelectedSourceUseCase = saveSelectedSourceUseCase
         setBindings()
         fetchAllSources()
     }
@@ -76,7 +79,7 @@ final class SourceSelectionViewModel {
         
         Task {
             // Download the data only once
-            let result = cellViewModels.isEmpty ? await useCase.execute() : .success(cellViewModels)
+            let result = cellViewModels.isEmpty ? await sourceSelectionUseCase.execute() : .success(cellViewModels)
             await handleResult(with: result)
         }
     }
@@ -267,7 +270,7 @@ extension SourceSelectionViewModel {
         print("[SourceSelectionViewModel] Selected source to save: \(savedSource.name), ID: \(savedSource.id)")
         
         Task {
-            let result = await useCase.saveSelectedSource(with: savedSource)
+            let result = await saveSelectedSourceUseCase.execute(with: savedSource)
             
             switch result {
                 case .success():
