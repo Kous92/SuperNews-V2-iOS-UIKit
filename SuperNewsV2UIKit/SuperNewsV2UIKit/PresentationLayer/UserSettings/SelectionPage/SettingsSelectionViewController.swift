@@ -38,7 +38,6 @@ final class SettingsSelectionViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         tableView.accessibilityIdentifier = "settingsChoiceTable"
-        // tableView.isHidden = true
         tableView.keyboardDismissMode = .onDrag
         
         return tableView

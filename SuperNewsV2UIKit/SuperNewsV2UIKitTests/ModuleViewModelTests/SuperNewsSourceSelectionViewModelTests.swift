@@ -21,8 +21,9 @@ final class SuperNewsSourceSelectionViewModelTests: XCTestCase {
         
         let sourceSelectionUseCase = SourceSelectionUseCase(dataRepository: dataRepository)
         let saveSelectedSourceUseCase = SaveSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
+        let loadSelectedSourceUseCase = LoadSavedSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
         
-        viewModel = SourceSelectionViewModel(sourceSelectionUseCase: sourceSelectionUseCase, saveSelectedSourceUseCase: saveSelectedSourceUseCase)
+        viewModel = SourceSelectionViewModel(sourceSelectionUseCase: sourceSelectionUseCase, loadSelectedSourceUseCase: loadSelectedSourceUseCase, saveSelectedSourceUseCase: saveSelectedSourceUseCase)
     }
 
     func testInitSourceCategories() {

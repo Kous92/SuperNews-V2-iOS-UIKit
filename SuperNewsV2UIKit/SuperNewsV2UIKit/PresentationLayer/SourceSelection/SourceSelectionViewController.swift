@@ -39,6 +39,21 @@ final class SourceSelectionViewController: UIViewController {
         return label
     }()
     
+    private lazy var actualFavoriteSourceLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .white
+        label.textAlignment = .center
+        // label.isHidden = true
+        label.text = "Source favorite sélectionnée"
+        label.accessibilityIdentifier = "actualFavoriteResultLabel"
+        
+        return label
+    }()
+    
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
@@ -95,6 +110,7 @@ final class SourceSelectionViewController: UIViewController {
         tableView.isHidden = true
         tableView.backgroundColor = .clear
         tableView.accessibilityIdentifier = "tableView"
+        tableView.keyboardDismissMode = .onDrag
         
         return tableView
     }()
@@ -115,6 +131,8 @@ final class SourceSelectionViewController: UIViewController {
         buildViewHierarchy()
         setConstraints()
         setBindings()
+        
+        viewModel?.loadSelectedSource()
     }
     
     // Will not work before in cycle (viewDidLoad,...)
@@ -142,6 +160,7 @@ final class SourceSelectionViewController: UIViewController {
         view.addSubview(noResultLabel)
         view.addSubview(searchBar)
         view.addSubview(categoryCollectionView)
+        view.addSubview(actualFavoriteSourceLabel)
         view.addSubview(tableView)
     }
     
@@ -166,8 +185,15 @@ final class SourceSelectionViewController: UIViewController {
             make.top.equalTo(categoryCollectionView.snp.bottom)
         }
         
+        actualFavoriteSourceLabel.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.horizontalEdges.equalToSuperview()
+            // make.bottom.equalTo(tableView.snp.top)
+            // make.verticalEdges.equalTo(20)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom)
+            make.top.equalTo(actualFavoriteSourceLabel.snp.bottom).offset(15)
             make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
         }
@@ -183,6 +209,12 @@ final class SourceSelectionViewController: UIViewController {
                     self?.setLoadingSpinner(isLoading: true)
                     self?.hideTableView()
                 }
+            }.store(in: &subscriptions)
+        
+        viewModel?.favoriteSourceUpdateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] sourceName in
+                self?.updateFavoriteSourceLabel(sourceName: sourceName)
             }.store(in: &subscriptions)
         
         // Update binding
@@ -252,6 +284,10 @@ extension SourceSelectionViewController {
         }
         
         tableView.isHidden = false
+    }
+    
+    private func updateFavoriteSourceLabel(sourceName: String) {
+        actualFavoriteSourceLabel.text = "Source favorite sélectionnée: \(sourceName)"
     }
     
     private func setLoadingSpinner(isLoading: Bool) {

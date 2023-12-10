@@ -43,6 +43,7 @@ final class SearchViewController: UIViewController {
         tableView.isHidden = true
         tableView.backgroundColor = .clear
         tableView.accessibilityIdentifier = "tableView" // UI testing
+        tableView.keyboardDismissMode = .onDrag
         
         return tableView
     }()

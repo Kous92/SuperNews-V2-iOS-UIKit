@@ -24,9 +24,10 @@ final class SourceSelectionModuleBuilder: ModuleBuilder {
         // 2) Get use case instances: domain layer
         let sourceSelectionUseCase = SourceSelectionUseCase(dataRepository: dataRepository)
         let saveSelectedSourceUseCase = SaveSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
+        let loadSelectedSourceUseCase = LoadSavedSelectedSourceUseCase(sourceSettingsRepository: sourceSettingsRepository)
         
         // 3) Get view model instance: presentation layer. Injecting all needed use cases.
-        let sourceSelectionViewModel = SourceSelectionViewModel(sourceSelectionUseCase: sourceSelectionUseCase, saveSelectedSourceUseCase: saveSelectedSourceUseCase)
+        let sourceSelectionViewModel = SourceSelectionViewModel(sourceSelectionUseCase: sourceSelectionUseCase, loadSelectedSourceUseCase: loadSelectedSourceUseCase, saveSelectedSourceUseCase: saveSelectedSourceUseCase)
         
         // 4) Injecting coordinator for presentation layer
         sourceSelectionViewModel.coordinator = coordinator as? SourceSelectionViewControllerDelegate

@@ -12,6 +12,7 @@ final class SourceSelectionViewModel {
     weak var coordinator: SourceSelectionViewControllerDelegate?
     
     private let sourceSelectionUseCase: SourceSelectionUseCaseProtocol
+    private let loadSelectedSourceUseCase: LoadSavedSelectedSourceUseCaseProtocol
     private let saveSelectedSourceUseCase: SaveSelectedSourceUseCaseProtocol
     
     private let categoryViewModels = CategoryCellViewModel.getSourceCategories()
@@ -19,15 +20,23 @@ final class SourceSelectionViewModel {
     private var sectionViewModels = [SourceSectionViewModel]()
     private(set) var filteredSectionViewModels = [SourceSectionViewModel]()
     
+    // Settings
+    private var savedMediaSource = SavedSourceDTO(id: "le-monde", name: "Le Monde")
+    
     // Bindings and subscriptions
     @Published var searchQuery = ""
     private var subscriptions = Set<AnyCancellable>()
     private var updateResult = PassthroughSubject<Bool, Never>()
+    private var favoriteSourceUpdateResult = PassthroughSubject<String, Never>()
     private var sortedUpdateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
     
     var updateResultPublisher: AnyPublisher<Bool, Never> {
         return updateResult.eraseToAnyPublisher()
+    }
+    
+    var favoriteSourceUpdateResultPublisher: AnyPublisher<String, Never> {
+        return favoriteSourceUpdateResult.eraseToAnyPublisher()
     }
     
     var sortedUpdateResultPublisher: AnyPublisher<Bool, Never> {
@@ -38,8 +47,9 @@ final class SourceSelectionViewModel {
         return isLoading.eraseToAnyPublisher()
     }
     
-    init(sourceSelectionUseCase: SourceSelectionUseCaseProtocol, saveSelectedSourceUseCase: SaveSelectedSourceUseCaseProtocol) {
+    init(sourceSelectionUseCase: SourceSelectionUseCaseProtocol, loadSelectedSourceUseCase: LoadSavedSelectedSourceUseCaseProtocol, saveSelectedSourceUseCase: SaveSelectedSourceUseCaseProtocol) {
         self.sourceSelectionUseCase = sourceSelectionUseCase
+        self.loadSelectedSourceUseCase = loadSelectedSourceUseCase
         self.saveSelectedSourceUseCase = saveSelectedSourceUseCase
         setBindings()
         fetchAllSources()
@@ -103,6 +113,47 @@ final class SourceSelectionViewModel {
         return SourceSectionViewModel(sectionName: name, sourceCellViewModels: cellViewModels)
     }
     
+    func saveSelectedSource(at indexPath: IndexPath) {
+        guard let cellViewModel = getCellViewModel(at: indexPath) else {
+            print("[SourceSelectionViewModel] ERROR when selecting the cell")
+            return
+        }
+        
+        let savedSource = SavedSourceDTO(id: cellViewModel.id, name: cellViewModel.name)
+        print("[SourceSelectionViewModel] Selected source to save: \(savedSource.name), ID: \(savedSource.id)")
+        
+        Task {
+            let result = await saveSelectedSourceUseCase.execute(with: savedSource)
+            
+            switch result {
+                case .success():
+                    print("[SourceSelectionViewModel] Saving succeeded")
+                    await backToHomeView(with: savedSource.id)
+                case .failure(let error):
+                    print("[SourceSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
+            }
+        }
+    }
+    
+    func loadSelectedSource() {
+        print("[SourceSelectionViewModel] Loading saved source if existing...")
+        
+        Task {
+            let result = await loadSelectedSourceUseCase.execute()
+            
+            switch result {
+                case .success(let savedSource):
+                    print("[SourceSelectionViewModel] Loading succeeded for saved source: \(savedSource.name), ID: \(savedSource.id)")
+                    self.savedMediaSource = savedSource
+                case .failure(let error):
+                    print("[SourceSelectionViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
+                    print("[SourceSelectionViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
+            }
+            
+            // Update the view
+            favoriteSourceUpdateResult.send(savedMediaSource.name)
+        }
+    }
     // MARK: - CollectionView and TableView logic
     func numberOfSections() -> Int {
         // A TableView must have at least one section, crash othervise
@@ -258,27 +309,5 @@ extension SourceSelectionViewModel {
     @MainActor private func backToHomeView(with sourceId: String? = nil) {
         print("[SourceSelectionViewModel] Back to Top Headlines screen. Selected source: \(sourceId ?? "None")")
         coordinator?.backToHomeView()
-    }
-    
-    func saveSelectedSource(at indexPath: IndexPath) {
-        guard let cellViewModel = getCellViewModel(at: indexPath) else {
-            print("[SourceSelectionViewModel] ERROR when selecting the cell")
-            return
-        }
-        
-        let savedSource = SavedSourceDTO(id: cellViewModel.id, name: cellViewModel.name)
-        print("[SourceSelectionViewModel] Selected source to save: \(savedSource.name), ID: \(savedSource.id)")
-        
-        Task {
-            let result = await saveSelectedSourceUseCase.execute(with: savedSource)
-            
-            switch result {
-                case .success():
-                    print("[SourceSelectionViewModel] Saving succeeded")
-                    await backToHomeView(with: savedSource.id)
-                case .failure(let error):
-                    print("[SourceSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
-            }
-        }
     }
 }
