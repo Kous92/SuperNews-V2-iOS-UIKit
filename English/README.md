@@ -455,7 +455,7 @@ It's also where we can test the different architecture layers by injecting mocks
 
 I don't know all the techniques yet to do better unit tests pour faire de meilleurs tests unitaires, but once I've got the hang of it, code coverage by tests will increase significantly.
 
-These UI tests currently cover **39,9%** of the application code.
+These unit tests currently cover **42,2%** of the application code.
 
 ![Unit tests coverage](UnitTestsCodeCoverage.png)
 
@@ -469,11 +469,11 @@ This is also the part of a corporate project that a team of testers is responsib
 
 From iOS developer side with **Xcode**, UI tests are performed in the same way as unit tests.
 
-These UI tests currently cover **74%** of the application code.
+These UI tests currently cover **74,9%** of the application code.
 
 ![UITestsCodeCoverage](UITestsCodeCoverage.png)
 ### Overall for tests
 
-By running the 114 unit and UI tests, current code coverage is **79%**.
+By running the 120 unit and UI tests, current code coverage is **79,9%**.
 
 ![UnitAndUITestsCodeCoverage](UnitAndUITestsCodeCoverage.png)

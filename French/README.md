@@ -454,7 +454,7 @@ Les tests unitaires sont les tests en boîte blanche **(White box)** où on a un
 
 Je ne connais pas encore toutes les techniques pour faire de meilleurs tests unitaires, mais une fois cela assimilé, la couverture du code par les tests augmentera de manière significative.
 
-Ces tests unitaires couvrent actuellement **39,9%** du code de l'application.
+Ces tests unitaires couvrent actuellement **42,2%** du code de l'application.
 
 ![Couverture tests unitaires](UnitTestsCodeCoverage.png)
 
@@ -466,12 +466,12 @@ C'est également cette partie-là que dans un projet en entreprise qu'une équip
 
 Côté développeur iOS avec **Xcode**, les tests UI s'effectuent de la même manière que des tests unitaires.
 
-Ces tests UI couvrent actuellement **74%** du code de l'application.
+Ces tests UI couvrent actuellement **74,9%** du code de l'application.
 
 ![Couverture tests UI](UITestsCodeCoverage.png)
 
 ### Au niveau global pour les tests
 
-En exécutant les 114 tests unitaires et UI, la couverture actuelle du code est de **79%**.
+En exécutant les 120 tests unitaires et UI, la couverture actuelle du code est de **79,9%**.
 
 ![Couverture tests unitaires et UI](UnitAndUITestsCodeCoverage.png)
