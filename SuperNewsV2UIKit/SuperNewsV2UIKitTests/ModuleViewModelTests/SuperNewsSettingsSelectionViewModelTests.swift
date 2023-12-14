@@ -11,11 +11,12 @@ import Combine
 
 final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
     
-    var subscriptions: Set<AnyCancellable> = []
-    var viewModel: SettingsSelectionViewModel?
-    var viewModel2: SettingsSelectionViewModel?
-    var sectionName1 = ""
-    var sectionName2 = ""
+    private var subscriptions: Set<AnyCancellable> = []
+    private var viewModel: SettingsSelectionViewModel?
+    private var viewModel2: SettingsSelectionViewModel?
+    private var sectionName1 = ""
+    private var sectionName2 = ""
+    private var fulfilledCount = 0
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -113,5 +114,77 @@ final class SuperNewsSettingsSelectionViewModelTests: XCTestCase {
         
         let cellViewModel = try XCTUnwrap(viewModel2?.getCellViewModel(at: IndexPath(row: 2, section: 0)))
         XCTAssertEqual(cellViewModel.name, cellViewModel.code.countryName())
+    }
+    
+    func testSaveLanguageSettingOption() {
+        let expectation5 = XCTestExpectation(description: "Load settings language choices")
+        
+        // The binding before executing the loading of data.
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                if updated {
+                    print("Fulfilled")
+                    self?.fulfilledCount += 1
+                    
+                    if self?.fulfilledCount == 1 {
+                        self?.viewModel?.saveSelectedSetting(at: IndexPath(row: 0, section: 0))
+                    } else if self?.fulfilledCount == 2 {
+                        if let index = self?.viewModel?.getActualSelectedIndex() {
+                            print("Index = \(index)")
+                            XCTAssertEqual(index, 0)
+                            
+                            if let vm = self?.viewModel?.getCellViewModel(at: IndexPath(row: 0, section: 0)) {
+                                XCTAssertEqual(vm.flagCode, "sa")
+                                XCTAssertEqual(vm.name, "Arabic")
+                                XCTAssertEqual(vm.code, "ar")
+                            }
+                        } else {
+                            XCTFail()
+                        }
+                        
+                        expectation5.fulfill()
+                    }
+                }
+            }.store(in: &subscriptions)
+        
+        viewModel?.loadCountryLanguageOptions()
+        wait(for: [expectation5], timeout: 10)
+    }
+    
+    func testSaveCountrySettingOption() {
+        let expectation6 = XCTestExpectation(description: "Load settings country choices")
+        
+        // The binding before executing the loading of data.
+        viewModel2?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                if updated {
+                    print("Fulfilled")
+                    self?.fulfilledCount += 1
+                    
+                    if self?.fulfilledCount == 1 {
+                        self?.viewModel2?.saveSelectedSetting(at: IndexPath(row: 0, section: 0))
+                    } else if self?.fulfilledCount == 2 {
+                        if let index = self?.viewModel2?.getActualSelectedIndex() {
+                            print("Index = \(index)")
+                            XCTAssertEqual(index, 0)
+                            
+                            if let vm = self?.viewModel2?.getCellViewModel(at: IndexPath(row: 0, section: 0)) {
+                                XCTAssertEqual(vm.flagCode, "dz")
+                                XCTAssertEqual(vm.name, "Algeria")
+                                XCTAssertEqual(vm.code, "dz")
+                            }
+                        } else {
+                            XCTFail()
+                        }
+                        
+                        expectation6.fulfill()
+                    }
+                }
+            }.store(in: &subscriptions)
+        
+        viewModel2?.loadCountryLanguageOptions()
+        wait(for: [expectation6], timeout: 10)
     }
 }

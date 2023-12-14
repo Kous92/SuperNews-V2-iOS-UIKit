@@ -27,6 +27,11 @@ final class SuperNewsDTOTests: XCTestCase {
         
         XCTAssertEqual(fakeSavedSourceDTO.id, "le-parisien")
         XCTAssertEqual(fakeSavedSourceDTO.name, "Le Parisien")
+        
+        let encodedSavedSource = fakeSavedSourceDTO.getEncodableSavedSource()
+        
+        XCTAssertEqual(encodedSavedSource.id, fakeSavedSourceDTO.id)
+        XCTAssertEqual(encodedSavedSource.name, fakeSavedSourceDTO.name)
     }
     
     func testCountryDTO() {
@@ -45,5 +50,32 @@ final class SuperNewsDTOTests: XCTestCase {
         XCTAssertEqual(fakeLanguageDTO.languageDefaultFlag, "fr")
         XCTAssertEqual(fakeLanguageDTO.defaultLanguage, true)
         XCTAssertEqual(fakeLanguageDTO.languageName, String(localized: "french"))
+    }
+    
+    func testSourceDTO() {
+        let fakeSourceDTO = SourceDTO.getFakeObjectFromSource()
+        
+        XCTAssertEqual(fakeSourceDTO.language, "fr")
+        XCTAssertEqual(fakeSourceDTO.category, "general")
+        XCTAssertEqual(fakeSourceDTO.country, "fr")
+        XCTAssertEqual(fakeSourceDTO.name, "Le Monde")
+    }
+    
+    func testCountryLanguageSettingDTO() {
+        let fakeCountryLanguageSettingDTO = CountryLanguageSettingDTO.getFakeObjectFromCountryLanguageSetting()
+        
+        XCTAssertEqual(fakeCountryLanguageSettingDTO.code, "fr")
+        XCTAssertEqual(fakeCountryLanguageSettingDTO.flagCode, "fr")
+        XCTAssertEqual(fakeCountryLanguageSettingDTO.name, "France")
+        
+        let countryLanguageSetting = fakeCountryLanguageSettingDTO.getCountryLanguageSetting()
+        XCTAssertEqual(countryLanguageSetting.code, fakeCountryLanguageSettingDTO.code)
+        XCTAssertEqual(countryLanguageSetting.flagCode, fakeCountryLanguageSettingDTO.flagCode)
+        XCTAssertEqual(countryLanguageSetting.name, fakeCountryLanguageSettingDTO.name)
+        
+        let fakeCountryLanguageSettingDTO2 = CountryLanguageSettingDTO(with: CountryLanguageSetting.getFakeCountryLanguageSetting())
+        XCTAssertEqual(fakeCountryLanguageSettingDTO2.code, "fr")
+        XCTAssertEqual(fakeCountryLanguageSettingDTO2.flagCode, "fr")
+        XCTAssertEqual(fakeCountryLanguageSettingDTO2.name, "France")
     }
 }

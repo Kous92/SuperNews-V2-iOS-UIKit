@@ -18,17 +18,6 @@ struct ArticleDTO {
     let sourceName: String
     let publishedAt: String
     
-    init(author: String, title: String, description: String, content: String, sourceUrl: String, imageUrl: String, sourceName: String, publishedAt: String) {
-        self.author = author
-        self.title = title
-        self.description = description
-        self.content = content
-        self.sourceUrl = sourceUrl
-        self.imageUrl = imageUrl
-        self.sourceName = sourceName
-        self.publishedAt = publishedAt
-    }
-    
     init(with article: Article) {
         self.author = article.author ?? String(localized: "unknownAuthor")
         self.title = article.title ?? String(localized: "noTitle")

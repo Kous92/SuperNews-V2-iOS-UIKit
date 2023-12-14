@@ -1095,6 +1095,7 @@
 				4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4B58367E2A1E6B7F005DCF6A /* XCRemoteSwiftPackageReference "AsyncLocationKit" */,
 				4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4B18109C2B2A1BB100F3DBDF /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 4BD88CAF29E6BAAD000369DE /* Products */;
 			projectDirPath = "";
@@ -1706,6 +1707,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4B18109C2B2A1BB100F3DBDF /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.54.0;
+			};
+		};
 		4B58367E2A1E6B7F005DCF6A /* XCRemoteSwiftPackageReference "AsyncLocationKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AsyncSwift/AsyncLocationKit";

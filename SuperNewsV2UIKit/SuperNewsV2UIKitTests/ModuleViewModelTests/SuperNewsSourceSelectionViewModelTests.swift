@@ -139,4 +139,45 @@ final class SuperNewsSourceSelectionViewModelTests: XCTestCase {
         
         XCTAssertGreaterThan(viewModel?.numberOfSections() ?? 0, 0)
     }
+    
+    func testLoadSelectedSource() {
+        let expectation3 = XCTestExpectation(description: "Retrieve all sources")
+        
+        // The binding before executing the loading of data.
+        viewModel?.updateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] updated in
+                print("Updated: \(updated)")
+                if updated {
+                    self?.viewModel?.loadSelectedSource()
+                }
+            }.store(in: &subscriptions)
+        
+        viewModel?.favoriteSourceUpdateResultPublisher
+            .receive(on: RunLoop.main)
+            .sink { sourceName in
+                print("Updated: \(sourceName)")
+                expectation3.fulfill()
+                
+                XCTAssertEqual(sourceName, "Le Monde")
+            }.store(in: &subscriptions)
+        
+        viewModel?.setSourceOption(with: "allSources")
+        wait(for: [expectation3], timeout: 10)
+    }
+    
+    func testIsLoading() {
+        let expectation4 = XCTestExpectation(description: "Retrieve all sources")
+        
+        viewModel?.isLoadingPublisher
+            .receive(on: RunLoop.main)
+            .sink { loading in
+                expectation4.fulfill()
+                XCTAssert(loading)
+            }.store(in: &subscriptions)
+        
+        wait(for: [expectation4], timeout: 10)
+        
+        viewModel?.setSourceOption(with: "allSources")
+    }
 }

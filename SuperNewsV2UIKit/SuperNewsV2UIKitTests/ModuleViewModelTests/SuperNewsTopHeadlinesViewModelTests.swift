@@ -26,7 +26,7 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
         
         viewModel = TopHeadlinesViewModel(topHeadlinesUseCase: topHeadlinesUseCase, loadSavedSelectedSourceUseCase: loadSavedSelectedSourceUseCase, loadUserSettingsUseCase: loadUserSettingsUseCase)
     }
-
+    
     func testInitNewsCategories() {
         let expectation1 = XCTestExpectation(description: "Retrieve different top headlines news categories")
         
@@ -82,7 +82,6 @@ final class SuperNewsTopHeadlinesViewModelTests: XCTestCase {
                 }
             }.store(in: &subscriptions)
         
-        // viewModel?.initCategories()
         viewModel?.fetchTopHeadlinesWithSource()
         wait(for: [expectation3], timeout: 10)
         

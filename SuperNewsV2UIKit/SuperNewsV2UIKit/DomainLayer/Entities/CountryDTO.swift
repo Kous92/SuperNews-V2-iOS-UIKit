@@ -12,13 +12,6 @@ struct CountryDTO {
     let countryCode, countryName: String
     let lat, lon: Double
     
-    init(countryCode: String, countryName: String, lat: Double, lon: Double) {
-        self.countryCode = countryCode
-        self.countryName = countryName
-        self.lat = lat
-        self.lon = lon
-    }
-    
     init(with country: Country) {
         self.countryCode = country.countryCode
         self.countryName = country.countryCode.countryName() ?? country.countryName

@@ -12,13 +12,6 @@ struct LanguageDTO {
     let languageCode, languageName, languageDefaultFlag: String
     let defaultLanguage: Bool
     
-    init(languageCode: String, languageName: String, languageDefaultFlag: String, defaultLanguage: Bool) {
-        self.languageCode = languageCode
-        self.languageName = languageName
-        self.languageDefaultFlag = languageDefaultFlag
-        self.defaultLanguage = defaultLanguage
-    }
-    
     init(with language: Language) {
         self.languageCode = language.languageCode
         self.languageName = language.languageCode.languageName()?.capitalized ?? language.languageName

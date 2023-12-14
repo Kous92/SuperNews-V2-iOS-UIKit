@@ -19,19 +19,19 @@ protocol ArticleDetailViewControllerDelegate: AnyObject {
 final class ArticleDetailCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the subflow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
-    
+
     private(set) var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var builder: ModuleBuilder
     private let testMode: Bool
-    
+
     init(navigationController: UINavigationController, builder: ModuleBuilder, testMode: Bool = false) {
         print("[ArticleDetailCoordinator] Initializing.")
         self.navigationController = navigationController
         self.builder = builder
         self.testMode = testMode
     }
-    
+
     // Make sure that the coordinator is destroyed correctly, useful for debug purposes
     deinit {
         print("[ArticleDetailCoordinator] Coordinator destroyed.")

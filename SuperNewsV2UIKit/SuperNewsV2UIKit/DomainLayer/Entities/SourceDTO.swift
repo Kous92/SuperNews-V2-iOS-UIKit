@@ -17,16 +17,6 @@ struct SourceDTO {
     let language: String
     let country: String
     
-    init(id: String, name: String, description: String, url: String, category: String, language: String, country: String) {
-        self.id = id
-        self.name = name
-        self.description = description
-        self.url = url
-        self.category = category
-        self.language = language
-        self.country = country
-    }
-    
     init(with mediaSource: MediaSource) {
         self.id = mediaSource.id
         self.name = mediaSource.name

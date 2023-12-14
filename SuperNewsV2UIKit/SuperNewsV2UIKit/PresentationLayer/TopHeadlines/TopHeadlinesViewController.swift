@@ -10,7 +10,6 @@ import SnapKit
 import Combine
 
 final class TopHeadlinesViewController: UIViewController {
-    
     // MVVM with Reactive Programming
     var viewModel: TopHeadlinesViewModel?
     private var subscriptions = Set<AnyCancellable>()

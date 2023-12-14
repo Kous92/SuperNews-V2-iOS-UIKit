@@ -127,7 +127,7 @@ final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
             }
         }
         
-        return countryCode == "fr" ? getArticles(with: "FrenchTopHeadlinesMockData") : .failure(.invalidURL)
+        return (countryCode == "fr" || countryCode == "us") ? getArticles(with: "FrenchTopHeadlinesMockData") : .failure(.invalidURL)
     }
     
     func fetchTopHeadlinesNews(sourceName: String) async -> Result<[Article], SuperNewsAPIError> {

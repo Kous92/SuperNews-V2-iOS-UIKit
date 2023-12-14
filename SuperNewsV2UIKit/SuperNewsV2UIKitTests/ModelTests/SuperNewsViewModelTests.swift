@@ -11,6 +11,16 @@ import XCTest
 @testable import SuperNewsV2UIKit
 
 final class SuperNewsViewModelTests: XCTestCase {
+    func testCountryPointAnnotation() {
+        let fakeViewModel = CountryAnnotationViewModel.getFakeCountryAnnotationViewModel()
+        
+        let annotation = CountryPointAnnotation(viewModel: fakeViewModel)
+        annotation.configure(with: fakeViewModel)
+        
+        XCTAssertEqual(annotation.coordinate.latitude, fakeViewModel.coordinates.latitude)
+        XCTAssertEqual(annotation.coordinate.longitude, fakeViewModel.coordinates.longitude)
+    }
+    
     func testCountryAnnoationViewModel() {
         let fakeViewModel = CountryAnnotationViewModel.getFakeCountryAnnotationViewModel()
         
@@ -31,6 +41,13 @@ final class SuperNewsViewModelTests: XCTestCase {
         XCTAssertEqual(fakeViewModel1.detail, String(localized: "newsCountry"))
         XCTAssertEqual(fakeViewModel2.detail, String(localized: "newsLanguage"))
         XCTAssertEqual(fakeViewModel3.detail, String(localized: "newsReset"))
+        
+        let settingSection1 = fakeViewModel1.getSettingSection()
+        let settingSection2 = fakeViewModel2.getSettingSection()
+        let settingSection3 = fakeViewModel3.getSettingSection()
+        XCTAssertEqual(settingSection1.description, fakeViewModel1.description)
+        XCTAssertEqual(settingSection2.detail, fakeViewModel2.detail)
+        XCTAssertEqual(settingSection3.description, fakeViewModel3.description)
     }
     
     func testCountrySettingViewModel() {
