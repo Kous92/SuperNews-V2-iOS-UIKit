@@ -350,6 +350,13 @@ extension SourceSelectionViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.tintColor = .systemGray6
+            headerView.textLabel?.textColor = .white
+        }
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel?.getSectionHeaderTitle(sectionIndex: section)
     }
