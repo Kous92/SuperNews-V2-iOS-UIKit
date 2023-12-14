@@ -98,6 +98,7 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTabBar()
         setNavigationBar()
         setViewBackground()
         buildViewHierarchy()
@@ -177,7 +178,11 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController {
-    private func setNavigationBar() {        
+    private func setTabBar() {
+        self.tabBarController?.delegate = self
+    }
+    
+    private func setNavigationBar() {
         navigationItem.title = String(localized: "search")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -263,6 +268,17 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: true)
+    }
+}
+
+extension SearchViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        // When tapping on the current TabBar, it scrolls back to top, but only if rows are visible.
+        let numberOfRows = viewModel?.numberOfRowsInTableView() ?? 0
+        
+        if numberOfRows > 0 {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 }
 
