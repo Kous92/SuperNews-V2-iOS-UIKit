@@ -387,12 +387,21 @@ extension ArticleDetailViewController {
     }
     
     private func setNavigationBar() {
+        // For UI testing
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "shareButton"
+        
+        // Appearance of navigation bar
+        let customNavBarAppearance = UINavigationBarAppearance()
+        
+        // Right bar button with action and color
         let item = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.forward.fill"), style: .plain, target: self, action: #selector(onClickShareButton))
         navigationItem.rightBarButtonItem = item
         navigationController?.navigationBar.tintColor = .white
         
-        // For UI testing
-        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "shareButton"
+        // When scrolling, custom color appareance for navigation bar
+        customNavBarAppearance.backgroundColor = .superNewsMediumBlue.withAlphaComponent(0.95)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.standardAppearance = customNavBarAppearance
     }
     
     private func setViewBackground() {
