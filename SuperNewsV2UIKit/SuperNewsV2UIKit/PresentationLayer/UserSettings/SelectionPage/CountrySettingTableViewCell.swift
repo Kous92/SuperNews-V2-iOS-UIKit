@@ -22,7 +22,6 @@ final class CountrySettingTableViewCell: UITableViewCell {
     private lazy var countryNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "France"
         label.textColor = .white
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5

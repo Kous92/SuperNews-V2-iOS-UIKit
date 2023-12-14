@@ -19,7 +19,6 @@ extension UIImageView {
         self.image = nil
         let defaultImage = defaultPlaceholderImage()
         
-        // URL(string: urlComponents.joined(separator: "/")
         guard !url.isEmpty, let imageURL = URL(string: url) else {
             self.image = defaultImage
             return

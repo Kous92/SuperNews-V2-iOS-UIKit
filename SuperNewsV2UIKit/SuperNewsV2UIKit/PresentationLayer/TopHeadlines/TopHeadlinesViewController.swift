@@ -215,14 +215,16 @@ extension TopHeadlinesViewController {
     
     private func updateCollectionView(reloadData: Bool, updateIndex: Int) {
         // When view is initialized, the first cell is selected by default. But apply it only once, the first time. Not after every reload data.
+        print("UPDATE CELL: \(reloadData), AND SELECTION AT \(updateIndex)")
+        
         if reloadData {
             print("UPDATE CELL AND SELECTION AT \(updateIndex)")
             categoryCollectionView.reloadData()
-            
-            // This index indicates the item to select. 0 for favorite country, 1 for favorite source
-            if updateIndex == 0 || updateIndex == 1 {
-                categoryCollectionView.selectItem(at: IndexPath(item: updateIndex, section: 0), animated: false, scrollPosition: .centeredHorizontally)
-            }
+        }
+        
+        // This index indicates the item to select. 0 for favorite country, 1 for favorite source
+        if updateIndex == 0 || updateIndex == 1 {
+            categoryCollectionView.selectItem(at: IndexPath(item: updateIndex, section: 0), animated: false, scrollPosition: .centeredHorizontally)
         }
         
         categoryCollectionView.isHidden = false

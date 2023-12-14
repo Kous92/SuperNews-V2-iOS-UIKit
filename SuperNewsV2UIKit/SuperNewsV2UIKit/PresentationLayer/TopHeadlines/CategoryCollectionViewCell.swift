@@ -15,7 +15,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 1
         label.minimumScaleFactor = 0.5
         label.font = UIFont.systemFont(ofSize: Constants.CategoryCollectionView.categoryTitleFontSize, weight: .regular)
-        label.textColor = .darkGray
+        label.textColor = .lightGray
         label.textAlignment = .center
         return label
     }()
@@ -42,7 +42,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     func configure(with title: String) {
         categoryTitleLabel.text = title
-        categoryTitleLabel.textColor = isSelected ? .white : .darkGray
+        categoryTitleLabel.textColor = isSelected ? .white : .lightGray
     }
     
     // For live preview
@@ -52,7 +52,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            categoryTitleLabel.textColor = isSelected ? .white : .darkGray
+            categoryTitleLabel.textColor = isSelected ? .white : .lightGray
         }
     }
 }

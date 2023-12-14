@@ -127,7 +127,7 @@ final class TopHeadlinesViewModel {
             print("[TopHeadlinesViewModel] Top headlines will be updated for new source set: \(savedMediaSource.name)")
             
             // No cell selection is it was the first load (-1)
-            self.categoryUpdateResult.send((true, isCategoryInitialized ? 1 : -1))
+            self.categoryUpdateResult.send((true, isCategoryInitialized ? 1 : 0))
             
             if isCategoryInitialized == true {
                 self.fetchTopHeadlinesWithSource()

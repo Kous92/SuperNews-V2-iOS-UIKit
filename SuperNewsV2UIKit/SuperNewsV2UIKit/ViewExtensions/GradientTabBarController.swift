@@ -35,6 +35,6 @@ final class GradientTabBarController: UITabBarController {
         
         // Apply for all views selected and unselected colors
         UITabBar.appearance().tintColor = .white
-        UITabBar.appearance().unselectedItemTintColor = .darkGray
+        UITabBar.appearance().unselectedItemTintColor = .lightGray
     }
 }
