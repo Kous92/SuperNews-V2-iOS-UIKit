@@ -287,7 +287,7 @@ extension SourceSelectionViewController {
     }
     
     private func updateFavoriteSourceLabel(sourceName: String) {
-        actualFavoriteSourceLabel.text = "Source favorite sélectionnée: \(sourceName)"
+        actualFavoriteSourceLabel.text = "\(String(localized: "favoriteSelectedSource")): \(sourceName)"
     }
     
     private func setLoadingSpinner(isLoading: Bool) {
@@ -352,7 +352,7 @@ extension SourceSelectionViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.tintColor = .systemGray6
+            headerView.tintColor = .superNewsDarkGray
             headerView.textLabel?.textColor = .white
         }
     }

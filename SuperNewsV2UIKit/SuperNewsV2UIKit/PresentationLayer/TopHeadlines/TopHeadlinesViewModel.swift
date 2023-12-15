@@ -26,7 +26,10 @@ final class TopHeadlinesViewModel {
     private var fetchedData = [String: String]()
     
     // Settings
-    private var savedMediaSource = SavedSourceDTO(id: "le-monde", name: "Le Monde")
+    private var savedMediaSource = {
+        let countryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
+        return countryCode == "fr" ? SavedSourceDTO(id: "le-monde", name: "Le Monde") : SavedSourceDTO(id: "abc-news", name: "ABC News")
+    }()
     private var savedLocalCountry = {
         let countryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
         return CountryLanguageSettingDTO(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode)

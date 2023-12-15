@@ -21,7 +21,10 @@ final class SourceSelectionViewModel {
     private(set) var filteredSectionViewModels = [SourceSectionViewModel]()
     
     // Settings
-    private var savedMediaSource = SavedSourceDTO(id: "le-monde", name: "Le Monde")
+    private var savedMediaSource = {
+        let countryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
+        return countryCode == "fr" ? SavedSourceDTO(id: "le-monde", name: "Le Monde") : SavedSourceDTO(id: "abc-news", name: "ABC News")
+    }()
     
     // Bindings and subscriptions
     @Published var searchQuery = ""
