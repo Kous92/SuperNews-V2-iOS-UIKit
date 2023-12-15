@@ -33,9 +33,14 @@ final class SearchViewModel {
     private var updateResult = PassthroughSubject<Bool, Never>()
     private var isLoading = PassthroughSubject<Bool, Never>()
     private var languageSetting = PassthroughSubject<String, Never>()
+    private var isEmpty = PassthroughSubject<Void, Never>()
     
     var updateResultPublisher: AnyPublisher<Bool, Never> {
         return updateResult.eraseToAnyPublisher()
+    }
+    
+    var isEmptyPublisher: AnyPublisher<Void, Never> {
+        return isEmpty.eraseToAnyPublisher()
     }
     
     var isLoadingPublisher: AnyPublisher<Bool, Never> {
@@ -86,6 +91,7 @@ final class SearchViewModel {
         // Empty content
         guard !searchQuery.isEmpty else {
             print("[SearchViewModel] Nothing to search, ignoring fetching data from network.")
+            isEmpty.send()
             return
         }
         

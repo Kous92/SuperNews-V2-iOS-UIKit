@@ -154,6 +154,12 @@ final class SearchViewController: UIViewController {
                 }
             }.store(in: &subscriptions)
         
+        viewModel?.isEmptyPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] in
+                self?.hideNoResult()
+            }.store(in: &subscriptions)
+        
         // Setting binding
         viewModel?.languageSettingPublisher
             .receive(on: RunLoop.main)
@@ -202,6 +208,10 @@ extension SearchViewController {
         tableView.isHidden = true
     }
     
+    private func hideNoResult() {
+        noResultLabel.isHidden = true
+    }
+    
     private func displayNoResult() {
         tableView.isHidden = true
         noResultLabel.text = "\(String(localized: "noResultFoundFor")) \"\(viewModel?.searchQuery ?? "??")\". \(String(localized: "pleaseTryOtherSearch"))."
@@ -212,6 +222,7 @@ extension SearchViewController {
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         tableView.isHidden = false
+        noResultLabel.isHidden = false
     }
     
     private func setLoadingSpinner(isLoading: Bool) {
