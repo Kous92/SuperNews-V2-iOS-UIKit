@@ -108,9 +108,11 @@ final class TopHeadlinesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // To avoid any issue especially if we switched from dark to light mode
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
         viewModel?.loadAndUpdateSourceCategoryTitle()
         viewModel?.loadAndUpdateUserCountrySettingTitle()
-        // viewModel?.checkSavedCountry()
     }
     
     private func buildViewHierarchy() {
@@ -192,7 +194,6 @@ extension TopHeadlinesViewController {
         let item = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(onClickSourceButton))
         navigationItem.rightBarButtonItem = item
         navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         // For UI testing
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "listButton"

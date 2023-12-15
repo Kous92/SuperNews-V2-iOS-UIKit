@@ -400,6 +400,9 @@ extension ArticleDetailViewController {
         
         // When scrolling, custom color appareance for navigation bar
         customNavBarAppearance.backgroundColor = .superNewsMediumBlue.withAlphaComponent(0.95)
+        
+        // To avoid any color issue especially if we switch from dark to light mode. We want any NavigationBar title color kept at white.
+        customNavBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.standardAppearance = customNavBarAppearance
     }

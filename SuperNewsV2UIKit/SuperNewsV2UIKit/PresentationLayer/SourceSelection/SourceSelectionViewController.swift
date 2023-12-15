@@ -140,7 +140,7 @@ final class SourceSelectionViewController: UIViewController {
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: String(localized: "search"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         searchBar.searchTextField.leftView?.tintColor = .lightGray
         
-        // In case of color mode switching (especially for world map)
+        // In case of color mode switching (especially from world map)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .white
         
         // When the screen is loaded, the first category is selected, only once.
