@@ -25,9 +25,14 @@ struct Constants {
         static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
     }
     
+    struct Search {
+        static let noResultLabelFontSize: CGFloat = isPhone() ? 18 : 30
+    }
+    
     struct SourceSelection {
         static let noResultLabelFontSize: CGFloat = isPhone() ? 18 : 30
         static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
+        static let favoriteSelectedLabelFontSize: CGFloat = isPhone() ? 16 : 27
     }
     
     struct ArticleDetail {
@@ -72,5 +77,20 @@ struct Constants {
         static let buttonSymbolSize: CGFloat = isPhone() ? 18 : 27
         static let buttonInset: CGFloat = isPhone() ? 15 : 30
         static let autoCompletionHeight: CGFloat = isPhone() ? 300 : 450
+    }
+    
+    struct PrivacyPolicy {
+        static let titleLabelFontSize: CGFloat = isPhone() ? 22 : 34
+        static let subtitleLabelFontSize: CGFloat = isPhone() ? 18 : 26
+        static let descriptionFontSize: CGFloat = isPhone() ? 14 : 21
+        static let dateLabelFontSize: CGFloat = isPhone() ? 15 : 22
+        static let dateTopMargin: CGFloat = isPhone() ? 20 : 30
+        static let dateBottomMargin: CGFloat = isPhone() ? 35 : 50
+        static let subtitleOffset: CGFloat = isPhone() ? 15 : 25
+        static let horizontalMargin: CGFloat = isPhone() ? 10 : 20
+        static let topMargin: CGFloat = isPhone() ? 10 : 20
+        static let bottomMargin: CGFloat = isPhone() ? 25 : 35
+        static let lineSpacing: CGFloat = isPhone() ? 10 : 20
+        
     }
 }

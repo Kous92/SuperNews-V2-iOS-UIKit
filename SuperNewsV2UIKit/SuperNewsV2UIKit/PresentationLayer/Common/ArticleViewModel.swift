@@ -25,7 +25,7 @@ struct ArticleViewModel {
         self.sourceUrl = article.sourceUrl
         self.imageUrl = article.imageUrl
         self.sourceName = article.sourceName
-        self.publishedAt = article.publishedAt.stringToDateFormat()
+        self.publishedAt = article.publishedAt.stringToFullDateFormat()
     }
     
     func getNewsCellViewModel() -> NewsCellViewModel {

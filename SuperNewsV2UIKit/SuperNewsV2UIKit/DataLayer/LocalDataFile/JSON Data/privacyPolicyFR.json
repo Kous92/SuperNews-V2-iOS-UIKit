@@ -1,0 +1,18 @@
+{
+    "title": "Politique de confidentialité de SuperNews",
+    "updateDate": "2023-12-26",
+    "sections": [
+        {
+            "subtitle": "Collecte et utilisation des informations",
+            "content": "SuperNews ne requiert pas la création d’un compte pour accéder à ses fonctionnalités. Cette application ne collecte aucune information personnelle permettant de vous identifier telle que votre nom, prénom, adresse e-mail ou toute autre information de contact.\n\nDe plus, bien que SuperNews exploite avec votre consentement la localisation GPS pour une expérience personnalisée de la carte du monde, ces données ne sont utilisées que pour vous positionner sur la carte et vous suggérer un positionnement (uniquement le pays où vous vous situez). Ces données de localisation ne sont aucunement collectées, ni partagées avec quelconque entité.\n\nSuperNews ne collecte pas non plus la moindre information sensible de quelconque nature.\nLes seules collectes d’informations possibles sont les suivantes:\n• Celles que vous me communiquez explicitement lorsque vous me contactez.\n• Rapports de crashs (plantages) de l’application, de manière automatique, afin de permettre l’investigation et la correction de ces derniers. Les informations collectées sont anonymes."
+        },
+        {
+            "subtitle": "Modifications de la politique de confidentialité",
+            "content": "En fonction des évolutions de l’application, cette politique de confidentialité peut être mise à jour à tout moment. Vous êtes invité à consulter régulièrement cette politique pour prendre connaissance d’éventuelles modifications.\n\nL’utilisation de cette application après publication de modifications constitue acceptation de ces modifications."
+        },
+        {
+            "subtitle": "Contact",
+            "content": "Pour toute question ou demande concernant cette politique de confidentialité, envoyez un e-mail à l’adresse suivante: supernewsiosapp@gmail.com"
+        }
+    ]
+}

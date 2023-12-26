@@ -11,3 +11,7 @@ protocol SuperNewsLocalFileRepository {
     func loadCountries() async -> Result<[CountryDTO], SuperNewsLocalFileError>
     func loadLanguages() async -> Result<[LanguageDTO], SuperNewsLocalFileError>
 }
+
+protocol SuperNewsPrivacyPolicyRepository {
+    func loadPrivacyPolicy() async -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError>
+}

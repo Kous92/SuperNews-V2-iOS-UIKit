@@ -314,7 +314,7 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         publishDateStackView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(articleImageView).inset(Constants.ArticleDetail.horizontalMargin)
+            make.horizontalEdges.equalToSuperview().inset(Constants.ArticleDetail.horizontalMargin)
             make.bottom.equalTo(articleImageView.snp.bottom).inset(Constants.ArticleDetail.margin10)
         }
         

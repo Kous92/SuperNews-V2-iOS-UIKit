@@ -7,9 +7,13 @@
 
 import Foundation
 
+func getLocale() -> String {
+    return Locale.current.languageCode ?? ""
+}
+
 extension String {
     // Converting date format string "yyyy-MM-dd'T'HH:mm:ss+0000Z" to "dd/MM/yyyy à HH:mm" format
-    func stringToDateFormat() -> String {
+    func stringToFullDateFormat() -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -33,6 +37,27 @@ extension String {
         let timeString = formatter.string(from: date) // Hours, minutes
         
         return locale.languageCode == "fr" ? "Le " + dateString + " à " + timeString : dateString + " at " + timeString
+    }
+    
+    // Converting date format string "yyyy-MM-dd to "dd/MM/yyyy" format
+    func stringToDateFormat() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = formatter.date(from: self) else {
+            return String(localized: "unknownDate")
+        }
+        
+        let locale = Locale.current
+        if locale.languageCode == "fr" {
+            formatter.locale = Locale(identifier: "fr_FR")
+        }
+        
+        formatter.dateStyle = .long
+        let dateString = formatter.string(from: date) // Day, month, year
+        
+        return dateString
     }
     
     // From the ISO code, it gives the country full name.

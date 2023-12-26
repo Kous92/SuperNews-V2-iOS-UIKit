@@ -216,6 +216,7 @@ final class SettingsSelectionViewModel {
                 self.updateResult.send(true)
             case .failure(let error):
                 print("[SettingsSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
+                await sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
             }
         }
     }

@@ -219,10 +219,10 @@ extension SearchViewController {
     }
     
     private func updateTableView() {
+        hideNoResult()
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         tableView.isHidden = false
-        noResultLabel.isHidden = false
     }
     
     private func setLoadingSpinner(isLoading: Bool) {

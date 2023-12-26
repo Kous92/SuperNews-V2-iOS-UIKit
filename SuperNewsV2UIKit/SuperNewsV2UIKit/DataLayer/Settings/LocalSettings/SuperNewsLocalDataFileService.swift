@@ -11,3 +11,7 @@ protocol SuperNewsLocalDataFileService {
     func loadCountries() async -> Result<[Country], SuperNewsLocalFileError>
     func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError>
 }
+
+protocol SuperNewsPrivacyPolicyLocalDataFileService {
+    func loadPrivacyPolicy(userLanguage: String) async -> Result<PrivacyPolicy, SuperNewsLocalFileError>
+}

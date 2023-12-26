@@ -11,6 +11,7 @@ enum SettingsSection: Int, CaseIterable, CustomStringConvertible {
     case newsLanguage
     case newsCountry
     case newsReset
+    case newsPrivacyPolicy
     
     var description: String {
         switch self {
@@ -20,6 +21,8 @@ enum SettingsSection: Int, CaseIterable, CustomStringConvertible {
             return "country"
         case .newsReset:
             return "reset"
+        case .newsPrivacyPolicy:
+            return "privacyPolicy"
         }
     }
     
@@ -31,6 +34,8 @@ enum SettingsSection: Int, CaseIterable, CustomStringConvertible {
             return String(localized: "newsCountry")
         case .newsReset:
             return String(localized: "newsReset")
+        case .newsPrivacyPolicy:
+            return String(localized: "privacyPolicy")
         }
     }
 }

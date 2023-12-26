@@ -1,0 +1,18 @@
+{
+    "title": "SuperNews Privacy Policy",
+    "updateDate": "2023-12-26",
+    "sections": [
+        {
+            "subtitle": "Information collection and use",
+            "content": "SuperNews does not require the creation of an account to access its features. This application does not collect any personal information allowing you to be identified, such as your first name, last name, e-mail address or any kind of contact information.\n\nIn addition, although SuperNews uses GPS location with your consent for a custom world map experience, these data are only used to position you on the map and suggest you a positioning (only the country where you are located). This location data is neither collected nor shared with any entity.\n\nSuperNews does not collect also any sensitive information of any kind.\nThe only information that can be collected is as follows:\n• Those you explicitly communicate to me when you contact me.\n• Application crash reports, automatically, in order to investigate and correct them. Information collected is anonymous."
+        },
+        {
+            "subtitle": "Privacy policy updates",
+            "content": "As the application evolves, this privacy policy may be updated may be updated at any moment. You are advised to review regularly this policy to take note of any update.\n\nUse of this application after publication of modifications constitutes acceptance of these modifications."
+        },
+        {
+            "subtitle": "Contact",
+            "content": "For any question or request about this privacy policy, send an e-mail to the following address: supernewsiosapp@gmail.com"
+        }
+    ]
+}

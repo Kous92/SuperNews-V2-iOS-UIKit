@@ -12,7 +12,7 @@ import UIKit
 protocol SettingsViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
     func goToSettingsSelectionView(settingSection: SettingsSection)
-    // func showResetSettingsAlert()
+    func goToPrivacyPolicyView()
     func showResetSettingsAlert(completion: @escaping (Bool) -> ())
 }
 
@@ -77,7 +77,6 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         navigationController.present(alert, animated: true, completion: nil)
     }
     
-    
     func goToSettingsSelectionView(settingSection: SettingsSection) {
         // Transition is separated here into a child coordinator.
         print("[SettingsCoordinator] Setting child coordinator: SettingsSelectionCoordinator.")
@@ -90,6 +89,20 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         // Transition from settings screen to settings selection screen
         print("[SettingsCoordinator] Go to SettingsSelectionViewController.")
         settingsSelectionCoordinator.start()
+    }
+    
+    func goToPrivacyPolicyView() {
+        // Transition is separated here into a child coordinator.
+        print("[SettingsCoordinator] Setting child coordinator: PrivacyPolicyCoordinator.")
+        let privacyPolicyCoordinator = PrivacyPolicyCoordinator(navigationController: navigationController, builder: PrivacyPolicyModuleBuilder())
+        
+        // Adding link to the parent with self, be careful to retain cycle
+        privacyPolicyCoordinator.parentCoordinator = self
+        addChildCoordinator(childCoordinator: privacyPolicyCoordinator)
+        
+        // Transition from settings screen to privacy policy screen
+        print("[SettingsCoordinator] Go to PrivacyPolicyViewController.")
+        privacyPolicyCoordinator.start()
     }
     
     private func resetUserSettings() {

@@ -1006,10 +1006,16 @@
     },
     "noTitle" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No title available"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Titre indisponible"
           }
         }
       }
@@ -1061,6 +1067,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Portugais"
+          }
+        }
+      }
+    },
+    "privacyPolicy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy policy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
           }
         }
       }
@@ -1472,6 +1495,23 @@
         }
       }
     },
+    "updateDate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update date"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date de mise à jour"
+          }
+        }
+      }
+    },
     "urdu" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1507,7 +1547,20 @@
       }
     },
     "webLinkOpeningError" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
     },
     "webOpeningLinkError" : {
       "extractionState" : "manual",

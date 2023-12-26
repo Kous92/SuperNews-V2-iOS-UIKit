@@ -31,10 +31,10 @@ final class SuperNewsJSONFileService: SuperNewsLocalDataFileService {
         }
         
         do {
-            // Récupération des données JSON en type Data
+            // Retrieving JSON data and converting to Data type
             let data = try Data(contentsOf: fileURL)
             
-            // Décodage des données JSON en objets exploitables
+            // Decoding JSON data to Swift objects
             guard let countries = decode([Country].self, from: data) else {
                 print("[SuperNewsJSONFileService] Data decoding has failed.")
                 return .failure(.decodeError)
@@ -54,10 +54,10 @@ final class SuperNewsJSONFileService: SuperNewsLocalDataFileService {
         }
         
         do {
-            // Récupération des données JSON en type Data
+            // Retrieving JSON data and converting to Data type
             let data = try Data(contentsOf: fileURL)
             
-            // Décodage des données JSON en objets exploitables
+            // Decoding JSON data to Swift objects
             guard let languages = decode([Language].self, from: data) else {
                 print("[SuperNewsJSONFileService] Data decoding has failed.")
                 return .failure(.decodeError)

@@ -63,3 +63,7 @@ protocol LoadUserSettingsUseCaseProtocol {
 protocol SaveUserSettingsUseCaseProtocol {
     func execute(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
 }
+
+protocol LoadPrivacyPolicyUseCaseProtocol {
+    func execute() async -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError>
+}
