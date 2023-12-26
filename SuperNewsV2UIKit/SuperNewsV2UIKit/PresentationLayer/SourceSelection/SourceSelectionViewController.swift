@@ -186,8 +186,6 @@ final class SourceSelectionViewController: UIViewController {
         actualFavoriteSourceLabel.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview()
-            // make.bottom.equalTo(tableView.snp.top)
-            // make.verticalEdges.equalTo(20)
         }
         
         tableView.snp.makeConstraints { make in
@@ -268,7 +266,7 @@ extension SourceSelectionViewController {
     private func displayNoResult() {
         print("No result")
         tableView.isHidden = true
-        noResultLabel.setShadowLabel(string: "\(String(localized: "noSourceFound")) \(viewModel?.searchQuery ?? "??")", font: UIFont.systemFont(ofSize: 18, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
+        noResultLabel.setShadowLabel(string: "\(String(localized: "noSourceFound")) \(viewModel?.searchQuery ?? "??")", font: UIFont.systemFont(ofSize: Constants.SourceSelection.noResultLabelFontSize, weight: .medium), textColor: .white, shadowColor: .blue, radius: 3)
         noResultLabel.isHidden = false
     }
     
@@ -322,6 +320,16 @@ extension SourceSelectionViewController: UICollectionViewDelegate {
         }
         
         viewModel?.setSourceOption(with: cellViewModel.categoryId)
+        
+        /*
+        guard let actualSearchText = self.searchBar.text, !actualSearchText.isEmpty else {
+            return
+        }
+        
+        viewModel?.searchQuery = ""
+        hideTableView()
+        viewModel?.searchQuery = actualSearchText
+         */
     }
 }
 

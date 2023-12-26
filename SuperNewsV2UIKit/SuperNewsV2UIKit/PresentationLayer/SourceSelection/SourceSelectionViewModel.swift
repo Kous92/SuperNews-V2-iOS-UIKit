@@ -295,6 +295,13 @@ extension SourceSelectionViewModel {
         }
         
         filteredSectionViewModels = sectionViewModels
+        
+        // To increase UX if user taps on other category with actual search filter
+        guard searchQuery.isEmpty else {
+            filterSources()
+            return
+        }
+        
         sortedUpdateResult.send(filteredSectionViewModels.count > 0)
     }
     
