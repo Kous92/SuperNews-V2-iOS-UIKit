@@ -7,6 +7,24 @@
 
 import Foundation
 
+// Utiliser une struct plutot ici
+// Et j'aurai meme fais un pattern comme cela :
+
+//enum CategoryNews: String, CaseIterable {
+//    case general
+//    case science
+//    case sport
+//
+//    var localizedKey: String {
+//        switch self { ... }
+//    }
+//}
+
+//et ton getCategories() devient alors :
+//static let categories = CategoryNews.allCases.map { CategoryCellViewModel(title: $0.localizedKey, $0.rawValue)}
+
+// pareil pour le "sourceCategorie" en dessous
+
 final class CategoryCellViewModel {
     private(set) var title: String
     let categoryId: String

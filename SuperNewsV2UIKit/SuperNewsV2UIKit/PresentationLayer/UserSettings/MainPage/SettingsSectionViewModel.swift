@@ -7,6 +7,10 @@
 
 import Foundation
 
+// Il y a méprise dans le naming :
+// Il s'agit d'un Model et non d'un ViewModel
+// Le modèle est la structure de données, le ViewModel est l'articulation entre la View et le Model
+
 struct SettingsSectionViewModel {
     let description: String
     let detail: String
