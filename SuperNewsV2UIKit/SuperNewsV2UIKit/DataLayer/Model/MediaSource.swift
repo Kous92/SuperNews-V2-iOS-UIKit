@@ -24,6 +24,8 @@ struct MediaSource: Codable {
     let country: String
 }
 
+// A deplacer dans un fichier MediaSource+Mock
+// entouré d'un #if DEBUG / #endif
 extension MediaSource {
     /// Returns a fake object with all available fields, not nil case. For unit tests and SwiftUI previews.
     static func getFakeObject() -> MediaSource {

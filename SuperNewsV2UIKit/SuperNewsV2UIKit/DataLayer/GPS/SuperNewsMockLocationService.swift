@@ -5,6 +5,10 @@
 //  Created by Koussaïla Ben Mamar on 11/07/2023.
 //
 
+// n'oublie pas de rajouter un #if DEBUG / #endif sur tes fichiers de Mock afin de ne pas embarquer ce code à la Release
+// c'est toujours ça de pris
+
+#if DEBUG
 import Foundation
 import CoreLocation
 
@@ -44,3 +48,4 @@ final class SuperNewsMockLocationService: SuperNewsLocationService {
         
     }
 }
+#endif

@@ -10,6 +10,9 @@ import Foundation
 func getLocale() -> String {
     return Locale.current.languageCode ?? ""
 }
+// Le DateFormatter() peut consommer énormément de ressouce car il parse des String
+// Le mieux est de créer une final class avec des fonctions statiques
+// Et d'appeler ces fonctions depuis tes extensions
 
 extension String {
     // Converting date format string "yyyy-MM-dd'T'HH:mm:ss+0000Z" to "dd/MM/yyyy à HH:mm" format

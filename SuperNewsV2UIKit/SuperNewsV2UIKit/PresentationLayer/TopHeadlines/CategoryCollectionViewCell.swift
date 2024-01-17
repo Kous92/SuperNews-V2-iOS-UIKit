@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class CategoryCollectionViewCell: UICollectionViewCell {
+    // Donc en fait, tu utilises bien un fichier de constant, mais pas de partout ?
+    // Dommage.
     private lazy var categoryTitleLabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -13,7 +13,8 @@ final class PrivacyPolicyViewController: UIViewController {
     // MVVM with Reactive Programming
     var viewModel: PrivacyPolicyViewModel?
     private var subscriptions = Set<AnyCancellable>()
-    
+
+    // J'ai vu dans tes extensions que tu faisais des fonctions pour cela, pourquoi pas ici ?
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
@@ -28,7 +29,7 @@ final class PrivacyPolicyViewController: UIViewController {
         gradient.locations = [0, 0.25, 0.5, 1]
         return gradient
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,15 +40,41 @@ final class PrivacyPolicyViewController: UIViewController {
         setBindings()
         viewModel?.loadPrivacyPolicy()
     }
-    
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
+    // Pourquoi ne pas attacher le reusableIdentifier à ta cellule et ainsi ne jamais avoir à réfléchir ou à manquer de te tromper dans l'écriture d'une chaine en dur ?
+    // static let reuseIdentifier = "" et l'utiliser comme cela PrivacyTableViewCell.reuseIdentifier
+
+    // Et encore plus smart :
+    //    protocol ReusableComponentIdentifiable {
+    //        var reuseIdentifier: String { get }
+    //    }
+    //    extension ReusableComponentIdentifiable {
+    //        static var reuseIdentifier: String { String(describing: Self.self) }
+    //    }
+    //
+    //    final class MyTableViewCell: UITableViewCell, ReusableComponentIdentifiable {
+    //
+    //    }
+    //
+    //    tableView.register(MyTableViewCell.self, forCellReuseIdentifier: MyTableViewCell.reuseIdentifier)
+
+    // D'une manière générale, et je te l'écris aussi une seule fois, mais valable pour toute l'app:
+    // il y a beaucoup trop de chaine en "dur". C'est risque d'erreur, c'est une perte de temps, et ces deux points sont deja beaucoup trop
+    // Pour les imageNames : des enum avec des static let à l'intérieur pour les constantes
+    // tu peux ensuite faire un pattern de ce type
+    // enum Constants { ... }
+    // extension Constants { enum ImageName { ... } }
+    // ect ...
+    // Et comme ça, plus jamais tu cherches une info ou une valeur de string, c'est tout mis à un seul endroit
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +151,9 @@ extension PrivacyPolicyViewController: UITableViewDataSource {
               let cell = PrivacyCellFactory.createCell(with: identifier, viewModel: cellViewModel, tableView: tableView, indexPath: indexPath) else {
             return UITableViewCell()
         }
-        
+
+        // ce code la n'est associé qu'à la cell, alors autant le mettre dedans
+        // quittes à le généraliser dans une extension de cell
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.selectedBackgroundView = UIView()
