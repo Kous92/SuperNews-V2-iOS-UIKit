@@ -13,7 +13,7 @@ extension UILabel {
         let shadow = NSShadow()
         shadow.shadowColor = shadowColor ?? UIColor.black
         shadow.shadowBlurRadius = radius
-
+        
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: textColor ?? UIColor.white,

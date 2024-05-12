@@ -10,7 +10,7 @@ import Kingfisher
 
 // With Kingfisher, it's asynchronous, fast and efficient. Cache is managed automatically.
 extension UIImageView {
-    private func defaultPlaceholderImage() -> UIImage {
+    func defaultPlaceholderImage() -> UIImage {
         return Locale.current.languageCode == "fr" ? UIImage(named: "SuperNewsNotAvailableImageFR")! : UIImage(named: "SuperNewsNotAvailableImageEN")!
     }
     

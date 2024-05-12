@@ -238,6 +238,13 @@ final class ArticleDetailViewController: UIViewController {
         viewModel?.updateArticleView()
     }
     
+    override func viewIsAppearing(_ animated: Bool) {
+        // In case of loading issue, force with default placeholder
+        if articleImageView.image == nil {
+            articleImageView.image = articleImageView.defaultPlaceholderImage()
+        }
+    }
+    
     // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
     override func viewWillDisappear(_ animated: Bool) {
         // We make sure it will go back to previous view

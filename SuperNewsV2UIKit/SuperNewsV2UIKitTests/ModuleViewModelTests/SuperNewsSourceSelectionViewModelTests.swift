@@ -159,7 +159,7 @@ final class SuperNewsSourceSelectionViewModelTests: XCTestCase {
                 print("Updated: \(sourceName)")
                 expectation3.fulfill()
                 
-                XCTAssertEqual(sourceName, "Le Monde")
+                XCTAssertEqual(sourceName, "ABC News")
             }.store(in: &subscriptions)
         
         viewModel?.setSourceOption(with: "allSources")

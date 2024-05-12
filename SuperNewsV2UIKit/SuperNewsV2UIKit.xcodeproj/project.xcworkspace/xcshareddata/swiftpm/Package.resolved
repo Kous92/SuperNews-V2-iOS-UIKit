@@ -1,12 +1,13 @@
 {
+  "originHash" : "9d8148632e45cf21ce852d808e35eea627ad324fda6d54a10320a77564ede69b",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/abseil-cpp-binary.git",
       "state" : {
-        "revision" : "bfc0b6f81adc06ce5121eb23f628473638d67c5c",
-        "version" : "1.2022062300.0"
+        "revision" : "748c7837511d0e6a507737353af268484e1745e2",
+        "version" : "1.2024011601.1"
       }
     },
     {
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
-        "revision" : "b2fa556e4e48cbf06cf8c63def138c98f4b811fa",
-        "version" : "5.8.0"
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/app-check.git",
       "state" : {
-        "revision" : "5746b2d35c91c50581590ed97abe4c06b5037274",
-        "version" : "10.18.0"
+        "revision" : "c218c2054299b15ae577e818bbba16084d3eabe6",
+        "version" : "10.18.2"
       }
     },
     {
@@ -50,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
       "state" : {
-        "revision" : "db51c407d3be4a051484a141bf0bff36c43d3b1e",
-        "version" : "1.8.0"
+        "revision" : "7892a123f7e8d0fe62f9f03728b17bbd4f94df5c",
+        "version" : "1.8.1"
       }
     },
     {
@@ -59,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
-        "revision" : "d9bcd141c3e4ad48a9500e6faeebb073f43cbcbd",
-        "version" : "10.19.0"
+        "revision" : "888f0b6026e2441a69e3ee2ad5293c7a92031e62",
+        "version" : "10.23.1"
       }
     },
     {
@@ -68,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "6b332152355c372ace9966d8ee76ed191f97025e",
-        "version" : "10.17.0"
+        "revision" : "c7a5917ebe48d69f421aadf154ef3969c8b7f12d",
+        "version" : "10.23.1"
       }
     },
     {
@@ -77,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "a732a4b47f59e4f725a2ea10f0c77e93a7131117",
-        "version" : "9.3.0"
+        "revision" : "a637d318ae7ae246b02d7305121275bc75ed5565",
+        "version" : "9.4.0"
       }
     },
     {
@@ -86,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "bc27fad73504f3d4af235de451f02ee22586ebd3",
-        "version" : "7.12.1"
+        "revision" : "26c898aed8bed13b8a63057ee26500abbbcb8d55",
+        "version" : "7.13.1"
       }
     },
     {
@@ -95,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/grpc-binary.git",
       "state" : {
-        "revision" : "a673bc2937fbe886dd1f99c401b01b6d977a9c98",
-        "version" : "1.49.1"
+        "revision" : "e9fad491d0673bdda7063a0341fb6b47a30c5359",
+        "version" : "1.62.2"
       }
     },
     {
@@ -104,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "115f75e43851774934d695449a4836123c3246e1",
-        "version" : "3.2.0"
+        "revision" : "9534039303015a84837090d20fa21cae6e5eadb6",
+        "version" : "3.3.2"
       }
     },
     {
@@ -122,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "revision" : "b6f62758f21a8c03cd64f4009c037cfa580a256e",
-        "version" : "7.9.1"
+        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
+        "version" : "7.11.0"
       }
     },
     {
@@ -131,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
       "state" : {
-        "revision" : "9d108e9112aa1d65ce508facf804674546116d9c",
-        "version" : "1.22.3"
+        "revision" : "43aaef65e0c665daadf848761d560e446d350d3d",
+        "version" : "1.22.4"
       }
     },
     {
@@ -140,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
-        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-        "version" : "2.30909.0"
+        "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
+        "version" : "2.30910.0"
       }
     },
     {
@@ -149,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
-        "revision" : "e70e889c0196c76d22759eb50d6a0270ca9f1d9e",
-        "version" : "2.3.1"
+        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
+        "version" : "2.4.0"
       }
     },
     {
@@ -158,8 +159,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SnapKit/SnapKit.git",
       "state" : {
-        "revision" : "f222cbdf325885926566172f6f5f06af95473158",
-        "version" : "5.6.0"
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
       }
     },
     {
@@ -185,8 +186,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
-        "version" : "1.25.2"
+        "revision" : "9f0c76544701845ad98716f3f6a774a892152bcb",
+        "version" : "1.26.0"
       }
     },
     {
@@ -230,10 +231,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jpsim/Yams.git",
       "state" : {
-        "revision" : "0d9ee7ea8c4ebd4a489ad7a73d5c6cad55d6fed3",
-        "version" : "5.0.6"
+        "revision" : "8a835d918245ca22f36663dd3862138805d7f707",
+        "version" : "5.1.0"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

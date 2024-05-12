@@ -67,10 +67,10 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
         
         let alert = UIAlertController(title: String(localized: "warning"), message: String(localized: "resetSettingsAlertMessage"), preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: String(localized: "yes"), style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: String(localized: "yes"), style: .destructive, handler: { _ in
             completion(true)
         }))
-        alert.addAction(UIAlertAction(title: String(localized: "no"), style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: String(localized: "no"), style: .default, handler: { _ in
             completion(false)
         }))
         

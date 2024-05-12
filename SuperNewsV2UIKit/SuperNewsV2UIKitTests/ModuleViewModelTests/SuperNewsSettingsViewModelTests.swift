@@ -21,7 +21,7 @@ final class SuperNewsSettingsViewModelTests: XCTestCase {
     }
     
     func testLoadSettingsSections() {
-        XCTAssertEqual(viewModel?.numberOfRows() ?? 0, 3)
+        XCTAssertEqual(viewModel?.numberOfRows() ?? 0, 4)
     }
     
     func testCellViewModel() {

@@ -9,9 +9,14 @@ import UIKit
 import SnapKit
 
 final class NewsTableViewCell: UITableViewCell {
-    
     private lazy var cellView: UIView = {
         let view = UIView()
+        return view
+    }()
+    
+    private lazy var cellBlurView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         return view
     }()
     
@@ -51,10 +56,11 @@ final class NewsTableViewCell: UITableViewCell {
     }
     
     private func buildViewHierarchy() {
-        addSubview(cellView)
+        contentView.addSubview(cellView)
         cellView.addSubview(articleImageView)
-        articleImageView.addSubview(titleLabel)
-        articleImageView.addSubview(sourceLabel)
+        articleImageView.addSubview(cellBlurView)
+        cellBlurView.addSubview(titleLabel)
+        cellBlurView.addSubview(sourceLabel)
     }
     
     private func setConstraints() {
@@ -64,6 +70,10 @@ final class NewsTableViewCell: UITableViewCell {
         
         articleImageView.snp.makeConstraints { make in
             make.edges.equalTo(cellView).inset(Constants.NewsCell.imageInsets)
+        }
+        
+        cellBlurView.snp.makeConstraints { make in
+            make.edges.equalTo(articleImageView)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -82,6 +92,11 @@ final class NewsTableViewCell: UITableViewCell {
         articleImageView.loadImage(with: viewModel.imageURL)
         sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: Constants.NewsCell.sourceLabelFontSize, weight: .medium), textColor: .white, shadowColor: .black, radius: 3)
         titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: Constants.NewsCell.titleLabelFontSize, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
+        
+        // In case of loading issue, force with default placeholder
+        if articleImageView.image == nil {
+            articleImageView.image = articleImageView.defaultPlaceholderImage()
+        }
     }
     
     // For live preview

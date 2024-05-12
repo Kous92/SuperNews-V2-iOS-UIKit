@@ -78,4 +78,14 @@ final class SuperNewsDTOTests: XCTestCase {
         XCTAssertEqual(fakeCountryLanguageSettingDTO2.flagCode, "fr")
         XCTAssertEqual(fakeCountryLanguageSettingDTO2.name, "France")
     }
+    
+    func testPrivacyPolicyDTO() {
+        let fakePrivacyPolicyDTO = PrivacyPolicyDTO.getFakeObjectFromPrivacyPolicy()
+        
+        XCTAssertEqual(fakePrivacyPolicyDTO.title, "SuperNews Privacy Policy")
+        XCTAssertEqual(fakePrivacyPolicyDTO.updateDate, "2023-12-26")
+        XCTAssertEqual(fakePrivacyPolicyDTO.sections.count, 2)
+        XCTAssertEqual(fakePrivacyPolicyDTO.sections[1].subtitle, "Contact")
+        XCTAssertEqual(fakePrivacyPolicyDTO.sections[1].content, "Contact at supernewsiosapp@gmail.com.")
+    }
 }

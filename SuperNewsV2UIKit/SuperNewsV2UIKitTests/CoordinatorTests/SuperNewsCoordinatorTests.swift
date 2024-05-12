@@ -229,4 +229,21 @@ final class SuperNewsCoordinatorTests: XCTestCase {
         print(navigationController.viewControllers)
         XCTAssertTrue(navigationController.viewControllers[0] is SettingsSelectionViewController)
     }
+    
+    func testPrivacyPolicyCoordinator() {
+        let moduleBuilder = PrivacyPolicyModuleBuilder()
+        let privacyPolicyCoordinator = PrivacyPolicyCoordinator(navigationController: UINavigationController(), builder: moduleBuilder, testMode: true)
+        let navigationController = privacyPolicyCoordinator.start()
+        
+        XCTAssertTrue(navigationController is UINavigationController)
+        guard let navigationController = navigationController as? UINavigationController else {
+            XCTFail("The ViewController is not a UINavigationController as required for this test.")
+            
+            return
+        }
+        
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        print(navigationController.viewControllers)
+        XCTAssertTrue(navigationController.viewControllers[0] is PrivacyPolicyViewController)
+    }
 }

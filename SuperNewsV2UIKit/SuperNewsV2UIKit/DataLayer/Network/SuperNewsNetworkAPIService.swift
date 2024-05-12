@@ -105,7 +105,8 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>) async -> Result<[MediaSource], SuperNewsAPIError> {
         switch result {
-            case .success(let data):print("[SuperNewsNetworkAPIService] Saving \(data.sources.count) downloaded sources to local cache, key: \(cacheKey)")
+            case .success(let data):
+                print("[SuperNewsNetworkAPIService] Saving \(data.sources.count) downloaded sources to local cache, key: \(cacheKey)")
                 await mediaSourceCache.setValue(data.sources, key: cacheKey)
                 await mediaSourceCache.saveToDisk()
                 

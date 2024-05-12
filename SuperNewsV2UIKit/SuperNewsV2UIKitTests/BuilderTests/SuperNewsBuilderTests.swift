@@ -116,4 +116,15 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssertNotNil(viewController)
         XCTAssert(viewController is SettingsSelectionViewController, "The UIViewController is not a SettingsSelectionViewController.")
     }
+    
+    func testPrivacyPolicyModuleBuilder() {
+        moduleBuilder = PrivacyPolicyModuleBuilder()
+        XCTAssertNotNil(moduleBuilder)
+        
+        // Checking dependency injections
+        let viewController = moduleBuilder?.buildModule(testMode: true, coordinator: nil)
+        
+        XCTAssertNotNil(viewController)
+        XCTAssert(viewController is PrivacyPolicyViewController, "The UIViewController is not a PrivacyPolicyViewController.")
+    }
 }

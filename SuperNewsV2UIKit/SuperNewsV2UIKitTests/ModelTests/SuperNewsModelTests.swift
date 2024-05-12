@@ -163,4 +163,14 @@ final class SuperNewsModelTests: XCTestCase {
         XCTAssertEqual(fakeSavedSource.getDTO().name, "Le Monde")
         XCTAssertEqual(fakeSavedSource2.name, "Le Parisien")
     }
+    
+    func testPrivacyPolicy() {
+        let fakePrivacyPolicy = PrivacyPolicy.getFakePrivacyPolicy()
+        
+        XCTAssertEqual(fakePrivacyPolicy.title, "SuperNews Privacy Policy")
+        XCTAssertEqual(fakePrivacyPolicy.updateDate, "2023-12-26")
+        XCTAssertEqual(fakePrivacyPolicy.sections.count, 2)
+        XCTAssertEqual(fakePrivacyPolicy.sections[1].subtitle, "Contact")
+        XCTAssertEqual(fakePrivacyPolicy.sections[1].content, "Contact at supernewsiosapp@gmail.com.")
+    }
 }
