@@ -24,6 +24,8 @@ final class NewsTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = Constants.NewsCell.imageCornerRadius
+        image.layer.borderColor = UIColor(resource: .superNewsLightGray).cgColor
+        image.layer.borderWidth = 0.4
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         return image

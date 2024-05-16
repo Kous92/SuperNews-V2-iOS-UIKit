@@ -14,9 +14,10 @@ final class SourceTableViewCell: UITableViewCell {
     private lazy var cellView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = Constants.SourceSelectionCell.viewCornerRadius
-        view.layer.borderColor = UIColor(resource: .superNewsDarkGray).cgColor
-        view.layer.borderWidth = 1
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        view.layer.borderColor = UIColor(resource: .superNewsLightGray).cgColor
+        view.layer.borderWidth = 0.4
+        // view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        view.backgroundColor = UIColor(resource: .superNewsDarkBlue)
         return view
     }()
     
