@@ -25,7 +25,14 @@ extension UIImageView {
         }
         
         self.kf.indicatorType = .activity // Download indicator
+        
+        // It might have server issues, if link is valid, but resource is not found. Investigate here !!!
         self.kf.setImage(with: imageURL, placeholder: nil, options: [.transition(.fade(0.5))])
+        
+        // In case of 404 error from server URL, replace with placeholder image.
+        if self.image == nil {
+            self.image = defaultImage
+        }
     }
     
     // Needed to optimize performances while scrolling the TableView
