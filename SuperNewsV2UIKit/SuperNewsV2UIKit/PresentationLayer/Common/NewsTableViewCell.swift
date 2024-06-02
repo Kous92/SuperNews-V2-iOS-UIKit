@@ -94,11 +94,6 @@ final class NewsTableViewCell: UITableViewCell {
         articleImageView.loadImage(with: viewModel.imageURL)
         sourceLabel.setShadowLabel(string: viewModel.source, font: UIFont.systemFont(ofSize: Constants.NewsCell.sourceLabelFontSize, weight: .medium), textColor: .white, shadowColor: .black, radius: 3)
         titleLabel.setShadowLabel(string: viewModel.title, font: UIFont.systemFont(ofSize: Constants.NewsCell.titleLabelFontSize, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
-        
-        // In case of loading issue, force with default placeholder
-        if articleImageView.image == nil {
-            articleImageView.image = articleImageView.defaultPlaceholderImage()
-        }
     }
     
     // For live preview

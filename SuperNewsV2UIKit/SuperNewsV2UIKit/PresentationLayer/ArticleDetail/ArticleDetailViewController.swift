@@ -72,6 +72,13 @@ final class ArticleDetailViewController: UIViewController {
         return image
     }()
     
+    private lazy var imageBlurView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        return view
+    }()
+    
     private let publishDateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -238,13 +245,6 @@ final class ArticleDetailViewController: UIViewController {
         viewModel?.updateArticleView()
     }
     
-    override func viewIsAppearing(_ animated: Bool) {
-        // In case of loading issue, force with default placeholder
-        if articleImageView.image == nil {
-            articleImageView.image = articleImageView.defaultPlaceholderImage()
-        }
-    }
-    
     // WARNING: This function is triggered when the screen is destroyed and when a screen will go above this one.
     override func viewWillDisappear(_ animated: Bool) {
         // We make sure it will go back to previous view
@@ -271,7 +271,9 @@ final class ArticleDetailViewController: UIViewController {
         // The view on top with the image of the article
         scrollStackViewContainer.addArrangedSubview(articleTopView)
         articleTopView.addSubview(articleImageView)
-        articleImageView.addSubview(publishDateStackView)
+        articleImageView.addSubview(imageBlurView)
+        imageBlurView.addSubview(publishDateStackView)
+
         publishDateStackView.addArrangedSubview(clockContainerView)
         clockContainerView.addSubview(clockImageView)
         publishDateStackView.addArrangedSubview(articlePublishDateLabel)
@@ -320,9 +322,13 @@ final class ArticleDetailViewController: UIViewController {
             make.edges.equalTo(articleTopView)
         }
         
+        imageBlurView.snp.makeConstraints { make in
+            make.edges.equalTo(articleImageView)
+        }
+        
         publishDateStackView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(Constants.ArticleDetail.horizontalMargin)
-            make.bottom.equalTo(articleImageView.snp.bottom).inset(Constants.ArticleDetail.margin10)
+            make.bottom.equalTo(imageBlurView.snp.bottom).inset(Constants.ArticleDetail.margin10)
         }
         
         clockContainerView.snp.makeConstraints { make in
@@ -431,7 +437,7 @@ extension ArticleDetailViewController {
     
     private func updateView(with articleViewModel: ArticleViewModel) {
         articleImageView.loadImage(with: articleViewModel.imageUrl)
-        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .semibold), textColor: .white, shadowColor: .black, radius: 3)
+        articlePublishDateLabel.setShadowLabel(string: articleViewModel.publishedAt, font: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .semibold), textColor: .white, shadowColor: .black, radius: 10)
         articleTitleLabel.text = articleViewModel.title
         articleAuthorLabel.text = articleViewModel.author
         articleDescriptionLabel.text = articleViewModel.description
