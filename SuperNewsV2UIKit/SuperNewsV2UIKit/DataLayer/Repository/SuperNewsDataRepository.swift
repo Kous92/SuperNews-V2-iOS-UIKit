@@ -75,6 +75,10 @@ final class SuperNewsDataRepository: SuperNewsRepository {
         switch result {
             case .success(let articles):
                 return .success(articlesToDTO(with: articles))
+            // Au choix
+//            return .success(articles.map(ArticleDTO.init))
+//            return .success(articles.map { ArticleDTO(with: $0) })
+            // et économiser qq lignes de codes pas forcément utiles
             case .failure(let error):
                 return .failure(error)
         }
@@ -88,7 +92,7 @@ final class SuperNewsDataRepository: SuperNewsRepository {
                 return .failure(error)
         }
     }
-    
+
     /// Converts Article data objects to Article Data Transfer Object for Domain Layer
     private func articlesToDTO(with articles: [Article]) -> [ArticleDTO] {
         var dtoList = [ArticleDTO]()

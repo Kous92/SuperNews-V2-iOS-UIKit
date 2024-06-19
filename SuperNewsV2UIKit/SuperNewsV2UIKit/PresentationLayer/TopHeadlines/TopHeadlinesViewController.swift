@@ -73,6 +73,21 @@ final class TopHeadlinesViewController: UIViewController {
         return spinner
     }()
     
+    // Quand je vois la quantité de code qu'il te faut pour chaque label,
+    // tu devrais faire des helpers de ce genre :  prepare(as type: TypeLabel)
+    // avec
+//    enum TypeLabel {
+//        case title
+//        case subtitle
+//        case body
+//        ...
+//    }
+
+//    et en fonction, mettre toute la config
+//    et à la fin, faire un simple
+//    let label = UILabel()
+//    label.prepare(as: .title)
+
     private lazy var noResultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
