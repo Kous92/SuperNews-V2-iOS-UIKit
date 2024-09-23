@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 // Ensure that the 4th and 5th SOLID principles are respected: Interface Segregation and Dependency Inversion
-protocol SourceSelectionViewControllerDelegate: AnyObject {
+@MainActor protocol SourceSelectionViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
     func backToHomeView()
 }
 
-final class SourceSelectionCoordinator: ParentCoordinator {
+@MainActor final class SourceSelectionCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the sub flow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
     

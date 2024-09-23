@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CountryLanguageSetting: Codable {
+struct CountryLanguageSetting: Codable, Sendable {
     let name: String
     let code: String
     let flagCode: String

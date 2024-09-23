@@ -246,7 +246,7 @@ extension SettingsSelectionViewModel {
     }
     
     // Navigation part
-    func backToPreviousScreen() {
+    @MainActor func backToPreviousScreen() {
         coordinator?.backToPreviousScreen()
     }
 }

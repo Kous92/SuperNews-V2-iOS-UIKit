@@ -10,7 +10,7 @@ import UIKit
 import OSLog
 
 /// The main app Coordinator, the root of navigation flow
-final class AppCoordinator: Coordinator {
+@MainActor final class AppCoordinator: Coordinator {
     private let logger = Logger(subsystem: "AppCoordinator", category: "Coordinator")
     
     var childCoordinators = [Coordinator]()

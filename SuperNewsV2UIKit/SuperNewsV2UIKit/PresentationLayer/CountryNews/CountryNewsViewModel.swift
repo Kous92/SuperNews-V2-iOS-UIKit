@@ -88,11 +88,11 @@ final class CountryNewsViewModel {
 
 // Navigation part
 extension CountryNewsViewModel {
-    func backToPreviousScreen() {
+    @MainActor func backToPreviousScreen() {
         coordinator?.backToPreviousScreen()
     }
     
-    func goToArticleDetailView(selectedViewModelIndex: Int) {
+    @MainActor func goToArticleDetailView(selectedViewModelIndex: Int) {
         print("[CountryNewsViewModel] TopHeadlines -> Coordinator -> ArticleDetail")
         print("[CountryNewsViewModel] ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
         coordinator?.goToDetailArticleView(with: articleViewModels[selectedViewModelIndex])

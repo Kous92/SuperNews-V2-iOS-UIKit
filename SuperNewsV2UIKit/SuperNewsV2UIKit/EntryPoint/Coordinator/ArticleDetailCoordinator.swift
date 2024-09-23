@@ -10,13 +10,13 @@ import UIKit
 import SafariServices
 
 // Ensure that the 4th and 5th SOLID principles are respected: Interface Segregation and Dependency Inversion
-protocol ArticleDetailViewControllerDelegate: AnyObject {
+@MainActor protocol ArticleDetailViewControllerDelegate: AnyObject {
     func backToPreviousScreen()
     func openSafariWithArticleWebsite(websiteURL: String)
     func openShareSheet(articleTitle: String, websiteURL: String)
 }
 
-final class ArticleDetailCoordinator: ParentCoordinator {
+@MainActor final class ArticleDetailCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the subflow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
 

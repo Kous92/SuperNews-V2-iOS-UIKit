@@ -12,7 +12,7 @@ enum PrivacyCellIdentifier {
     case content
 }
 
-struct PrivacyTableViewModel {
+struct PrivacyTableViewModel: Sendable {
     let headerViewModel: PrivacyHeaderViewModel
     let cellViewModels: [PrivacyCellViewModel]
     

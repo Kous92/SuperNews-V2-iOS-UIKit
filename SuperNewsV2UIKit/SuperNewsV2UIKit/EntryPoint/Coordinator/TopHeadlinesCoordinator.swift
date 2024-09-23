@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
-protocol TopHeadlinesViewControllerDelegate: AnyObject {
+@MainActor protocol TopHeadlinesViewControllerDelegate: AnyObject {
     func goToDetailArticleView(with articleViewModel: ArticleViewModel)
     func goToSourceSelectionView()
     func displayErrorAlert(with errorMessage: String)
 }
 
-final class TopHeadlinesCoordinator: ParentCoordinator {
+@MainActor final class TopHeadlinesCoordinator: ParentCoordinator {
     // Attention à la rétention de cycle, le sous-flux ne doit pas retenir la référence avec le parent.
     weak var parentCoordinator: Coordinator?
     

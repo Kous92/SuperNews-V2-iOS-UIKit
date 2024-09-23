@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol Coordinator: AnyObject {
+@MainActor protocol Coordinator: AnyObject {
     func start() -> UIViewController
     var childCoordinators: [Coordinator] { get set }
     
@@ -31,7 +31,7 @@ extension Coordinator {
     }
 }
 
-protocol ParentCoordinator: Coordinator, AnyObject {
+@MainActor protocol ParentCoordinator: Coordinator, AnyObject {
     var parentCoordinator: Coordinator? { get }
     var navigationController: UINavigationController { get }
 }

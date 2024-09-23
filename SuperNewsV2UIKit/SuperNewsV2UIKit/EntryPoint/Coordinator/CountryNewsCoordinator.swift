@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
-protocol CountryNewsViewControllerDelegate: AnyObject {
+@MainActor protocol CountryNewsViewControllerDelegate: AnyObject {
     func backToPreviousScreen()
     func goToDetailArticleView(with articleViewModel: ArticleViewModel)
     func displayErrorAlert(with errorMessage: String)
 }
 
-final class CountryNewsCoordinator: ParentCoordinator {
+@MainActor final class CountryNewsCoordinator: ParentCoordinator {
     // Attention à la rétention de cycle, le sous-flux ne doit pas retenir la référence avec le parent.
     weak var parentCoordinator: Coordinator?
     

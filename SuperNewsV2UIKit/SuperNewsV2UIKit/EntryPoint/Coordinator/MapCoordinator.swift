@@ -11,13 +11,13 @@ import CoreLocation
 import Combine
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
-protocol MapViewControllerDelegate: AnyObject {
+@MainActor protocol MapViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
     func goToCountryNewsView(countryCode: String)
     func displaySuggestedLocationAlert(with actualLocation: (location: CLLocation, countryName: String), to suggestedLocation: (location: CLLocation, countryName: String), completion: @escaping (_ answer: Bool) -> ())
 }
 
-final class MapCoordinator: ParentCoordinator {
+@MainActor final class MapCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the sub flow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
     

@@ -144,7 +144,7 @@ extension SearchViewModel {
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
-    func goToArticleDetailView(selectedViewModelIndex: Int) {
+    @MainActor func goToArticleDetailView(selectedViewModelIndex: Int) {
         print("[SearchViewModel] Search -> Coordinator -> ArticleDetail")
         print("[SearchViewModel] ViewModel to use: \(articleViewModels[selectedViewModelIndex])")
         coordinator?.goToDetailArticleView(with: articleViewModels[selectedViewModelIndex])

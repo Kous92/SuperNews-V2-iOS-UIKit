@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SavedSource: Codable {
+struct SavedSource: Codable, Sendable {
     let id: String
     let name: String
     

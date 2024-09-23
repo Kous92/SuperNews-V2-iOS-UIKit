@@ -311,7 +311,7 @@ extension SourceSelectionViewModel {
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
-    func backToTopHeadlinesView() {
+    @MainActor func backToTopHeadlinesView() {
         print("[SourceSelectionViewModel] Back to Top Headlines screen, no source selected")
         coordinator?.backToHomeView()
     }

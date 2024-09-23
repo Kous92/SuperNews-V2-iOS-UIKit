@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PrivacyHeaderViewModel {
+struct PrivacyHeaderViewModel: Sendable {
     let title: String
     let date: String
     

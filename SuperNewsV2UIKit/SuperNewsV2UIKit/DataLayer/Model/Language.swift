@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Language: Decodable {
+struct Language: Decodable, Sendable {
     let languageCode, languageName, languageDefaultFlag: String
     let defaultLanguage: Bool
 }

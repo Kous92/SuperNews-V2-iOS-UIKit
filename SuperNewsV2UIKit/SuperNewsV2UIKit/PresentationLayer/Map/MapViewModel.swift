@@ -200,7 +200,7 @@ extension MapViewModel {
         return userMapPosition
     }
     
-    func goToCountryNewsView(selectedCountryCode: String) {
+    @MainActor func goToCountryNewsView(selectedCountryCode: String) {
         coordinator?.goToCountryNewsView(countryCode: selectedCountryCode)
     }
     

@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct PrivacyPolicy: Decodable {
+struct PrivacyPolicy: Decodable, Sendable {
     let title: String
     let updateDate: String
     let sections: [PrivacyPolicySection]
 }
 
-struct PrivacyPolicySection: Decodable {
+struct PrivacyPolicySection: Decodable, Sendable {
     let subtitle: String
     let content: String
 }

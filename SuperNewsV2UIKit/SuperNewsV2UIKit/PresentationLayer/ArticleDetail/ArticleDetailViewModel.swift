@@ -31,15 +31,15 @@ final class ArticleDetailViewModel {
 }
 
 extension ArticleDetailViewModel {
-    func backToPreviousScreen() {
+    @MainActor func backToPreviousScreen() {
         coordinator?.backToPreviousScreen()
     }
     
-    func openShareSheetWindow() {
+    @MainActor func openShareSheetWindow() {
         coordinator?.openShareSheet(articleTitle: articleViewModel.title, websiteURL: articleViewModel.sourceUrl)
     }
     
-    func openArticleWebsite() {
+    @MainActor func openArticleWebsite() {
         print("[ArticleDetailViewModel] Opening Safari from Coordinator...")
         coordinator?.openSafariWithArticleWebsite(websiteURL: articleViewModel.sourceUrl)
     }

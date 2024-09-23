@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Country: Decodable {
+struct Country: Decodable, Sendable {
     let countryCode, countryName: String
     let lat, lon: Double
 }

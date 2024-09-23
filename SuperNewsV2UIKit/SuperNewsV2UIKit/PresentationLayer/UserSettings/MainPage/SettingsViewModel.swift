@@ -41,7 +41,7 @@ extension SettingsViewModel {
         coordinator?.displayErrorAlert(with: errorMessage)
     }
     
-    func goToSettingsSelectionView(at indexPath: IndexPath) {
+    @MainActor func goToSettingsSelectionView(at indexPath: IndexPath) {
         let option = sectionViewModels[indexPath.row].description
         print("[SettingsViewModel] Selected option: \(option)")
         
@@ -71,7 +71,7 @@ extension SettingsViewModel {
          */
     }
     
-    private func notifyUserWithReset() {
+    @MainActor private func notifyUserWithReset() {
         print("[SettingsViewModel] Resetting parameters.")
         coordinator?.showResetSettingsAlert(completion: { [weak self] reset in
             if reset {

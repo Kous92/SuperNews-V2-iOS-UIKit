@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
-protocol PrivacyPolicyViewControllerDelegate: AnyObject {
+@MainActor protocol PrivacyPolicyViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
 }
 
-final class PrivacyPolicyCoordinator: ParentCoordinator {
+@MainActor final class PrivacyPolicyCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the sub flow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
     

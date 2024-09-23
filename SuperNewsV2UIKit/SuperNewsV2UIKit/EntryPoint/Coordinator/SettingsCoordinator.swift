@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 // We respect the 4th and 5th SOLID principles of Interface Segregation and Dependency Inversion
-protocol SettingsViewControllerDelegate: AnyObject {
+@MainActor protocol SettingsViewControllerDelegate: AnyObject {
     func displayErrorAlert(with errorMessage: String)
     func goToSettingsSelectionView(settingSection: SettingsSection)
     func goToPrivacyPolicyView()
     func showResetSettingsAlert(completion: @escaping (Bool) -> ())
 }
 
-final class SettingsCoordinator: ParentCoordinator {
+@MainActor final class SettingsCoordinator: ParentCoordinator {
     // Be careful to retain cycle, the sub flow must not hold the reference with the parent.
     weak var parentCoordinator: Coordinator?
     
