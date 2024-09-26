@@ -7,6 +7,7 @@
 
 import Foundation
 
+// naming à toujours suffixer par "protocol" quand il s'agit d'un protocol
 protocol SuperNewsDataAPIService {
     func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError>
     func fetchNewsSources(category: String) async -> Result<[MediaSource], SuperNewsAPIError>

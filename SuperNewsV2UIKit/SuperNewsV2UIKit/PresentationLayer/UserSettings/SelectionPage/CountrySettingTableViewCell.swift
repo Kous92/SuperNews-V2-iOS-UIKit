@@ -19,6 +19,8 @@ final class CountrySettingTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    // Un peu à la manière d'un design system, tu pourrais mettre en "constant" les fonts, et ainsi ne jamais douter de ce que tu utilises, où tu comptes l'utiliser
+    // genre title, subtitle, body ... ect 
     private lazy var countryNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +46,8 @@ final class CountrySettingTableViewCell: UITableViewCell {
         contentView.addSubview(countryNameLabel)
     }
     
+    // ce qui est valable pour les constant String est également valable pour les constants Int
+    // De plus, ton padding devrait être le meme de partout, donc forcément, tu ne te tromperas jamais si tu le généralises qq part
     private func setConstraints() {
         countryFlagImage.snp.makeConstraints { make in
             make.height.equalTo(45)

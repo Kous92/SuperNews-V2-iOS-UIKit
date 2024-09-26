@@ -13,6 +13,8 @@ import OSLog
 @MainActor final class AppCoordinator: Coordinator {
     private let logger = Logger(subsystem: "AppCoordinator", category: "Coordinator")
     
+    // Ce code aurait du être dans l'Init ou dans une fonction private "prepare()" ou encore "configure()" appelée depuis l'init
+
     var childCoordinators = [Coordinator]()
     private let topHeadlinesCoordinator = TopHeadlinesCoordinator(navigationController: UINavigationController(), builder: TopHeadlinesModuleBuilder())
     private let searchCoordinator = SearchCoordinator(navigationController: UINavigationController(), builder: SearchModuleBuilder())
@@ -25,7 +27,23 @@ import OSLog
         logger.info("Initializing main coordinator")
         self.rootViewController = rootViewController
     }
+
+    // Déplacer tout ce code dans chaque VC
+    // avec un pattern de ce type
+    // Ton parent ici n'a pas nécessite de connaitre le fond de chacun des objets qu'il ajoute
     
+//
+//    func prepare() {
+//        (rootViewController as? UITabBarController)?.viewControllers = [
+//            TopHeadlinesCoordinator(),
+//            SearchCoordinator(),
+//            ...
+//
+//        ].map { coordinator in
+//            coordinator.start()
+//        }
+//    }
+
     func start() -> UIViewController {
         print("[AppCoordinator] Setting root view with TabBarController")
         let topHeadlinesViewController = topHeadlinesCoordinator.start()

@@ -35,6 +35,13 @@ import UIKit
     deinit {
         print("[CountryNewsCoordinator] Coordinator destroyed.")
     }
+
+    // Le pattern "discardableResult" n'est pas terrible car il sous entend que tu n'auras pas besoin du résultat.
+    // Je crois comprendre que tu fais ça pour éviter les warnings du linter :
+    // donc
+    // soit tu fais un assignation vide  _ = myDiscardableFunction()
+    // soit tu évites de l'utiliser
+    // Parce que cela veut aussi dire qu'un return devient inutile
     
     @discardableResult func start() -> UIViewController {
         print("[CountryNewsCoordinator] Instantiating TopHeadlinesViewController.")
