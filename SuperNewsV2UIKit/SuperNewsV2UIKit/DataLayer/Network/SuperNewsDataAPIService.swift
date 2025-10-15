@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SuperNewsDataAPIService {
+protocol SuperNewsDataAPIService: Sendable {
     func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError>
     func fetchNewsSources(category: String) async -> Result<[MediaSource], SuperNewsAPIError>
     func fetchNewsSources(language: String) async -> Result<[MediaSource], SuperNewsAPIError>

@@ -55,20 +55,6 @@ extension SettingsViewModel {
         default:
             break
         }
-        
-        /*
-         guard option != "reset" else {
-         print("[SettingsViewModel] Resetting parameters.")
-         coordinator?.showResetSettingsAlert(completion: { [weak self] reset in
-         if reset {
-         self?.resetUserSettings()
-         }
-         })
-         return
-         }
-         
-         coordinator?.goToSettingsSelectionView(settingSection: sectionViewModels[indexPath.row].getSettingSection())
-         */
     }
     
     @MainActor private func notifyUserWithReset() {

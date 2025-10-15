@@ -25,9 +25,9 @@ final class SuperNewsJSONFileService: SuperNewsLocalDataFileService {
         return nil
     }
     
-    func loadCountries() async -> Result<[Country], SuperNewsLocalFileError> {
+    func loadCountries() async throws -> [Country] {
         guard let fileURL = getFilePath(name: "countries") else {
-            return .failure(.localFileError)
+            throw SuperNewsLocalFileError.localFileError
         }
         
         do {
@@ -37,20 +37,20 @@ final class SuperNewsJSONFileService: SuperNewsLocalDataFileService {
             // Decoding JSON data to Swift objects
             guard let countries = decode([Country].self, from: data) else {
                 print("[SuperNewsJSONFileService] Data decoding has failed.")
-                return .failure(.decodeError)
+                throw SuperNewsLocalFileError.decodeError
             }
             
             print("[SuperNewsJSONFileService] \(countries.count) countries loaded.")
-            return .success(countries)
+            return countries
         } catch {
             print("[SuperNewsJSONFileService] An error has occured: \(error)")
-            return .failure(.decodeError)
+            throw SuperNewsLocalFileError.decodeError
         }
     }
     
-    func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError> {
+    func loadLanguages() async throws -> [Language] {
         guard let fileURL = getFilePath(name: "languages") else {
-            return .failure(.localFileError)
+            throw SuperNewsLocalFileError.localFileError
         }
         
         do {
@@ -60,14 +60,14 @@ final class SuperNewsJSONFileService: SuperNewsLocalDataFileService {
             // Decoding JSON data to Swift objects
             guard let languages = decode([Language].self, from: data) else {
                 print("[SuperNewsJSONFileService] Data decoding has failed.")
-                return .failure(.decodeError)
+                throw SuperNewsLocalFileError.decodeError
             }
             
             print("[SuperNewsJSONFileService] \(languages.count) languages loaded.")
-            return .success(languages)
+            return languages
         } catch {
             print("[SuperNewsJSONFileService] An error has occured: \(error)")
-            return .failure(.decodeError)
+            throw SuperNewsLocalFileError.decodeError
         }
     }
 }

@@ -78,6 +78,7 @@
 		4B4B15E229FDD82500050BF3 /* SourceSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B15E129FDD82500050BF3 /* SourceSectionViewModel.swift */; };
 		4B4B15E429FDDB9200050BF3 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B15E329FDDB9200050BF3 /* ArrayExtensions.swift */; };
 		4B4DCC9D2AAD373300121021 /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DCC9C2AAD373300121021 /* CacheEntry.swift */; };
+		4B4EEA762E9FE8D40091BB72 /* ThreadExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4EEA752E9FE8CE0091BB72 /* ThreadExtensions.swift */; };
 		4B5220CF2A843F3900F86569 /* languages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B5220CE2A843F3900F86569 /* languages.json */; };
 		4B5220D12A843F6E00F86569 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5220D02A843F6E00F86569 /* Language.swift */; };
 		4B5220D32A8440C900F86569 /* LanguageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5220D22A8440C900F86569 /* LanguageDTO.swift */; };
@@ -118,6 +119,8 @@
 		4B73F61C29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */; };
 		4B73F61D29ECAC3B00CD412C /* SourcesTopHeadlinesMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */; };
 		4B7F53072A75DB5D00FAB22A /* CountrySettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7F53062A75DB5D00FAB22A /* CountrySettingTableViewCell.swift */; };
+		4B8085282E889D0F005FCD59 /* LiquidGlassTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8085272E889D05005FCD59 /* LiquidGlassTabBarController.swift */; };
+		4B80852A2E889E3D005FCD59 /* TabBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8085292E889E39005FCD59 /* TabBarFactory.swift */; };
 		4B82596129F80B33003CB627 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B82596029F80B33003CB627 /* ModuleBuilder.swift */; };
 		4B82596629F8104C003CB627 /* SuperNewsBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B82596529F8104C003CB627 /* SuperNewsBuilderTests.swift */; };
 		4B82596929F81FDE003CB627 /* ShadowUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B82596829F81FDE003CB627 /* ShadowUILabel.swift */; };
@@ -314,6 +317,7 @@
 		4B4B15E129FDD82500050BF3 /* SourceSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSectionViewModel.swift; sourceTree = "<group>"; };
 		4B4B15E329FDDB9200050BF3 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		4B4DCC9C2AAD373300121021 /* CacheEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheEntry.swift; sourceTree = "<group>"; };
+		4B4EEA752E9FE8CE0091BB72 /* ThreadExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadExtensions.swift; sourceTree = "<group>"; };
 		4B5220CE2A843F3900F86569 /* languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = languages.json; sourceTree = "<group>"; };
 		4B5220D02A843F6E00F86569 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		4B5220D22A8440C900F86569 /* LanguageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDTO.swift; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 		4B73F61529ECAA2500CD412C /* SportsTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SportsTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4B73F61B29ECAAEE00CD412C /* SourcesTopHeadlinesMockData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SourcesTopHeadlinesMockData.json; sourceTree = "<group>"; };
 		4B7F53062A75DB5D00FAB22A /* CountrySettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySettingTableViewCell.swift; sourceTree = "<group>"; };
+		4B8085272E889D05005FCD59 /* LiquidGlassTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassTabBarController.swift; sourceTree = "<group>"; };
+		4B8085292E889E39005FCD59 /* TabBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFactory.swift; sourceTree = "<group>"; };
 		4B82596029F80B33003CB627 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		4B82596529F8104C003CB627 /* SuperNewsBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperNewsBuilderTests.swift; sourceTree = "<group>"; };
 		4B82596829F81FDE003CB627 /* ShadowUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowUILabel.swift; sourceTree = "<group>"; };
@@ -512,8 +518,10 @@
 		4B08603029ED881600AA32C0 /* ViewExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				4B8085292E889E39005FCD59 /* TabBarFactory.swift */,
 				4B9E901029ED9286006E541F /* LivePreviews */,
 				4B08603129ED884600AA32C0 /* GradientTabBarController.swift */,
+				4B8085272E889D05005FCD59 /* LiquidGlassTabBarController.swift */,
 				4B306F7F29F70F37009AA92D /* ImageLoader.swift */,
 				4B82596829F81FDE003CB627 /* ShadowUILabel.swift */,
 				4BD0D13F2A0BD01300EEB48A /* ShadowUIImage.swift */,
@@ -1052,6 +1060,7 @@
 		4BF6376E29FC888400AC469F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4B4EEA752E9FE8CE0091BB72 /* ThreadExtensions.swift */,
 				4BF6376F29FC889F00AC469F /* StringExtensions.swift */,
 				4B4B15E329FDDB9200050BF3 /* ArrayExtensions.swift */,
 			);
@@ -1143,7 +1152,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					4B90748E2AAF967C00E559FF = {
 						CreatedOnToolsVersion = 15.0;
@@ -1345,12 +1354,14 @@
 				4B08601F29ED49AC00AA32C0 /* SuperNewsNetworkAPIService.swift in Sources */,
 				4BE0CADF2AA7926C00D6737A /* ResetUserSettingsUseCase.swift in Sources */,
 				4BF6377929FCA13D00AC469F /* SourceTableViewCell.swift in Sources */,
+				4B80852A2E889E3D005FCD59 /* TabBarFactory.swift in Sources */,
 				4BF6377229FC9AC900AC469F /* SourceSelectionUseCase.swift in Sources */,
 				4B56264A2A2FF3FD00C19A26 /* CountryNewsViewModel.swift in Sources */,
 				4B1D3D762B3A3B6C00EA749B /* PrivacyTableViewModel.swift in Sources */,
 				4BE6C33D2A143A4500CC73D1 /* SearchBuilder.swift in Sources */,
 				4BEA42962B3A381A0089EF28 /* PrivacyHeaderViewModel.swift in Sources */,
 				4B9B22E82B23C00500C29558 /* LoadUserSettingsUseCase.swift in Sources */,
+				4B4EEA762E9FE8D40091BB72 /* ThreadExtensions.swift in Sources */,
 				4B3A62892B348AC500A9600A /* PrivacyPolicyViewController.swift in Sources */,
 				4B95B1782A803B16001437C7 /* SuperNewsSettingsRepository.swift in Sources */,
 				4B08602129ED4D3300AA32C0 /* SuperNewsAPIEndpoint.swift in Sources */,
@@ -1391,6 +1402,7 @@
 				4B64685F29E6F0F500F35682 /* SuperNewsDataAPIService.swift in Sources */,
 				4BF447002A0006D1001FA87A /* SuperNewsSourceSettingsRepository.swift in Sources */,
 				4BF446FC2A000263001FA87A /* SuperNewsUserDefaultsLocalSettings.swift in Sources */,
+				4B8085282E889D0F005FCD59 /* LiquidGlassTabBarController.swift in Sources */,
 				4B71680A2A0149D700C54EB6 /* CategoryCellViewModel.swift in Sources */,
 				4BE6C33B2A14389200CC73D1 /* SearchUseCase.swift in Sources */,
 				4BD88CE329E6CDED000369DE /* MediaSource.swift in Sources */,
@@ -1504,7 +1516,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1525,7 +1536,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1546,7 +1556,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
@@ -1565,7 +1574,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
@@ -1614,6 +1622,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LX6HN92HPR;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1636,9 +1645,11 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -1678,6 +1689,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LX6HN92HPR;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1693,9 +1705,11 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1706,9 +1720,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = LX6HN92HPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
@@ -1722,13 +1735,15 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1741,8 +1756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = LX6HN92HPR;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperNewsV2UIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SuperNews;
@@ -1756,13 +1770,15 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kous92.SuperNewsV2UIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

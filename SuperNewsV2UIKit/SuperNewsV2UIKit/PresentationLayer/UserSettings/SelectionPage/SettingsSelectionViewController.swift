@@ -15,17 +15,7 @@ final class SettingsSelectionViewController: UIViewController {
     private var subscriptions = Set<AnyCancellable>()
     
     private lazy var gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
-        gradient.type = .axial
-        gradient.colors = [
-            blue,
-            darkBlue,
-            darkBlue,
-            UIColor.black.cgColor
-        ]
-        gradient.locations = [0, 0.25, 0.5, 1]
+        let gradient = getGradient2()
         return gradient
     }()
     
@@ -255,38 +245,20 @@ extension SettingsSelectionViewController: UISearchBarDelegate {
 
 // Ready to live preview and make views much faster
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct SettingsSelectionViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        
-        ForEach(deviceNames, id: \.self) { deviceName in
-            // Dark mode
-            UIViewControllerPreview {
-                let navigationController = UINavigationController()
-                let builder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsCountry)
-                let vc = builder.buildModule(testMode: true)
-                navigationController.pushViewController(vc, animated: false)
-                return navigationController
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
-            .previewDisplayName("\(deviceName): country mode")
-            .edgesIgnoringSafeArea(.all)
-            
-            UIViewControllerPreview {
-                let navigationController = UINavigationController()
-                let builder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsLanguage)
-                let vc = builder.buildModule(testMode: true)
-                navigationController.pushViewController(vc, animated: false)
-                return navigationController
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
-            .previewDisplayName("\(deviceName): language mode")
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
+#Preview("SettingsSelectionViewController (Country mode)") {
+    let navigationController = UINavigationController()
+    let builder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsCountry)
+    let vc = builder.buildModule(testMode: true)
+    navigationController.pushViewController(vc, animated: false)
+    return navigationController
 }
+
+#Preview("SettingsSelectionViewController (Language mode)") {
+    let navigationController = UINavigationController()
+    let builder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsLanguage)
+    let vc = builder.buildModule(testMode: true)
+    navigationController.pushViewController(vc, animated: false)
+    return navigationController
+}
+
 #endif

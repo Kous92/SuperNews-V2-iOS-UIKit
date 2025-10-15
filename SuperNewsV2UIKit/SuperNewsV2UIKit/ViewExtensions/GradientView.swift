@@ -24,3 +24,34 @@ extension UIView {
     }
 }
 
+func getGradient1() -> CAGradientLayer {
+    let gradient = CAGradientLayer()
+    let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
+    let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
+    gradient.type = .axial
+    gradient.colors = [
+        blue,
+        darkBlue,
+        darkBlue,
+        UIColor.black.cgColor
+    ]
+    gradient.locations = [0, 0.25, 0.5, 1]
+    return gradient
+}
+
+func getGradient2() -> CAGradientLayer {
+    let gradient = CAGradientLayer()
+    let brightBlue = UIColor(resource: .superNewsBrightBlue).cgColor
+    let blue = UIColor(resource: .superNewsBlue).cgColor
+    let mediumBlue = UIColor(resource: .superNewsMediumBlue).cgColor
+    let darkBlue = UIColor(resource: .superNewsDarkBlue).cgColor
+    gradient.type = .axial
+    gradient.colors = [
+        brightBlue,
+        blue,
+        mediumBlue,
+        darkBlue
+    ]
+    gradient.locations = [0, 0.15, 0.4, 1]
+    return gradient
+}

@@ -15,17 +15,17 @@ final class SuperNewsGPSRepository: SuperNewsLocationRepository {
         self.locationService = locationService
     }
     
-    func fetchLocation() async -> Result<CLLocation, SuperNewsGPSError> {
-        guard let result = await locationService?.fetchLocation() else {
-            return .failure(.serviceNotAvailable)
+    func fetchLocation() async throws -> CLLocation {
+        guard let result = try await locationService?.fetchLocation() else {
+            throw SuperNewsGPSError.serviceNotAvailable
         }
         
         return result
     }
     
-    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
-        guard let result = await locationService?.reverseGeocoding(location: location) else {
-            return .failure(.serviceNotAvailable)
+    func reverseGeocoding(location: CLLocation) async throws -> String {
+        guard let result = try await locationService?.reverseGeocoding(location: location) else {
+            throw SuperNewsGPSError.serviceNotAvailable
         }
         
         return result

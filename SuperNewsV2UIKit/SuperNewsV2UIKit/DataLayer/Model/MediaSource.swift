@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct MediaSourceOutput: Codable {
+struct MediaSourceOutput: Codable, Sendable {
     let status: String
     let sources: [MediaSource]
     let code: String?
     let message: String?
 }
 
-struct MediaSource: Codable {
+struct MediaSource: Codable, Sendable {
     let id: String
     let name: String
     let description: String

@@ -22,7 +22,7 @@ final class SearchViewModel {
     
     // Settings
     private var savedLocalLanguage = {
-        let languageCode = Locale.current.languageCode == "fr" ? "fr" : "en"
+        let languageCode = Locale.current.language.languageCode?.identifier == "fr" ? "fr" : "en"
         
         return CountryLanguageSettingDTO(name: languageCode.languageName() ?? languageCode, code: languageCode, flagCode: languageCode)
     }()
@@ -111,8 +111,8 @@ final class SearchViewModel {
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("[SearchViewModel] ERROR: " + error.rawValue)
-                await self.sendErrorMessage(with: error.rawValue)
-                self.updateResult.send(false)
+                await sendErrorMessage(with: error.rawValue)
+                updateResult.send(false)
         }
     }
     

@@ -12,12 +12,12 @@ import CoreLocation
 final class MapUseCase: MapUseCaseProtocol {
     private let localFileRepository: SuperNewsLocalFileRepository
     
-    init(localFileRepository: SuperNewsLocalFileRepository) {
+    nonisolated init(localFileRepository: SuperNewsLocalFileRepository) {
         self.localFileRepository = localFileRepository
     }
     
-    func execute() async -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {
-        return handleResult(with: await localFileRepository.loadCountries())
+    @concurrent func execute() async throws -> [CountryAnnotationViewModel] {
+        return parseViewModels(with: try await localFileRepository.loadCountries())
     }
     
     private func handleResult(with result: Result<[CountryDTO], SuperNewsLocalFileError>) -> Result<[CountryAnnotationViewModel], SuperNewsLocalFileError> {

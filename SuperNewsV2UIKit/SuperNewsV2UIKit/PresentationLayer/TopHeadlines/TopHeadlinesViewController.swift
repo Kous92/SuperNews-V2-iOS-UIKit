@@ -15,17 +15,8 @@ final class TopHeadlinesViewController: UIViewController {
     private var subscriptions = Set<AnyCancellable>()
     
     lazy var gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
-        gradient.type = .axial
-        gradient.colors = [
-            blue,
-            darkBlue,
-            darkBlue,
-            UIColor.black.cgColor
-        ]
-        gradient.locations = [0, 0.25, 0.5, 1]
+        let gradient = getGradient2()
+        
         return gradient
     }()
     
@@ -318,32 +309,18 @@ extension TopHeadlinesViewController: UITabBarControllerDelegate {
     }
 }
 
-// Ready to live preview and make views much faster
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct HomeViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        
-        ForEach(deviceNames, id: \.self) { deviceName in
-            // Dark mode
-            UIViewControllerPreview {
-                let tabBar = GradientTabBarController()
-                let navigationController = UINavigationController()
-                let builder = TopHeadlinesModuleBuilder()
-                let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: String(localized: "news"), image: UIImage(systemName: "newspaper"), tag: 0)
-                navigationController.pushViewController(vc, animated: false)
-                tabBar.viewControllers = [navigationController]
-                
-                return tabBar
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.light)
-            .previewDisplayName(deviceName)
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
+#if DEBUG
+#Preview("TopHeadlinesViewController preview") {
+    let tabBar = UITabBarController()
+    let navigationController = UINavigationController()
+    let builder = TopHeadlinesModuleBuilder()
+    let vc = builder.buildModule(testMode: true)
+    
+    vc.tabBarItem = UITabBarItem(title: String(localized: "news"), image: UIImage(systemName: "newspaper"), tag: 0)
+    navigationController.pushViewController(vc, animated: false)
+    tabBar.viewControllers = [navigationController]
+    
+    return tabBar
 }
+
 #endif

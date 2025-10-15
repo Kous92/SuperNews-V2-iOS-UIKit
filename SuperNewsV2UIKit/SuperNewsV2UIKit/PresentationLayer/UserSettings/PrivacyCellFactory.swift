@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class PrivacyCellFactory {
+@MainActor final class PrivacyCellFactory {
     static func createCell(with cellIdentifier: PrivacyCellIdentifier, viewModel: PrivacyTableViewModel, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
         switch cellIdentifier {
         case .header:

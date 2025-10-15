@@ -14,37 +14,37 @@ final class SuperNewsJSONFileRepository: SuperNewsLocalFileRepository {
         self.localFileService = localFileService
     }
     
-    func loadCountries() async -> Result<[CountryDTO], SuperNewsLocalFileError> {
-        guard let result = await localFileService?.loadCountries() else {
-            return .failure(.localFileError)
+    func loadCountries() async throws -> [CountryDTO] {
+        guard let countries = try await localFileService?.loadCountries() else {
+            throw SuperNewsLocalFileError.localFileError
         }
         
-        return handleCountryResult(with: result)
+        return countriesToDTO(with: countries)
     }
     
-    func loadLanguages() async -> Result<[LanguageDTO], SuperNewsLocalFileError> {
-         guard let result = await localFileService?.loadLanguages() else {
-            return .failure(.localFileError)
+    func loadLanguages() async throws -> [LanguageDTO] {
+        guard let languages = try await localFileService?.loadLanguages() else {
+            throw SuperNewsLocalFileError.localFileError
         }
         
-        return handleLanguageResult(with: result)
+        return languageToDTO(with: languages)
     }
     
     private func handleCountryResult(with result: Result<[Country], SuperNewsLocalFileError>) -> Result<[CountryDTO], SuperNewsLocalFileError> {
         switch result {
-            case .success(let countries):
-                return .success(countriesToDTO(with: countries))
-            case .failure(let error):
-                return .failure(error)
+        case .success(let countries):
+            return .success(countriesToDTO(with: countries))
+        case .failure(let error):
+            return .failure(error)
         }
     }
     
     private func handleLanguageResult(with result: Result<[Language], SuperNewsLocalFileError>) -> Result<[LanguageDTO], SuperNewsLocalFileError> {
         switch result {
-            case .success(let languages):
-                return .success(languageToDTO(with: languages))
-            case .failure(let error):
-                return .failure(error)
+        case .success(let languages):
+            return .success(languageToDTO(with: languages))
+        case .failure(let error):
+            return .failure(error)
         }
     }
     

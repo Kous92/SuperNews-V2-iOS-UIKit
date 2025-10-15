@@ -16,7 +16,7 @@ final class FetchUserLocationUseCase: FetchUserLocationUseCaseProtocol {
         self.locationRepository = locationRepository
     }
     
-    func execute() async -> Result<CLLocation, SuperNewsGPSError> {
-        return await locationRepository.fetchLocation()
+    func execute() async throws -> CLLocation {
+        return try await locationRepository.fetchLocation()
     }
 }

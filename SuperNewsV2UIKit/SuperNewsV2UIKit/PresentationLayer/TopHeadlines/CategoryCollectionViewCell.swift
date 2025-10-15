@@ -20,10 +20,42 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var liquidGlassView: UIVisualEffectView = {
+        var view = UIVisualEffectView()
+        
+        if #available(iOS 26.0, *) {
+            let glassEffect = UIGlassEffect(style: .regular)
+            glassEffect.isInteractive = true
+            view = UIVisualEffectView(effect: glassEffect)
+        } else {
+            // Fallback on earlier versions
+            let glassEffect = UIBlurEffect(style: .regular)
+            view = UIVisualEffectView(effect: glassEffect)
+        }
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 20
+        
+        return view
+    }()
+    
+    private func setEffect() {
+        if #available(iOS 26.0, *) {
+            let glassEffect = UIGlassEffect(style: .clear)
+            glassEffect.isInteractive = true
+            liquidGlassView = UIVisualEffectView(effect: glassEffect)
+        } else {
+            // Fallback on earlier versions
+            let glassEffect = UIBlurEffect(style: .regular)
+            liquidGlassView = UIVisualEffectView(effect: glassEffect)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         buildViewHierarchy()
         setConstraints()
+        setEffect()
     }
     
     required init?(coder: NSCoder) {
@@ -31,18 +63,29 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func buildViewHierarchy() {
+        contentView.addSubview(liquidGlassView)
         contentView.addSubview(categoryTitleLabel)
     }
     
     private func setConstraints() {
-        categoryTitleLabel.snp.makeConstraints { make in
+        liquidGlassView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(Constants.CategoryCollectionView.categoryTitleInsets)
+        }
+        
+        categoryTitleLabel.snp.makeConstraints { make in
+            make.edges.equalTo(liquidGlassView).inset(12)
         }
     }
     
     func configure(with title: String) {
         categoryTitleLabel.text = title
         categoryTitleLabel.textColor = isSelected ? .white : .lightGray
+        
+        /*
+        if !isSelected {
+            liquidGlassView.effect = nil
+        }
+         */
     }
     
     // For live preview
@@ -53,6 +96,14 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             categoryTitleLabel.textColor = isSelected ? .white : .lightGray
+            
+            /*
+            if isSelected {
+                setEffect()
+            } else {
+                liquidGlassView.effect = nil
+            }
+             */
         }
     }
 }

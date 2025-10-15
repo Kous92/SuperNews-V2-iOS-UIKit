@@ -90,8 +90,15 @@ final class MapViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         button.layer.cornerRadius = Constants.MapView.cornerRadius
+        
+        if #available(iOS 26.0, *) {
+            button.configuration = .clearGlass()
+            button.layer.borderWidth = 0.5
+        } else {
+            button.layer.borderWidth = 0.5
+        }
+        
         button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
         button.setImage(UIImage(systemName: "location.fill"), for: .normal)
         button.isEnabled = false
         button.isHidden = true
@@ -105,9 +112,17 @@ final class MapViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         button.layer.cornerRadius = Constants.MapView.cornerRadius
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
+        
+        if #available(iOS 26.0, *) {
+            button.configuration = .clearGlass()
+            button.layer.borderWidth = 0.5
+        } else {
+            button.layer.borderWidth = 0.5
+        }
+        
         button.accessibilityIdentifier = "zoomButton"
+        button.layer.borderColor = UIColor.white.cgColor
+        button.setImage(UIImage(systemName: "globe"), for: .normal)
 
         return button
     }()
@@ -182,8 +197,11 @@ final class MapViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         autoCompletionView.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.25, 0.5, 1], cornerRadius: Constants.MapView.cornerRadius)
-        locationButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
-        worldZoomButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
+        
+        if #unavailable(iOS 26.0) {
+            locationButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
+            worldZoomButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
+        }
     }
     
     private func setBindings() {
@@ -383,30 +401,15 @@ extension MapViewController: UITableViewDelegate {
 
 // Ready to live preview and make views much faster
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct MapViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        
-        ForEach(deviceNames, id: \.self) { deviceName in
-            // Dark mode
-            UIViewControllerPreview {
-                let tabBar = GradientTabBarController()
-                let navigationController = UINavigationController()
-                let builder = MapModuleBuilder()
-                let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 0)
-                navigationController.pushViewController(vc, animated: false)
-                tabBar.viewControllers = [navigationController]
-                
-                return tabBar
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
-            .previewDisplayName(deviceName)
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
+#Preview("MapViewController") {
+    let tabBar = GradientTabBarController()
+    let navigationController = UINavigationController()
+    let builder = MapModuleBuilder()
+    let vc = builder.buildModule(testMode: true)
+    vc.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 0)
+    navigationController.pushViewController(vc, animated: false)
+    tabBar.viewControllers = [navigationController]
+    
+    return tabBar
 }
 #endif

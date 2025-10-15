@@ -8,6 +8,6 @@
 import Foundation
 import UIKit
 
-protocol ModuleBuilder {
+@MainActor protocol ModuleBuilder {
     func buildModule(testMode: Bool, coordinator: ParentCoordinator?) -> UIViewController
 }

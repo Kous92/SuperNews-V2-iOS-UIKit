@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-protocol SuperNewsLocationService {
-    func fetchLocation() async -> Result<CLLocation, SuperNewsGPSError>
-    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError>
+protocol SuperNewsLocationService: Sendable {
+    func fetchLocation() async throws -> CLLocation
+    func reverseGeocoding(location: CLLocation) async throws -> String
 }

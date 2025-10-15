@@ -8,6 +8,7 @@
 import Foundation
 
 final class SuperNewsMockFileService: SuperNewsLocalDataFileService {
+    
     private let forceLoadFailure: Bool
     
     init(forceLoadFailure: Bool) {
@@ -30,10 +31,25 @@ final class SuperNewsMockFileService: SuperNewsLocalDataFileService {
         return .success(countries)
     }
     
-    func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError> {
+    func loadCountries() async throws -> [Country] {
+        print("[SuperNewsMockFileService] Loading countries")
+        guard forceLoadFailure == false else {
+            throw SuperNewsLocalFileError.localFileError
+        }
+        
+        let countries = [
+            Country(countryCode: "fr", countryName: "France", lat: 46.6423682169416, lon: 2.1940236627886227),
+            Country(countryCode: "gb", countryName: "United Kingdom", lat: 53.97844735080214, lon: -2.852943909329258),
+            Country(countryCode: "dz", countryName: "Algeria", lat: 28.3509697448891, lon: 2.65584647197691)
+        ]
+        
+        return countries
+    }
+    
+    func loadLanguages() async throws -> [Language] {
         print("[SuperNewsMockFileService] Loading languages")
         guard forceLoadFailure == false else {
-            return .failure(.localFileError)
+            throw SuperNewsLocalFileError.localFileError
         }
         
         let languages = [
@@ -42,6 +58,6 @@ final class SuperNewsMockFileService: SuperNewsLocalDataFileService {
             Language(languageCode: "ar", languageName: "Arabic", languageDefaultFlag: "sa", defaultLanguage: false)
         ]
         
-        return .success(languages)
+        return languages
     }
 }

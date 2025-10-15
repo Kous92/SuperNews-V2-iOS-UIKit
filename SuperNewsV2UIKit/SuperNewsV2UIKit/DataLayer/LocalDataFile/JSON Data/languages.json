@@ -30,12 +30,6 @@
         "defaultLanguage": true
     },
     {
-        "languageCode": "he",
-        "languageName": "hebrew",
-        "languageDefaultFlag": "il",
-        "defaultLanguage": false
-    },
-    {
         "languageCode": "it",
         "languageName": "italian",
         "languageDefaultFlag": "it",

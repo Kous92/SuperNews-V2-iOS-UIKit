@@ -26,5 +26,5 @@ final class CacheEntry<T> {
     }
 }
 
-// CacheEntry will support codable trype
+// CacheEntry will support codable type
 extension CacheEntry: Codable where T: Codable {}

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class SourceSelectionModuleBuilder: ModuleBuilder {
+@MainActor final class SourceSelectionModuleBuilder: ModuleBuilder {
     private var testMode = false
     
     func buildModule(testMode: Bool, coordinator: ParentCoordinator? = nil) -> UIViewController {

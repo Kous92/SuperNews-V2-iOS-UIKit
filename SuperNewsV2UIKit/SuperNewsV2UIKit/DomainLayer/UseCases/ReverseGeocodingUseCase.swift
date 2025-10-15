@@ -16,7 +16,7 @@ final class ReverseGeocodingUseCase: ReverseGeocodingUseCaseProtocol {
         self.locationRepository = locationRepository
     }
     
-    func execute(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
-        return await locationRepository.reverseGeocoding(location: location)
+    func execute(location: CLLocation) async throws -> String {
+        return try await locationRepository.reverseGeocoding(location: location)
     }
 }

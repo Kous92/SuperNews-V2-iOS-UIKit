@@ -9,17 +9,28 @@ import Foundation
 
 /// This use case loads all available options for settings
 final class UserSettingsUseCase: UserSettingsUseCaseProtocol {
+    
     private let localFileRepository: SuperNewsLocalFileRepository
     
     init(localFileRepository: SuperNewsLocalFileRepository) {
         self.localFileRepository = localFileRepository
     }
     
+    /*
     func execute(with option: String) async -> Result<[CountrySettingViewModel], SuperNewsLocalFileError> {
         if option == "country" {
             return handleResultWithCountries(with: await localFileRepository.loadCountries())
         } else {
             return handleResultWithLanguages(with: await localFileRepository.loadLanguages())
+        }
+    }
+     */
+    
+    @concurrent func execute(with option: String) async throws -> [CountrySettingViewModel] {
+        if option == "country" {
+            return parseViewModels(with: try await localFileRepository.loadCountries())
+        } else {
+            return parseViewModels(with: try await localFileRepository.loadLanguages())
         }
     }
     

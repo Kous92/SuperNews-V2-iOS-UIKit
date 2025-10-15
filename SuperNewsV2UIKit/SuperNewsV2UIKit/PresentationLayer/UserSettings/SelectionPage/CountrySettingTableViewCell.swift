@@ -14,7 +14,6 @@ final class CountrySettingTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "fr")
-        imageView.tintColor = .orange
         
         return imageView
     }()
@@ -70,20 +69,10 @@ final class CountrySettingTableViewCell: UITableViewCell {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct CountrySettingTableViewCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = CountrySettingTableViewCell()
-            view.configure(with: CountrySettingViewModel.init(code: "fr", name: "France", flagCode: "fr", isSaved: false))
-            return view
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("CountrySettingTableViewCell (dark)")
-    }
+#if DEBUG
+#Preview("CountrySettingTableViewCell") {
+    let view = CountrySettingTableViewCell()
+    view.configure(with: CountrySettingViewModel.init(code: "fr", name: "France", flagCode: "fr", isSaved: false))
+    return view
 }
 #endif

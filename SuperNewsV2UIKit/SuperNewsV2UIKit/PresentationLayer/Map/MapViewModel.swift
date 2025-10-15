@@ -55,18 +55,17 @@ final class MapViewModel {
     func getLocation() {
         Task {
             print("[MapViewModel] Getting user location")
-            let result = await fetchUserLocationUseCase.execute()
             
-            switch result {
-                case .success(let userCoordinates):
-                    print("[MapViewModel] User location retrieved, ready for map with coordinates: x = \(userCoordinates.coordinate.longitude), y = \(userCoordinates.coordinate.latitude)")
-                    self.userMapPosition = userCoordinates
-                    print("[MapViewModel] Ready for reverse geocoding")
-                    await positionReverseGeocoding()
-                case .failure(let error):
-                    print("[MapViewModel] Impossible to retrieve user location.")
-                    print("[MapViewModel] ERROR: \(error.rawValue)")
-                    await self.sendErrorMessage(with: error.rawValue)
+            do {
+                let userCoordinates = try await fetchUserLocationUseCase.execute()
+                print("[MapViewModel] User location retrieved, ready for map with coordinates: x = \(userCoordinates.coordinate.longitude), y = \(userCoordinates.coordinate.latitude)")
+                self.userMapPosition = userCoordinates
+                print("[MapViewModel] Ready for reverse geocoding")
+                await positionReverseGeocoding()
+            } catch SuperNewsGPSError.serviceNotAvailable {
+                print("[MapViewModel] Impossible to retrieve user location.")
+                print("[MapViewModel] ERROR: \(SuperNewsGPSError.serviceNotAvailable.rawValue)")
+                await self.sendErrorMessage(with: SuperNewsGPSError.serviceNotAvailable.rawValue)
             }
         }
     }
@@ -74,34 +73,36 @@ final class MapViewModel {
     func loadCountries() {
         Task {
             print("[MapViewModel] Loading countries")
-            let result = await mapUseCase.execute()
-            
-            switch result {
-                case .success(let annotations):
-                    self.annotationsViewModels = annotations
-                    self.autocompletionViewModels = annotations
-                    print("[MapViewModel] Countries loaded successfully, ready to display on map")
-                    self.countryAnnotations.send(true)
-                    self.updateResult.send(true)
-                case .failure(let error):
-                    print("[MapViewModel] Loading failed.")
-                    print("[MapViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
-                    await self.sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
+            do {
+                let result = try await mapUseCase.execute()
+                self.annotationsViewModels = result
+                self.autocompletionViewModels = result
+                print("[MapViewModel] Countries loaded successfully, ready to display on map")
+                self.countryAnnotations.send(true)
+                self.updateResult.send(true)
+            } catch SuperNewsLocalFileError.decodeError {
+                print("[MapViewModel] Loading failed.")
+                let errorMessage = String(localized: String.LocalizationValue(SuperNewsLocalFileError.decodeError.rawValue))
+                print("[MapViewModel] ERROR: \(errorMessage)")
+                await self.sendErrorMessage(with: errorMessage)
             }
         }
     }
     
     private func positionReverseGeocoding() async {
-        let result = await reverseGeocodingUseCase.execute(location: userMapPosition)
-        
-        switch result {
-            case .success(let address):
-                self.locatedCountryName = address
-                print("[MapViewModel] Reverse geocoding succeeded, located country is \(address)")
-                await self.getClosestCountryFromPosition()
-            case .failure(let error):
-                print("[MapViewModel] Reverse geocoding failed. ERROR: \(error.rawValue)")
-                self.userLocation.send(userMapPosition)
+        print("[MapViewModel] Reverse geocoding with \(userMapPosition)")
+        do {
+            let address = try await reverseGeocodingUseCase.execute(location: userMapPosition)
+            self.locatedCountryName = address
+            print("[MapViewModel] Reverse geocoding succeeded, located country is \(address)")
+            await self.getClosestCountryFromPosition()
+        } catch SuperNewsGPSError.reverseGeocodingFailed {
+            print("[MapViewModel] Reverse geocoding failed. ERROR: \(SuperNewsGPSError.reverseGeocodingFailed.rawValue)")
+            self.userLocation.send(userMapPosition)
+        } catch {
+            // Handle any other unexpected errors to satisfy exhaustive catch
+            print("[MapViewModel] Reverse geocoding failed with unexpected error: \(error)")
+            self.userLocation.send(userMapPosition)
         }
     }
     
@@ -217,3 +218,4 @@ extension MapViewModel {
         }
     }
 }
+

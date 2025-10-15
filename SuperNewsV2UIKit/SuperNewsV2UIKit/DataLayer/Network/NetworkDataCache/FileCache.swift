@@ -20,7 +20,6 @@ actor FileCache<T: Codable>: NSCacheType {
     let fileName: String
     
     init(fileName: String, expirationInterval: TimeInterval) {
-        
         self.fileName = fileName
         self.expirationInterval = expirationInterval
     }

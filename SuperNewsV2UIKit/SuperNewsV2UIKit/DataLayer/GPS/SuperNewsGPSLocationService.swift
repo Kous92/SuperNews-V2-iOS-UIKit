@@ -38,7 +38,7 @@ final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
         }
     }
     
-    func fetchLocation() async -> Result<CLLocation, SuperNewsGPSError> {
+    func fetchLocation() async throws -> CLLocation {
         print("[SuperNewsGPSLocationService] Fetching user location")
         let permission = checkLocationPermission()
         
@@ -56,11 +56,11 @@ final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
                     asyncLocationManager.stopUpdatingLocation()
                     
                     guard let location = locations.last else {
-                        return .failure(.unknown)
+                        throw SuperNewsGPSError.unknown
                     }
                     
                     print("[SuperNewsGPSLocationService] User location retrieved: \(location)")
-                    return .success(location)
+                    return location
                 case .didFailWith(let error):
                     print(error.localizedDescription)
                     break
@@ -69,21 +69,21 @@ final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
             }
         }
         
-        return .failure(.serviceNotAvailable)
+        throw SuperNewsGPSError.serviceNotAvailable
     }
     
-    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
+    func reverseGeocoding(location: CLLocation) async throws -> String {
         do {
             let placemarks = try await geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.current)
             
             guard let place = placemarks.first, let countryName = place.country else {
-                return .failure(.reverseGeocodingFailed)
+                throw SuperNewsGPSError.reverseGeocodingFailed
             }
             
-            return .success(countryName)
+            return countryName
         } catch {
             print(error.localizedDescription)
-            return .failure(.reverseGeocodingFailed)
+            throw SuperNewsGPSError.reverseGeocodingFailed
         }
     }
 }

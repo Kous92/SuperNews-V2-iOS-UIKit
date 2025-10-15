@@ -10,6 +10,7 @@ import CoreLocation
 
 /// Mock location service for unit tests and live preview mode
 final class SuperNewsMockLocationService: SuperNewsLocationService {
+    
     private let forceFetchFailure: Bool
     
     init(forceFetchFailure: Bool) {
@@ -17,30 +18,30 @@ final class SuperNewsMockLocationService: SuperNewsLocationService {
         self.forceFetchFailure = forceFetchFailure
     }
     
-    func fetchLocation() async -> Result<CLLocation, SuperNewsGPSError> {
+    func fetchLocation() async throws -> CLLocation {
         print("[SuperNewsMockLocationService] Fetching user location")
         
         guard forceFetchFailure == false else {
-            return .failure(.serviceNotAvailable)
+            throw SuperNewsGPSError.serviceNotAvailable
         }
         
         let mockLocation = CLLocation(latitude: 2.301540063286635, longitude: 48.87255175759405)
         print("[SuperNewsMockLocationService] User location retrieved: \(mockLocation)")
         
-        return .success(mockLocation)
+        return mockLocation
     }
     
-    func reverseGeocoding(location: CLLocation) async -> Result<String, SuperNewsGPSError> {
+    func reverseGeocoding(location: CLLocation) async throws -> String {
         guard forceFetchFailure == false else {
-            return .failure(.reverseGeocodingFailed)
+            throw SuperNewsGPSError.reverseGeocodingFailed
         }
         
         let coordinates = location.coordinate
-        if coordinates.latitude == 2.301540063286635 && coordinates.longitude == 48.87255175759405 {
-            return .success("France")
-        } else {
-            return .failure(.reverseGeocodingFailed)
-        }
         
+        if coordinates.latitude == 2.301540063286635 && coordinates.longitude == 48.87255175759405 {
+            return "France"
+        } else {
+            throw SuperNewsGPSError.reverseGeocodingFailed
+        }
     }
 }

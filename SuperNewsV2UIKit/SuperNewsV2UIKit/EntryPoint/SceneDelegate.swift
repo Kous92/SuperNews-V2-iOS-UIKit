@@ -20,8 +20,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        // The very first pushed ViewController from the Coordinator, which will host all main ViewControllers.
-        let tabBar = GradientTabBarController()
+        // The very first pushed ViewController from the Coordinator, which will host all main ViewControllers. With iOS 26.0 at least, it will have the Liquid Glass effect.
+        let tabBar = TabBarCellFactory.getTabBar()
         
         // It's from here where we start the app and here where we start with the coordinator
         print("[SceneDelegate] Initializing the root coordinator: AppCoordinator")

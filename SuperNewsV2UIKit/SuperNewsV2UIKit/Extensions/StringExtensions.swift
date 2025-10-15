@@ -8,7 +8,7 @@
 import Foundation
 
 func getLocale() -> String {
-    return Locale.current.languageCode ?? ""
+    return Locale.current.language.languageCode?.identifier ?? ""
 }
 
 extension String {
@@ -23,7 +23,7 @@ extension String {
         }
         
         let locale = Locale.current
-        if locale.languageCode == "fr" {
+        if locale.language.languageCode?.identifier == "fr" {
             formatter.locale = Locale(identifier: "fr_FR")
         }
         
@@ -36,7 +36,7 @@ extension String {
         
         let timeString = formatter.string(from: date) // Hours, minutes
         
-        return locale.languageCode == "fr" ? "Le " + dateString + " à " + timeString : dateString + " at " + timeString
+        return locale.language.languageCode?.identifier == "fr" ? "Le " + dateString + " à " + timeString : dateString + " at " + timeString
     }
     
     // Converting date format string "yyyy-MM-dd to "dd/MM/yyyy" format
@@ -50,7 +50,7 @@ extension String {
         }
         
         let locale = Locale.current
-        if locale.languageCode == "fr" {
+        if locale.language.languageCode?.identifier == "fr" {
             formatter.locale = Locale(identifier: "fr_FR")
         }
         
@@ -79,11 +79,8 @@ extension String {
     
     // Fix some unavailable countries due to confusing codes and conform to NewsAPI options
     func checkCountryISO3166_1Alpha1Code() -> String {
-        // "is" was normally Iceland, but NewsAPI refers "is" to Israel. Correct code is "il".
         // "zh" is unknown, but NewsAPI refers "zh" to China. Correct code is "cn".
-        if self.lowercased() == "is" {
-            return "il"
-        } else if self.lowercased() == "zh" {
+        if self.lowercased() == "zh" {
             return "cn"
         } else {
             return self

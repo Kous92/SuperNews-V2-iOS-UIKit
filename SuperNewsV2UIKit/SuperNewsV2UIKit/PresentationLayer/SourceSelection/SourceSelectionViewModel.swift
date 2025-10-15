@@ -22,7 +22,7 @@ final class SourceSelectionViewModel {
     
     // Settings
     private var savedMediaSource = {
-        let countryCode = Locale.current.languageCode == "fr" ? "fr" : "us"
+        let countryCode = Locale.current.language.languageCode?.identifier == "fr" ? "fr" : "us"
         return countryCode == "fr" ? SavedSourceDTO(id: "le-monde", name: "Le Monde") : SavedSourceDTO(id: "abc-news", name: "ABC News")
     }()
     

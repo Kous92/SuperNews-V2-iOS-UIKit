@@ -8,8 +8,8 @@
 import Foundation
 
 protocol SuperNewsLocalDataFileService {
-    func loadCountries() async -> Result<[Country], SuperNewsLocalFileError>
-    func loadLanguages() async -> Result<[Language], SuperNewsLocalFileError>
+    func loadCountries() async throws -> [Country]
+    func loadLanguages() async throws -> [Language]
 }
 
 protocol SuperNewsPrivacyPolicyLocalDataFileService {

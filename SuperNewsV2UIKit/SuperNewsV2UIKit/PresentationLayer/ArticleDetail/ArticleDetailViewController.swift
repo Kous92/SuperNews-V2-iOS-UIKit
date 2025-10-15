@@ -212,12 +212,16 @@ final class ArticleDetailViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(String(localized: "articleWebsite"), for: .normal)
-        button.tintColor = .white
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = 0.5
         button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.buttonTitleFontSize, weight: .regular)
         button.accessibilityIdentifier = "websiteButton"
+        
+        if #available(iOS 26.0, *) {
+            button.configuration = .clearGlass()
+            button.tintColor = .white
+        }
         
         return button
     }()
@@ -261,7 +265,9 @@ final class ArticleDetailViewController: UIViewController {
         clockContainerView.layer.shadowOpacity = 0.25
         clockContainerView.layer.shadowPath = UIBezierPath(roundedRect: clockImageView.bounds, cornerRadius: 10).cgPath
         
-        articleWebsiteButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: 10)
+        if #unavailable(iOS 26.0) {
+            articleWebsiteButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: 10)
+        }
     }
     
     private func buildViewHierarchy() {
@@ -460,6 +466,19 @@ extension ArticleDetailViewController {
 }
 
 // Ready to live preview and make views much faster
+#if DEBUG
+#Preview("ArticleDetailViewController preview") {
+    let navigationController = UINavigationController()
+    let builder = ArticleDetailModuleBuilder(articleViewModel: ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle()))
+    let vc = builder.buildModule(testMode: true)
+    
+    navigationController.pushViewController(vc, animated: false)
+    return navigationController
+}
+
+#endif
+
+/*
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
@@ -485,3 +504,4 @@ struct ArticleDetailSelectionControllerPreview: PreviewProvider {
     }
 }
 #endif
+*/

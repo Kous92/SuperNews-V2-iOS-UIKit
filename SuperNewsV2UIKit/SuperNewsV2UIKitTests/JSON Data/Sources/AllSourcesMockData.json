@@ -434,15 +434,6 @@
             "country": "in"
         },
         {
-            "id": "google-news-is",
-            "name": "Google News (Israel)",
-            "description": "כיסוי מקיף ועדכני של חדשות שהצטברו ממקורות בכל העולם על ידי &#39;חדשות Google&#39;.",
-            "url": "https://news.google.com",
-            "category": "general",
-            "language": "he",
-            "country": "is"
-        },
-        {
             "id": "google-news-it",
             "name": "Google News (Italy)",
             "description": "Copertura giornalistica completa e aggiornata ottenuta combinando fonti di notizie in tutto il mondo attraverso Google News.",

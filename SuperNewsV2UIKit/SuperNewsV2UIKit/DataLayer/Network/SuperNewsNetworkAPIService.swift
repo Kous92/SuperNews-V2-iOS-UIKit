@@ -36,10 +36,12 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         self.apiKey = getApiKey() ?? ""
         print("[SuperNewsNetworkAPIService] Initializing with API Key: \(apiKey)")
         
-        Task(priority: .userInitiated) {
+        Task(priority: .userInitiated) { [weak self] in
+            guard let self else { return }
+            
             print("[SuperNewsNetworkAPIService] Initializing file caches")
-            await articleCache.loadFromDisk()
-            await mediaSourceCache.loadFromDisk()
+            await self.articleCache.loadFromDisk()
+            await self.mediaSourceCache.loadFromDisk()
         }
     }
     
@@ -129,7 +131,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         }
     }
     
-    private func getRequest<T: Decodable>(endpoint: SuperNewsAPIEndpoint) async -> Result<T, SuperNewsAPIError> {
+    private func getRequest<T: Decodable & Sendable>(endpoint: SuperNewsAPIEndpoint) async -> Result<T, SuperNewsAPIError> {
         guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
             return .failure(.invalidURL)
         }

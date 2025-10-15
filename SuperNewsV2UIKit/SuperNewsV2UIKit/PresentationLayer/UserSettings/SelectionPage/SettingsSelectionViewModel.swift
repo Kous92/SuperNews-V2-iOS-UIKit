@@ -45,8 +45,8 @@ final class SettingsSelectionViewModel {
         self.saveUserSettingsUseCase = saveUserSettingsUseCase
         
         let locale = Locale.current
-        let languageCode = locale.languageCode == "fr" ? "fr" : "en"
-        let countryCode = locale.languageCode == "fr" ? "fr" : "us"
+        let languageCode = locale.language.languageCode?.identifier == "fr" ? "fr" : "en"
+        let countryCode = locale.language.languageCode?.identifier == "fr" ? "fr" : "us"
         
         if settingSection.description == "country" {
             savedCountryLanguageSetting = CountryLanguageSettingDTO(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode)
@@ -112,14 +112,38 @@ final class SettingsSelectionViewModel {
     private func loadCountries() {
         Task {
             print("[SettingsSelectionViewModel] Loading countries")
-            await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
+            // await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
+            
+            do {
+                let result = try await userSettingsUseCase.execute(with: settingSection.description)
+                self.cellViewModels = result
+                await sortViewModels()
+                self.filteredCellViewModels = result
+                await loadSetting()
+            } catch {
+                print("[SettingsSelectionViewModel] Loading failed.")
+                print("[SettingsSelectionViewModel] ERROR: \(error.localizedDescription)")
+                await self.sendErrorMessage(with: error.localizedDescription)
+            }
         }
     }
     
     private func loadLanguages() {
         Task {
             print("[SettingsSelectionViewModel] Loading languages")
-            await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
+            // await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
+            
+            do {
+                let result = try await userSettingsUseCase.execute(with: settingSection.description)
+                self.cellViewModels = result
+                await sortViewModels()
+                self.filteredCellViewModels = result
+                await loadSetting()
+            } catch {
+                print("[SettingsSelectionViewModel] Loading failed.")
+                print("[SettingsSelectionViewModel] ERROR: \(error.localizedDescription)")
+                await self.sendErrorMessage(with: error.localizedDescription)
+            }
         }
     }
     

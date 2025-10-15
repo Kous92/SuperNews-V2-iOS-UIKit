@@ -14,17 +14,7 @@ final class SettingsViewController: UIViewController {
     var viewModel: SettingsViewModel?
     
     private lazy var gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
-        gradient.type = .axial
-        gradient.colors = [
-            blue,
-            darkBlue,
-            darkBlue,
-            UIColor.black.cgColor
-        ]
-        gradient.locations = [0, 0.25, 0.5, 1]
+        let gradient = getGradient2()
         return gradient
     }()
     
