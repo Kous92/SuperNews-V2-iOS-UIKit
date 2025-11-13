@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class PrivacyPolicyViewModel {
+@MainActor final class PrivacyPolicyViewModel {
     weak var coordinator: PrivacyPolicyViewControllerDelegate?
     
     // Use case
@@ -29,22 +29,20 @@ final class PrivacyPolicyViewModel {
     func loadPrivacyPolicy() {
         print("[PrivacyPolicyViewModel] Loading privacy policy with \(getLocale()) language...")
         
-        Task {
-            let result = await loadPrivacyPolicyUseCase.execute()
-            
-            switch result {
-            case .success(let privacyPolicy):
+        Task { [weak self] in
+            do {
+                let privacyPolicy = try await self?.loadPrivacyPolicyUseCase.execute()
                 print("[PrivacyPolicyViewModel] Loading succeeded for privacy policy.")
-                let headerViewModel = PrivacyHeaderViewModel(title: privacyPolicy.title, date: privacyPolicy.updateDate)
-                let cellViewModels = privacyPolicy.sections.map { section in
+                let headerViewModel = PrivacyHeaderViewModel(title: privacyPolicy?.title ?? "Privacy policy", date: privacyPolicy?.updateDate ?? "26/12/2023")
+                let cellViewModels = privacyPolicy?.sections.compactMap { section in
                     PrivacyCellViewModel(subtitle: section.subtitle, description: section.content)
                 }
                 
-                self.privacyTableViewModel = PrivacyTableViewModel(headerViewModel: headerViewModel, cellViewModels: cellViewModels)
-                updateResult.send()
-            case .failure(let error):
-                print("[SourceSelectionViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
-                await sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
+                self?.privacyTableViewModel = PrivacyTableViewModel(headerViewModel: headerViewModel, cellViewModels: cellViewModels ?? [])
+                self?.updateResult.send()
+            } catch SuperNewsLocalFileError.localFileError {
+                print("[SourceSelectionViewModel] ERROR: \(SuperNewsLocalFileError.localFileError.rawValue)")
+                self?.sendErrorMessage(with: SuperNewsLocalFileError.localFileError.rawValue)
             }
         }
     }

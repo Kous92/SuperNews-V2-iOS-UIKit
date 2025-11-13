@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SettingsViewModel {
+@MainActor final class SettingsViewModel {
     weak var coordinator: SettingsViewControllerDelegate?
     
     // For resetting user settings to default settings
@@ -58,7 +58,7 @@ extension SettingsViewModel {
     }
     
     @MainActor private func notifyUserWithReset() {
-        print("[SettingsViewModel] Resetting parameters.")
+        print("[SettingsViewModel] Resetting parameters. Thread: \(Thread.currentThread)")
         coordinator?.showResetSettingsAlert(completion: { [weak self] reset in
             if reset {
                 self?.resetUserSettings()
@@ -66,17 +66,15 @@ extension SettingsViewModel {
         })
     }
     
-    private func resetUserSettings() {
-        Task {
-            print("[SettingsViewModel] Resetting user settings to default.")
-            let result = await resetUserSettingsUseCase.execute()
-            
-            switch result {
-            case .success():
+    nonisolated private func resetUserSettings() {
+        Task { [weak self] in
+            print("[SettingsViewModel] Resetting user settings to default. Thread: \(Thread.currentThread)")
+            do {
+                let result = try await self?.resetUserSettingsUseCase.execute()
                 print("[SettingsViewModel] Resetting succeeded to default settings.")
-            case .failure(let error):
-                print("[SettingsViewModel] Resetting failed. ERROR: \(error.rawValue)")
-                await self.sendErrorMessage(with: error.rawValue)
+            } catch SuperNewsUserSettingsError.userSettingsError {
+                print("[SettingsViewModel] Resetting failed. ERROR: \(SuperNewsUserSettingsError.userSettingsError.rawValue)")
+                await self?.sendErrorMessage(with: SuperNewsUserSettingsError.userSettingsError.rawValue)
             }
         }
     }

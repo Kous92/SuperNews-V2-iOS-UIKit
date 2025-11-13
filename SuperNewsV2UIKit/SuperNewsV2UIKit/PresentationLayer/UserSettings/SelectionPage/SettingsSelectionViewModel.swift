@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class SettingsSelectionViewModel {
+@MainActor final class SettingsSelectionViewModel {
     weak var coordinator: SettingsSelectionViewControllerDelegate?
     
     private let settingSection: SettingsSection
@@ -110,39 +110,43 @@ final class SettingsSelectionViewModel {
     }
     
     private func loadCountries() {
-        Task {
+        Task { [weak self] in
             print("[SettingsSelectionViewModel] Loading countries")
             // await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
             
             do {
-                let result = try await userSettingsUseCase.execute(with: settingSection.description)
-                self.cellViewModels = result
-                await sortViewModels()
-                self.filteredCellViewModels = result
-                await loadSetting()
+                let result = try await self?.userSettingsUseCase.execute(with: self?.settingSection.description ?? "country")
+                
+                await MainActor.run { [weak self] in
+                    self?.cellViewModels = result ?? []
+                    self?.filteredCellViewModels = result ?? []
+                }
             } catch {
                 print("[SettingsSelectionViewModel] Loading failed.")
                 print("[SettingsSelectionViewModel] ERROR: \(error.localizedDescription)")
-                await self.sendErrorMessage(with: error.localizedDescription)
+                self?.sendErrorMessage(with: error.localizedDescription)
             }
         }
     }
     
-    private func loadLanguages() {
-        Task {
+   nonisolated private func loadLanguages() {
+        Task { [weak self] in
             print("[SettingsSelectionViewModel] Loading languages")
             // await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))
             
             do {
-                let result = try await userSettingsUseCase.execute(with: settingSection.description)
-                self.cellViewModels = result
-                await sortViewModels()
-                self.filteredCellViewModels = result
-                await loadSetting()
+                let result = try await self?.userSettingsUseCase.execute(with: self?.settingSection.description ?? "language")
+                
+                await MainActor.run { [weak self] in
+                    self?.cellViewModels = result ?? []
+                    self?.filteredCellViewModels = result ?? []
+                }
+                
+                await self?.loadSetting()
             } catch {
                 print("[SettingsSelectionViewModel] Loading failed.")
                 print("[SettingsSelectionViewModel] ERROR: \(error.localizedDescription)")
-                await self.sendErrorMessage(with: error.localizedDescription)
+                await self?.sendErrorMessage(with: error.localizedDescription)
             }
         }
     }
@@ -157,20 +161,20 @@ final class SettingsSelectionViewModel {
         case .failure(let error):
             print("[SettingsSelectionViewModel] Loading failed.")
             print("[SettingsSelectionViewModel] ERROR: \(error.rawValue)")
-            await self.sendErrorMessage(with: error.rawValue)
+            self.sendErrorMessage(with: error.rawValue)
         }
     }
     
     private func loadSetting() async {
-        let result = await loadUserSettingsUseCase.execute()
-        
-        switch result {
-        case .success(let userSetting):
+        do {
+            let userSetting = try await loadUserSettingsUseCase.execute()
             print("[SettingsSelectionViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
             self.savedCountryLanguageSetting = userSetting
-        case .failure(let error):
+        } catch SuperNewsUserSettingsError.userSettingsError {
             print("[SettingsSelectionViewModel] Loading failed, the default user country setting will be used: \(savedCountryLanguageSetting.name), code: \(savedCountryLanguageSetting.code), flagCode: \(savedCountryLanguageSetting.flagCode)")
-            print("[SettingsSelectionViewModel] ERROR: \(error.rawValue)")
+        } catch {
+            // Handle any other unexpected error types to make the catch exhaustive
+            print("[SettingsSelectionViewModel] Loading failed with unexpected error: \(error.localizedDescription). Using default setting: \(savedCountryLanguageSetting.name) [\(savedCountryLanguageSetting.code)]")
         }
         
         await updateViewModelsWithSavedSetting()
@@ -227,20 +231,20 @@ final class SettingsSelectionViewModel {
         let savedSelectedSetting = CountryLanguageSettingDTO(name: cellViewModel.name, code: cellViewModel.code, flagCode: cellViewModel.flagCode)
         print("[SettingsSelectionViewModel] Selected \(settingSection.description) to save: \(savedSelectedSetting.name), code: \(savedSelectedSetting.code), flagCode: \(savedSelectedSetting.flagCode)")
         
-        Task {
-            await unsetSavedViewModel()
-            let result = await saveUserSettingsUseCase.execute(with: savedSelectedSetting)
+        Task { [weak self] in
+            await self?.unsetSavedViewModel()
             
-            switch result {
-            case .success():
+            do {
+                try await self?.saveUserSettingsUseCase.execute(with: savedSelectedSetting)
                 print("[SettingsSelectionViewModel] Saving succeeded")
-                savedCountryLanguageSetting = savedSelectedSetting
-                await updateViewModelsWithSavedSetting()
-                await updateFilteredViewModelsWithSavedSetting()
-                self.updateResult.send(true)
-            case .failure(let error):
-                print("[SettingsSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
-                await sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
+                
+                self?.savedCountryLanguageSetting = savedSelectedSetting
+                await self?.updateViewModelsWithSavedSetting()
+                await self?.updateFilteredViewModelsWithSavedSetting()
+                self?.updateResult.send(true)
+            } catch SuperNewsUserSettingsError.userSettingsError {
+                print("[SettingsSelectionViewModel] Saving failed. ERROR: \(SuperNewsUserSettingsError.userSettingsError.rawValue)")
+                self?.sendErrorMessage(with: String(localized: String.LocalizationValue(SuperNewsUserSettingsError.userSettingsError.rawValue)))
             }
         }
     }
@@ -274,3 +278,4 @@ extension SettingsSelectionViewModel {
         coordinator?.backToPreviousScreen()
     }
 }
+

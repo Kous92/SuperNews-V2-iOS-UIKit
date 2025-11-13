@@ -12,7 +12,7 @@ final class SuperNewsBuilderTests: XCTestCase {
 
     private var moduleBuilder: ModuleBuilder?
 
-    func testTopHeadlinesModuleBuilder() {
+    @MainActor func testTopHeadlinesModuleBuilder() {
         moduleBuilder = TopHeadlinesModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         
@@ -31,7 +31,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssertNotNil(topHeadlinesViewController.viewModel)
     }
     
-    func testSourceSelectionModuleBuilder() {
+    @MainActor func testSourceSelectionModuleBuilder() {
         moduleBuilder = SourceSelectionModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         
@@ -50,7 +50,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssertNotNil(sourceSelectionViewController.viewModel)
     }
     
-    func testArticleDetailModuleBuilder() {
+    @MainActor func testArticleDetailModuleBuilder() {
         let viewModel = ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle())
         moduleBuilder = ArticleDetailModuleBuilder(articleViewModel: viewModel)
         XCTAssertNotNil(moduleBuilder)
@@ -62,7 +62,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssert(viewController is ArticleDetailViewController, "The UIViewController is not a ArticleDetailViewController.")
     }
     
-    func testSearchModuleBuilder() {
+    @MainActor func testSearchModuleBuilder() {
         moduleBuilder = SearchModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         
@@ -73,7 +73,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssert(viewController is SearchViewController, "The UIViewController is not a SearchViewController.")
     }
     
-    func testMapModuleBuilder() {
+    @MainActor func testMapModuleBuilder() {
         moduleBuilder = MapModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         
@@ -84,7 +84,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssert(viewController is MapViewController, "The UIViewController is not a MapViewController.")
     }
     
-    func testCountryModuleBuilder() {
+    @MainActor func testCountryModuleBuilder() {
         moduleBuilder = CountryNewsModuleBuilder(countryCode: "fr")
         XCTAssertNotNil(moduleBuilder)
         
@@ -95,7 +95,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssert(viewController is CountryNewsViewController, "The UIViewController is not a CountryNewsViewController.")
     }
     
-    func testSettingsModuleBuilder() {
+    @MainActor func testSettingsModuleBuilder() {
         moduleBuilder = SettingsModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         
@@ -106,7 +106,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssert(viewController is SettingsViewController, "The UIViewController is not a SettingsViewController.")
     }
     
-    func testSettingsSelectionModuleBuilder() {
+    @MainActor func testSettingsSelectionModuleBuilder() {
         moduleBuilder = SettingsSelectionModuleBuilder(settingSection: SettingsSection.newsLanguage) // Can be done also with "country" section
         XCTAssertNotNil(moduleBuilder)
         
@@ -117,7 +117,7 @@ final class SuperNewsBuilderTests: XCTestCase {
         XCTAssert(viewController is SettingsSelectionViewController, "The UIViewController is not a SettingsSelectionViewController.")
     }
     
-    func testPrivacyPolicyModuleBuilder() {
+    @MainActor func testPrivacyPolicyModuleBuilder() {
         moduleBuilder = PrivacyPolicyModuleBuilder()
         XCTAssertNotNil(moduleBuilder)
         

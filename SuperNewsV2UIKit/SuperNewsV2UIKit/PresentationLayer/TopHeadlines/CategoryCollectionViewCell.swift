@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 final class CategoryCollectionViewCell: UICollectionViewCell {
+    private var state = CellState()
+    
     private lazy var categoryTitleLabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +42,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    
     private func setEffect() {
         if #available(iOS 26.0, *) {
             let glassEffect = UIGlassEffect(style: .clear)
@@ -53,18 +57,43 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        buildViewHierarchy()
-        setConstraints()
-        setEffect()
+        // buildViewHierarchy()
+        // setConstraints()
+        // setEffect()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        contentConfiguration = nil
+    }
+    
     private func buildViewHierarchy() {
-        contentView.addSubview(liquidGlassView)
-        contentView.addSubview(categoryTitleLabel)
+        // Create a SwiftUI view
+        if #available(iOS 26.0, *) {
+            /*
+            let swiftUIView = CategoryCellView(title: "Top Headlines")
+            // Create a UIHostingController
+            let hostingController = UIHostingController(rootView: swiftUIView)
+            
+            let hostView = hostingController.view
+            hostingController.view.frame = contentView.bounds
+            hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            if let hostView {
+                contentView.addSubview(hostView)
+            }
+            */
+        } else {
+            // Fallback on earlier versions
+            contentView.addSubview(liquidGlassView)
+            contentView.addSubview(categoryTitleLabel)
+        }
+        
     }
     
     private func setConstraints() {
@@ -81,11 +110,12 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         categoryTitleLabel.text = title
         categoryTitleLabel.textColor = isSelected ? .white : .lightGray
         
-        /*
-        if !isSelected {
-            liquidGlassView.effect = nil
+        self.contentConfiguration = UIHostingConfiguration {
+            let view = CategoryCellView(title: title, state: state)
+            return view
         }
-         */
+        .background(.clear)
+        .margins(.all, 0)
     }
     
     // For live preview
@@ -95,33 +125,17 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
+            state.isSelected = isSelected
             categoryTitleLabel.textColor = isSelected ? .white : .lightGray
-            
-            /*
-            if isSelected {
-                setEffect()
-            } else {
-                liquidGlassView.effect = nil
-            }
-             */
         }
     }
 }
 
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct CategoryCollectionViewCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = CategoryCollectionViewCell()
-            view.configure(with: "News category")
-            return view
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("CategoryCollectionViewCell (dark)")
-    }
+#Preview("CategoryCollectionViewCell") {
+    let view = CategoryCollectionViewCell()
+    view.configure(with: "News category")
+    view.isSelected = true
+    return view
 }
 #endif

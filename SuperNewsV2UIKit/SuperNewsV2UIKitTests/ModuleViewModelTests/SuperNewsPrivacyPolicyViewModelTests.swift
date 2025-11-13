@@ -17,7 +17,7 @@ final class SuperNewsPrivacyPolicyViewModelTests: XCTestCase {
     private var sectionName2 = ""
     private var fulfilledCount = 0
     
-    override func setUpWithError() throws {
+    @MainActor override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let privacyPolicyFileRepository = SuperNewsPrivacyPolicyFileRepository(localFileService: SuperNewsMockPrivacyPolicyFileService(forceLoadFailure: false))
         let loadPrivacyPolicyUseCase = LoadPrivacyPolicyUseCase(privacyPolicyFileRepository: privacyPolicyFileRepository)
@@ -25,7 +25,7 @@ final class SuperNewsPrivacyPolicyViewModelTests: XCTestCase {
         viewModel = PrivacyPolicyViewModel(loadPrivacyPolicyUseCase: loadPrivacyPolicyUseCase)
     }
     
-    func testLoadPrivacyPolicy() throws {
+    @MainActor func testLoadPrivacyPolicy() throws {
         let expectation1 = XCTestExpectation(description: "Load privacy policy")
         
         viewModel?.updateResultPublisher

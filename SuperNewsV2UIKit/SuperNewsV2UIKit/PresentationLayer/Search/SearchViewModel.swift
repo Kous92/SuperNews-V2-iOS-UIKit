@@ -71,16 +71,13 @@ final class SearchViewModel {
         print("[SearchViewModel] Loading saved user language if existing...")
         
         Task {
-            let result = await loadUserSettingsUseCase.execute()
-            
-            // If it fails, it will use the default one.
-            switch result {
-                case .success(let userSetting):
-                    print("[SearchViewModel] Loading succeeded for saved user language setting: \(userSetting.name), code: \(userSetting.code)")
-                    self.savedLocalLanguage = userSetting
-                case .failure(let error):
-                    print("[SearchViewModel] Loading failed, the default language will be used: \(savedLocalLanguage.name), code: \(savedLocalLanguage.code)")
-                    print("[SearchViewModel] ERROR: \(error.rawValue)")
+            do {
+                let userSetting = try await loadUserSettingsUseCase.execute()
+                print("[SearchViewModel] Loading succeeded for saved user language setting: \(userSetting.name), code: \(userSetting.code)")
+                self.savedLocalLanguage = userSetting
+            } catch SuperNewsUserSettingsError.userSettingsError {
+                print("[SearchViewModel] Loading failed, the default language will be used: \(savedLocalLanguage.name), code: \(savedLocalLanguage.code)")
+                // print("[SearchViewModel] ERROR: \(error.rawValue)")
             }
             
             self.languageSetting.send(savedLocalLanguage.code.languageName() ?? savedLocalLanguage.name)

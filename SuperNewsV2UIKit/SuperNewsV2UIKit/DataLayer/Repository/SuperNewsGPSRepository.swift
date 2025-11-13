@@ -16,6 +16,8 @@ final class SuperNewsGPSRepository: SuperNewsLocationRepository {
     }
     
     func fetchLocation() async throws -> CLLocation {
+        print("SuperNewsGPSRepository -> Thread \(Thread.currentThread)")
+        
         guard let result = try await locationService?.fetchLocation() else {
             throw SuperNewsGPSError.serviceNotAvailable
         }
@@ -24,6 +26,7 @@ final class SuperNewsGPSRepository: SuperNewsLocationRepository {
     }
     
     func reverseGeocoding(location: CLLocation) async throws -> String {
+        print("SuperNewsGPSRepository -> Thread \(Thread.currentThread)")
         guard let result = try await locationService?.reverseGeocoding(location: location) else {
             throw SuperNewsGPSError.serviceNotAvailable
         }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol SuperNewsUserSettings {
-    func saveSelectedUserSetting(setting: CountryLanguageSetting) async -> Result<Void, SuperNewsUserSettingsError>
-    func loadSelectedUserSetting() async -> Result<CountryLanguageSetting, SuperNewsUserSettingsError>
-    func resetSettings() async -> Result<Void, SuperNewsUserSettingsError>
+protocol SuperNewsUserSettings: Sendable {
+    func saveSelectedUserSetting(setting: CountryLanguageSetting) async throws -> Bool
+    func loadSelectedUserSetting() async throws -> CountryLanguageSetting
+    func resetSettings() async throws -> Bool
 }

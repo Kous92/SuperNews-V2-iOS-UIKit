@@ -14,18 +14,8 @@ import SnapKit
 final class CountryClusterAnnotationView: MKAnnotationView {
     // Background
     private lazy var backgroundGradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
-        gradient.type = .axial
+        let gradient = getGradient2()
         gradient.cornerRadius = 15
-        gradient.colors = [
-            blue,
-            darkBlue,
-            darkBlue,
-            UIColor.black.cgColor
-        ]
-        gradient.locations = [0, 0.25, 0.5, 1]
         return gradient
     }()
     
@@ -40,6 +30,9 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         return label
     }()
     
+    // MARK: - SwiftUI hosting (no @available here)
+    private var hostingController: AnyObject?
+    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         collisionMode = .rectangle
@@ -48,22 +41,23 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         centerOffset = CGPoint(x: 0, y: 0)
         self.layer.cornerRadius = 15
         self.clipsToBounds = true
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1
-        self.layer.cornerCurve = .continuous
         
+        if #unavailable(iOS 26.0) {
+            self.layer.borderColor = UIColor.white.cgColor
+            self.layer.borderWidth = 1
+            self.layer.cornerCurve = .continuous
+        }
         
         setViewBackground()
         buildViewHierarchy()
         setConstraints()
-        countryCountLabel.setShadowLabel(string: "0", font: UIFont.systemFont(ofSize: 17, weight: .medium), shadowColor: .blue, radius: 3)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// - Tag: CustomCluster
+    // MARK: - Display
     override func prepareForDisplay() {
         super.prepareForDisplay()
         
@@ -71,13 +65,53 @@ final class CountryClusterAnnotationView: MKAnnotationView {
             return
         }
         
-        let countries = cluster.memberAnnotations.count
+        let count = cluster.memberAnnotations.count
         
-        if countries > 0 {
-            displayPriority = .defaultLow
-            countryCountLabel.setShadowLabel(string: String(countries), font: UIFont.systemFont(ofSize: 17, weight: .medium), shadowColor: .blue, radius: 3)
+        if #available(iOS 26.0, *) {
+            // SwiftUI Glass Version
+            let glassView = CountryClusterAnnotationGlassView(count: count)
+            let hc = UIHostingController(rootView: glassView)
+            hc.view.backgroundColor = .clear
+            hc.view.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Remove UIKit subviews if any
+            countryCountLabel.removeFromSuperview()
+            backgroundGradient.removeFromSuperlayer()
+            
+            // Remove old hosting controller
+            (hostingController as? UIViewController)?.view.removeFromSuperview()
+            
+            addSubview(hc.view)
+            hc.view.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+                make.width.height.equalTo(100)
+            }
+            
+            hostingController = hc
+            
         } else {
-            displayPriority = .defaultHigh
+            // UIKit fallback version
+            (hostingController as? UIViewController)?.view.removeFromSuperview()
+            hostingController = nil
+            
+            // Rebuild UIKit layout if removed
+            if countryCountLabel.superview == nil {
+                setViewBackground()
+                buildViewHierarchy()
+                setConstraints()
+            }
+            
+            if count > 0 {
+                displayPriority = .defaultLow
+                countryCountLabel.setShadowLabel(
+                    string: String(count),
+                    font: UIFont.systemFont(ofSize: 17, weight: .medium),
+                    shadowColor: .blue,
+                    radius: 3
+                )
+            } else {
+                displayPriority = .defaultHigh
+            }
         }
     }
     
@@ -105,16 +139,8 @@ final class CountryClusterAnnotationView: MKAnnotationView {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-@available(iOS 13.0, *)
-struct CountryClusterAnnotationViewPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let annotationView = CountryClusterAnnotationView()
-            return annotationView
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("CountryClusterAnnotationView (dark)")
-    }
+#Preview("CountryClusterAnnotationView") {
+    let annotationView = CountryClusterAnnotationView()
+    return annotationView
 }
 #endif

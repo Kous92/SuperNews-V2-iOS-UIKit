@@ -10,7 +10,7 @@ import Combine
 import CoreLocation
 @testable import SuperNewsV2UIKit
 
-final class SuperNewsMapViewModelTests: XCTestCase {
+@MainActor final class SuperNewsMapViewModelTests: XCTestCase {
 
     var subscriptions: Set<AnyCancellable> = []
     var viewModel: MapViewModel?

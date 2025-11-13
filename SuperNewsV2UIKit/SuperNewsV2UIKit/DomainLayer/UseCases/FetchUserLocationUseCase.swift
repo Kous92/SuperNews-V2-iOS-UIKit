@@ -17,6 +17,7 @@ final class FetchUserLocationUseCase: FetchUserLocationUseCaseProtocol {
     }
     
     func execute() async throws -> CLLocation {
+        print("FetchUserLocationUseCase -> Thread \(Thread.currentThread)")
         return try await locationRepository.fetchLocation()
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 import Foundation
 
-struct PrivacyPolicyDTO: Decodable {
+struct PrivacyPolicyDTO: Decodable, Sendable {
     let title: String
     let updateDate: String
     let sections: [PrivacyPolicySectionDTO]
@@ -21,7 +21,7 @@ struct PrivacyPolicyDTO: Decodable {
     }
 }
 
-struct PrivacyPolicySectionDTO: Decodable {
+struct PrivacyPolicySectionDTO: Decodable, Sendable {
     let subtitle: String
     let content: String
     

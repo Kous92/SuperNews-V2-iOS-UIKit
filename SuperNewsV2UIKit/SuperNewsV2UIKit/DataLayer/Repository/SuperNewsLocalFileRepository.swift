@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol SuperNewsLocalFileRepository {
+protocol SuperNewsLocalFileRepository: Sendable {
     func loadCountries() async throws -> [CountryDTO]
     func loadLanguages() async throws -> [LanguageDTO]
 }
 
-protocol SuperNewsPrivacyPolicyRepository {
-    func loadPrivacyPolicy() async -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError>
+protocol SuperNewsPrivacyPolicyRepository: Sendable {
+    func loadPrivacyPolicy() async throws -> PrivacyPolicyDTO
 }

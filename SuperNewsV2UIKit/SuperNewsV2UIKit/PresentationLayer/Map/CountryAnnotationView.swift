@@ -10,24 +10,16 @@ import UIKit
 import MapKit
 import CoreLocation
 import SnapKit
+import SwiftUI
 
 final class CountryAnnotationView: MKAnnotationView {
     private(set) var viewModel: CountryAnnotationViewModel?
     
     // Background
     private lazy var backgroundGradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
+        let gradient = getGradient2()
         gradient.type = .axial
         gradient.cornerRadius = 35
-        gradient.colors = [
-            blue,
-            darkBlue,
-            darkBlue,
-            UIColor.black.cgColor
-        ]
-        gradient.locations = [0, 0.25, 0.5, 1]
         return gradient
     }()
     
@@ -65,6 +57,9 @@ final class CountryAnnotationView: MKAnnotationView {
         return label
     }()
     
+    // MARK: - SwiftUI hosting (no @available here)
+    private var hostingController: AnyObject?
+    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         clusteringIdentifier = "countryCluster"
@@ -80,14 +75,58 @@ final class CountryAnnotationView: MKAnnotationView {
         displayPriority = .defaultHigh
         frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-        self.layer.cornerRadius = 35
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1
+        layer.cornerRadius = 35
+        
         self.annotationView.accessibilityIdentifier = "annotation\(viewModel?.countryCode ?? "??")"
         
-        setViewBackground()
-        buildViewHierarchy()
-        setConstraints()
+        /*
+        - iOS 26.0 and later: use SwiftUI view with Liquid Glass
+        - iOS < 26 : keep the classic UIKit view
+        */
+        if #available(iOS 26.0, *) {
+            applySwiftUIView()
+        } else {
+            layer.borderColor = UIColor.white.cgColor
+            layer.borderWidth = 1
+            setViewBackground()
+            buildViewHierarchy()
+            setConstraints()
+        }
+    }
+    
+    // MARK: - SwiftUI integration
+    @available(iOS 26.0, *)
+    private func applySwiftUIView() {
+        // Remove UIKit fallback layers
+        annotationView.removeFromSuperview()
+        backgroundGradient.removeFromSuperlayer()
+        flagImageView.removeFromSuperview()
+        countryNameLabel.removeFromSuperview()
+        
+        // Clear any previous hosting view
+        (hostingController as? UIViewController)?.view.removeFromSuperview()
+        hostingController = nil
+        
+        // Create SwiftUI view dynamically
+        let name = viewModel?.countryName ?? ""
+        let code = viewModel?.countryCode ?? ""
+        
+        let swiftUIView = CountryAnnotationGlassView(
+            countryName: name,
+            countryCode: code
+        )
+        
+        let hc = UIHostingController(rootView: swiftUIView)
+        hc.view.backgroundColor = .clear
+        hc.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(hc.view)
+        hc.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.height.equalTo(100)
+        }
+        
+        hostingController = hc
     }
     
     private func buildViewHierarchy() {
@@ -122,8 +161,18 @@ final class CountryAnnotationView: MKAnnotationView {
     /// Fills a NewsTableViewCell with title, source and image data from a ViewModel.
     func configure(with viewModel: CountryAnnotationViewModel) {
         self.viewModel = viewModel
-        countryNameLabel.setShadowLabel(string: viewModel.countryName, font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
-        flagImageView.image = UIImage(named: viewModel.countryCode)
+        
+        if #available(iOS 26.0, *) {
+            if let hc = hostingController as? UIHostingController<CountryAnnotationGlassView> {
+                hc.rootView = CountryAnnotationGlassView(
+                    countryName: viewModel.countryName,
+                    countryCode: viewModel.countryCode
+                )
+            }
+        } else {
+            countryNameLabel.setShadowLabel(string: viewModel.countryName, font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
+            flagImageView.image = UIImage(named: viewModel.countryCode)
+        }
     }
     
     // For live preview
@@ -133,19 +182,9 @@ final class CountryAnnotationView: MKAnnotationView {
 }
 
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct CountryAnnotationViewPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let annotationView = CountryAnnotationView()
-            annotationView.configure(with: CountryAnnotationViewModel(countryName: "Émirats Arabes Unis", countryCode: "ae", coordinates: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169)))
-            return annotationView
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("CountryAnnotationView (dark)")
-    }
+#Preview("CountryAnnotationView") {
+    let annotationView = CountryAnnotationView()
+    annotationView.configure(with: CountryAnnotationViewModel(countryName: "Émirats Arabes Unis", countryCode: "ae", coordinates: CLLocationCoordinate2D(latitude: 48.861066, longitude: 2.340169)))
+    return annotationView
 }
 #endif

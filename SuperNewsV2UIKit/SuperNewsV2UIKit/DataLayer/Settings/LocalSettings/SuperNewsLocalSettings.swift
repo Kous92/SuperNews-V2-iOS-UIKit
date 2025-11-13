@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SuperNewsLocalSettings {
+protocol SuperNewsLocalSettings: Sendable {
     func saveSelectedMediaSource(source: SavedSource) async -> Result<Void, SuperNewsLocalSettingsError>
     func loadSelectedMediaSource() async -> Result<SavedSource, SuperNewsLocalSettingsError>
 }

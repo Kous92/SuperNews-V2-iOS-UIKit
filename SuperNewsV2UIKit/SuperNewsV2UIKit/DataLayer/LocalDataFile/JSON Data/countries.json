@@ -84,6 +84,12 @@
         "lon": 10.426171427430804
     },
     {
+        "countryCode": "dz",
+        "countryName": "Algérie",
+        "lat": 28.0345,
+        "lon": 2.6173
+    },
+    {
         "countryCode": "eg",
         "countryName": "Égypte",
         "lat": 26.6051703445062,

@@ -15,7 +15,7 @@ final class SaveUserSettingsUseCase: SaveUserSettingsUseCaseProtocol {
         self.userSettingsRepository = userSettingsRepository
     }
     
-    func execute(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError> {
-        return await userSettingsRepository.saveUserSetting(userSetting: countryLanguageSetting)
+    func execute(with countryLanguageSetting: CountryLanguageSettingDTO) async throws -> Bool {
+        return try await userSettingsRepository.saveUserSetting(userSetting: countryLanguageSetting)
     }
 }

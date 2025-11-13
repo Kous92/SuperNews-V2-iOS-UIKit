@@ -14,12 +14,22 @@ final class SuperNewsPrivacyPolicyFileRepository: SuperNewsPrivacyPolicyReposito
         self.localFileService = localFileService
     }
     
+    /*
     func loadPrivacyPolicy() async -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError> {
         guard let result = await localFileService?.loadPrivacyPolicy(userLanguage: getLocale().uppercased()) else {
             return .failure(.localFileError)
         }
         
         return handlePrivacyPolicyResult(with: result)
+    }
+     */
+    
+    func loadPrivacyPolicy() async throws -> PrivacyPolicyDTO {
+        guard let result = try await localFileService?.loadPrivacyPolicy(userLanguage: getLocale().uppercased()) else {
+            throw SuperNewsLocalFileError.localFileError
+        }
+        
+        return entityToDTO(with: result)
     }
     
     private func handlePrivacyPolicyResult(with result: Result<PrivacyPolicy, SuperNewsLocalFileError>) -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError> {

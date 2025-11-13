@@ -14,7 +14,7 @@ final class LoadUserSettingsUseCase: LoadUserSettingsUseCaseProtocol {
         self.userSettingsRepository = userSettingsRepository
     }
     
-    func execute() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
-        return await userSettingsRepository.loadUserSetting()
+    func execute() async throws -> CountryLanguageSettingDTO {
+        return try await userSettingsRepository.loadUserSetting()
     }
 }

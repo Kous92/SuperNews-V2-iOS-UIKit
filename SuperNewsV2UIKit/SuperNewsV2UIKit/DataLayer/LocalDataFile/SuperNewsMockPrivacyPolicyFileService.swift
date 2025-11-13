@@ -15,12 +15,12 @@ final class SuperNewsMockPrivacyPolicyFileService: SuperNewsPrivacyPolicyLocalDa
         self.forceLoadFailure = forceLoadFailure
     }
     
-    func loadPrivacyPolicy(userLanguage: String) async -> Result<PrivacyPolicy, SuperNewsLocalFileError> {
+    func loadPrivacyPolicy(userLanguage: String) async throws -> PrivacyPolicy {
         print("[SuperNewsMockPrivacyPolicyFileService] Loading privacy policy")
         guard forceLoadFailure == false else {
-            return .failure(.localFileError)
+            throw SuperNewsLocalFileError.localFileError
         }
         
-        return .success(PrivacyPolicy.getFakePrivacyPolicy())
+        return PrivacyPolicy.getFakePrivacyPolicy()
     }
 }

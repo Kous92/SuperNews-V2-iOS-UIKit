@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreLocation
 
-final class MapViewModel {
+@MainActor final class MapViewModel {
     private var annotationsViewModels = [CountryAnnotationViewModel]()
     private var autocompletionViewModels = [CountryAnnotationViewModel]()
     
@@ -65,14 +65,14 @@ final class MapViewModel {
             } catch SuperNewsGPSError.serviceNotAvailable {
                 print("[MapViewModel] Impossible to retrieve user location.")
                 print("[MapViewModel] ERROR: \(SuperNewsGPSError.serviceNotAvailable.rawValue)")
-                await self.sendErrorMessage(with: SuperNewsGPSError.serviceNotAvailable.rawValue)
+                self.sendErrorMessage(with: SuperNewsGPSError.serviceNotAvailable.rawValue)
             }
         }
     }
     
     func loadCountries() {
         Task {
-            print("[MapViewModel] Loading countries")
+            print("[MapViewModel] Loading countries. Thread \(Thread.currentThread)")
             do {
                 let result = try await mapUseCase.execute()
                 self.annotationsViewModels = result
@@ -84,13 +84,13 @@ final class MapViewModel {
                 print("[MapViewModel] Loading failed.")
                 let errorMessage = String(localized: String.LocalizationValue(SuperNewsLocalFileError.decodeError.rawValue))
                 print("[MapViewModel] ERROR: \(errorMessage)")
-                await self.sendErrorMessage(with: errorMessage)
+                self.sendErrorMessage(with: errorMessage)
             }
         }
     }
     
     private func positionReverseGeocoding() async {
-        print("[MapViewModel] Reverse geocoding with \(userMapPosition)")
+        print("[MapViewModel] Reverse geocoding with \(userMapPosition). Thread \(Thread.currentThread)")
         do {
             let address = try await reverseGeocodingUseCase.execute(location: userMapPosition)
             self.locatedCountryName = address
@@ -107,7 +107,7 @@ final class MapViewModel {
     }
     
     private func getClosestCountryFromPosition() async {
-        print("[MapViewModel] Calculating closest country from position.")
+        print("[MapViewModel] Calculating closest country from position. Thread \(Thread.currentThread)")
         guard !locatedCountryName.isEmpty else {
             return
         }
@@ -120,7 +120,7 @@ final class MapViewModel {
             suggestedCoordinates = CLLocation(latitude: viewModel.coordinates.latitude, longitude: viewModel.coordinates.longitude)
             
             print("[MapViewModel] Actual: \(userMapPosition), suggested: \(suggestedCoordinates)")
-            await showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, locatedCountryName))
+            showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, locatedCountryName))
             
             return
         }
@@ -142,7 +142,7 @@ final class MapViewModel {
         }
         
         print("[MapViewModel] Country to suggest: \(suggestedCountry)")
-        await showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, suggestedCountry))
+        showSuggestedLocationAlert(with: (userMapPosition, locatedCountryName), to: (suggestedCoordinates, suggestedCountry))
     }
     
     @MainActor private func sendErrorMessage(with errorMessage: String) {

@@ -13,29 +13,29 @@ protocol TopHeadlinesUseCaseProtocol: Sendable {
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
-protocol SearchUseCaseProtocol {
+protocol SearchUseCaseProtocol: Sendable {
     func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
-protocol CountryNewsUseCaseProtocol {
+protocol CountryNewsUseCaseProtocol: Sendable {
     func execute(countryCode: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
 }
 
 // Source selection use cases
-protocol SourceSelectionUseCaseProtocol {
+protocol SourceSelectionUseCaseProtocol: Sendable {
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
 }
 
-protocol LoadSavedSelectedSourceUseCaseProtocol {
+protocol LoadSavedSelectedSourceUseCaseProtocol: Sendable {
     func execute() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
 }
 
-protocol SaveSelectedSourceUseCaseProtocol {
+protocol SaveSelectedSourceUseCaseProtocol: Sendable {
     func execute(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
 }
 
 // Map use cases
-protocol MapUseCaseProtocol {
+protocol MapUseCaseProtocol: Sendable {
     func execute() async throws -> [CountryAnnotationViewModel]
 }
 
@@ -48,22 +48,22 @@ protocol ReverseGeocodingUseCaseProtocol: Sendable {
 }
 
 // User settings use cases
-protocol UserSettingsUseCaseProtocol {
+protocol UserSettingsUseCaseProtocol: Sendable {
     func execute(with option: String) async throws -> [CountrySettingViewModel]
 }
 
-protocol ResetUserSettingsUseCaseProtocol {
-    func execute() async -> Result<Void, SuperNewsUserSettingsError>
+protocol ResetUserSettingsUseCaseProtocol: Sendable {
+    @discardableResult func execute() async throws -> Bool
 }
 
 protocol LoadUserSettingsUseCaseProtocol: Sendable {
-    func execute() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError>
+    func execute() async throws -> CountryLanguageSettingDTO
 }
 
 protocol SaveUserSettingsUseCaseProtocol: Sendable {
-    func execute(with countryLanguageSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError>
+    @discardableResult func execute(with countryLanguageSetting: CountryLanguageSettingDTO) async throws -> Bool
 }
 
-protocol LoadPrivacyPolicyUseCaseProtocol {
-    func execute() async -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError>
+protocol LoadPrivacyPolicyUseCaseProtocol: Sendable {
+    func execute() async throws -> PrivacyPolicyDTO
 }

@@ -14,7 +14,7 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
         self.settingOption = settingOption
     }
     
-    func saveSelectedUserSetting(setting: CountryLanguageSetting) async -> Result<Void, SuperNewsUserSettingsError> {
+    func saveSelectedUserSetting(setting: CountryLanguageSetting) async throws -> Bool {
         print("[SuperNewsUserDefaultsCountryLanguageSettings] Saving selected user setting: \(setting.code), name: \(setting.name)")
         
         do {
@@ -28,15 +28,15 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
             UserDefaults.standard.set(data, forKey: settingOption)
             
             // Done, notify that saving has succeeded
-            return .success(())
+            return true
 
         } catch {
             print("[SuperNewsUserDefaultsCountryLanguageSettings] ERROR: Unable to encode the selected source to save (\(error))")
-            return .failure(.encodeError)
+            throw SuperNewsUserSettingsError.encodeError
         }
     }
     
-    func loadSelectedUserSetting() async -> Result<CountryLanguageSetting, SuperNewsUserSettingsError> {
+    func loadSelectedUserSetting() async throws -> CountryLanguageSetting {
         print("[SuperNewsUserDefaultsCountryLanguageSettings] Loading user setting")
         
         if let data = UserDefaults.standard.data(forKey: settingOption) {
@@ -48,18 +48,18 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
                 let userSetting = try decoder.decode(CountryLanguageSetting.self, from: data)
                 
                 // Done, notify that loading has succeeded
-                return .success(userSetting)
+                return userSetting
             } catch {
                 print("[SuperNewsUserDefaultsCountryLanguageSettings] ERROR: Unable to decode the user setting (\(error))")
-                return .failure(.decodeError)
+                throw SuperNewsUserSettingsError.decodeError
             }
         }
         
-        return .failure(.userSettingsError)
+        throw SuperNewsUserSettingsError.userSettingsError
     }
     
-    func resetSettings() async -> Result<Void, SuperNewsUserSettingsError> {
-        print("[SettingsCoordinator] Resetting user parameters.")
+    func resetSettings() async throws -> Bool {
+        print("[SettingsCoordinator] Resetting user parameters. Thread: \(Thread.currentThread)")
         // Resetting to default parameters
         do {
             // Create JSON Encoder
@@ -77,10 +77,10 @@ final class SuperNewsUserDefaultsCountryLanguageSettings: SuperNewsUserSettings 
             UserDefaults.standard.set(countryData, forKey: "country")
             
             print("[SettingsCoordinator] Resetting succeeded.")
-            return .success(())
+            return true
         } catch {
             print("[SettingsCoordinator] Resetting failed.")
-            return .failure(.userSettingsError)
+            throw SuperNewsUserSettingsError.userSettingsError
         }
     }
 }

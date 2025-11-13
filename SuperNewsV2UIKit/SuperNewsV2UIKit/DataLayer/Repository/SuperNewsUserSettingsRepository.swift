@@ -14,25 +14,26 @@ final class SuperNewsUserSettingsRepository: SuperNewsSettingsRepository {
         self.settingsService = settingsService
     }
     
-    func saveUserSetting(userSetting: CountryLanguageSettingDTO) async -> Result<Void, SuperNewsUserSettingsError> {
-        guard let result = await settingsService?.saveSelectedUserSetting(setting: dtoToCountryLanguageSetting(with: userSetting)) else {
-            return .failure(.userSettingsError)
+    func saveUserSetting(userSetting: CountryLanguageSettingDTO) async throws -> Bool {
+        guard let result = try await settingsService?.saveSelectedUserSetting(setting: dtoToCountryLanguageSetting(with: userSetting)) else {
+            throw SuperNewsUserSettingsError.userSettingsError
         }
         
         return result
     }
     
-    func loadUserSetting() async -> Result<CountryLanguageSettingDTO, SuperNewsUserSettingsError> {
-        guard let result = await settingsService?.loadSelectedUserSetting() else {
-            return .failure(.userSettingsError)
+    func loadUserSetting() async throws -> CountryLanguageSettingDTO {
+        guard let result = try await settingsService?.loadSelectedUserSetting() else {
+            throw SuperNewsUserSettingsError.userSettingsError
         }
         
-        return handleSavedCountryLanguageSetting(with: result)
+        return countryLanguageSettingToDTO(with: result)
     }
     
-    func resetUserSettings() async -> Result<Void, SuperNewsUserSettingsError> {
-        guard let result = await settingsService?.resetSettings()else {
-            return .failure(.userSettingsError)
+    func resetUserSettings() async throws -> Bool {
+        print("Reset user settings repository. Thread: \(Thread.currentThread)")
+        guard let result = try await settingsService?.resetSettings() else {
+            throw SuperNewsUserSettingsError.userSettingsError
         }
         
         return result

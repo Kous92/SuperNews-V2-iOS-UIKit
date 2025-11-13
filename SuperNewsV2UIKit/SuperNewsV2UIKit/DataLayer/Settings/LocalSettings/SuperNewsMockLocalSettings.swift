@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SuperNewsMockLocalSettings: SuperNewsLocalSettings {
+final actor SuperNewsMockLocalSettings: SuperNewsLocalSettings {
     private var savedData: Data?
     
     init() {

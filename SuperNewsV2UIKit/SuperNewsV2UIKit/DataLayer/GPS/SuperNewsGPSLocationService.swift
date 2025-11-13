@@ -7,10 +7,9 @@
 
 import Foundation
 import CoreLocation
-import AsyncLocationKit
+@preconcurrency import AsyncLocationKit
 
 final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
-    private var geocoder: CLGeocoder = CLGeocoder()
     private let asyncLocationManager = AsyncLocationManager(desiredAccuracy: .bestAccuracy)
     
     override init() {
@@ -39,7 +38,7 @@ final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
     }
     
     func fetchLocation() async throws -> CLLocation {
-        print("[SuperNewsGPSLocationService] Fetching user location")
+        print("[SuperNewsGPSLocationService] Fetching user location. Thread \(Thread.currentThread)")
         let permission = checkLocationPermission()
         
         switch permission {
@@ -73,7 +72,9 @@ final class SuperNewsGPSLocationService: NSObject, SuperNewsLocationService {
     }
     
     func reverseGeocoding(location: CLLocation) async throws -> String {
+        print("[SuperNewsGPSLocationService] Reverse geocoding. Thread \(Thread.currentThread)")
         do {
+            let geocoder: CLGeocoder = CLGeocoder()
             let placemarks = try await geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.current)
             
             guard let place = placemarks.first, let countryName = place.country else {

@@ -27,9 +27,9 @@ final class SuperNewsPrivacyPolicyJSONFileService: SuperNewsPrivacyPolicyLocalDa
         return nil
     }
     
-    func loadPrivacyPolicy(userLanguage: String) async -> Result<PrivacyPolicy, SuperNewsLocalFileError> {
+    func loadPrivacyPolicy(userLanguage: String) async throws -> PrivacyPolicy {
         guard let fileURL = getFilePath(name: "privacyPolicy\(userLanguage)") else {
-            return .failure(.localFileError)
+            throw SuperNewsLocalFileError.localFileError
         }
         
         do {
@@ -39,14 +39,14 @@ final class SuperNewsPrivacyPolicyJSONFileService: SuperNewsPrivacyPolicyLocalDa
             // Decoding JSON data to Swift objects
             guard let privacyPolicy = decode(PrivacyPolicy.self, from: data) else {
                 print("[SuperNewsPrivacyPolicyJSONFileService] Data decoding has failed.")
-                return .failure(.decodeError)
+                throw SuperNewsLocalFileError.decodeError
             }
             
             print("[SuperNewsPrivacyPolicyJSONFileService] Privacy policy loaded.")
-            return .success(privacyPolicy)
+            return privacyPolicy
         } catch {
             print("[SuperNewsPrivacyPolicyJSONFileService] An error has occured: \(error)")
-            return .failure(.decodeError)
+            throw SuperNewsLocalFileError.decodeError
         }
     }
 }

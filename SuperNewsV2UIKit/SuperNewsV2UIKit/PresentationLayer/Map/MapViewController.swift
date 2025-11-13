@@ -18,17 +18,7 @@ final class MapViewController: UIViewController {
     
     // Background
     private lazy var backgroundGradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
-        gradient.type = .axial
-        gradient.colors = [
-            blue,
-            darkBlue,
-            darkBlue,
-            UIColor.black.cgColor
-        ]
-        gradient.locations = [0, 0.25, 0.5, 1]
+        let gradient = getGradient2()
         return gradient
     }()
     
@@ -64,10 +54,32 @@ final class MapViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = Constants.MapView.cornerRadius
-        view.layer.borderColor = UIColor.white.cgColor
-        view.layer.borderWidth = 1
+        
+        if #unavailable(iOS 26.0) {
+            view.layer.borderColor = UIColor.white.cgColor
+            view.layer.borderWidth = 1
+        }
+        
+        view.backgroundColor = .clear
         view.isHidden = true
         view.accessibilityIdentifier = "autoCompletion"
+        
+        return view
+    }()
+    
+    // This Liquid Glass view will be used only with iOS 26.0 and later.
+    private lazy var glassView: UIVisualEffectView = {
+        let view: UIVisualEffectView
+        
+        if #available(iOS 26.0, *) {
+            let glassEffect = UIGlassEffect(style: .regular)
+            glassEffect.isInteractive = true
+            view = UIVisualEffectView(effect: glassEffect)
+            view.layer.cornerRadius = Constants.MapView.cornerRadius
+        } else {
+            let blurEffect = UIBlurEffect(style: .dark)
+            view = UIVisualEffectView(effect: blurEffect)
+        }
         
         return view
     }()
@@ -157,7 +169,13 @@ final class MapViewController: UIViewController {
         view.addSubview(mapView)
         mapView.addSubview(searchBar)
         mapView.addSubview(autoCompletionView)
+        
+        if #available(iOS 26.0, *) {
+            autoCompletionView.insertSubview(glassView, at: 0)
+        }
+        
         autoCompletionView.addSubview(countryAutoCompletionTableView)
+        
         mapView.addSubview(locationButton)
         mapView.addSubview(worldZoomButton)
     }
@@ -178,6 +196,12 @@ final class MapViewController: UIViewController {
             make.height.equalTo(Constants.MapView.autoCompletionHeight)
         }
         
+        if #available(iOS 26.0, *) {
+            glassView.snp.makeConstraints { make in
+                make.edges.equalTo(autoCompletionView)
+            }
+        }
+        
         countryAutoCompletionTableView.snp.makeConstraints { make in
             make.edges.equalTo(autoCompletionView)
         }
@@ -196,9 +220,9 @@ final class MapViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        autoCompletionView.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.25, 0.5, 1], cornerRadius: Constants.MapView.cornerRadius)
-        
         if #unavailable(iOS 26.0) {
+            autoCompletionView.applyGradient(colours: [UIColor(resource: .superNewsBrightBlue), UIColor(resource: .superNewsBlue), UIColor(resource: .superNewsMediumBlue), UIColor(resource: .superNewsDarkBlue)], locations: [0, 0.15, 0.4, 1], cornerRadius: Constants.MapView.cornerRadius)
+            
             locationButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
             worldZoomButton.applyGradient(colours: [UIColor(named: "SuperNewsBlue") ?? .blue, UIColor(named: "SuperNewsDarkBlue") ?? .black, .black], locations: [0, 0.75, 1], cornerRadius: Constants.MapView.cornerRadius)
         }

@@ -9,23 +9,22 @@ import Foundation
 import Alamofire
 
 final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
-    private var apiKey = ""
-    private var cacheKey = ""
+    private let apiKey: String
     private let articleCache = FileCache<[Article]>(fileName: "article_cache_data", expirationInterval: 86400) // 1 day before expiration
     private let mediaSourceCache = FileCache<[MediaSource]>(fileName: "media_source_cache_data", expirationInterval: 604800) // 1 week before expiration
     
-    fileprivate func getApiKey() -> String? {
+    fileprivate static func getApiKey() -> String {
         guard let path = Bundle.main.path(forResource: "apiKey", ofType: "plist") else {
             print("[SuperNewsNetworkAPIService] ERROR: apiKey.plist file does not exists")
-            return nil
+            return "noKey"
         }
         
         guard let dictionary = NSDictionary(contentsOfFile: path) else {
             print("[SuperNewsNetworkAPIService] ERROR: Data not available")
-            return nil
+            return "noKey"
         }
         
-        return dictionary.object(forKey: "apiKey") as? String
+        return dictionary.object(forKey: "apiKey") as? String ?? "noKey"
     }
     
     private func getAuthorizationHeader() -> HTTPHeaders {
@@ -33,7 +32,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     }
     
     init() {
-        self.apiKey = getApiKey() ?? ""
+        self.apiKey = Self.getApiKey()
         print("[SuperNewsNetworkAPIService] Initializing with API Key: \(apiKey)")
         
         Task(priority: .userInitiated) { [weak self] in
@@ -77,7 +76,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     
     /// It fetches the data with caching option. If existing data was already downloaded (and not expired), the data will be retrieved from cache.
     private func fetchArticleData(endpoint: SuperNewsAPIEndpoint) async -> Result<[Article], SuperNewsAPIError> {
-        cacheKey = endpoint.path
+        let cacheKey = endpoint.path
         print("[SuperNewsNetworkAPIService] Checking cached data for key: \(cacheKey)")
         
         if let articles = await articleCache.value(key: cacheKey) {
@@ -87,12 +86,12 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         
         print("[SuperNewsNetworkAPIService] No data in cache for \(cacheKey)")
         
-        return await handleArticlesResult(with: await getRequest(endpoint: endpoint))
+        return await handleArticlesResult(with: await getRequest(endpoint: endpoint), cacheKey: cacheKey)
     }
     
     /// It fetches the data with caching option. If existing data was already downloaded (and not expired), the data will be retrieved from cache.
     private func fetchMediaSourceData(endpoint: SuperNewsAPIEndpoint) async -> Result<[MediaSource], SuperNewsAPIError> {
-        cacheKey = endpoint.path
+        let cacheKey = endpoint.path
         print("[SuperNewsNetworkAPIService] Checking cached data for key: \(cacheKey)")
         
         if let sources = await mediaSourceCache.value(key: cacheKey) {
@@ -102,10 +101,10 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         
         print("[SuperNewsNetworkAPIService] No data in cache for \(cacheKey)")
         
-        return await handleSourcesResult(with: await getRequest(endpoint: endpoint))
+        return await handleSourcesResult(with: await getRequest(endpoint: endpoint), cacheKey: cacheKey)
     }
     
-    private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>) async -> Result<[MediaSource], SuperNewsAPIError> {
+    private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>, cacheKey: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         switch result {
             case .success(let data):
                 print("[SuperNewsNetworkAPIService] Saving \(data.sources.count) downloaded sources to local cache, key: \(cacheKey)")
@@ -118,7 +117,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         }
     }
     
-    private func handleArticlesResult(with result: Result<ArticleOutput, SuperNewsAPIError>) async -> Result<[Article], SuperNewsAPIError> {
+    private func handleArticlesResult(with result: Result<ArticleOutput, SuperNewsAPIError>, cacheKey: String) async -> Result<[Article], SuperNewsAPIError> {
         switch result {
             case .success(let data):
                 print("[SuperNewsNetworkAPIService] Saving \(data.articles?.count ?? 0) downloaded articles to local cache, key: \(cacheKey)")
@@ -172,3 +171,4 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         }
     }
 }
+

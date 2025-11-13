@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol SuperNewsLocalDataFileService {
+protocol SuperNewsLocalDataFileService: Sendable {
     func loadCountries() async throws -> [Country]
     func loadLanguages() async throws -> [Language]
 }
 
-protocol SuperNewsPrivacyPolicyLocalDataFileService {
-    func loadPrivacyPolicy(userLanguage: String) async -> Result<PrivacyPolicy, SuperNewsLocalFileError>
+protocol SuperNewsPrivacyPolicyLocalDataFileService: Sendable {
+    func loadPrivacyPolicy(userLanguage: String) async throws -> PrivacyPolicy
 }

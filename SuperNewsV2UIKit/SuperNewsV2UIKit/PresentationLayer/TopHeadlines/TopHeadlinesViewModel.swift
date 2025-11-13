@@ -92,21 +92,18 @@ final class TopHeadlinesViewModel {
         print("[TopHeadlinesViewModel] Loading saved user country if existing...")
         
         Task {
-            let result = await loadUserSettingsUseCase.execute()
-            
-            switch result {
-                case .success(let userSetting):
-                    print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
-                    self.savedLocalCountry = userSetting
-                case .failure(let error):
-                    print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
-                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
+            do {
+                let userSetting = try await loadUserSettingsUseCase.execute()
+                print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
+                self.savedLocalCountry = userSetting
+            } catch SuperNewsUserSettingsError.userSettingsError {
+                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
+                // print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
+                // If it fails, it will use the default one.
+                self.updateCountryCategoryTitle()
+                print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
+                self.checkSavedCountry()
             }
-            
-            // If it fails, it will use the default one.
-            self.updateCountryCategoryTitle()
-            print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
-            self.checkSavedCountry()
         }
     }
     

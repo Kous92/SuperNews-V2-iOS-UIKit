@@ -15,7 +15,8 @@ final class ResetUserSettingsUseCase: ResetUserSettingsUseCaseProtocol {
         self.userSettingsRepository = userSettingsRepository
     }
     
-    func execute() async -> Result<Void, SuperNewsUserSettingsError> {
-        return await userSettingsRepository.resetUserSettings()
+    func execute() async throws -> Bool {
+        print("Reset settings executed. Thread: \(Thread.currentThread)")
+        return try await userSettingsRepository.resetUserSettings()
     }
 }

@@ -15,35 +15,35 @@ final class SuperNewsLocationServiceTestCaller {
     var invokedReverseGeocoding = false
     var invokedReverseGeocodingCount = 0
     
-    func fetchLocationSuccess() async -> Result<CLLocation, SuperNewsGPSError> {
+    func fetchLocationSuccess() async throws -> CLLocation {
         let locationService = SuperNewsMockLocationService(forceFetchFailure: false)
         invokedFetchLocation = true
         invokedFetchLocationCount += 1
         
-        return await locationService.fetchLocation()
+        return try await locationService.fetchLocation()
     }
     
-    func fetchLocationFailure() async -> Result<CLLocation, SuperNewsGPSError> {
+    func fetchLocationFailure() async throws -> CLLocation {
         let locationService = SuperNewsMockLocationService(forceFetchFailure: true)
         invokedFetchLocation = true
         invokedFetchLocationCount += 1
         
-        return await locationService.fetchLocation()
+        return try await locationService.fetchLocation()
     }
     
-    func reverseGeocodingSuccess() async -> Result<String, SuperNewsGPSError> {
+    func reverseGeocodingSuccess() async throws -> String {
         let locationService = SuperNewsMockLocationService(forceFetchFailure: false)
         invokedReverseGeocoding = true
         invokedReverseGeocodingCount += 1
         
-        return await locationService.reverseGeocoding(location: CLLocation(latitude: 2.301540063286635, longitude: 48.87255175759405))
+        return try await locationService.reverseGeocoding(location: CLLocation(latitude: 2.301540063286635, longitude: 48.87255175759405))
     }
     
-    func reverseGeocodingFailure() async -> Result<String, SuperNewsGPSError> {
+    func reverseGeocodingFailure() async throws -> String {
         let locationService = SuperNewsMockLocationService(forceFetchFailure: true)
         invokedReverseGeocoding = true
         invokedReverseGeocodingCount += 1
         
-        return await locationService.reverseGeocoding(location: CLLocation(latitude: 2.301540063286635, longitude: 48.87255175759405))
+        return try await locationService.reverseGeocoding(location: CLLocation(latitude: 2.301540063286635, longitude: 48.87255175759405))
     }
 }

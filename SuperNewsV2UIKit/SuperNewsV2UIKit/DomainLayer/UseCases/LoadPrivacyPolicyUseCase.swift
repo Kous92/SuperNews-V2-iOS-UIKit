@@ -14,7 +14,7 @@ final class LoadPrivacyPolicyUseCase: LoadPrivacyPolicyUseCaseProtocol {
         self.privacyPolicyFileRepository = privacyPolicyFileRepository
     }
     
-    func execute() async -> Result<PrivacyPolicyDTO, SuperNewsLocalFileError> {
-        return await privacyPolicyFileRepository.loadPrivacyPolicy()
+    func execute() async throws -> PrivacyPolicyDTO {
+        return try await privacyPolicyFileRepository.loadPrivacyPolicy()
     }
 }

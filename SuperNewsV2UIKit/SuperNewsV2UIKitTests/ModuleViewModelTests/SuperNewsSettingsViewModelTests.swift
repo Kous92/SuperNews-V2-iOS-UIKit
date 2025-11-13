@@ -17,14 +17,17 @@ final class SuperNewsSettingsViewModelTests: XCTestCase {
         let userSettingsRepository = SuperNewsUserSettingsRepository(settingsService: SuperNewsMockCountryLanguageSettings(with: "language"))
         let resetUserSettingsUseCase = ResetUserSettingsUseCase(userSettingsRepository: userSettingsRepository)
         
-        viewModel = SettingsViewModel(resetUserSettingsUseCase: resetUserSettingsUseCase)
+        Task { @MainActor in
+            viewModel = SettingsViewModel(resetUserSettingsUseCase: resetUserSettingsUseCase)
+        }
+        
     }
     
-    func testLoadSettingsSections() {
+    @MainActor func testLoadSettingsSections() {
         XCTAssertEqual(viewModel?.numberOfRows() ?? 0, 4)
     }
     
-    func testCellViewModel() {
+    @MainActor func testCellViewModel() {
         XCTAssertEqual(viewModel?.getCellViewModel(at: IndexPath(row: 0, section: 0))?.description, "language")
     }
 }
