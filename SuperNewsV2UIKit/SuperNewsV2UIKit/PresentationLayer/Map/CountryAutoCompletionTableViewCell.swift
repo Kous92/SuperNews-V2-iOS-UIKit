@@ -22,7 +22,14 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.textColor = .white
+        
+        // For Liquid Glass view
+        if #available(iOS 26.0, *) {
+            label.textColor = .label
+        } else {
+            label.textColor = .white
+        }
+
         return label
     }()
     

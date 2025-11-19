@@ -15,7 +15,9 @@ extension UILabel {
         shadow.shadowBlurRadius = radius
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: font,
+            .font: UIFontMetrics(forTextStyle: .body).scaledFont(
+                for: font
+            ),
             .foregroundColor: textColor ?? UIColor.white,
             .shadow: shadow
         ]

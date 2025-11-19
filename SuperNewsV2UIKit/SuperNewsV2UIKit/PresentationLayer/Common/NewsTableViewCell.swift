@@ -36,6 +36,7 @@ final class NewsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     
@@ -44,6 +45,7 @@ final class NewsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     

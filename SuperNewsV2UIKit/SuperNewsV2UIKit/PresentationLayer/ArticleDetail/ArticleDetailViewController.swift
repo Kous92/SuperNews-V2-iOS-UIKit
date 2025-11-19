@@ -16,12 +16,7 @@ final class ArticleDetailViewController: UIViewController {
     private var subscriptions = Set<AnyCancellable>()
     
     private lazy var gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        let blue = UIColor(named: "SuperNewsBlue")?.cgColor ?? UIColor.blue.cgColor
-        let darkBlue = UIColor(named: "SuperNewsDarkBlue")?.cgColor ?? UIColor.black.cgColor
-        gradient.type = .axial
-        gradient.colors = [blue, darkBlue, darkBlue, UIColor.black.cgColor]
-        gradient.locations = [0, 0.25, 0.5, 1]
+        let gradient = getGradient2()
         return gradient
     }()
     
@@ -82,6 +77,7 @@ final class ArticleDetailViewController: UIViewController {
     private let publishDateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        // stackView.alignment = .top
         stackView.spacing = Constants.ArticleDetail.stackViewHorizontalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -101,6 +97,7 @@ final class ArticleDetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "clock")
         imageView.tintColor = .white
+        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
         
         return imageView
     }()
@@ -111,6 +108,7 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.textColor = .white
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     
@@ -120,7 +118,11 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
-        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
+        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
+        )
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .white
         return label
     }()
@@ -128,6 +130,7 @@ final class ArticleDetailViewController: UIViewController {
     private let authorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        
         stackView.spacing = Constants.ArticleDetail.stackViewHorizontalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -139,8 +142,9 @@ final class ArticleDetailViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "person.fill")
+        imageView.image = UIImage(systemName: "person.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .default))
         imageView.tintColor = .white
+        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
         
         return imageView
     }()
@@ -150,7 +154,11 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        )
+        label.adjustsFontForContentSizeCategory = true
         label.lineBreakMode = .byWordWrapping
         label.textColor = .white
         return label
@@ -161,7 +169,11 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.descriptionLabelFontSize, weight: .medium)
+        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.descriptionLabelFontSize, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.ArticleDetail.descriptionLabelFontSize, weight: .semibold)
+        )
+        label.adjustsFontForContentSizeCategory = true
         label.lineBreakMode = .byWordWrapping
         label.textColor = .white
         return label
@@ -172,7 +184,11 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.contentLabelFontSize, weight: .regular)
+        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.contentLabelFontSize, weight: .regular)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.ArticleDetail.contentLabelFontSize, weight: .semibold)
+        )
+        label.adjustsFontForContentSizeCategory = true
         label.lineBreakMode = .byWordWrapping
         label.textColor = .white
         return label
@@ -191,7 +207,11 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
+        )
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .white
         return label
     }()
@@ -204,6 +224,7 @@ final class ArticleDetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "newspaper.fill")
         imageView.tintColor = .white
+        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
         
         return imageView
     }()
@@ -213,8 +234,12 @@ final class ArticleDetailViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(String(localized: "articleWebsite"), for: .normal)
         button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 0.5
+        
+        if #unavailable(iOS 26.0) {
+            button.layer.borderColor = UIColor.white.cgColor
+            button.layer.borderWidth = 0.5
+        }
+        
         button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.buttonTitleFontSize, weight: .regular)
         button.accessibilityIdentifier = "websiteButton"
         
@@ -338,7 +363,7 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         clockContainerView.snp.makeConstraints { make in
-            make.size.equalTo(Constants.ArticleDetail.imageIconSize)
+            make.size.greaterThanOrEqualTo(Constants.ArticleDetail.imageIconSize)
         }
         
         clockImageView.snp.makeConstraints { make in
@@ -361,7 +386,7 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         authorImageView.snp.makeConstraints { make in
-            make.size.equalTo(Constants.ArticleDetail.imageIconSize)
+            make.size.greaterThanOrEqualTo(Constants.ArticleDetail.imageIconSize)
         }
         
         articleDescriptionLabel.snp.makeConstraints { make in
@@ -381,7 +406,7 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         sourceImageView.snp.makeConstraints { make in
-            make.size.equalTo(Constants.ArticleDetail.imageIconSize)
+            make.size.greaterThanOrEqualTo(Constants.ArticleDetail.imageIconSize)
         }
         
         // MARK: - Under the middle view
@@ -394,7 +419,8 @@ final class ArticleDetailViewController: UIViewController {
             make.bottom.equalTo(articleBottomView.snp.bottom).inset(Constants.ArticleDetail.buttonInset)
             make.centerX.equalTo(articleBottomView)
             make.width.equalTo(articleBottomView).multipliedBy(0.7)
-            make.height.equalTo(Constants.ArticleDetail.buttonHeight)
+            // make.height.equalTo(Constants.ArticleDetail.buttonHeight)
+            make.height.greaterThanOrEqualTo(Constants.ArticleDetail.buttonHeight)
         }
     }
 }
@@ -418,7 +444,9 @@ extension ArticleDetailViewController {
         navigationController?.navigationBar.tintColor = .white
         
         // When scrolling, custom color appareance for navigation bar
-        customNavBarAppearance.backgroundColor = .superNewsMediumBlue.withAlphaComponent(0.95)
+        if #unavailable(iOS 26.0) {
+            customNavBarAppearance.backgroundColor = .superNewsMediumBlue.withAlphaComponent(0.95)
+        }
         
         // To avoid any color issue especially if we switch from dark to light mode. We want any NavigationBar title color kept at white.
         customNavBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -477,31 +505,3 @@ extension ArticleDetailViewController {
 }
 
 #endif
-
-/*
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ArticleDetailSelectionControllerPreview: PreviewProvider {
-    static var previews: some View {
-        
-        ForEach(deviceNames, id: \.self) { deviceName in
-            // Dark mode
-            UIViewControllerPreview {
-                let navigationController = UINavigationController()
-                let builder = ArticleDetailModuleBuilder(articleViewModel: ArticleViewModel(with: ArticleDTO.getFakeObjectFromArticle()))
-                let vc = builder.buildModule(testMode: true)
-                
-                navigationController.pushViewController(vc, animated: false)
-                return navigationController
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
-            .previewDisplayName(deviceName)
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
-}
-#endif
-*/

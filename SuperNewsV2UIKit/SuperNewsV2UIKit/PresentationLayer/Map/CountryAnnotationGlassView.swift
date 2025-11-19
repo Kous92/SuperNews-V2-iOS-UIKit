@@ -17,12 +17,13 @@ struct CountryAnnotationGlassView: View {
             Text(countryName)
                 .font(.system(size: 12, weight: .medium))
                 .multilineTextAlignment(.center)
+                .padding(.horizontal, 10)
             
             Image(countryCode)
                 .resizable()
                 .frame(width: 35, height: 30)
         }
-        .frame(width: 100, height: 100)
+        .frame(minWidth: 100, minHeight: 100)
         .glassEffect(.clear.interactive(), in: .rect(cornerRadius: 35.0))
     }
 }

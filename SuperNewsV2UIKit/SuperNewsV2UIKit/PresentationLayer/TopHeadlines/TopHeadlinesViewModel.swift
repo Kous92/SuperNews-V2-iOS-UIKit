@@ -96,6 +96,7 @@ final class TopHeadlinesViewModel {
                 let userSetting = try await loadUserSettingsUseCase.execute()
                 print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
                 self.savedLocalCountry = userSetting
+                self.updateCountryCategoryTitle()
             } catch SuperNewsUserSettingsError.userSettingsError {
                 print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
                 // print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")

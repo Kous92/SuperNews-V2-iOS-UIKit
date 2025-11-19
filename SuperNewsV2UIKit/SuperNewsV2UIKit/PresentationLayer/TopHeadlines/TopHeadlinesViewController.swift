@@ -20,18 +20,21 @@ final class TopHeadlinesViewController: UIViewController {
         return gradient
     }()
     
+    private var collectionViewHeightConstraint: Constraint?
+    
     private lazy var categoryCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        
+        let layout = makeCategoriesHorizontalLayout()
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.alwaysBounceVertical = false
+        collectionView.alwaysBounceHorizontal = true
+        collectionView.isDirectionalLockEnabled = true
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isHidden = true
         collectionView.accessibilityIdentifier = "categoryCollectionView"
         
@@ -106,6 +109,13 @@ final class TopHeadlinesViewController: UIViewController {
         viewModel?.loadAndUpdateUserCountrySettingTitle()
     }
     
+    // MARK: - Ajustement dynamique de la hauteur
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // tentative de mise à jour (on vérifie que la hauteur est > 0)
+        updateCollectionViewHeightIfNeeded()
+    }
+    
     private func buildViewHierarchy() {
         view.addSubview(loadingSpinner)
         view.addSubview(noResultLabel)
@@ -132,7 +142,9 @@ final class TopHeadlinesViewController: UIViewController {
         categoryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(Constants.CategoryCollectionView.collectionViewHeight)
+            // make.height.equalTo(Constants.CategoryCollectionView.collectionViewHeight)
+            // hauteur initiale raisonnable pour éviter frame = 0 et scroll vertical au démarrage
+            collectionViewHeightConstraint = make.height.equalTo(Constants.CategoryCollectionView.collectionViewHeight).constraint
         }
     }
     
@@ -208,6 +220,74 @@ extension TopHeadlinesViewController {
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         tableView.isHidden = false
+    }
+    
+    private func updateCollectionViewHeightIfNeeded() {
+        // Mesure actuelle fournie par le layout
+        let measuredHeight = categoryCollectionView.collectionViewLayout.collectionViewContentSize.height
+
+        // Debug prints utiles
+        // print("Measured content height = \(measuredHeight), frame.height = \(collectionView.frame.height)")
+
+        guard measuredHeight > 0 else { return }
+
+        // Si la hauteur mesurée est différente de la contrainte en place, on update
+        let currentConstraintValue = collectionViewHeightConstraint?.layoutConstraints.first?.constant ?? -1
+        if abs(currentConstraintValue - measuredHeight) > 0.1 {
+            collectionViewHeightConstraint?.update(offset: measuredHeight)
+            // Assure un layout immédiat si besoin
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+        }
+    }
+    
+    private func makeCategoriesHorizontalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(60),
+            heightDimension: .estimated(44)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(60),
+            heightDimension: .estimated(44)
+        )
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.interGroupSpacing = 8
+        section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+
+        // IMPORTANT: on s'assure que la section ne forçe pas un comportement vertical
+        // section.supplementariesFollowContentInsets = false
+        section.supplementaryContentInsetsReference = .none
+
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    // MARK: - Dynamic Type support
+    private func observeDynamicTypeChanges() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleDynamicTypeChange),
+            name: UIContentSizeCategory.didChangeNotification,
+            object: nil
+        )
+    }
+
+    @objc private func handleDynamicTypeChange() {
+        // Invalide le layout puis force un recalcul propre
+        categoryCollectionView.collectionViewLayout.invalidateLayout()
+
+        // reload + performBatchUpdates pour s'assurer que la collection mesure correctement
+        categoryCollectionView.reloadData()
+        categoryCollectionView.performBatchUpdates(nil) { [weak self] _ in
+            self?.updateCollectionViewHeightIfNeeded()
+        }
+        
     }
     
     private func updateCollectionView(reloadData: Bool, updateIndex: Int) {

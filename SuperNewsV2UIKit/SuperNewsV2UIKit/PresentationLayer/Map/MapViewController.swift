@@ -207,13 +207,13 @@ final class MapViewController: UIViewController {
         }
         
         worldZoomButton.snp.makeConstraints { make in
-            make.size.equalTo(Constants.MapView.buttonSize)
+            make.size.greaterThanOrEqualTo(Constants.MapView.buttonSize)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.MapView.buttonInset)
             make.leading.equalToSuperview().inset(Constants.MapView.buttonInset)
         }
         
         locationButton.snp.makeConstraints { make in
-            make.size.equalTo(Constants.MapView.buttonSize)
+            make.size.greaterThanOrEqualTo(Constants.MapView.buttonSize)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Constants.MapView.buttonInset)
             make.trailing.equalToSuperview().inset(Constants.MapView.buttonInset)
         }
