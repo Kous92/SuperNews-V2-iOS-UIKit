@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class TopHeadlinesViewModel {
+@MainActor final class TopHeadlinesViewModel {
     // Delegate
     weak var coordinator: TopHeadlinesViewControllerDelegate?
     
@@ -30,10 +30,12 @@ final class TopHeadlinesViewModel {
         let countryCode = Locale.current.language.languageCode?.identifier == "fr" ? "fr" : "us"
         return countryCode == "fr" ? SavedSourceDTO(id: "le-monde", name: "Le Monde") : SavedSourceDTO(id: "abc-news", name: "ABC News")
     }()
+    
     private var savedLocalCountry = {
         let countryCode = Locale.current.language.languageCode?.identifier == "fr" ? "fr" : "us"
         return CountryLanguageSettingDTO(name: countryCode.countryName() ?? countryCode, code: countryCode, flagCode: countryCode)
     }()
+    
     private var previousSavedCountryCode = ""
     private var previousSavedSourceID = ""
     private var isCategoryInitialized = false
@@ -97,14 +99,17 @@ final class TopHeadlinesViewModel {
                 print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
                 self.savedLocalCountry = userSetting
                 self.updateCountryCategoryTitle()
+                // self.fetchTopHeadlines()
             } catch SuperNewsUserSettingsError.userSettingsError {
                 print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
                 // print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
                 // If it fails, it will use the default one.
                 self.updateCountryCategoryTitle()
                 print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
-                self.checkSavedCountry()
+                // self.checkSavedCountry()
             }
+            
+            self.checkSavedCountry()
         }
     }
     
@@ -188,7 +193,7 @@ final class TopHeadlinesViewModel {
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("[TopHeadlinesViewModel] ERROR: " + String(localized: String.LocalizationValue(error.rawValue)))
-                await self.sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
+                self.sendErrorMessage(with: String(localized: String.LocalizationValue(error.rawValue)))
                 self.updateResult.send(false)
         }
     }

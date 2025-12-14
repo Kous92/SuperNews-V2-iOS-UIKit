@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "singapore-64x64-33080.png",
+      "filename" : "SingaporeRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "singapore-64x64-33081.png",
+      "filename" : "SingaporeRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "singapore-64x64-33082.png",
+      "filename" : "SingaporeRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

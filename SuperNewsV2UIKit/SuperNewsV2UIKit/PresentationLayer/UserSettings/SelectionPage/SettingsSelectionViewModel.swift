@@ -121,6 +121,8 @@ import Combine
                     self?.cellViewModels = result ?? []
                     self?.filteredCellViewModels = result ?? []
                 }
+                
+                await self?.loadSetting()
             } catch {
                 print("[SettingsSelectionViewModel] Loading failed.")
                 print("[SettingsSelectionViewModel] ERROR: \(error.localizedDescription)")

@@ -51,6 +51,7 @@ final class CountryAnnotationView: MKAnnotationView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
+        label.adjustsFontForContentSizeCategory = true
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         
@@ -146,10 +147,11 @@ final class CountryAnnotationView: MKAnnotationView {
         }
         
         flagImageView.snp.makeConstraints { make in
-            make.height.equalTo(30)
-            make.width.equalTo(35)
+            make.height.equalTo(40)
+            make.width.equalTo(56)
             make.centerX.equalTo(annotationView)
-            make.top.equalTo(countryNameLabel.snp.bottom).offset(5)
+            make.top.equalTo(countryNameLabel.snp.bottom).offset(10)
+            make.bottom.equalToSuperview().inset(20)
         }
     }
     
@@ -170,15 +172,18 @@ final class CountryAnnotationView: MKAnnotationView {
                 )
             }
         } else {
+            setViewBackground()
             countryNameLabel.setShadowLabel(string: viewModel.countryName, font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
             flagImageView.image = UIImage(named: viewModel.countryCode)
         }
     }
     
     // For live preview
+    /*
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 100, height: 100)
     }
+     */
 }
 
 #if canImport(SwiftUI) && DEBUG

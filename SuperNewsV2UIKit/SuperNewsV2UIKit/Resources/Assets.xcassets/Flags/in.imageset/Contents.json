@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "india-64x64-32988.png",
+      "filename" : "IndiaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "india-64x64-32989.png",
+      "filename" : "IndiaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "india-64x64-32990.png",
+      "filename" : "IndiaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

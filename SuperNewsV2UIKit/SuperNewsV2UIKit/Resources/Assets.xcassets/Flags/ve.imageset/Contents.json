@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "venezuela-64x64-33138.png",
+      "filename" : "venezuela.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "venezuela-64x64-33139.png",
+      "filename" : "venezuela@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "venezuela-64x64-33140.png",
+      "filename" : "venezuela@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

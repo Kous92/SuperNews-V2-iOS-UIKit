@@ -77,38 +77,48 @@ final class ArticleDetailViewController: UIViewController {
     private let publishDateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        // stackView.alignment = .top
+        stackView.alignment = .center
         stackView.spacing = Constants.ArticleDetail.stackViewHorizontalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     private lazy var clockContainerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
+        // view.backgroundColor = .red
         return view
     }()
-    
+
     private lazy var clockImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.layer.masksToBounds = false
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "clock")
         imageView.tintColor = .white
-        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        
+
+        // Key part for Dynamic Type support
+        imageView.preferredSymbolConfiguration =
+            UIImage.SymbolConfiguration(textStyle: .body)
+
+        // imageView.backgroundColor = .blue
         return imageView
     }()
-    
+
     private lazy var articlePublishDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.minimumScaleFactor = 0.5
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .left
+
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .semibold)
+        )
+
+        // label.backgroundColor = .green
         return label
     }()
     
@@ -118,7 +128,6 @@ final class ArticleDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
         label.lineBreakMode = .byWordWrapping
-        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
         label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
             for: UIFont.systemFont(ofSize: Constants.ArticleDetail.titleLabelFontSize, weight: .semibold)
         )
@@ -154,7 +163,6 @@ final class ArticleDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        // label.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
         label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
             for: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .medium)
         )
@@ -362,13 +370,23 @@ final class ArticleDetailViewController: UIViewController {
             make.bottom.equalTo(imageBlurView.snp.bottom).inset(Constants.ArticleDetail.margin10)
         }
         
+        let baseIconSize = Constants.ArticleDetail.imageIconSize
+        let imageIconSize = CGSize(width: baseIconSize, height: baseIconSize) // iPhone
+        
         clockContainerView.snp.makeConstraints { make in
-            make.size.greaterThanOrEqualTo(Constants.ArticleDetail.imageIconSize)
+            make.size.lessThanOrEqualTo(publishDateStackView.snp.width).multipliedBy(0.30)
+            // make.width.greaterThanOrEqualTo(imageIconSize.width)
+            // make.height.greaterThanOrEqualTo(imageIconSize.height)
+            
+            // make.width.lessThanOrEqualTo(publishDateStackView.snp.width).multipliedBy(0.30)
         }
         
         clockImageView.snp.makeConstraints { make in
             make.edges.equalTo(clockContainerView)
         }
+        
+        clockContainerView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        articlePublishDateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         // MARK: - Under the top view, the content
         articleContentView.snp.makeConstraints { make in

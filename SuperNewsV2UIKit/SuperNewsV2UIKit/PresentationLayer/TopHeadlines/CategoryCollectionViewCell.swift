@@ -57,8 +57,12 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        // buildViewHierarchy()
-        // setConstraints()
+        
+        if #unavailable(iOS 26.0) {
+            buildViewHierarchy()
+            setConstraints()
+        }
+        
         // setEffect()
     }
     
@@ -73,27 +77,8 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func buildViewHierarchy() {
-        // Create a SwiftUI view
-        if #available(iOS 26.0, *) {
-            /*
-            let swiftUIView = CategoryCellView(title: "Top Headlines")
-            // Create a UIHostingController
-            let hostingController = UIHostingController(rootView: swiftUIView)
-            
-            let hostView = hostingController.view
-            hostingController.view.frame = contentView.bounds
-            hostingController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            if let hostView {
-                contentView.addSubview(hostView)
-            }
-            */
-        } else {
-            // Fallback on earlier versions
-            contentView.addSubview(liquidGlassView)
-            contentView.addSubview(categoryTitleLabel)
-        }
-        
+        contentView.addSubview(liquidGlassView)
+        contentView.addSubview(categoryTitleLabel)
     }
     
     private func setConstraints() {

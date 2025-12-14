@@ -35,13 +35,12 @@ struct CategoryCellView: View {
                 .if(state.isSelected) { view in
                     view.glassEffect(.regular.interactive(), in: .rect(cornerRadius: 20))
                 }
-                .padding(7)
-                // .animation(.easeInOut(duration: 0.2), value: state.isSelected)
+                // .padding(7)
         } else {
             Text(title)
                 .padding(12)
                 .foregroundStyle(state.isSelected ? .white : .gray)
-                .padding(7)
+                // .padding(7)
         }
     }
 }

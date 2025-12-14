@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "austria-64x64-32920.png",
+      "filename" : "AustriaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "austria-64x64-32921.png",
+      "filename" : "AustriaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "austria-64x64-32922.png",
+      "filename" : "AustriaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

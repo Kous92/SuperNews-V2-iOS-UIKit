@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "colombia-64x64-32946.png",
+      "filename" : "colombia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "colombia-64x64-32947.png",
+      "filename" : "colombia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "colombia-64x64-32948.png",
+      "filename" : "colombia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

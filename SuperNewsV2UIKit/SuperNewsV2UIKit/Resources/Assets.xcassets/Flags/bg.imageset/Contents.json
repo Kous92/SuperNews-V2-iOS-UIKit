@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "bulgaria-64x64-32973.png",
+      "filename" : "Bulgaria.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bulgaria-64x64-32974.png",
+      "filename" : "Bulgaria@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bulgaria-64x64-32975.png",
+      "filename" : "Bulgaria@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

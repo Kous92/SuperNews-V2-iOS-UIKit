@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "china-64x64-32942.png",
+      "filename" : "China.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "china-64x64-32943.png",
+      "filename" : "China@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "china-64x64-32944.png",
+      "filename" : "China@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "portugal-64x64-33058.png",
+      "filename" : "PortugalRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "portugal-64x64-33059.png",
+      "filename" : "PortugalRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "portugal-64x64-33060.png",
+      "filename" : "PortugalRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

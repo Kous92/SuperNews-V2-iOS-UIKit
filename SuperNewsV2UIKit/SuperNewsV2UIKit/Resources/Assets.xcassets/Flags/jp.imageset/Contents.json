@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "japan-64x64-33001.png",
+      "filename" : "JapanRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "japan-64x64-33002.png",
+      "filename" : "JapanRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "japan-64x64-33003.png",
+      "filename" : "JapanRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "belgium-64x64-32911.png",
+      "filename" : "belgium.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "belgium-64x64-32912.png",
+      "filename" : "belgium@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "belgium-64x64-32913.png",
+      "filename" : "belgium@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

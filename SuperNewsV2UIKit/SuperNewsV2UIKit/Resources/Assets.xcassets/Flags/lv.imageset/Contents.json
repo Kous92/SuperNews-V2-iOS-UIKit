@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "latvia-64x64-33031.png",
+      "filename" : "latvia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "latvia-64x64-33032.png",
+      "filename" : "latvia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "latvia-64x64-33033.png",
+      "filename" : "latvia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

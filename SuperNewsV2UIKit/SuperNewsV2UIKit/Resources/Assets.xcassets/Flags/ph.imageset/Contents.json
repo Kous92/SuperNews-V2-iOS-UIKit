@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "philippines-64x64-33052.png",
+      "filename" : "philippines.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "philippines-64x64-33053.png",
+      "filename" : "philippines@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "philippines-64x64-33054.png",
+      "filename" : "philippines@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

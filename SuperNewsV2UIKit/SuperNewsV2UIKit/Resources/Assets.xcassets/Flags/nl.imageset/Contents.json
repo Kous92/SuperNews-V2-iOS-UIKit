@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "netherlands-64x64-33035.png",
+      "filename" : "Netherlands.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "netherlands-64x64-33036.png",
+      "filename" : "Netherlands@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "netherlands-64x64-33037.png",
+      "filename" : "Netherlands@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "argentina-64x64-32919.png",
+      "filename" : "ArgentinaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "argentina-64x64-32920.png",
+      "filename" : "ArgentinaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "argentina-64x64-32921.png",
+      "filename" : "ArgentinaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "united-64x64-33135.png",
+      "filename" : "UnitedStatesOfAmerica.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "united-64x64-33136.png",
+      "filename" : "UnitedStatesOfAmerica@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "united-64x64-33137.png",
+      "filename" : "UnitedStatesOfAmerica@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

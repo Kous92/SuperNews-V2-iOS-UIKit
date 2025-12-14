@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "united-64x64-33114.png",
+      "filename" : "united-arab-emirates.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "united-64x64-33115.png",
+      "filename" : "united-arab-emirates@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "united-64x64-33116.png",
+      "filename" : "united-arab-emirates@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

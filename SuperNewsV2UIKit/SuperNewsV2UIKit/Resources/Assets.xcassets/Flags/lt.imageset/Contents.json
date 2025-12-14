@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "lithuania-64x64-33043.png",
+      "filename" : "lithuania.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "lithuania-64x64-33044.png",
+      "filename" : "lithuania@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "lithuania-64x64-33045.png",
+      "filename" : "lithuania@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

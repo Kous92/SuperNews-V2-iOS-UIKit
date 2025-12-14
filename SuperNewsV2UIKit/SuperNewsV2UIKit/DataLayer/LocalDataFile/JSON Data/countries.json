@@ -86,8 +86,14 @@
     {
         "countryCode": "dz",
         "countryName": "Algérie",
-        "lat": 28.0345,
-        "lon": 2.6173
+        "lat": 28.350969744889056,
+        "lon": 2.6558464719769135
+    },
+    {
+        "countryCode": "es",
+        "countryName": "Espagne",
+        "lat": 40.365008336683836,
+        "lon": -3.6516251409956983
     },
     {
         "countryCode": "eg",
@@ -162,6 +168,12 @@
         "lon": 127.76224551357649
     },
     {
+        "countryCode": "lb",
+        "countryName": "Liban",
+        "lat": 33.91160170722086,
+        "lon": 35.89651946324749
+    },
+    {
         "countryCode": "lt",
         "countryName": "Lituanie",
         "lat": 55.29437393417175,
@@ -228,6 +240,12 @@
         "lon": 19.43573279234468
     },
     {
+        "countryCode": "ps",
+        "countryName": "Palestine",
+        "lat": 31.930818736453883,
+        "lon": 35.24251184154588
+    },
+    {
         "countryCode": "pt",
         "countryName": "Portugal",
         "lat": 39.67529214702138,
@@ -288,6 +306,12 @@
         "lon": 101.08675116214552
     },
     {
+        "countryCode": "tn",
+        "countryName": "Tunisie",
+        "lat": 34.08636179565723,
+        "lon": 9.65587551697984
+    },
+    {
         "countryCode": "tr",
         "countryName": "Turquie",
         "lat": 38.93207363123396,
@@ -316,6 +340,12 @@
         "countryName": "Venezuela",
         "lat": 7.148324760507107,
         "lon": -66.36492135985132
+    },
+    {
+        "countryCode": "vn",
+        "countryName": "Vietnam",
+        "lat": 16.517347170839393,
+        "lon": 105.91338832758704
     },
     {
         "countryCode": "za",

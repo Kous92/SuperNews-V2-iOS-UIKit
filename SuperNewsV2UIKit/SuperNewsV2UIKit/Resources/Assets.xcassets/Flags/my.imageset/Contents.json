@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "malaysia-64x64-33134.png",
+      "filename" : "malaysia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "malaysia-64x64-33135.png",
+      "filename" : "malaysia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "malaysia-64x64-33136.png",
+      "filename" : "malaysia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

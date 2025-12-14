@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "saudi-64x64-33076.png",
+      "filename" : "SaudiArabiaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "saudi-64x64-33077.png",
+      "filename" : "SaudiArabiaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "saudi-64x64-33078.png",
+      "filename" : "SaudiArabiaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

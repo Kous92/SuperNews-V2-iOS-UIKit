@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "sweden-64x64-33096.png",
+      "filename" : "sweden.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "sweden-64x64-33097.png",
+      "filename" : "sweden@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "sweden-64x64-33098.png",
+      "filename" : "sweden@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

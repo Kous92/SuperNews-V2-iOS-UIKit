@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class CountryNewsViewModel {
+@MainActor final class CountryNewsViewModel {
     // Delegate
     weak var coordinator: CountryNewsViewControllerDelegate?
     
@@ -52,7 +52,7 @@ final class CountryNewsViewModel {
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("[CountryNewsViewModel] ERROR: " + error.rawValue)
-                await self.sendErrorMessage(with: error.rawValue)
+                self.sendErrorMessage(with: error.rawValue)
                 self.updateResult.send(false)
         }
     }

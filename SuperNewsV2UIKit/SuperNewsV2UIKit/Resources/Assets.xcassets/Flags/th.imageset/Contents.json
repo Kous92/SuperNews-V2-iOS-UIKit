@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "thailand-64x64-33102.png",
+      "filename" : "thailand.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "thailand-64x64-33103.png",
+      "filename" : "thailand@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "thailand-64x64-33104.png",
+      "filename" : "thailand@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

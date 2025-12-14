@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "south-64x64-33086.png",
+      "filename" : "SouthKoreaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "south-64x64-33087.png",
+      "filename" : "SouthKoreaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "south-64x64-33088.png",
+      "filename" : "SouthKoreaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

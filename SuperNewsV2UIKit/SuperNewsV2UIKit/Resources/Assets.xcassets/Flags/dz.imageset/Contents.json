@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Algeria.png",
+      "filename" : "AlgeriaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Algeria@2x.png",
+      "filename" : "AlgeriaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Algeria@3x.png",
+      "filename" : "AlgeriaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

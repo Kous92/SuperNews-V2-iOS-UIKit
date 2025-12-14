@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "romania-64x64-33063.png",
+      "filename" : "RomaniaRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "romania-64x64-33064.png",
+      "filename" : "RomaniaRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "romania-64x64-33065.png",
+      "filename" : "RomaniaRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

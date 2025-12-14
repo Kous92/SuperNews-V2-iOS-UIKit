@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "hong-64x64-32987.png",
+      "filename" : "HongKongRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "hong-64x64-32988.png",
+      "filename" : "HongKongRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "hong-64x64-32989.png",
+      "filename" : "HongKongRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

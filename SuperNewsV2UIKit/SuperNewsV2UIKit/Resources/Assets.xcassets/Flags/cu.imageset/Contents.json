@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cuba-64x64-32951.png",
+      "filename" : "cuba.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "cuba-64x64-32952.png",
+      "filename" : "cuba@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "cuba-64x64-32953.png",
+      "filename" : "cuba@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

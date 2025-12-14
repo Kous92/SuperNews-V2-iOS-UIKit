@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "poland-64x64-33057.png",
+      "filename" : "poland.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "poland-64x64-33058.png",
+      "filename" : "poland@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "poland-64x64-33059.png",
+      "filename" : "poland@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

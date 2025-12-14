@@ -24,7 +24,11 @@ final class CountrySettingTableViewCell: UITableViewCell {
         label.textColor = .white
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: 16, weight: .medium)
+        )
+        
         return label
     }()
     
@@ -45,10 +49,10 @@ final class CountrySettingTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         countryFlagImage.snp.makeConstraints { make in
-            make.height.equalTo(45)
-            make.width.equalTo(55)
+            make.height.equalTo(48)
+            make.width.equalTo(64)
             make.leading.equalToSuperview().inset(15)
-            make.centerY.equalToSuperview()
+            make.verticalEdges.equalToSuperview().inset(10)
         }
         
         countryNameLabel.snp.makeConstraints { make in

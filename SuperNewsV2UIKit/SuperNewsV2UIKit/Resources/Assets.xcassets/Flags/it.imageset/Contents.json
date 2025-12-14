@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "italy-64x64-33001.png",
+      "filename" : "ItalyRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "italy-64x64-33000.png",
+      "filename" : "ItalyRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "italy-64x64-32999.png",
+      "filename" : "ItalyRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

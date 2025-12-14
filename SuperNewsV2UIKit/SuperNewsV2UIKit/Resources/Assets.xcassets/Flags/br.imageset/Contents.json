@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "brazil-64x64-32937.png",
+      "filename" : "BrazilRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "brazil-64x64-32938.png",
+      "filename" : "BrazilRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "brazil-64x64-32939.png",
+      "filename" : "BrazilRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

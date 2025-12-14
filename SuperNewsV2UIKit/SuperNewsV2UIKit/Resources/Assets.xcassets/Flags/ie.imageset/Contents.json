@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ireland-64x64-32996.png",
+      "filename" : "IrelandRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ireland-64x64-32997.png",
+      "filename" : "IrelandRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ireland-64x64-32998.png",
+      "filename" : "IrelandRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

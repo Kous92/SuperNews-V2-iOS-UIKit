@@ -26,7 +26,10 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.titleLabelFontSize, weight: .semibold)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.SourceSelectionCell.titleLabelFontSize, weight: .semibold)
+        )
         label.text = String(localized: "mediaSourceName")
         label.textColor = .white
         return label
@@ -37,7 +40,10 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.descriptionLabelFontSize, weight: .medium)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.SourceSelectionCell.descriptionLabelFontSize, weight: .medium)
+        )
         label.textColor = .white
         return label
     }()
@@ -47,7 +53,10 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
+        )
         label.textColor = .white
         return label
     }()
@@ -57,7 +66,10 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
+        )
         label.textColor = .white
         return label
     }()
@@ -67,7 +79,10 @@ final class SourceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.SourceSelectionCell.otherLabelFontSize, weight: .medium)
+        )
         label.text = String(localized: "mediaURL")
         label.textColor = .white
         return label
@@ -159,25 +174,17 @@ final class SourceTableViewCell: UITableViewCell {
     }
     
     // For live preview
+    /*
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: 200)
     }
+     */
 }
 
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct SourceTableViewCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = SourceTableViewCell()
-            view.configure(with: SourceCellViewModel(with: SourceDTO.getFakeObjectFromSource()))
-            return view
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("CustomTableViewCell (dark)")
-    }
+#Preview("SourceTableViewCell") {
+    let view = SourceTableViewCell()
+    view.configure(with: SourceCellViewModel(with: SourceDTO.getFakeObjectFromSource()))
+    return view
 }
 #endif

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "mexico-64x64-33133.png",
+      "filename" : "Mexico.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "mexico-64x64-33134.png",
+      "filename" : "Mexico@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "mexico-64x64-33135.png",
+      "filename" : "Mexico@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

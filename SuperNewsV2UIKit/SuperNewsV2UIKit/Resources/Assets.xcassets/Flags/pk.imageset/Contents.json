@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "pakistan-64x64-33047.png",
+      "filename" : "pakistan.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "pakistan-64x64-33048.png",
+      "filename" : "pakistan@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "pakistan-64x64-33049.png",
+      "filename" : "pakistan@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

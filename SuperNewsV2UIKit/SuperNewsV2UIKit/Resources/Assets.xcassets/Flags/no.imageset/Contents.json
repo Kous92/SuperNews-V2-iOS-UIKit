@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "norway-64x64-33155.png",
+      "filename" : "NorwayRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "norway-64x64-33156.png",
+      "filename" : "NorwayRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "norway-64x64-33157.png",
+      "filename" : "NorwayRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

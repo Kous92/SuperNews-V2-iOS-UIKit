@@ -43,7 +43,7 @@ final class NewsTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 3
         label.minimumScaleFactor = 0.5
         label.adjustsFontForContentSizeCategory = true
         return label
@@ -112,20 +112,10 @@ final class NewsTableViewCell: UITableViewCell {
 }
 
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct CustomTableViewCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = NewsTableViewCell()
-            let article = ArticleDTO.getFakeObjectFromArticle()
-            view.configure(with: NewsCellViewModel(imageURL: article.imageUrl, title: article.title, source: article.sourceName))
-            return view
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("CustomTableViewCell (dark)")
-    }
+#Preview("NewsTableViewCell") {
+    let view = NewsTableViewCell()
+    let article = ArticleDTO.getFakeObjectFromArticle()
+    view.configure(with: NewsCellViewModel(imageURL: article.imageUrl, title: article.title, source: article.sourceName))
+    return view
 }
 #endif

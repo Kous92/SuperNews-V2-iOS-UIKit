@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "taiwan-64x64-33098.png",
+      "filename" : "taiwan.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "taiwan-64x64-33099.png",
+      "filename" : "taiwan@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "taiwan-64x64-33100.png",
+      "filename" : "taiwan@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

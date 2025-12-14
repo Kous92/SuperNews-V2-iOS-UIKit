@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class SearchViewModel {
+@MainActor final class SearchViewModel {
     // Delegate
     weak var coordinator: SearchViewControllerDelegate?
     

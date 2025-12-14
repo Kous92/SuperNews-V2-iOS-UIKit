@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "serbia-64x64-33099.png",
+      "filename" : "Serbia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "serbia-64x64-33100.png",
+      "filename" : "Serbia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "serbia-64x64-33101.png",
+      "filename" : "Serbia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

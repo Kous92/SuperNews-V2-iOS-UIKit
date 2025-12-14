@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "czech-64x64-32956.png",
+      "filename" : "czech-republic.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "czech-64x64-32957.png",
+      "filename" : "czech-republic@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "czech-64x64-32958.png",
+      "filename" : "czech-republic@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

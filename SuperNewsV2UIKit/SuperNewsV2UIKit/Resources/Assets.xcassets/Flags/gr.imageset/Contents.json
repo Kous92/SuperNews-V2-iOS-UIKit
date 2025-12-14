@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "greece-64x64-32991.png",
+      "filename" : "GreeceRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "greece-64x64-32992.png",
+      "filename" : "GreeceRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "greece-64x64-32993.png",
+      "filename" : "GreeceRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

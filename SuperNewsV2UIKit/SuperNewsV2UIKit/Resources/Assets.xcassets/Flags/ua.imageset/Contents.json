@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ukraine-64x64-33145.png",
+      "filename" : "ukraine.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ukraine-64x64-33146.png",
+      "filename" : "ukraine@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ukraine-64x64-33147.png",
+      "filename" : "ukraine@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

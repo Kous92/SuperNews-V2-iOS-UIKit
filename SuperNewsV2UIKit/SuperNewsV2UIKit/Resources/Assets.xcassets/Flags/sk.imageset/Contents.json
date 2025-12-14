@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "slovakia-64x64-33082.png",
+      "filename" : "slovakia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "slovakia-64x64-33083.png",
+      "filename" : "slovakia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "slovakia-64x64-33084.png",
+      "filename" : "slovakia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

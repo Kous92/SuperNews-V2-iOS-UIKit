@@ -70,7 +70,7 @@ extension SettingsViewModel {
         Task { [weak self] in
             print("[SettingsViewModel] Resetting user settings to default. Thread: \(Thread.currentThread)")
             do {
-                let result = try await self?.resetUserSettingsUseCase.execute()
+                try await self?.resetUserSettingsUseCase.execute()
                 print("[SettingsViewModel] Resetting succeeded to default settings.")
             } catch SuperNewsUserSettingsError.userSettingsError {
                 print("[SettingsViewModel] Resetting failed. ERROR: \(SuperNewsUserSettingsError.userSettingsError.rawValue)")

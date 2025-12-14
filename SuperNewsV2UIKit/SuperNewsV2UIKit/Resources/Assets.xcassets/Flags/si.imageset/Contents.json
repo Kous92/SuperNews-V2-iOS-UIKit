@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "slovenia-64x64-33084.png",
+      "filename" : "slovenia.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "slovenia-64x64-33085.png",
+      "filename" : "slovenia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "slovenia-64x64-33086.png",
+      "filename" : "slovenia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

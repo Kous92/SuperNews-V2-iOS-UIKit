@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "spain-64x64-33105.png",
+      "filename" : "SpainRounded.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "spain-64x64-33106.png",
+      "filename" : "SpainRounded@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "spain-64x64-33107.png",
+      "filename" : "SpainRounded@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
