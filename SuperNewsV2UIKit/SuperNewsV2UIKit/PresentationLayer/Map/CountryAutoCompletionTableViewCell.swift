@@ -21,7 +21,11 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: 15, weight: .medium)
+        )
         
         // For Liquid Glass view
         if #available(iOS 26.0, *) {
@@ -31,6 +35,14 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
         }
 
         return label
+    }()
+    
+    private lazy var cellView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        // view.backgroundColor = .green
+        
+        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -44,22 +56,30 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
     }
     
     private func buildViewHierarchy() {
-        addSubview(flagImageView)
-        addSubview(countryNameLabel)
+        // contentView.backgroundColor = .yellow
+        contentView.addSubview(cellView)
+        cellView.addSubview(flagImageView)
+        cellView.addSubview(countryNameLabel)
     }
     
     private func setConstraints() {
+        cellView.snp.makeConstraints { make in
+            make.top.equalTo(10)
+            make.bottom.equalTo(-10)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
         flagImageView.snp.makeConstraints { make in
             make.height.equalTo(25)
-            make.width.equalTo(35)
-            make.leading.equalToSuperview().inset(15)
-            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.leading.equalTo(cellView.snp.leading).inset(15)
+            make.centerY.equalTo(cellView.snp.centerY)
         }
         
         countryNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(flagImageView.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().inset(15)
-            make.centerY.equalTo(flagImageView.snp.centerY)
+            make.trailing.equalTo(cellView.snp.trailing ).inset(15)
+            make.verticalEdges.equalTo(cellView.snp.verticalEdges).inset(10)
         }
     }
     // Dependency injection
@@ -70,7 +90,7 @@ final class CountryAutoCompletionTableViewCell: UITableViewCell {
     
     // For live preview
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 50)
+        return CGSize(width: UIScreen.main.bounds.width, height: 70)
     }
 }
 

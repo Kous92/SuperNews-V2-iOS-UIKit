@@ -14,8 +14,12 @@ final class PrivacyTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.PrivacyPolicy.subtitleLabelFontSize, weight: .semibold)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.PrivacyPolicy.subtitleLabelFontSize, weight: .semibold)
+        )
+        
         label.text = String(localized: "mediaSourceName")
         label.textColor = .white
         return label
@@ -25,8 +29,11 @@ final class PrivacyTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.PrivacyPolicy.descriptionFontSize, weight: .regular)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.PrivacyPolicy.descriptionFontSize, weight: .regular)
+        )
         label.text = String(localized: "mediaSourceName")
         label.setLineSpacing(lineSpacing: Constants.PrivacyPolicy.lineSpacing)
         label.textColor = .white
@@ -73,23 +80,13 @@ final class PrivacyTableViewCell: UITableViewCell {
 }
 
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct PrivacyTableViewCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = PrivacyTableViewCell()
-            let dto = PrivacyPolicyDTO.getFakeObjectFromPrivacyPolicy()
-            let cellViewModels = dto.sections.map { section in
-                PrivacyCellViewModel(subtitle: section.subtitle, description: section.content)
-            }
-            view.configure(with: cellViewModels[0])
-            return view
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("PrivacyTableViewCell (dark)")
+#Preview("PrivacyTableViewCell") {
+    let view = PrivacyTableViewCell()
+    let dto = PrivacyPolicyDTO.getFakeObjectFromPrivacyPolicy()
+    let cellViewModels = dto.sections.map { section in
+        PrivacyCellViewModel(subtitle: section.subtitle, description: section.content)
     }
+    view.configure(with: cellViewModels[0])
+    return view
 }
 #endif

@@ -113,26 +113,11 @@ extension SettingsViewController: UITableViewDelegate {
 
 // Ready to live preview and make views much faster
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct SettingsViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        
-        ForEach(deviceNames, id: \.self) { deviceName in
-            // Dark mode
-            UIViewControllerPreview {
-                let navigationController = UINavigationController()
-                let builder = SettingsModuleBuilder()
-                let vc = builder.buildModule(testMode: true)
-                navigationController.pushViewController(vc, animated: false)
-                return navigationController
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
-            .previewDisplayName(deviceName)
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
+#Preview("SettingsViewController") {
+    let navigationController = UINavigationController()
+    let builder = SettingsModuleBuilder()
+    let vc = builder.buildModule(testMode: true)
+    navigationController.pushViewController(vc, animated: false)
+    return navigationController
 }
 #endif

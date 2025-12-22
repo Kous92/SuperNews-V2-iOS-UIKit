@@ -204,29 +204,15 @@ extension CountryNewsViewController: UITableViewDelegate {
 
 // Ready to live preview and make views much faster
 #if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct CountryNewsViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        ForEach(deviceNames, id: \.self) { deviceName in
-            // Dark mode
-            UIViewControllerPreview {
-                let tabBar = GradientTabBarController()
-                let navigationController = UINavigationController()
-                let builder = CountryNewsModuleBuilder(countryCode: "fr")
-                let vc = builder.buildModule(testMode: true)
-                vc.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 0)
-                navigationController.pushViewController(vc, animated: false)
-                tabBar.viewControllers = [navigationController]
-                
-                return tabBar
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .preferredColorScheme(.dark)
-            .previewDisplayName(deviceName)
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
+#Preview("CountryNewsViewController") {
+    let tabBar = GradientTabBarController()
+    let navigationController = UINavigationController()
+    let builder = CountryNewsModuleBuilder(countryCode: "fr")
+    let vc = builder.buildModule(testMode: true)
+    vc.tabBarItem = UITabBarItem(title: String(localized: "worldMap"), image: UIImage(systemName: "map"), tag: 0)
+    navigationController.pushViewController(vc, animated: false)
+    tabBar.viewControllers = [navigationController]
+    
+    return tabBar
 }
 #endif

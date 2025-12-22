@@ -13,8 +13,11 @@ final class PrivacyHeaderTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.PrivacyPolicy.titleLabelFontSize, weight: .semibold)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.PrivacyPolicy.titleLabelFontSize, weight: .semibold)
+        )
         label.textAlignment = .center
         label.textColor = .white
         return label
@@ -24,8 +27,11 @@ final class PrivacyHeaderTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.PrivacyPolicy.dateLabelFontSize, weight: .medium)
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.PrivacyPolicy.dateLabelFontSize, weight: .medium)
+        )
         label.text = ""
         label.textColor = .white
         return label
@@ -72,18 +78,9 @@ final class PrivacyHeaderTableViewCell: UITableViewCell {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
-
-@available(iOS 13.0, *)
-struct PrivacyHeaderTableViewCellPreview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let view = PrivacyHeaderTableViewCell()
-            view.configure(with: PrivacyHeaderViewModel(title: "SuperNews privacy policy", date: "2023-12-21"))
-            return view
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
-        .preferredColorScheme(.dark)
-        .previewDisplayName("PrivacyTableViewCell (dark)")
-    }
+#Preview("PrivacyHeaderTableViewCell") {
+    let view = PrivacyHeaderTableViewCell()
+    view.configure(with: PrivacyHeaderViewModel(title: "SuperNews privacy policy", date: "2023-12-21"))
+    return view
 }
 #endif
