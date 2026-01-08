@@ -15,11 +15,46 @@ import SwiftUI
 final class CountryAnnotationView: MKAnnotationView {
     private(set) var viewModel: CountryAnnotationViewModel?
     
+    // Dynamic Type ratios
+    private var viewSizeRatio: CGFloat {
+        let category = traitCollection.preferredContentSizeCategory
+        
+        switch category {
+        case .extraSmall, .small, .medium, .large, .extraLarge:
+            return 1.0
+        case .extraExtraLarge:
+            return 1.2
+        case .extraExtraExtraLarge:
+            return 1.6
+            // Correspondances approximatives avec les niveaux d'accessibilité SwiftUI
+        case .accessibilityMedium, .accessibilityLarge: // Equivalent accessibility 1 & 2
+            return 1.9
+        case .accessibilityExtraLarge, .accessibilityExtraExtraLarge, .accessibilityExtraExtraExtraLarge: // Equivalent 3, 4, 5
+            return 2.2
+        default:
+            return 1.0
+        }
+    }
+    
+    private var imageScaleFactor: CGFloat {
+        let category = traitCollection.preferredContentSizeCategory
+        
+        if category == .extraSmall || category == .small || category == .medium || category == .large || category == .extraLarge {
+            return 1.0
+        }
+        
+        let referenceFontSize: CGFloat = 17 // Basic size of .body
+        let scaledFontSize = UIFontMetrics.default.scaledValue(for: referenceFontSize)
+        
+        // Calculer le ratio par rapport à la taille par défaut (17pt pour .body)
+        return scaledFontSize / referenceFontSize
+    }
+    
     // Background
     private lazy var backgroundGradient: CAGradientLayer = {
         let gradient = getGradient2()
         gradient.type = .axial
-        gradient.cornerRadius = 35
+        gradient.cornerRadius = (110 * viewSizeRatio) / 3
         return gradient
     }()
     
@@ -64,6 +99,19 @@ final class CountryAnnotationView: MKAnnotationView {
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         clusteringIdentifier = "countryCluster"
+        
+        // Detect any size category change with Dynamic Type
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self, UITraitUserInterfaceStyle.self], handler: { (self: Self, previousTraitCollection: UITraitCollection) in
+            
+            // Si la catégorie de taille de contenu a changé
+            if self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory {
+                print("Change size, current ratio: \(self.viewSizeRatio), image scale \(self.imageScaleFactor):")
+                // On force le redessin si on est en mode UIKit pur
+                if #unavailable(iOS 26.0) {
+                    self.updateLayoutForDynamicType()
+                }
+            }
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,9 +122,9 @@ final class CountryAnnotationView: MKAnnotationView {
         super.prepareForDisplay()
         
         displayPriority = .defaultHigh
-        frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        frame = CGRect(x: 0, y: 0, width: 110 * viewSizeRatio, height: 110 * viewSizeRatio)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-        layer.cornerRadius = 35
+        layer.cornerRadius = (110 * viewSizeRatio) / 3
         
         self.annotationView.accessibilityIdentifier = "annotation\(viewModel?.countryCode ?? "??")"
         
@@ -124,10 +172,41 @@ final class CountryAnnotationView: MKAnnotationView {
         addSubview(hc.view)
         hc.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.width.height.equalTo(100)
+            make.width.height.equalTo(110)
         }
         
         hostingController = hc
+    }
+    
+    // Nouvelle méthode pour centraliser le calcul de taille UIKit
+    private func updateLayoutForDynamicType() {
+        // 1. Récupérer le ratio actuel
+        print(viewSizeRatio)
+        let newSizeValue = 110 * viewSizeRatio
+        
+        // 2. Calculer la nouvelle taille (Base 100 comme dans SwiftUI)
+        let newSize = CGSize(width: newSizeValue, height: newSizeValue)
+        
+        // 3. Mettre à jour la frame
+        // On garde le centre actuel pour éviter que l'annotation ne "saute" visuellement
+        self.frame.size = newSize
+        // Sur une MKAnnotationView, MapKit gère souvent le positionnement,
+        // mais définir la taille suffit généralement.
+        
+        // 4. Mettre à jour le corner radius (Base / 3.0 comme dans SwiftUI)
+        let newCornerRadius = newSizeValue / 3.0
+        self.layer.cornerRadius = newCornerRadius
+        backgroundGradient.cornerRadius = newCornerRadius
+        
+        // 5. Mettre à jour le background layer
+        backgroundGradient.frame = self.bounds
+        
+        // 6. Mettre à jour la font si nécessaire (déjà fait dans prepareForDisplay, mais utile pour traitCollectionDidChange)
+        /*
+        if let currentText = countryCountLabel.text, !currentText.isEmpty {
+            countryCountLabel.font = UIFont.systemFont(ofSize: 18 * ratio, weight: .semibold)
+        }
+        */
     }
     
     private func buildViewHierarchy() {
@@ -147,8 +226,8 @@ final class CountryAnnotationView: MKAnnotationView {
         }
         
         flagImageView.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.width.equalTo(56)
+            make.height.equalTo(32 * imageScaleFactor)
+            make.width.equalTo(44 * imageScaleFactor)
             make.centerX.equalTo(annotationView)
             make.top.equalTo(countryNameLabel.snp.bottom).offset(10)
             make.bottom.equalToSuperview().inset(20)
@@ -173,17 +252,16 @@ final class CountryAnnotationView: MKAnnotationView {
             }
         } else {
             setViewBackground()
-            countryNameLabel.setShadowLabel(string: viewModel.countryName, font: UIFont.systemFont(ofSize: 12, weight: .medium), shadowColor: .blue, radius: 3)
+            countryNameLabel.setShadowLabel(string: viewModel.countryName, font: UIFont.systemFont(ofSize: 15, weight: .medium), shadowColor: .blue, radius: 3)
             flagImageView.image = UIImage(named: viewModel.countryCode)
         }
     }
     
     // For live preview
-    /*
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 110 * viewSizeRatio, height: 110 * viewSizeRatio)
+     
     }
-     */
 }
 
 #if canImport(SwiftUI) && DEBUG

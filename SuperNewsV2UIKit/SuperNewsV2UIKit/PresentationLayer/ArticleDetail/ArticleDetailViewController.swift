@@ -113,7 +113,6 @@ final class ArticleDetailViewController: UIViewController {
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .left
-
         label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
             for: UIFont.systemFont(ofSize: Constants.ArticleDetail.stackLabelFontSize, weight: .semibold)
         )

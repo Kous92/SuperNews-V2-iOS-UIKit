@@ -44,7 +44,10 @@ final class SourceSelectionViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: Constants.SourceSelection.favoriteSelectedLabelFontSize, weight: .medium)
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(
+            for: UIFont.systemFont(ofSize: Constants.SourceSelection.favoriteSelectedLabelFontSize, weight: .medium)
+        )
         label.textColor = .white
         label.textAlignment = .center
         label.accessibilityIdentifier = "actualFavoriteResultLabel"

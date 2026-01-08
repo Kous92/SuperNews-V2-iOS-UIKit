@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Enable Firebase services (Crashlytics)
         FirebaseApp.configure()
-        loadRocketSimConnect()
+        // loadRocketSimConnect()
         
         return true
     }
