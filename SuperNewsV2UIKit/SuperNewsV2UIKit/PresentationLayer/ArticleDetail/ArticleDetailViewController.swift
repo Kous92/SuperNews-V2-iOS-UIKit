@@ -370,7 +370,7 @@ final class ArticleDetailViewController: UIViewController {
         }
         
         let baseIconSize = Constants.ArticleDetail.imageIconSize
-        let imageIconSize = CGSize(width: baseIconSize, height: baseIconSize) // iPhone
+        // let imageIconSize = CGSize(width: baseIconSize, height: baseIconSize) // iPhone
         
         clockContainerView.snp.makeConstraints { make in
             make.size.lessThanOrEqualTo(publishDateStackView.snp.width).multipliedBy(0.30)

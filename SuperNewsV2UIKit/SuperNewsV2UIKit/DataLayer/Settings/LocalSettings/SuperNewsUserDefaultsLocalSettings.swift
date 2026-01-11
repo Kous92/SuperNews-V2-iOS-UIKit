@@ -8,6 +8,50 @@
 import Foundation
 
 final class SuperNewsUserDefaultsLocalSettings: SuperNewsLocalSettings {
+    @discardableResult func saveSelectedMediaSource(source: SavedSource) async throws -> Bool {
+        print("[SuperNewsUserDefaultsLocalSettings] Saving selected source: \(source.name), id: \(source.id)")
+        
+        do {
+            // Create JSON Encoder
+            let encoder = JSONEncoder()
+
+            // Encode saved source
+            let data = try encoder.encode(source)
+
+            // Write/Set Data
+            UserDefaults.standard.set(data, forKey: "savedSource")
+            
+            // Done, notify that saving has succeeded
+            return true
+
+        } catch {
+            print("[SuperNewsUserDefaultsLocalSettings] ERROR: Unable to encode the selected source to save (\(error))")
+            throw SuperNewsLocalSettingsError.encodeError
+        }
+    }
+    
+    func loadSelectedMediaSource() async throws -> SavedSource {
+        print("[SuperNewsUserDefaultsLocalSettings] Loading selected source")
+        
+        if let data = UserDefaults.standard.data(forKey: "savedSource") {
+            do {
+                // Create JSON Decoder
+                let decoder = JSONDecoder()
+
+                // Decode saved source
+                let savedSource = try decoder.decode(SavedSource.self, from: data)
+                
+                // Done, notify that loading has succeeded
+                return savedSource
+            } catch {
+                print("[SuperNewsUserDefaultsLocalSettings] ERROR: Unable to decode the loaded source (\(error))")
+                throw SuperNewsLocalSettingsError.decodeError
+            }
+        }
+        
+        throw SuperNewsLocalSettingsError.localSettingsError
+    }
+    
     func saveSelectedMediaSource(source: SavedSource) async -> Result<Void, SuperNewsLocalSettingsError> {
         print("[SuperNewsUserDefaultsLocalSettings] Saving selected source: \(source.name), id: \(source.id)")
         

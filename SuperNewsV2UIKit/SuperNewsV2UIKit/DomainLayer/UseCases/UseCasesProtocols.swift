@@ -23,15 +23,18 @@ protocol CountryNewsUseCaseProtocol: Sendable {
 
 // Source selection use cases
 protocol SourceSelectionUseCaseProtocol: Sendable {
-    func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
+    // func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError>
+    func execute() async throws -> [SourceCellViewModel]
 }
 
 protocol LoadSavedSelectedSourceUseCaseProtocol: Sendable {
-    func execute() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
+    // func execute() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError>
+    func execute() async throws -> SavedSourceDTO
 }
 
 protocol SaveSelectedSourceUseCaseProtocol: Sendable {
-    func execute(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
+    // func execute(with savedSource: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError>
+    @discardableResult func execute(with savedSource: SavedSourceDTO) async throws -> Bool
 }
 
 // Map use cases

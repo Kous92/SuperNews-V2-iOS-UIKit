@@ -15,6 +15,7 @@ final class SuperNewsSourceUserDefaultsRepository: SuperNewsSourceSettingsReposi
         self.settingsService = settingsService
     }
     
+    /*
     func saveSelectedMediaSource(source: SavedSourceDTO) async -> Result<Void, SuperNewsLocalSettingsError> {
         guard let result = await settingsService?.saveSelectedMediaSource(source: dtoToSavedSource(with: source)) else {
             return .failure(.localSettingsError)
@@ -22,13 +23,32 @@ final class SuperNewsSourceUserDefaultsRepository: SuperNewsSourceSettingsReposi
         
         return result
     }
+     */
     
+    @discardableResult func saveSelectedMediaSource(source: SavedSourceDTO) async throws -> Bool {
+        guard let result = try await settingsService?.saveSelectedMediaSource(source: dtoToSavedSource(with: source)) else {
+            throw SuperNewsLocalSettingsError.localSettingsError
+        }
+        
+        return result
+    }
+    
+    /*
     func loadSelectedMediaSource() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError> {
         guard let result = await settingsService?.loadSelectedMediaSource() else {
             return .failure(.localSettingsError)
         }
         
         return handleSavedSourceResult(with: result)
+    }
+     */
+    
+    func loadSelectedMediaSource() async throws -> SavedSourceDTO {
+        guard let result = try await settingsService?.loadSelectedMediaSource() else {
+            throw SuperNewsLocalSettingsError.localSettingsError
+        }
+        
+        return savedSourceToDTO(with: result)
     }
     
     private func handleSavedSourceResult(with result: Result<SavedSource, SuperNewsLocalSettingsError>) -> Result<SavedSourceDTO, SuperNewsLocalSettingsError> {

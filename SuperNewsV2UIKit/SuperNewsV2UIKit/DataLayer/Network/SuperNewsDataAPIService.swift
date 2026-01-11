@@ -8,10 +8,14 @@
 import Foundation
 
 protocol SuperNewsDataAPIService: Sendable {
-    func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError>
-    func fetchNewsSources(category: String) async -> Result<[MediaSource], SuperNewsAPIError>
-    func fetchNewsSources(language: String) async -> Result<[MediaSource], SuperNewsAPIError>
-    func fetchNewsSources(country: String) async -> Result<[MediaSource], SuperNewsAPIError>
+    // func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError>
+    func fetchAllNewsSources() async throws -> [MediaSource]
+    // func fetchNewsSources(category: String) async -> Result<[MediaSource], SuperNewsAPIError>
+    func fetchNewsSources(category: String) async throws -> [MediaSource]
+    // func fetchNewsSources(language: String) async -> Result<[MediaSource], SuperNewsAPIError>
+    func fetchNewsSources(language: String) async throws -> [MediaSource]
+    // func fetchNewsSources(country: String) async -> Result<[MediaSource], SuperNewsAPIError>
+    func fetchNewsSources(country: String) async throws -> [MediaSource]
     func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[Article], SuperNewsAPIError>
     func fetchTopHeadlinesNews(sourceName: String) async -> Result<[Article], SuperNewsAPIError>
     func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async -> Result<[Article], SuperNewsAPIError>

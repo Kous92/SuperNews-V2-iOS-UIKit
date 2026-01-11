@@ -131,7 +131,7 @@ import Combine
         }
     }
     
-   nonisolated private func loadLanguages() {
+    nonisolated private func loadLanguages() {
         Task { [weak self] in
             print("[SettingsSelectionViewModel] Loading languages")
             // await handleResult(with: await userSettingsUseCase.execute(with: settingSection.description))

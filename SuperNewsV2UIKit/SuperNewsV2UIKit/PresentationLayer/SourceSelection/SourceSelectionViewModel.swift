@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class SourceSelectionViewModel {
+@MainActor final class SourceSelectionViewModel {
     weak var coordinator: SourceSelectionViewControllerDelegate?
     
     private let sourceSelectionUseCase: SourceSelectionUseCaseProtocol
@@ -91,9 +91,29 @@ final class SourceSelectionViewModel {
         print("[SourceSelectionViewModel] Fetching all sources")
         
         Task {
-            // Download the data only once
+            do {
+                // Download the data only once
+                if cellViewModels.isEmpty {
+                    cellViewModels = try await sourceSelectionUseCase.execute()
+                }
+                
+                self.sectionViewModels.append(self.parseSection(with: String(localized: "allSources"), cellViewModels: cellViewModels))
+                self.filteredSectionViewModels = sectionViewModels
+                print("[SourceSelectionViewModel] Retrieved data: \(self.cellViewModels.count) sources")
+                self.updateResult.send(cellViewModels.count > 0)
+            } catch {
+                if let apiError = error as? SuperNewsAPIError {
+                    print("[SourceSelectionViewModel] ERROR: " + apiError.rawValue)
+                    self.sendErrorMessage(with: apiError.rawValue)
+                    self.updateResult.send(false)
+                }
+            }
+            
+            /*
+             // Download the data only once
             let result = cellViewModels.isEmpty ? await sourceSelectionUseCase.execute() : .success(cellViewModels)
             await handleResult(with: result)
+             */
         }
     }
     
@@ -107,7 +127,7 @@ final class SourceSelectionViewModel {
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("[SourceSelectionViewModel] ERROR: " + error.rawValue)
-                await self.sendErrorMessage(with: error.rawValue)
+                self.sendErrorMessage(with: error.rawValue)
                 self.updateResult.send(false)
         }
     }
@@ -126,6 +146,17 @@ final class SourceSelectionViewModel {
         print("[SourceSelectionViewModel] Selected source to save: \(savedSource.name), ID: \(savedSource.id)")
         
         Task {
+            do {
+                let result = try await saveSelectedSourceUseCase.execute(with: savedSource)
+                print("[SourceSelectionViewModel] Saving succeeded")
+                backToHomeView(with: savedSource.id)
+            } catch {
+                if let apiError = error as? SuperNewsLocalSettingsError {
+                    print("[SourceSelectionViewModel] Saving failed. ERROR: \(apiError.rawValue)")
+                }
+            }
+            
+            /*
             let result = await saveSelectedSourceUseCase.execute(with: savedSource)
             
             switch result {
@@ -135,6 +166,7 @@ final class SourceSelectionViewModel {
                 case .failure(let error):
                     print("[SourceSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
             }
+             */
         }
     }
     
@@ -142,7 +174,19 @@ final class SourceSelectionViewModel {
         print("[SourceSelectionViewModel] Loading saved source if existing...")
         
         Task {
-            let result = await loadSelectedSourceUseCase.execute()
+            do {
+                let savedSource = try await loadSelectedSourceUseCase.execute()
+                print("[SourceSelectionViewModel] Loading succeeded for saved source: \(savedSource.name), ID: \(savedSource.id)")
+                self.savedMediaSource = savedSource
+            } catch {
+                if let apiError = error as? SuperNewsLocalSettingsError {
+                    print("[SourceSelectionViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
+                    print("[SourceSelectionViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                }
+            }
+            
+            /*
+            let result = try await loadSelectedSourceUseCase.execute()
             
             switch result {
                 case .success(let savedSource):
@@ -152,6 +196,7 @@ final class SourceSelectionViewModel {
                     print("[SourceSelectionViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
                     print("[SourceSelectionViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
             }
+            */
             
             // Update the view
             favoriteSourceUpdateResult.send(savedMediaSource.name)

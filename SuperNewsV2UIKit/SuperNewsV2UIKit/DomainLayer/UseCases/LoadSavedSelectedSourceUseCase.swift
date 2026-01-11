@@ -15,7 +15,13 @@ final class LoadSavedSelectedSourceUseCase: LoadSavedSelectedSourceUseCaseProtoc
         self.sourceSettingsRepository = sourceSettingsRepository
     }
     
+    /*
     func execute() async -> Result<SavedSourceDTO, SuperNewsLocalSettingsError> {
         return await sourceSettingsRepository.loadSelectedMediaSource()
+    }
+    */
+    
+    func execute() async throws -> SavedSourceDTO {
+        return try await sourceSettingsRepository.loadSelectedMediaSource()
     }
 }

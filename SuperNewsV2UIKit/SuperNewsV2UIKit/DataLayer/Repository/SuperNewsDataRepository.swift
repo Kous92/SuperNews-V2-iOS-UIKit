@@ -8,13 +8,14 @@
 import Foundation
 
 final class SuperNewsDataRepository: SuperNewsRepository {
-    
+
     private let apiService: SuperNewsDataAPIService?
     
     init(apiService: SuperNewsDataAPIService?) {
         self.apiService = apiService
     }
     
+    /*
     func fetchAllNewsSources() async -> Result<[SourceDTO], SuperNewsAPIError> {
         guard let result = await apiService?.fetchAllNewsSources() else {
             return .failure(.apiError)
@@ -22,7 +23,17 @@ final class SuperNewsDataRepository: SuperNewsRepository {
         
         return handleSourceResult(with: result)
     }
+     */
     
+    func fetchAllNewsSources() async throws -> [SourceDTO] {
+        guard let sources = try await apiService?.fetchAllNewsSources() else {
+            throw SuperNewsAPIError.unknown
+        }
+        
+        return sourcesToDTO(with: sources)
+    }
+    
+    /*
     func fetchNewsSources(category: String) async -> Result<[SourceDTO], SuperNewsAPIError> {
         guard let result = await apiService?.fetchNewsSources(category: category) else {
             return .failure(.apiError)
@@ -30,7 +41,17 @@ final class SuperNewsDataRepository: SuperNewsRepository {
         
         return handleSourceResult(with: result)
     }
+     */
     
+    func fetchNewsSources(category: String) async throws -> [SourceDTO] {
+        guard let sources = try await apiService?.fetchNewsSources(category: category) else {
+            throw SuperNewsAPIError.unknown
+        }
+        
+        return sourcesToDTO(with: sources)
+    }
+    
+    /*
     func fetchNewsSources(language: String) async -> Result<[SourceDTO], SuperNewsAPIError> {
         guard let result = await apiService?.fetchNewsSources(language: language) else {
             return .failure(.apiError)
@@ -38,13 +59,32 @@ final class SuperNewsDataRepository: SuperNewsRepository {
         
         return handleSourceResult(with: result)
     }
+     */
     
+    func fetchNewsSources(language: String) async throws -> [SourceDTO] {
+        guard let sources = try await apiService?.fetchNewsSources(language: language) else {
+            throw SuperNewsAPIError.unknown
+        }
+        
+        return sourcesToDTO(with: sources)
+    }
+    
+    /*
     func fetchNewsSources(country: String) async -> Result<[SourceDTO], SuperNewsAPIError> {
         guard let result = await apiService?.fetchNewsSources(country: country) else {
             return .failure(.apiError)
         }
         
         return handleSourceResult(with: result)
+    }
+     */
+    
+    func fetchNewsSources(country: String) async throws -> [SourceDTO] {
+        guard let sources = try await apiService?.fetchNewsSources(country: country) else {
+            throw SuperNewsAPIError.unknown
+        }
+        
+        return sourcesToDTO(with: sources)
     }
     
     func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[ArticleDTO], SuperNewsAPIError> {

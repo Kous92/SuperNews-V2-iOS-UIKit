@@ -105,7 +105,6 @@ final class CountryClusterAnnotationView: MKAnnotationView {
         
         // 3. Mettre à jour la frame
         // On garde le centre actuel pour éviter que l'annotation ne "saute" visuellement
-        let oldCenter = self.center
         self.frame.size = newSize
         // Sur une MKAnnotationView, MapKit gère souvent le positionnement,
         // mais définir la taille suffit généralement.

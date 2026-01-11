@@ -15,8 +15,14 @@ final class SourceSelectionUseCase: SourceSelectionUseCaseProtocol {
         self.dataRepository = dataRepository
     }
     
+    /*
     func execute() async -> Result<[SourceCellViewModel], SuperNewsAPIError> {
         return handleResult(with: await dataRepository.fetchAllNewsSources())
+    }
+    */
+    
+    func execute() async throws -> [SourceCellViewModel] {
+        return parseViewModels(with: try await dataRepository.fetchAllNewsSources())
     }
     
     private func handleResult(with result: Result<[SourceDTO], SuperNewsAPIError>) -> Result<[SourceCellViewModel], SuperNewsAPIError> {

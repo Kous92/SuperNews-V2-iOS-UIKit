@@ -72,6 +72,26 @@ import Combine
         print("[TopHeadlinesViewModel] Loading saved source if existing...")
         
         Task {
+            do {
+                let savedSource = try await loadSavedSelectedSourceUseCase.execute()
+                print("[TopHeadlinesViewModel] Loading succeeded for saved source: \(savedSource.name), ID: \(savedSource.id)")
+                self.savedMediaSource = savedSource
+            } catch {
+                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
+                // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+                if let apiError = error as? SuperNewsLocalSettingsError {
+                    print(apiError.rawValue)
+                    
+                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                }
+            }
+            
+            // If it fails, it will use the default one.
+            self.updateSourceCategoryTitle()
+            print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
+            self.checkSavedSource()
+            
+            /*
             let result = await loadSavedSelectedSourceUseCase.execute()
             
             switch result {
@@ -87,6 +107,26 @@ import Combine
             self.updateSourceCategoryTitle()
             print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
             self.checkSavedSource()
+             */
+        }
+        
+        Task {
+            do {
+                let userSetting = try await loadUserSettingsUseCase.execute()
+                print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
+                self.savedLocalCountry = userSetting
+                self.updateCountryCategoryTitle()
+                // self.fetchTopHeadlines()
+            } catch SuperNewsUserSettingsError.userSettingsError {
+                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
+                // print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
+                // If it fails, it will use the default one.
+                self.updateCountryCategoryTitle()
+                print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
+                // self.checkSavedCountry()
+            }
+            
+            self.checkSavedCountry()
         }
     }
     

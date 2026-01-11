@@ -8,6 +8,7 @@
 import Foundation
 
 final actor SuperNewsMockLocalSettings: SuperNewsLocalSettings {
+    
     private var savedData: Data?
     
     init() {
@@ -36,6 +37,28 @@ final actor SuperNewsMockLocalSettings: SuperNewsLocalSettings {
         }
     }
     
+    @discardableResult func saveSelectedMediaSource(source: SavedSource) async throws -> Bool {
+        print("[SuperNewsMockLocalSettings] Saving selected source: \(source.name), id: \(source.id)")
+        
+        do {
+            // Create JSON Encoder
+            let encoder = JSONEncoder()
+
+            // Encode saved source
+            let data = try encoder.encode(source)
+
+            // Write/Set Data
+            savedData = data
+            
+            // Done, notify that saving has succeeded
+            return true
+
+        } catch {
+            print("[SuperNewsMockLocalSettings] ERROR: Unable to encode the selected source to save (\(error))")
+            throw SuperNewsLocalSettingsError.encodeError
+        }
+    }
+    
     func loadSelectedMediaSource() async -> Result<SavedSource, SuperNewsLocalSettingsError> {
         print("[SuperNewsMockLocalSettings] Loading selected source")
         
@@ -56,5 +79,27 @@ final actor SuperNewsMockLocalSettings: SuperNewsLocalSettings {
         }
         
         return .failure(.localSettingsError)
+    }
+    
+    func loadSelectedMediaSource() async throws -> SavedSource {
+        print("[SuperNewsMockLocalSettings] Loading selected source")
+        
+        if let data = savedData {
+            do {
+                // Create JSON Decoder
+                let decoder = JSONDecoder()
+
+                // Decode Source
+                let savedSource = try decoder.decode(SavedSource.self, from: data)
+                
+                // Done, notify that loading has succeeded
+                return savedSource
+            } catch {
+                print("[SuperNewsMockLocalSettings] ERROR: Unable to decode the loaded source (\(error))")
+                throw SuperNewsLocalSettingsError.decodeError
+            }
+        }
+        
+        throw SuperNewsLocalSettingsError.localSettingsError
     }
 }

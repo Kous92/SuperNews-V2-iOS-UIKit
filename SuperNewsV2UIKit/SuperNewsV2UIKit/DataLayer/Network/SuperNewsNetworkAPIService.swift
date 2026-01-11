@@ -48,16 +48,32 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         return await fetchMediaSourceData(endpoint: .fetchAllSources)
     }
     
+    func fetchAllNewsSources() async throws -> [MediaSource] {
+        return try await fetchMediaSourceData(endpoint: .fetchAllSources)
+    }
+    
     func fetchNewsSources(category: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchSourcesWithCategory(category: category))
+    }
+    
+    func fetchNewsSources(category: String) async throws -> [MediaSource] {
+        return try await fetchMediaSourceData(endpoint: .fetchSourcesWithCategory(category: category))
     }
     
     func fetchNewsSources(language: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchSourcesWithLanguage(language: language))
     }
     
+    func fetchNewsSources(language: String) async throws -> [MediaSource] {
+        return try await fetchMediaSourceData(endpoint: .fetchSourcesWithLanguage(language: language))
+    }
+    
     func fetchNewsSources(country: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchSourcesWithCountry(country: country))
+    }
+    
+    func fetchNewsSources(country: String) async throws -> [MediaSource] {
+        return try await fetchMediaSourceData(endpoint: .fetchSourcesWithCountry(country: country))
     }
     
     func fetchTopHeadlinesNews(countryCode: String, category: String? = nil) async -> Result<[Article], SuperNewsAPIError> {
@@ -104,6 +120,33 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         return await handleSourcesResult(with: await getRequest(endpoint: endpoint), cacheKey: cacheKey)
     }
     
+    private func fetchMediaSourceData(endpoint: SuperNewsAPIEndpoint) async throws -> [MediaSource] {
+        let cacheKey = endpoint.path
+        print("[SuperNewsNetworkAPIService] Checking cached data for key: \(cacheKey)")
+        
+        if let sources = await mediaSourceCache.value(key: cacheKey) {
+            print("[SuperNewsNetworkAPIService] Cached data found, \(sources.count) sources available. Skipping download process.")
+            return sources
+        }
+        
+        print("[SuperNewsNetworkAPIService] No data in cache for \(cacheKey)")
+        
+        do {
+            let data: MediaSourceOutput = try await getRequest(endpoint: endpoint)
+            await mediaSourceCache.setValue(data.sources, key: cacheKey)
+            await mediaSourceCache.saveToDisk()
+            
+            return data.sources
+        } catch {
+            // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+            if let apiError = error as? SuperNewsAPIError {
+                throw apiError
+            } else {
+                throw SuperNewsAPIError.networkError
+            }
+        }
+    }
+    
     private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>, cacheKey: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         switch result {
             case .success(let data):
@@ -116,6 +159,21 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
                 return .failure(error)
         }
     }
+    
+    /*
+    private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>, cacheKey: String) async throws -> [MediaSource] {
+        switch result {
+            case .success(let data):
+                print("[SuperNewsNetworkAPIService] Saving \(data.sources.count) downloaded sources to local cache, key: \(cacheKey)")
+                await mediaSourceCache.setValue(data.sources, key: cacheKey)
+                await mediaSourceCache.saveToDisk()
+                
+                return .success(data.sources)
+            case .failure(let error):
+                return .failure(error)
+        }
+    }
+     */
     
     private func handleArticlesResult(with result: Result<ArticleOutput, SuperNewsAPIError>, cacheKey: String) async -> Result<[Article], SuperNewsAPIError> {
         switch result {
@@ -167,6 +225,47 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
                         return .failure(.serverError)
                     default:
                         return .failure(.decodeError)
+                }
+        }
+    }
+    
+    private func getRequest<T: Decodable & Sendable>(endpoint: SuperNewsAPIEndpoint) async throws -> T {
+        guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
+            throw SuperNewsAPIError.invalidURL
+        }
+        
+        print("[SuperNewsNetworkAPIService] Called URL: \(url.absoluteString), downloading data...")
+        let request = AF.request(url, headers: getAuthorizationHeader()).validate()
+        let decodableResponse = await request.serializingDecodable(T.self).response
+        
+        switch decodableResponse.result {
+            case .success:
+                guard let data = decodableResponse.value else {
+                    throw SuperNewsAPIError.decodeError
+                }
+                
+                return data
+            case let .failure(error):
+                guard let httpResponse = decodableResponse.response else {
+                    print("[SuperNewsNetworkAPIService] ERROR: \(error)")
+                    throw SuperNewsAPIError.networkError
+                }
+                
+                print("[SuperNewsNetworkAPIService] Failure code: \(httpResponse.statusCode)")
+                
+                switch httpResponse.statusCode {
+                    case 400:
+                        throw SuperNewsAPIError.parametersMissing
+                    case 401:
+                        throw SuperNewsAPIError.invalidApiKey
+                    case 404:
+                        throw SuperNewsAPIError.notFound
+                    case 429:
+                        throw SuperNewsAPIError.tooManyRequests
+                    case 500:
+                        throw SuperNewsAPIError.serverError
+                    default:
+                        throw SuperNewsAPIError.decodeError
                 }
         }
     }

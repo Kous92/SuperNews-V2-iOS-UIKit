@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SourceSelectionOption {
+enum SourceSelectionOption: Sendable {
     case fetchAllSources
     case saveSelectedSource(name: String?)
 }
