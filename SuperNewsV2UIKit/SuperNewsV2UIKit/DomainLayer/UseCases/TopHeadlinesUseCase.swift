@@ -9,12 +9,14 @@ import Foundation
 
 /// This use case will fetch the top headlines news from the API
 final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
+    
     private let dataRepository: SuperNewsRepository
     
     init(dataRepository: SuperNewsRepository) {
         self.dataRepository = dataRepository
     }
     
+    /*
     func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError> {
         switch topHeadlinesOption {
             case .sourceNews(name: let name):
@@ -23,6 +25,18 @@ final class TopHeadlinesUseCase: TopHeadlinesUseCaseProtocol {
                 return handleResult(with: await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: name))
             case .localCountryNews(countryCode: let countryCode):
                 return handleResult(with: await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
+        }
+    }
+     */
+    
+    func execute(topHeadlinesOption: TopHeadlinesOption) async throws -> [ArticleViewModel] {
+        switch topHeadlinesOption {
+            case .sourceNews(name: let name):
+                return parseViewModels(with: try await dataRepository.fetchTopHeadlinesNews(sourceName: name))
+            case .categoryNews(name: let name, countryCode: let countryCode):
+                return parseViewModels(with: try await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: name))
+            case .localCountryNews(countryCode: let countryCode):
+                return parseViewModels(with: try await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
         }
     }
     

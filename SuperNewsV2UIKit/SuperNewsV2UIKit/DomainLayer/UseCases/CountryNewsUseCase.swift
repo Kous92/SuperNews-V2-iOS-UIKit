@@ -15,8 +15,14 @@ final class CountryNewsUseCase: CountryNewsUseCaseProtocol {
         self.dataRepository = dataRepository
     }
     
+    /*
     func execute(countryCode: String) async -> Result<[ArticleViewModel], SuperNewsAPIError> {
         return handleResult(with: await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
+    }
+    */
+    
+    func execute(countryCode: String) async throws -> [ArticleViewModel] {
+        return parseViewModels(with: try await dataRepository.fetchTopHeadlinesNews(countryCode: countryCode, category: nil))
     }
     
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {

@@ -109,25 +109,6 @@ import Combine
             self.checkSavedSource()
              */
         }
-        
-        Task {
-            do {
-                let userSetting = try await loadUserSettingsUseCase.execute()
-                print("[TopHeadlinesViewModel] Loading succeeded for saved user country setting: \(userSetting.name), code: \(userSetting.code)")
-                self.savedLocalCountry = userSetting
-                self.updateCountryCategoryTitle()
-                // self.fetchTopHeadlines()
-            } catch SuperNewsUserSettingsError.userSettingsError {
-                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedLocalCountry.name), code: \(savedLocalCountry.code)")
-                // print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(error.rawValue)))")
-                // If it fails, it will use the default one.
-                self.updateCountryCategoryTitle()
-                print("[TopHeadlinesViewModel] Categories: \(categoryViewModels.count)")
-                // self.checkSavedCountry()
-            }
-            
-            self.checkSavedCountry()
-        }
     }
     
     func loadAndUpdateUserCountrySettingTitle() {
@@ -199,28 +180,88 @@ import Combine
     // MARK: - Top headlines
     func fetchTopHeadlines() {
         Task {
+            /*
             fetchedData["local"] = savedLocalCountry.code
             isLoading.send(true)
             let result = await topHeadlinesUseCase.execute(topHeadlinesOption: .localCountryNews(countryCode: savedLocalCountry.code))
             await handleResult(with: result)
+             */
+            
+            do {
+                fetchedData["local"] = savedLocalCountry.code
+                isLoading.send(true)
+                let viewModels = try await topHeadlinesUseCase.execute(topHeadlinesOption: .localCountryNews(countryCode: savedLocalCountry.code))
+                print("[TopHeadlinesViewModel] Retrieved data: \(viewModels.count) articles")
+                self.articleViewModels = viewModels
+                await parseViewModels()
+                self.updateResult.send(viewModels.count > 0)
+            } catch {
+                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
+                // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+                if let apiError = error as? SuperNewsAPIError {
+                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                    self.sendErrorMessage(with: String(localized: String.LocalizationValue(apiError.rawValue)))
+                    self.updateResult.send(false)
+                }
+            }
         }
     }
     
     func fetchTopHeadlinesWithSource() {
         Task {
+            /*
             fetchedData["source"] = savedMediaSource.id
             isLoading.send(true)
             let result = await topHeadlinesUseCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource.id))
             await handleResult(with: result)
+             */
+            
+            do {
+                fetchedData["source"] = savedMediaSource.id
+                isLoading.send(true)
+                let viewModels = try await topHeadlinesUseCase.execute(topHeadlinesOption: .sourceNews(name: savedMediaSource.id))
+                print("[TopHeadlinesViewModel] Retrieved data: \(viewModels.count) articles")
+                self.articleViewModels = viewModels
+                await parseViewModels()
+                self.updateResult.send(viewModels.count > 0)
+            } catch {
+                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
+                // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+                if let apiError = error as? SuperNewsAPIError {
+                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                    self.sendErrorMessage(with: String(localized: String.LocalizationValue(apiError.rawValue)))
+                    self.updateResult.send(false)
+                }
+            }
         }
     }
     
     func fetchTopHeadlines(with category: String) {
         Task {
+            /*
             fetchedData[category] = savedLocalCountry.code
             isLoading.send(true)
             let result = await topHeadlinesUseCase.execute(topHeadlinesOption: .categoryNews(name: category, countryCode: savedLocalCountry.code))
             await handleResult(with: result)
+             */
+            
+            do {
+                fetchedData[category] = savedLocalCountry.code
+                isLoading.send(true)
+                let viewModels = try await topHeadlinesUseCase.execute(topHeadlinesOption: .categoryNews(name: category, countryCode: savedLocalCountry.code))
+                print("[TopHeadlinesViewModel] Retrieved data: \(viewModels.count) articles")
+                self.articleViewModels = viewModels
+                await parseViewModels()
+                self.updateResult.send(viewModels.count > 0)
+            } catch {
+                print("[TopHeadlinesViewModel] Loading failed, the default source will be used: \(savedMediaSource.name), ID: \(savedMediaSource.id)")
+                // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+                if let apiError = error as? SuperNewsAPIError {
+                    print("[TopHeadlinesViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                    self.sendErrorMessage(with: String(localized: String.LocalizationValue(apiError.rawValue)))
+                    self.updateResult.send(false)
+                }
+            }
         }
     }
     

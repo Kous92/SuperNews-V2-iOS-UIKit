@@ -14,8 +14,14 @@ final class SearchUseCase: SearchUseCaseProtocol {
         self.dataRepository = dataRepository
     }
     
+    /*
     func execute(searchQuery: String, language: String, sortBy: String = "publishedAt") async -> Result<[ArticleViewModel], SuperNewsAPIError> {
         return handleResult(with: await dataRepository.searchNewsFromEverything(with: searchQuery, language: language, sortBy: sortBy))
+    }
+     */
+    
+    func execute(searchQuery: String, language: String, sortBy: String = "publishedAt") async throws -> [ArticleViewModel] {
+        return parseViewModels(with: try await dataRepository.searchNewsFromEverything(with: searchQuery, language: language, sortBy: sortBy))
     }
     
     private func handleResult(with result: Result<[ArticleDTO], SuperNewsAPIError>) -> Result<[ArticleViewModel], SuperNewsAPIError> {

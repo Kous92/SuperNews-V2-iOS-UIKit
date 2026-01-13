@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
+    
     private let apiKey: String
     private let articleCache = FileCache<[Article]>(fileName: "article_cache_data", expirationInterval: 86400) // 1 day before expiration
     private let mediaSourceCache = FileCache<[MediaSource]>(fileName: "media_source_cache_data", expirationInterval: 604800) // 1 week before expiration
@@ -44,38 +45,47 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         }
     }
     
+    /*
     func fetchAllNewsSources() async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchAllSources)
     }
+     */
     
     func fetchAllNewsSources() async throws -> [MediaSource] {
         return try await fetchMediaSourceData(endpoint: .fetchAllSources)
     }
     
+    /*
     func fetchNewsSources(category: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchSourcesWithCategory(category: category))
     }
+     */
     
     func fetchNewsSources(category: String) async throws -> [MediaSource] {
         return try await fetchMediaSourceData(endpoint: .fetchSourcesWithCategory(category: category))
     }
     
+    /*
     func fetchNewsSources(language: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchSourcesWithLanguage(language: language))
     }
+     */
     
     func fetchNewsSources(language: String) async throws -> [MediaSource] {
         return try await fetchMediaSourceData(endpoint: .fetchSourcesWithLanguage(language: language))
     }
     
+    /*
     func fetchNewsSources(country: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         return await fetchMediaSourceData(endpoint: .fetchSourcesWithCountry(country: country))
     }
+     */
     
     func fetchNewsSources(country: String) async throws -> [MediaSource] {
         return try await fetchMediaSourceData(endpoint: .fetchSourcesWithCountry(country: country))
     }
     
+    /*
     func fetchTopHeadlinesNews(countryCode: String, category: String? = nil) async -> Result<[Article], SuperNewsAPIError> {
         return await fetchArticleData(endpoint: .fetchTopHeadlinesNews(countryCode: countryCode, category: category))
     }
@@ -83,13 +93,31 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     func fetchTopHeadlinesNews(sourceName: String) async -> Result<[Article], SuperNewsAPIError> {
         return await fetchArticleData(endpoint: .fetchTopHeadlinesNewsWithSource(name: sourceName))
     }
+     */
     
+    func fetchTopHeadlinesNews(countryCode: String, category: String?) async throws -> [Article] {
+        return try await fetchArticleData(endpoint: .fetchTopHeadlinesNews(countryCode: countryCode, category: category))
+    }
+    
+    func fetchTopHeadlinesNews(sourceName: String) async throws -> [Article] {
+        return try await fetchArticleData(endpoint: .fetchTopHeadlinesNewsWithSource(name: sourceName))
+    }
+    
+    /*
     func searchNewsFromEverything(with searchQuery: String, language: String = "fr", sortBy: String = "publishedAt") async -> Result<[Article], SuperNewsAPIError> {
         // Required to avoid any error when searching with some special characters
         let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? ""
         return await fetchArticleData(endpoint: .searchNewsFromEverything(searchQuery: encodedQuery, language: language, sortBy: sortBy))
     }
+     */
     
+    func searchNewsFromEverything(with searchQuery: String, language: String = "fr", sortBy: String = "publishedAt") async throws -> [Article] {
+        // Required to avoid any error when searching with some special characters
+        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? ""
+        return try await fetchArticleData(endpoint: .searchNewsFromEverything(searchQuery: encodedQuery, language: language, sortBy: sortBy))
+    }
+    
+    /*
     /// It fetches the data with caching option. If existing data was already downloaded (and not expired), the data will be retrieved from cache.
     private func fetchArticleData(endpoint: SuperNewsAPIEndpoint) async -> Result<[Article], SuperNewsAPIError> {
         let cacheKey = endpoint.path
@@ -104,7 +132,38 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         
         return await handleArticlesResult(with: await getRequest(endpoint: endpoint), cacheKey: cacheKey)
     }
+     */
     
+    /// It fetches the data with caching option. If existing data was already downloaded (and not expired), the data will be retrieved from cache.
+    private func fetchArticleData(endpoint: SuperNewsAPIEndpoint) async throws -> [Article] {
+        let cacheKey = endpoint.path
+        print("[SuperNewsNetworkAPIService] Checking cached data for key: \(cacheKey)")
+        
+        if let articles = await articleCache.value(key: cacheKey) {
+            print("[SuperNewsNetworkAPIService] Cached data found, \(articles.count) articles available. Skipping download process.")
+            return articles
+        }
+        
+        print("[SuperNewsNetworkAPIService] No data in cache for \(cacheKey)")
+        
+        do {
+            let data: ArticleOutput = try await getRequest(endpoint: endpoint)
+            print("[SuperNewsNetworkAPIService] Saving \(data.articles?.count ?? 0) downloaded articles to local cache, key: \(cacheKey)")
+            await articleCache.setValue(data.articles ?? [], key: cacheKey)
+            await articleCache.saveToDisk()
+            
+            return data.articles ?? []
+        } catch {
+            // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+            if let apiError = error as? SuperNewsAPIError {
+                throw apiError
+            } else {
+                throw SuperNewsAPIError.networkError
+            }
+        }
+    }
+    
+    /*
     /// It fetches the data with caching option. If existing data was already downloaded (and not expired), the data will be retrieved from cache.
     private func fetchMediaSourceData(endpoint: SuperNewsAPIEndpoint) async -> Result<[MediaSource], SuperNewsAPIError> {
         let cacheKey = endpoint.path
@@ -119,6 +178,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         
         return await handleSourcesResult(with: await getRequest(endpoint: endpoint), cacheKey: cacheKey)
     }
+     */
     
     private func fetchMediaSourceData(endpoint: SuperNewsAPIEndpoint) async throws -> [MediaSource] {
         let cacheKey = endpoint.path
@@ -133,6 +193,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         
         do {
             let data: MediaSourceOutput = try await getRequest(endpoint: endpoint)
+            print("[SuperNewsNetworkAPIService] Saving \(data.sources.count) downloaded sources to local cache, key: \(cacheKey)")
             await mediaSourceCache.setValue(data.sources, key: cacheKey)
             await mediaSourceCache.saveToDisk()
             
@@ -147,6 +208,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
         }
     }
     
+    /*
     private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>, cacheKey: String) async -> Result<[MediaSource], SuperNewsAPIError> {
         switch result {
             case .success(let data):
@@ -159,6 +221,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
                 return .failure(error)
         }
     }
+     */
     
     /*
     private func handleSourcesResult(with result: Result<MediaSourceOutput, SuperNewsAPIError>, cacheKey: String) async throws -> [MediaSource] {
@@ -175,6 +238,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
     }
      */
     
+    /*
     private func handleArticlesResult(with result: Result<ArticleOutput, SuperNewsAPIError>, cacheKey: String) async -> Result<[Article], SuperNewsAPIError> {
         switch result {
             case .success(let data):
@@ -187,6 +251,7 @@ final class SuperNewsNetworkAPIService: SuperNewsDataAPIService {
                 return .failure(error)
         }
     }
+     */
     
     private func getRequest<T: Decodable & Sendable>(endpoint: SuperNewsAPIEndpoint) async -> Result<T, SuperNewsAPIError> {
         guard let url = URL(string: endpoint.baseURL + endpoint.path) else {

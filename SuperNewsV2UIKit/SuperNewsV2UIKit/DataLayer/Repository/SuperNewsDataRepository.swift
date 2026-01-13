@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class SuperNewsDataRepository: SuperNewsRepository {
-
+final class SuperNewsDataRepository: SuperNewsRepository {    
+    
     private let apiService: SuperNewsDataAPIService?
     
     init(apiService: SuperNewsDataAPIService?) {
@@ -27,7 +27,7 @@ final class SuperNewsDataRepository: SuperNewsRepository {
     
     func fetchAllNewsSources() async throws -> [SourceDTO] {
         guard let sources = try await apiService?.fetchAllNewsSources() else {
-            throw SuperNewsAPIError.unknown
+            throw SuperNewsAPIError.apiError
         }
         
         return sourcesToDTO(with: sources)
@@ -45,7 +45,7 @@ final class SuperNewsDataRepository: SuperNewsRepository {
     
     func fetchNewsSources(category: String) async throws -> [SourceDTO] {
         guard let sources = try await apiService?.fetchNewsSources(category: category) else {
-            throw SuperNewsAPIError.unknown
+            throw SuperNewsAPIError.apiError
         }
         
         return sourcesToDTO(with: sources)
@@ -63,7 +63,7 @@ final class SuperNewsDataRepository: SuperNewsRepository {
     
     func fetchNewsSources(language: String) async throws -> [SourceDTO] {
         guard let sources = try await apiService?.fetchNewsSources(language: language) else {
-            throw SuperNewsAPIError.unknown
+            throw SuperNewsAPIError.apiError
         }
         
         return sourcesToDTO(with: sources)
@@ -81,12 +81,13 @@ final class SuperNewsDataRepository: SuperNewsRepository {
     
     func fetchNewsSources(country: String) async throws -> [SourceDTO] {
         guard let sources = try await apiService?.fetchNewsSources(country: country) else {
-            throw SuperNewsAPIError.unknown
+            throw SuperNewsAPIError.apiError
         }
         
         return sourcesToDTO(with: sources)
     }
     
+    /*
     func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[ArticleDTO], SuperNewsAPIError> {
         guard let result = await apiService?.fetchTopHeadlinesNews(countryCode: countryCode, category: category) else {
             return .failure(.apiError)
@@ -94,7 +95,9 @@ final class SuperNewsDataRepository: SuperNewsRepository {
         
         return handleArticleResult(with: result)
     }
+     */
     
+    /*
     func fetchTopHeadlinesNews(sourceName: String) async -> Result<[ArticleDTO], SuperNewsAPIError> {
         guard let result = await apiService?.fetchTopHeadlinesNews(sourceName: sourceName) else {
             return .failure(.apiError)
@@ -102,13 +105,40 @@ final class SuperNewsDataRepository: SuperNewsRepository {
         
         return handleArticleResult(with: result)
     }
+     */
     
+    func fetchTopHeadlinesNews(countryCode: String, category: String?) async throws -> [ArticleDTO] {
+        guard let articles = try await apiService?.fetchTopHeadlinesNews(countryCode: countryCode, category: category) else {
+            throw SuperNewsAPIError.apiError
+        }
+        
+        return articlesToDTO(with: articles)
+    }
+    
+    func fetchTopHeadlinesNews(sourceName: String) async throws -> [ArticleDTO] {
+        guard let articles = try await apiService?.fetchTopHeadlinesNews(sourceName: sourceName) else {
+            throw SuperNewsAPIError.apiError
+        }
+        
+        return articlesToDTO(with: articles)
+    }
+    
+    /*
     func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleDTO], SuperNewsAPIError> {
         guard let result = await apiService?.searchNewsFromEverything(with: searchQuery, language: language, sortBy: sortBy) else {
             return .failure(.apiError)
         }
         
         return handleArticleResult(with: result)
+    }
+     */
+    
+    func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async throws -> [ArticleDTO] {
+        guard let articles = try await apiService?.searchNewsFromEverything(with: searchQuery, language: language, sortBy: sortBy) else {
+            throw SuperNewsAPIError.apiError
+        }
+        
+        return articlesToDTO(with: articles)
     }
     
     private func handleArticleResult(with result: Result<[Article], SuperNewsAPIError>) -> Result<[ArticleDTO], SuperNewsAPIError> {

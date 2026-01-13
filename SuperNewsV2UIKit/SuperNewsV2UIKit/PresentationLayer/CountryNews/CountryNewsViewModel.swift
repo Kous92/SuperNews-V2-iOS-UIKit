@@ -37,9 +37,27 @@ import Combine
     // MARK: - Top headlines
     func fetchCountryTopHeadlines() {
         Task {
+            /*
             isLoading.send(true)
             let result = await useCase.execute(countryCode: self.countryCode)
             await handleResult(with: result)
+             */
+            
+            do {
+                isLoading.send(true)
+                let viewModels = try await useCase.execute(countryCode: self.countryCode)
+                print("[CountryNewsViewModel] Data retrieved: \(viewModels.count) articles")
+                self.articleViewModels = viewModels
+                await parseViewModels()
+                self.updateResult.send(viewModels.count > 0)
+            } catch {
+                // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+                if let apiError = error as? SuperNewsAPIError {
+                    print("[CountryNewsViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                    self.sendErrorMessage(with: String(localized: String.LocalizationValue(apiError.rawValue)))
+                    self.updateResult.send(false)
+                }
+            }
         }
     }
     

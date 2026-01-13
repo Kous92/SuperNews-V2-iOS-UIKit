@@ -18,7 +18,10 @@ protocol SuperNewsRepository: AnyObject, Sendable {
     func fetchNewsSources(language: String) async throws -> [SourceDTO]
     // func fetchNewsSources(country: String) async -> Result<[SourceDTO], SuperNewsAPIError>
     func fetchNewsSources(country: String) async throws -> [SourceDTO]
-    func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[ArticleDTO], SuperNewsAPIError>
-    func fetchTopHeadlinesNews(sourceName: String) async -> Result<[ArticleDTO], SuperNewsAPIError>
-    func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleDTO], SuperNewsAPIError>
+    // func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[ArticleDTO], SuperNewsAPIError>
+    // func fetchTopHeadlinesNews(sourceName: String) async -> Result<[ArticleDTO], SuperNewsAPIError>
+    func fetchTopHeadlinesNews(countryCode: String, category: String?) async throws -> [ArticleDTO]
+    func fetchTopHeadlinesNews(sourceName: String) async throws -> [ArticleDTO]
+    // func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleDTO], SuperNewsAPIError>
+    func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async throws -> [ArticleDTO]
 }

@@ -15,7 +15,9 @@ I'm especially interested for **code reviews** in order to implement potential i
 
 Also, I'm not a native english speaker, don't hesitate to tell me if I have made english mistakes on the english part.
 
-This app is available for testing with **TestFlight**, **[click here to test](https://testflight.apple.com/join/SKj6fn5k)**. An iPhone or iPad under iOS/iPadOS 15.0 or later is required.
+This app is available for testing with **TestFlight**, **[click here to test](https://testflight.apple.com/join/SKj6fn5k)**. An iPhone or iPad under iOS/iPadOS 17.0 or later is required.
+
+Also, it's available on the **[App Store](https://apps.apple.com/app/id6466199585)**, you can download it now.
 
 ## <a name="french"></a>🇫🇷 Bienvenue
 
@@ -25,4 +27,6 @@ Pour consulter la documentation complète du projet (guide d'utilisation, soluti
 
 Je suis particulièrement intéressé pour des revues de code **(code reviews)** afin de mettre en place de potentielles améliorations, mais également monter en compétences sur des notions et techniques avancées. Si vous êtes **confirmé/sénior/expert en développement iOS**.
 
-L'application est disponible à l'essai via **TestFlight** en **[cliquant ici](https://testflight.apple.com/join/SKj6fn5k)**. Un iPhone ou un iPad sous iOS/iPadOS 15.0 ou plus est requis.
+L'application est disponible à l'essai via **TestFlight** en **[cliquant ici](https://testflight.apple.com/join/SKj6fn5k)**. Un iPhone ou un iPad sous iOS/iPadOS 17.0 ou plus est requis.
+
+Cette application est également disponible sur l'**[App Store](https://apps.apple.com/app/id6466199585)**, vous pouvez la télécharger dès maintenant.

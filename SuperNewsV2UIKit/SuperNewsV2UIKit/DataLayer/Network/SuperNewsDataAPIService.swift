@@ -16,7 +16,10 @@ protocol SuperNewsDataAPIService: Sendable {
     func fetchNewsSources(language: String) async throws -> [MediaSource]
     // func fetchNewsSources(country: String) async -> Result<[MediaSource], SuperNewsAPIError>
     func fetchNewsSources(country: String) async throws -> [MediaSource]
-    func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[Article], SuperNewsAPIError>
-    func fetchTopHeadlinesNews(sourceName: String) async -> Result<[Article], SuperNewsAPIError>
-    func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async -> Result<[Article], SuperNewsAPIError>
+    // func fetchTopHeadlinesNews(countryCode: String, category: String?) async -> Result<[Article], SuperNewsAPIError>
+    // func fetchTopHeadlinesNews(sourceName: String) async -> Result<[Article], SuperNewsAPIError>
+    func fetchTopHeadlinesNews(countryCode: String, category: String?) async throws -> [Article]
+    func fetchTopHeadlinesNews(sourceName: String) async throws -> [Article]
+    // func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async -> Result<[Article], SuperNewsAPIError>
+    func searchNewsFromEverything(with searchQuery: String, language: String, sortBy: String) async throws -> [Article]
 }

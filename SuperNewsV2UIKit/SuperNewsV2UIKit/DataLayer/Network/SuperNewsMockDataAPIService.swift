@@ -9,6 +9,7 @@ import Foundation
 
 /// Mock data service for unit tests and live preview mode
 final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
+    
     private let forceFetchFailure: Bool
     
     init(forceFetchFailure: Bool) {
@@ -248,6 +249,14 @@ final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
         return sourceName == "le-monde" ? getArticles(with: "SourcesTopHeadlinesMockData") : .failure(.invalidURL)
     }
     
+    func fetchTopHeadlinesNews(sourceName: String) async throws -> [Article] {
+        guard sourceName == "le-monde" else {
+            throw SuperNewsAPIError.invalidURL
+        }
+        
+        return try getArticles(with: "SourcesTopHeadlinesMockData")
+    }
+    
     func searchNewsFromEverything(with searchQuery: String, language: String = "fr", sortBy: String = "publishedAt") async -> Result<[Article], SuperNewsAPIError> {
         
         guard searchQuery == "iPhone" else {
@@ -260,6 +269,20 @@ final class SuperNewsMockDataAPIService: SuperNewsDataAPIService {
             return getArticles(with: "EverythingArticleOutputMockData")
         } else {
             return .failure(.invalidURL)
+        }
+    }
+    
+    func searchNewsFromEverything(with searchQuery: String, language: String = "fr", sortBy: String = "publishedAt") async throws -> [Article] {
+        guard searchQuery == "iPhone" else {
+            throw SuperNewsAPIError.apiError
+        }
+        
+        if language == "fr" {
+            return try getArticles(with: "EverythingiPhoneFrenchNewsMockData")
+        } else if language == "en" {
+            return try getArticles(with: "EverythingArticleOutputMockData")
+        } else {
+            throw SuperNewsAPIError.invalidURL
         }
     }
 }

@@ -10,15 +10,18 @@ import CoreLocation
 
 // News fetch use cases
 protocol TopHeadlinesUseCaseProtocol: Sendable {
-    func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    // func execute(topHeadlinesOption: TopHeadlinesOption) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    func execute(topHeadlinesOption: TopHeadlinesOption) async throws -> [ArticleViewModel]
 }
 
 protocol SearchUseCaseProtocol: Sendable {
-    func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    // func execute(searchQuery: String, language: String, sortBy: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    func execute(searchQuery: String, language: String, sortBy: String) async throws -> [ArticleViewModel]
 }
 
 protocol CountryNewsUseCaseProtocol: Sendable {
-    func execute(countryCode: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    // func execute(countryCode: String) async -> Result<[ArticleViewModel], SuperNewsAPIError>
+    func execute(countryCode: String) async throws -> [ArticleViewModel]
 }
 
 // Source selection use cases

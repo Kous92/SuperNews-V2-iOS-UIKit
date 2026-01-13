@@ -93,9 +93,27 @@ import Combine
         }
         
         Task {
+            /*
             isLoading.send(true)
             let result = await searchUseCase.execute(searchQuery: searchQuery, language: savedLocalLanguage.code, sortBy: "publishedAt")
             await handleResult(with: result)
+             */
+            
+            do {
+                isLoading.send(true)
+                let viewModels = try await searchUseCase.execute(searchQuery: searchQuery, language: savedLocalLanguage.code, sortBy: "publishedAt")
+                print("[SearchViewModel] Downloaded data: \(viewModels.count) articles")
+                self.articleViewModels = viewModels
+                await parseViewModels()
+                self.updateResult.send(viewModels.count > 0)
+            } catch {
+                // If the thrown error is already a SuperNewsAPIError, rethrow it. Otherwise map to a generic network error.
+                if let apiError = error as? SuperNewsAPIError {
+                    print("[SearchViewModel] ERROR: \(String(localized: String.LocalizationValue(apiError.rawValue)))")
+                    self.sendErrorMessage(with: String(localized: String.LocalizationValue(apiError.rawValue)))
+                    self.updateResult.send(false)
+                }
+            }
         }
     }
     
@@ -108,7 +126,7 @@ import Combine
                 self.updateResult.send(viewModels.count > 0)
             case .failure(let error):
                 print("[SearchViewModel] ERROR: " + error.rawValue)
-                await sendErrorMessage(with: error.rawValue)
+                sendErrorMessage(with: error.rawValue)
                 updateResult.send(false)
         }
     }
