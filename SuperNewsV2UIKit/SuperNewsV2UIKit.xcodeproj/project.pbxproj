@@ -96,7 +96,6 @@
 		4B60E6322AAB26C9003202FD /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4B60E6312AAB26C9003202FD /* Localizable.xcstrings */; };
 		4B64685029E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
 		4B64685129E6E4AB00F35682 /* EverythingArticleOutputMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B64684F29E6E4AB00F35682 /* EverythingArticleOutputMockData.json */; };
-		4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685429E6ED1F00F35682 /* Kingfisher */; };
 		4B64685829E6ED7200F35682 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685729E6ED7200F35682 /* Alamofire */; };
 		4B64685B29E6EDF700F35682 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4B64685A29E6EDF700F35682 /* SnapKit */; };
 		4B64685F29E6F0F500F35682 /* SuperNewsDataAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B64685E29E6F0F500F35682 /* SuperNewsDataAPIService.swift */; };
@@ -202,6 +201,7 @@
 		4BDDC8532A01035900278CB7 /* SuperNewsSourceUserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDC8522A01035900278CB7 /* SuperNewsSourceUserDefaultsRepository.swift */; };
 		4BDDC8552A010D8800278CB7 /* SuperNewsMockLocalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDC8542A010D8800278CB7 /* SuperNewsMockLocalSettings.swift */; };
 		4BE0CADF2AA7926C00D6737A /* ResetUserSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE0CADE2AA7926C00D6737A /* ResetUserSettingsUseCase.swift */; };
+		4BE1A17F2F1D4AAD0085238E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4BE1A17E2F1D4AAD0085238E /* Kingfisher */; };
 		4BE6930E2EC00A0700EE2CE0 /* CountryClusterAnnotationGlassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6930D2EC00A0700EE2CE0 /* CountryClusterAnnotationGlassView.swift */; };
 		4BE6C3392A14372800CC73D1 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C3382A14372800CC73D1 /* SearchViewModel.swift */; };
 		4BE6C33B2A14389200CC73D1 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE6C33A2A14389200CC73D1 /* SearchUseCase.swift */; };
@@ -481,8 +481,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BE1A17F2F1D4AAD0085238E /* Kingfisher in Frameworks */,
 				4B64685B29E6EDF700F35682 /* SnapKit in Frameworks */,
-				4B64685529E6ED1F00F35682 /* Kingfisher in Frameworks */,
 				4B64685829E6ED7200F35682 /* Alamofire in Frameworks */,
 				4B9CE0C72B25283800FF5A77 /* FirebaseCrashlytics in Frameworks */,
 				4B9CE0C52B25283800FF5A77 /* FirebaseAnalytics in Frameworks */,
@@ -1145,12 +1145,12 @@
 			);
 			name = SuperNewsV2UIKit;
 			packageProductDependencies = (
-				4B64685429E6ED1F00F35682 /* Kingfisher */,
 				4B64685729E6ED7200F35682 /* Alamofire */,
 				4B64685A29E6EDF700F35682 /* SnapKit */,
 				4B58367F2A1E6B7F005DCF6A /* AsyncLocationKit */,
 				4B9CE0C42B25283800FF5A77 /* FirebaseAnalytics */,
 				4B9CE0C62B25283800FF5A77 /* FirebaseCrashlytics */,
+				4BE1A17E2F1D4AAD0085238E /* Kingfisher */,
 			);
 			productName = SuperNewsV2UIKit;
 			productReference = 4BD88CAE29E6BAAD000369DE /* SuperNewsV2UIKit.app */;
@@ -1190,12 +1190,11 @@
 			);
 			mainGroup = 4BD88CA529E6BAAD000369DE;
 			packageReferences = (
-				4B64685329E6ED1F00F35682 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4B64685629E6ED7200F35682 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4B64685929E6EDF700F35682 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				4B58367E2A1E6B7F005DCF6A /* XCRemoteSwiftPackageReference "AsyncLocationKit" */,
 				4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				4B18109C2B2A1BB100F3DBDF /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				4BE1A17D2F1D4AAD0085238E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 4BD88CAF29E6BAAD000369DE /* Products */;
 			projectDirPath = "";
@@ -1845,28 +1844,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4B18109C2B2A1BB100F3DBDF /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.54.0;
-			};
-		};
 		4B58367E2A1E6B7F005DCF6A /* XCRemoteSwiftPackageReference "AsyncLocationKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AsyncSwift/AsyncLocationKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		4B64685329E6ED1F00F35682 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
 			};
 		};
 		4B64685629E6ED7200F35682 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -1893,6 +1876,14 @@
 				minimumVersion = 10.19.0;
 			};
 		};
+		4BE1A17D2F1D4AAD0085238E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1900,11 +1891,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4B58367E2A1E6B7F005DCF6A /* XCRemoteSwiftPackageReference "AsyncLocationKit" */;
 			productName = AsyncLocationKit;
-		};
-		4B64685429E6ED1F00F35682 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4B64685329E6ED1F00F35682 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 		4B64685729E6ED7200F35682 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1925,6 +1911,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4B9CE0C32B25283800FF5A77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		4BE1A17E2F1D4AAD0085238E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4BE1A17D2F1D4AAD0085238E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

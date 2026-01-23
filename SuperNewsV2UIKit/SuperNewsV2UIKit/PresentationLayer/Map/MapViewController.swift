@@ -185,9 +185,10 @@ final class MapViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
+        // iPad have TabBar on the top of the screen.
         searchBar.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(isiPad() ? 50 : 0)
         }
         
         autoCompletionView.snp.makeConstraints { make in

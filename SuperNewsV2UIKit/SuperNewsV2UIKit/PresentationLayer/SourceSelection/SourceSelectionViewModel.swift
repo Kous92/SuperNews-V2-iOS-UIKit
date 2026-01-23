@@ -147,7 +147,7 @@ import Combine
         
         Task {
             do {
-                let result = try await saveSelectedSourceUseCase.execute(with: savedSource)
+                try await saveSelectedSourceUseCase.execute(with: savedSource)
                 print("[SourceSelectionViewModel] Saving succeeded")
                 backToHomeView(with: savedSource.id)
             } catch {
@@ -155,18 +155,6 @@ import Combine
                     print("[SourceSelectionViewModel] Saving failed. ERROR: \(apiError.rawValue)")
                 }
             }
-            
-            /*
-            let result = await saveSelectedSourceUseCase.execute(with: savedSource)
-            
-            switch result {
-                case .success():
-                    print("[SourceSelectionViewModel] Saving succeeded")
-                    await backToHomeView(with: savedSource.id)
-                case .failure(let error):
-                    print("[SourceSelectionViewModel] Saving failed. ERROR: \(error.rawValue)")
-            }
-             */
         }
     }
     

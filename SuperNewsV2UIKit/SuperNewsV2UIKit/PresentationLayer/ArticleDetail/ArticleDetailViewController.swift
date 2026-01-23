@@ -86,7 +86,6 @@ final class ArticleDetailViewController: UIViewController {
     private lazy var clockContainerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
-        // view.backgroundColor = .red
         return view
     }()
 
@@ -249,6 +248,7 @@ final class ArticleDetailViewController: UIViewController {
         
         button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.ArticleDetail.buttonTitleFontSize, weight: .regular)
         button.accessibilityIdentifier = "websiteButton"
+        button.accessibilityTraits = [.toggleButton]
         
         if #available(iOS 26.0, *) {
             button.configuration = .clearGlass()
@@ -257,6 +257,80 @@ final class ArticleDetailViewController: UIViewController {
         
         return button
     }()
+    
+    /// Configuration to support VoiceOver
+    private func configureAccessibility() {
+        // Hide decorative or redundant elements from VoiceOver
+        articleImageView.isAccessibilityElement = false
+        imageBlurView.isAccessibilityElement = false
+        clockContainerView.isAccessibilityElement = false
+        clockImageView.isAccessibilityElement = false
+        authorImageView.isAccessibilityElement = false
+        sourceImageView.isAccessibilityElement = false
+        publishDateStackView.isAccessibilityElement = false
+        authorStackView.isAccessibilityElement = false
+        sourceStackView.isAccessibilityElement = false
+
+        // Title as header
+        articleTitleLabel.isAccessibilityElement = true
+        articleTitleLabel.accessibilityTraits.insert(.header)
+
+        // Publish date label
+        articlePublishDateLabel.isAccessibilityElement = true
+        articlePublishDateLabel.accessibilityTraits = [.staticText]
+        if articlePublishDateLabel.accessibilityLabel == nil || articlePublishDateLabel.accessibilityLabel?.isEmpty == true {
+            articlePublishDateLabel.accessibilityLabel = String(localized: "voicePublishDate")
+        }
+        // articlePublishDateLabel.accessibilityHint = String(localized: "voicePublishDate")
+
+        // Author label
+        articleAuthorLabel.isAccessibilityElement = true
+        if articleAuthorLabel.accessibilityLabel == nil || articleAuthorLabel.accessibilityLabel?.isEmpty == true {
+            articleAuthorLabel.accessibilityLabel = String(localized: "voiceArticleAuthorName")
+        }
+        
+        // articleAuthorLabel.accessibilityHint = String(localized: "voiceArticleAuthorName")
+
+        // Description and content
+        /*
+        articleDescriptionLabel.isAccessibilityElement = true
+        articleDescriptionLabel.accessibilityTraits = [.staticText]
+        articleDescriptionLabel.accessibilityHint = String(localized: "voiceShortArticleDescription")
+
+        articleContentLabel.isAccessibilityElement = true
+        articleContentLabel.accessibilityTraits = [.staticText]
+        articleContentLabel.accessibilityHint = String(localized: "voiceMainArticleContent")
+        */
+
+        // Source label
+        articleSourceLabel.isAccessibilityElement = true
+        
+        if articleSourceLabel.accessibilityLabel == nil || articleSourceLabel.accessibilityLabel?.isEmpty == true {
+            articleSourceLabel.accessibilityLabel = String(localized: "voiceArticleSource")
+        }
+        // articleSourceLabel.accessibilityHint = String(localized: "voiceArticleSource")
+
+        // Website button
+        articleWebsiteButton.isAccessibilityElement = true
+        articleWebsiteButton.accessibilityTraits = [.button]
+        if articleWebsiteButton.accessibilityLabel == nil || articleWebsiteButton.accessibilityLabel?.isEmpty == true {
+            articleWebsiteButton.accessibilityLabel = String(localized: "voiceOpenWebsite")
+        }
+        articleWebsiteButton.accessibilityHint = String(localized: "voiceOpenWebsiteHint")
+
+        // Establish a logical reading order within the scroll view
+        scrollView.isAccessibilityElement = false
+        view.isAccessibilityElement = false
+        view.accessibilityElements = [
+            articleTitleLabel,
+            articlePublishDateLabel,
+            articleAuthorLabel,
+            articleDescriptionLabel,
+            articleContentLabel,
+            articleSourceLabel,
+            articleWebsiteButton
+        ]
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -275,6 +349,7 @@ final class ArticleDetailViewController: UIViewController {
         setConstraints()
         setBindings()
         setButtonActions()
+        configureAccessibility()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -287,6 +362,11 @@ final class ArticleDetailViewController: UIViewController {
         if isMovingFromParent {
             viewModel?.backToPreviousScreen()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .screenChanged, argument: articleTitleLabel)
     }
     
     override func viewDidLayoutSubviews() {
@@ -369,15 +449,11 @@ final class ArticleDetailViewController: UIViewController {
             make.bottom.equalTo(imageBlurView.snp.bottom).inset(Constants.ArticleDetail.margin10)
         }
         
-        let baseIconSize = Constants.ArticleDetail.imageIconSize
+        // let baseIconSize = Constants.ArticleDetail.imageIconSize
         // let imageIconSize = CGSize(width: baseIconSize, height: baseIconSize) // iPhone
         
         clockContainerView.snp.makeConstraints { make in
             make.size.lessThanOrEqualTo(publishDateStackView.snp.width).multipliedBy(0.30)
-            // make.width.greaterThanOrEqualTo(imageIconSize.width)
-            // make.height.greaterThanOrEqualTo(imageIconSize.height)
-            
-            // make.width.lessThanOrEqualTo(publishDateStackView.snp.width).multipliedBy(0.30)
         }
         
         clockImageView.snp.makeConstraints { make in
@@ -458,6 +534,10 @@ extension ArticleDetailViewController {
         // Right bar button with action and color
         let item = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.forward.fill"), style: .plain, target: self, action: #selector(onClickShareButton))
         navigationItem.rightBarButtonItem = item
+        
+        navigationItem.rightBarButtonItem?.accessibilityLabel = String(localized: "voiceShareArticleButton")
+        navigationItem.rightBarButtonItem?.accessibilityHint = String(localized: "voiceShareArticleButtonHint")
+        
         navigationController?.navigationBar.tintColor = .white
         
         // When scrolling, custom color appareance for navigation bar
@@ -483,6 +563,9 @@ extension ArticleDetailViewController {
             .sink { [weak self] articleViewModel in
                 print("[ArticleDetailViewController] Ready to update.")
                 self?.updateView(with: articleViewModel)
+                if let titleLabel = self?.articleTitleLabel {
+                    UIAccessibility.post(notification: .screenChanged, argument: titleLabel)
+                }
             }.store(in: &subscriptions)
     }
     
@@ -494,6 +577,14 @@ extension ArticleDetailViewController {
         articleDescriptionLabel.text = articleViewModel.description
         articleContentLabel.text = articleViewModel.content
         articleSourceLabel.text = articleViewModel.sourceName
+        
+        // Accessibility dynamic content updates
+        articleTitleLabel.accessibilityValue = articleViewModel.title
+        articlePublishDateLabel.accessibilityValue = articleViewModel.publishedAt
+        articleAuthorLabel.accessibilityValue = articleViewModel.author
+        articleDescriptionLabel.accessibilityValue = articleViewModel.description
+        articleContentLabel.accessibilityValue = articleViewModel.content
+        articleSourceLabel.accessibilityValue = articleViewModel.sourceName
     }
     
     // This variant is available for UIKit in iOS 14 and later, no need anymore to use legacy addTarget with #selector.
@@ -502,6 +593,10 @@ extension ArticleDetailViewController {
             self?.viewModel?.openArticleWebsite()
         }
         
+        // Ensure correct accessibility trait for a simple button (not a toggle)
+        articleWebsiteButton.accessibilityTraits.remove(.selected)
+        articleWebsiteButton.accessibilityTraits.remove(.toggleButton)
+        articleWebsiteButton.accessibilityTraits.insert(.button)
         articleWebsiteButton.addAction(websiteOpenAction, for: .touchUpInside)
     }
     
@@ -522,3 +617,4 @@ extension ArticleDetailViewController {
 }
 
 #endif
+

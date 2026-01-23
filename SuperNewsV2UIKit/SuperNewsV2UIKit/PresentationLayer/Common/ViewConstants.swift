@@ -13,6 +13,11 @@ import UIKit
     return UIDevice.current.userInterfaceIdiom == .phone
 }
 
+// Is an iPad
+@MainActor func isiPad() -> Bool {
+    return UIDevice.current.userInterfaceIdiom == .pad
+}
+
 @MainActor struct Constants {
     @MainActor struct CategoryCollectionView {
         static let collectionViewHeight: CGFloat = isPhone() ? 60 : 90
